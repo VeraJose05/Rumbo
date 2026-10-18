@@ -1,0 +1,19 @@
+{
+  "name": "rumbo",
+  "version": "0.1.0",
+  "description": "Planificador turístico conversacional con RAG y modelos open source (Genkit + Ollama).",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  }
+}

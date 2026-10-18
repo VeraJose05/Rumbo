@@ -1,0 +1,21 @@
+# Dependencias y compilación
+node_modules/
+dist/
+coverage/
+
+# Variables de entorno
+.env*
+!.env.example
+
+# Trazas locales de Genkit
+.genkit/
+
+# Corpus descargado e índices (se regeneran con la ingesta)
+data/
+
+# Varios
+*.log
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
