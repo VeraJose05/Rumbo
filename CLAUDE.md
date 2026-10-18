@@ -17,6 +17,7 @@ Planificador turístico conversacional con RAG y modelos open source. TFM de má
 
 ## Forma de trabajar
 - Trabajar por fase y por requisito; indicar siempre qué RF/RNF se implementa.
+- Una rama por requisito, con el formato `f<fase>/<requisito>-<descripción>` (p. ej. `f1/rf-03-ingesta-wikivoyage`). Si cubre varios requisitos, se nombra por el principal y el resto se indica en el commit. Se fusiona en main con `--no-ff`.
 - TDD en la lógica determinista (troceado, parseo, esquemas Zod, métricas, configuración): escribir el test primero, verlo fallar y luego implementar.
 - Los flows con LLM se prueban con un modelo simulado; la calidad real se mide en src/eval, no con tests unitarios.
 - Framework de tests: Vitest.
