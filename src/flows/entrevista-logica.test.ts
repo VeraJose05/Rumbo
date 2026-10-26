@@ -27,9 +27,13 @@ describe('fusionarPerfil', () => {
     ).toEqual(['museos', 'naturaleza']);
   });
 
-  it('escribe el destino como en el catálogo si lo tiene, y lo deja tal cual si no', () => {
+  it('escribe el destino como en el catálogo', () => {
     expect(fusionarPerfil({}, { ...sinDatos, destino: 'granada' }).destino).toBe('Granada');
-    expect(fusionarPerfil({}, { ...sinDatos, destino: 'Bilbao' }).destino).toBe('Bilbao');
+  });
+
+  it('no guarda un destino sin guía, para que se vuelva a preguntar', () => {
+    expect(fusionarPerfil({}, { ...sinDatos, destino: 'Japón', dias: 5 })).toEqual({ dias: 5 });
+    expect(fusionarPerfil({ destino: 'Sevilla' }, { ...sinDatos, destino: 'Japón' }).destino).toBe('Sevilla');
   });
 
   it('descarta los valores inválidos para que se vuelvan a preguntar', () => {
@@ -66,9 +70,9 @@ describe('siguientePaso', () => {
 });
 
 describe('avisoDestino', () => {
-  it('avisa si el destino no tiene guía y dice cuáles la tienen', () => {
+  it('si el destino no tiene guía, lo dice y pregunta por uno de los disponibles', () => {
     expect(avisoDestino('Bilbao')).toBe(
-      'Aviso: todavía no tengo información de Bilbao. Ahora mismo conozco Sevilla, Madrid, Barcelona, Granada y Valencia; si quieres, puedes cambiar de destino.',
+      'Lo siento, todavía no tengo información de Bilbao. Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia. ¿A cuál te gustaría ir?',
     );
   });
 

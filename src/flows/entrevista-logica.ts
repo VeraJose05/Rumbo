@@ -39,15 +39,16 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
   const resultado: PerfilParcial = { ...perfil };
   const forma = PerfilSchema.shape;
 
-  for (const campo of ['destino', 'dias', 'ritmo', 'presupuesto', 'compania'] as const) {
+  // Solo destinos con guía: si no, la entrevista vuelve a preguntar. Se guarda escrito como en el
+  // catálogo («granada» → «Granada») para que coincida con los metadatos de Chroma.
+  const destino = typeof extraido.destino === 'string' ? buscarDestino(extraido.destino) : undefined;
+  if (destino) resultado.destino = destino.nombre;
+
+  for (const campo of ['dias', 'ritmo', 'presupuesto', 'compania'] as const) {
     const valor = extraido[campo];
     if (valor === null || valor === undefined) continue;
     const validado = forma[campo].safeParse(valor);
     if (validado.success) resultado[campo] = validado.data;
-  }
-  // «granada» → «Granada», para que coincida con los metadatos de Chroma.
-  if (typeof resultado.destino === 'string') {
-    resultado.destino = buscarDestino(resultado.destino)?.nombre ?? resultado.destino;
   }
 
   const interesValido = z.enum(INTERESES);
@@ -61,12 +62,15 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
   return resultado;
 }
 
-/** Aviso para un destino sin guía. Se acepta igualmente: la evaluación incluye destinos fuera del corpus. */
+/**
+ * Respuesta para un destino sin guía. La entrevista no lo acepta (el perfil sí admitiría cualquier
+ * destino: los perfiles de prueba de la evaluación se crean directamente, sin entrevista).
+ */
 export function avisoDestino(destino: string): string | null {
   if (buscarDestino(destino)) return null;
   const nombres = DESTINOS.map((d) => d.nombre);
   const lista = `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
-  return `Aviso: todavía no tengo información de ${destino}. Ahora mismo conozco ${lista}; si quieres, puedes cambiar de destino.`;
+  return `Lo siento, todavía no tengo información de ${destino}. Puedo ayudarte con ${lista}. ¿A cuál te gustaría ir?`;
 }
 
 export function siguientePaso(estado: EstadoEntrevista): Paso {

@@ -34,26 +34,29 @@ describe('entrevistaFlow', () => {
   });
 
   it('guarda lo extraído del mensaje y pregunta por lo siguiente que falta', async () => {
-    const { flow, peticiones, textoDe } = crearEntorno({ ...sinDatos, destino: 'Sevilla', dias: 3 });
+    const { flow, peticiones } = crearEntorno({ ...sinDatos, destino: 'Sevilla', dias: 3 });
 
     const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Sevilla, 3 días' });
 
     expect(salida.estado.perfil).toEqual({ destino: 'Sevilla', dias: 3 });
     expect(salida.perfil).toBeNull();
-    // La segunda llamada redacta la pregunta por los intereses; las opciones las añade el código.
-    expect(textoDe(peticiones[1]!)).toMatch(/intereses/);
+    // La pregunta de intereses es un texto fijo: solo se llama al modelo para extraer.
+    expect(peticiones).toHaveLength(1);
     expect(salida.respuesta).toBe(
-      'Pregunta del modelo Puedes elegir varios: monumentos, museos, gastronomía, naturaleza, ocio nocturno, compras, playa, niños.',
+      '¿Qué te gustaría hacer en Sevilla? Puedes elegir varios: monumentos, museos, gastronomía, naturaleza, ocio nocturno, compras, playa, niños.',
     );
   });
 
-  it('avisa delante de la pregunta si el destino no tiene guía', async () => {
-    const { flow } = crearEntorno({ ...sinDatos, destino: 'Bilbao' });
+  it('si el destino no tiene guía, no avanza: lo dice y vuelve a pedir el destino', async () => {
+    const { flow, peticiones } = crearEntorno({ ...sinDatos, destino: 'Japón', dias: 5 });
 
-    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'A Bilbao' });
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'A Japón, 5 días' });
 
-    expect(salida.estado.perfil).toEqual({ destino: 'Bilbao' });
-    expect(salida.respuesta).toMatch(/^Aviso: todavía no tengo información de Bilbao\.[\s\S]*Pregunta del modelo$/);
+    expect(salida.estado.perfil).toEqual({ dias: 5 });
+    expect(salida.respuesta).toMatch(/^Lo siento, todavía no tengo información de Japón\./);
+    expect(salida.perfil).toBeNull();
+    // Solo la extracción: la respuesta es un texto fijo.
+    expect(peticiones).toHaveLength(1);
   });
 
   it('indica al extractor qué se acababa de preguntar, para entender respuestas cortas como «3»', async () => {

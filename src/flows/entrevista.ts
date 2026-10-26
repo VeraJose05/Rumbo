@@ -44,21 +44,22 @@ const ExtraccionSchema = z.object({
 // Con un modelo pequeño hay que insistir en no deducir: en las pruebas rellenaba intereses
 // («museos, gastronomía») a partir de un simple «me apetece Granada».
 const SISTEMA_EXTRACCION = `Extraes datos de viaje del mensaje de un viajero. Copia solo lo que el mensaje dice de forma explícita; no deduzcas ni completes. Si un dato no aparece, pon null (o lista vacía en intereses).
-- destino: ciudad o lugar al que viaja.
+- destino: solo el nombre de la ciudad o el lugar al que viaja, sin preposiciones («A Japón» → «Japón»).
 - dias: número de días del viaje («un fin de semana» son 2).
 - intereses: solo si el viajero habla de lo que le gusta o quiere hacer; elige de esta lista: ${INTERESES.join(', ')}. Decir con quién viaja no es un interés.
 - ritmo: solo si habla del ritmo o la intensidad del viaje (tranquilo, normal o intenso).
 - presupuesto: solo si habla de dinero (bajo, medio o alto).
 - compania: solo, pareja, familia (con hijos o familiares) o amigos.`;
 
-const QUE_PREGUNTAR: Record<'destino' | 'dias' | 'intereses', string> = {
+const QUE_PREGUNTAR: Record<'destino' | 'dias', string> = {
   destino: 'a qué destino quiere viajar',
   dias: 'cuántos días va a durar el viaje (de 1 a 7)',
-  intereses: 'qué intereses tiene para el viaje',
 };
 
-// Partes fijas: el modelo resumía mal las opciones (ofrecía solo dos intereses de ocho).
-const OPCIONES_INTERESES = `Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`;
+// Textos fijos: al redactar la pregunta de intereses, el modelo ofrecía solo dos de las ocho
+// opciones o se inventaba lugares («el Parque de Atracciones de Valencia»).
+const preguntaIntereses = (destino: unknown) =>
+  `¿Qué te gustaría hacer en ${destino}? Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`;
 const PREGUNTA_OPCIONALES =
   '¿Quieres contarme algo más? Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), ' +
   'qué ritmo prefieres (tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».';
@@ -72,8 +73,6 @@ export function definirEntrevistaFlow(ai: Genkit) {
     async ({ estado: estadoPrevio, mensaje }) => {
       let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
-      const destinoPrevio = estado.perfil.destino;
-
       // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado.
       if (mensaje.trim()) {
         const preguntado = siguientePaso(estado);
@@ -86,24 +85,24 @@ export function definirEntrevistaFlow(ai: Genkit) {
         });
         // 2. Fusionar con lo que ya se sabía (solo valores válidos).
         if (output) estado = { ...estado, perfil: fusionarPerfil(estado.perfil, output) };
-      }
 
-      // Si el destino acaba de cambiar y no tiene guía, se avisa delante de la siguiente pregunta.
-      const destino = estado.perfil.destino;
-      const aviso = typeof destino === 'string' && destino !== destinoPrevio ? avisoDestino(destino) : null;
-      const conAviso = (texto: string) => (aviso ? `${aviso}\n\n${texto}` : texto);
+        // Un destino sin guía no se guarda: se dice y se vuelve a pedir, sin seguir con la entrevista.
+        const aviso = output?.destino ? avisoDestino(output.destino) : null;
+        if (aviso) return { estado, respuesta: aviso, perfil: null };
+      }
 
       // 3. Decidir el siguiente paso.
       const paso = siguientePaso(estado);
       if (paso.tipo === 'terminar') {
         return {
           estado,
-          respuesta: conAviso(`¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`),
+          respuesta: `¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`,
           perfil: paso.perfil,
         };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
-      if (paso.campo === 'opcionales') return { estado, respuesta: conAviso(PREGUNTA_OPCIONALES), perfil: null };
+      if (paso.campo === 'opcionales') return { estado, respuesta: PREGUNTA_OPCIONALES, perfil: null };
+      if (paso.campo === 'intereses') return { estado, respuesta: preguntaIntereses(estado.perfil.destino), perfil: null };
 
       // 4. Redactar la pregunta.
       const { text } = await ai.generate({
@@ -114,8 +113,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
           `Pregúntale ${QUE_PREGUNTAR[paso.campo]}.`,
         ].join('\n'),
       });
-      const respuesta = paso.campo === 'intereses' ? `${text.trim()} ${OPCIONES_INTERESES}` : text.trim();
-      return { estado, respuesta: conAviso(respuesta), perfil: null };
+      return { estado, respuesta: text.trim(), perfil: null };
     },
   );
 }
