@@ -39,9 +39,10 @@ describe('aPeticionOllama', () => {
     expect(aPeticionOllama('qwen2.5:3b', { messages: mensajes, output: { format: 'json' } }).format).toBe('json');
   });
 
-  it('pasa la temperatura de la configuración', () => {
-    expect(aPeticionOllama('qwen2.5:3b', { messages: mensajes, config: { temperature: 0 } }).options).toEqual({
-      temperature: 0,
+  it('pasa la temperatura y la semilla de la configuración', () => {
+    expect(aPeticionOllama('qwen2.5:3b', { messages: mensajes, config: { temperature: 0.8, seed: 7 } }).options).toEqual({
+      temperature: 0.8,
+      seed: 7,
     });
   });
 });

@@ -9,7 +9,7 @@ interface PeticionOllama {
   stream: false;
   messages: { role: string; content: string }[];
   format?: 'json' | Record<string, unknown>;
-  options: { temperature?: number; num_ctx?: number };
+  options: { temperature?: number; seed?: number; num_ctx?: number };
 }
 
 export function aPeticionOllama(modelo: string, peticion: GenerateRequest, contexto?: number): PeticionOllama {
@@ -25,8 +25,10 @@ export function aPeticionOllama(modelo: string, peticion: GenerateRequest, conte
   if (peticion.output?.schema) resultado.format = peticion.output.schema;
   else if (peticion.output?.format === 'json') resultado.format = 'json';
 
-  const temperatura = (peticion.config as { temperature?: number } | undefined)?.temperature;
-  if (temperatura !== undefined) resultado.options.temperature = temperatura;
+  const config = peticion.config as { temperature?: number; seed?: number } | undefined;
+  if (config?.temperature !== undefined) resultado.options.temperature = config.temperature;
+  // Con semilla fija, una temperatura mayor que 0 sigue dando resultados repetibles (RNF-03).
+  if (config?.seed !== undefined) resultado.options.seed = config.seed;
   if (contexto !== undefined) resultado.options.num_ctx = contexto;
   return resultado;
 }

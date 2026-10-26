@@ -23,7 +23,7 @@ function crearEntorno(respuestasDias: object[], documentos = [doc('s:1', '* Cate
   const ai = genkit({ model: 'simulado' });
 
   ai.defineModel({ name: 'simulado', supports: { constrained: 'all', output: ['json'] } }, async (peticion) => {
-    const respuesta = respuestasDias[peticiones.length] ?? { manana: [], tarde: [], noche: [] };
+    const respuesta = respuestasDias[peticiones.length] ?? { actividades: [] };
     peticiones.push(peticion);
     return { message: { role: 'model', content: [{ text: JSON.stringify(respuesta) }] } };
   });
@@ -36,7 +36,13 @@ function crearEntorno(respuestasDias: object[], documentos = [doc('s:1', '* Cate
   return { flow: definirPlanificacionFlow(ai, recuperador), peticiones, consultas, textoDe };
 }
 
-const dia = (lugar: string, citas: number[]) => ({ manana: [{ lugar, descripcion: 'Visita.', citas }], tarde: [], noche: [] });
+// El ritmo tranquilo pide 2 actividades por día: la indicada por la mañana y un paseo por la noche.
+const dia = (lugar: string, citas: number[]) => ({
+  actividades: [
+    { franja: 'manana', lugar, descripcion: 'Visita.', citas },
+    { franja: 'noche', lugar: `Paseo tras ${lugar}`, descripcion: 'Paseo.', citas: [2] },
+  ],
+});
 
 describe('planificacionFlow', () => {
   it('en C1 hace una búsqueda por consulta del perfil y genera un día por llamada', async () => {
@@ -58,7 +64,9 @@ describe('planificacionFlow', () => {
 
     await flow({ perfil, modo: 'C1' });
 
-    expect(textoDe(peticiones[1]!)).toContain('ya incluidos en días anteriores: Catedral de Sevilla.');
+    expect(textoDe(peticiones[1]!)).toContain(
+      'ya incluidos en días anteriores: Catedral de Sevilla, Paseo tras Catedral de Sevilla.',
+    );
   });
 
   it('verifica cada actividad contra los textos que cita y devuelve solo las fuentes citadas', async () => {
@@ -68,9 +76,9 @@ describe('planificacionFlow', () => {
 
     expect(salida.hayInformacion).toBe(true);
     expect(salida.dias[0]?.manana).toEqual([
-      { lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1], verificada: true },
+      { lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1], verificacion: 'verificada' },
     ]);
-    expect(salida.dias[1]?.manana[0]?.verificada).toBe(false);
+    expect(salida.dias[1]?.manana[0]?.verificacion).toBe('sin-fuente');
     expect(salida.fuentes.map((f) => f.cita)).toEqual([1, 2]);
     expect(salida.fuentes[0]).toEqual({
       cita: 1,
@@ -83,15 +91,44 @@ describe('planificacionFlow', () => {
 
   it('en C0 no recupera nada, no pide citas y no puede verificar', async () => {
     const { flow, consultas, textoDe, peticiones } = crearEntorno([
-      { manana: [{ lugar: 'Catedral', descripcion: 'Visita.' }], tarde: [], noche: [] },
+      {
+        actividades: [
+          { franja: 'manana', lugar: 'Catedral', descripcion: 'Visita.' },
+          { franja: 'tarde', lugar: 'Triana', descripcion: 'Paseo.' },
+        ],
+      },
     ]);
 
     const salida = await flow({ perfil: { ...perfil, dias: 1 }, modo: 'C0' });
 
     expect(consultas).toHaveLength(0);
     expect(textoDe(peticiones[0]!)).not.toContain('Textos:');
-    expect(salida.dias[0]?.manana).toEqual([{ lugar: 'Catedral', descripcion: 'Visita.', citas: [], verificada: null }]);
+    expect(salida.dias[0]?.manana).toEqual([{ lugar: 'Catedral', descripcion: 'Visita.', citas: [], verificacion: null }]);
     expect(salida.fuentes).toEqual([]);
+  });
+
+  it('si al quitar repetidos faltan actividades, reintenta el día con la lista de lugares a evitar', async () => {
+    const { flow, peticiones, textoDe } = crearEntorno([
+      dia('Catedral de Sevilla', [1]),
+      dia('Catedral de Sevilla', [1]), // repite los dos lugares del día 1
+      dia('Parque de María Luisa', [2]),
+    ]);
+
+    const salida = await flow({ perfil, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(3);
+    expect(textoDe(peticiones[2]!)).toContain('Catedral de Sevilla');
+    expect(salida.dias[1]?.manana[0]?.lugar).toBe('Parque de María Luisa');
+  });
+
+  it('no reintenta más de dos veces', async () => {
+    const repetido = dia('Catedral de Sevilla', [1]);
+    const { flow, peticiones } = crearEntorno([repetido, repetido, repetido, repetido, repetido]);
+
+    const salida = await flow({ perfil, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(4); // día 1 + día 2 con dos reintentos
+    expect(salida.dias[1]).toEqual({ dia: 2, manana: [], tarde: [], noche: [] });
   });
 
   it('en C1, si no hay fragmentos del destino, lo dice sin llamar al modelo (RF-07)', async () => {

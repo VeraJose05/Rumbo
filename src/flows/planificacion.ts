@@ -2,23 +2,34 @@
 // en el modo indicado: C0 sin recuperación, C1 con RAG básico.
 import { z, type Document, type Genkit, type RetrieverArgument } from 'genkit';
 import { consultasDelPerfil, fusionarResultados } from './consultas.js';
-import { DiaSchema, esquemaDiaModelo, lugaresUsados, type Dia } from './itinerario.js';
+import {
+  actividadesPorDia,
+  DiaSchema,
+  esquemaDiaModelo,
+  lugaresUsados,
+  repartirEnFranjas,
+  totalActividades,
+  type Dia,
+} from './itinerario.js';
 import { PerfilSchema } from './perfil.js';
 import { FuenteSchema, type OpcionesRecuperacionSchema } from './pregunta.js';
 import { construirPromptDia } from './prompt-dia.js';
-import { citasValidas, fuentesCitadas, verificarRecomendacion } from './rag.js';
+import { citasValidas, clasificarActividad, fuentesCitadas } from './rag.js';
 
 export const MODOS = ['C0', 'C1'] as const;
 
 /** Fragmentos que se recuperan en total, repartidos entre las consultas del perfil. */
 export const TOTAL_FRAGMENTOS = 12;
 
+/** Veces que se vuelve a pedir un día si, al quitar repetidos, le faltan actividades. */
+const REINTENTOS = 2;
+
 const ActividadFinalSchema = z.object({
   lugar: z.string(),
   descripcion: z.string(),
   citas: z.array(z.number()),
-  /** El lugar aparece en los textos que cita; null en C0, que no tiene fuentes. */
-  verificada: z.boolean().nullable(),
+  /** Si el lugar está en los textos que cita, en otro texto recuperado o en ninguno; null en C0. */
+  verificacion: z.enum(['verificada', 'cita-erronea', 'sin-fuente']).nullable(),
 });
 
 const DiaFinalSchema = DiaSchema.extend({
@@ -66,29 +77,40 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
       const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
 
       // 2. Generación: un día por llamada, con los lugares ya usados para no repetir.
+      const actividades = actividadesPorDia(perfil.ritmo);
+      const esquema = esquemaDiaModelo({ conCitas: documentos !== null, actividades });
       const dias: Dia[] = [];
       for (let numero = 1; numero <= perfil.dias; numero++) {
-        const { system, prompt } = construirPromptDia({ perfil, dia: numero, usados: lugaresUsados(dias), fragmentos });
-        const { output } = await ai.generate({
-          system,
-          prompt,
-          output: { schema: esquemaDiaModelo({ conCitas: documentos !== null }) },
-          // Temperatura 0 para que los experimentos sean repetibles (RNF-03).
-          config: { temperature: 0 },
-        });
-        if (!output) throw new Error(`El modelo no devolvió el día ${numero} con el esquema esperado`);
-        const conCitas = (franja: { lugar: string; descripcion: string; citas?: number[] }[]) =>
-          franja.map((a) => ({ lugar: a.lugar, descripcion: a.descripcion, citas: a.citas ?? [] }));
-        dias.push({ dia: numero, manana: conCitas(output.manana), tarde: conCitas(output.tarde), noche: conCitas(output.noche) });
+        const usados = lugaresUsados(dias);
+        const candidatas: z.infer<typeof esquema>['actividades'] = [];
+        let dia = repartirEnFranjas(numero, [], usados);
+        // Los repetidos se quitan en código («no repitas» en el prompt no bastaba). Si faltan
+        // actividades, se reintenta con todo lo propuesto en la lista de lugares a evitar.
+        for (let intento = 0; intento <= REINTENTOS && totalActividades(dia) < actividades; intento++) {
+          const evitar = [...new Set([...usados, ...candidatas.map((a) => a.lugar)])];
+          const { system, prompt } = construirPromptDia({ perfil, dia: numero, usados: evitar, fragmentos });
+          const { output } = await ai.generate({
+            system,
+            prompt,
+            output: { schema: esquema },
+            // Temperatura 0 para que los experimentos sean repetibles (RNF-03). En los reintentos se sube,
+            // con semilla fija: a temperatura 0 el modelo volvía a proponer exactamente los mismos lugares.
+            config: intento === 0 ? { temperature: 0 } : { temperature: 0.8, seed: intento },
+          });
+          if (!output) throw new Error(`El modelo no devolvió el día ${numero} con el esquema esperado`);
+          candidatas.push(...output.actividades);
+          dia = repartirEnFranjas(numero, candidatas, usados, actividades);
+        }
+        dias.push(dia);
       }
 
       // 3. Verificación de cada actividad contra los textos que cita.
+      const textos = documentos?.map((d) => d.text) ?? [];
       const verificar = (franja: Dia['manana']) =>
         franja.map((a) => {
-          if (!documentos) return { ...a, citas: [], verificada: null };
+          if (!documentos) return { ...a, citas: [], verificacion: null };
           const citas = citasValidas(a.citas, documentos.length);
-          const textos = citas.map((c) => documentos[c - 1]!.text);
-          return { ...a, citas, verificada: verificarRecomendacion(a.lugar, textos) };
+          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos) };
         });
       const diasFinales = dias.map((d) => ({ ...d, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) }));
 

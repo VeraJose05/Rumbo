@@ -58,6 +58,19 @@ export function verificarRecomendacion(lugar: string, textosCitados: string[]): 
   return palabrasLugar.length > 0 && palabrasLugar.every((p) => palabrasTextos.has(p));
 }
 
+export type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente';
+
+/**
+ * Distingue dos fallos que pesan distinto en la evaluación: citar mal un lugar que sí está en
+ * los textos recuperados (cita errónea) o proponer uno que no aparece en ninguno (sin fuente,
+ * probablemente inventado). `citas` va de 1 a n sobre `textos`.
+ */
+export function clasificarActividad(lugar: string, citas: number[], textos: string[]): Verificacion {
+  const citados = citas.map((c) => textos[c - 1] ?? '');
+  if (verificarRecomendacion(lugar, citados)) return 'verificada';
+  return verificarRecomendacion(lugar, textos) ? 'cita-erronea' : 'sin-fuente';
+}
+
 function palabras(texto: string): string[] {
   return texto
     .normalize('NFD')

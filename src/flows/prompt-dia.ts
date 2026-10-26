@@ -7,8 +7,8 @@ import type { Perfil } from './perfil.js';
 import type { FragmentoRecuperado } from './rag.js';
 
 const REGLAS_COMUNES = [
-  'Escribe en español el plan de UN día de un viaje, repartido en mañana, tarde y noche.',
-  'Pon exactamente el número de actividades que se pide en total; deja vacías las franjas que no uses.',
+  'Escribe en español el plan de UN día de un viaje: una lista de actividades, cada una en su franja (manana, tarde o noche).',
+  'Cada actividad es un lugar distinto; reparte las actividades entre las franjas y deja libres las franjas que no uses.',
   'No repitas lugares ya incluidos en días anteriores.',
   'Adapta las actividades a los intereses, la compañía y el presupuesto del viajero.',
   'En "descripcion" escribe una frase breve dirigida al viajero.',
