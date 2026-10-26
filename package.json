@@ -15,7 +15,9 @@
     "test:watch": "vitest",
     "dev": "npm run build && genkit start -- node --env-file-if-exists=.env dist/index.js",
     "flow:prueba": "npm run build && node --env-file-if-exists=.env dist/probar.js",
-    "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js"
+    "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js",
+    "ingesta": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar.js",
+    "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
@@ -24,6 +26,7 @@
     "vitest": "5.0.5"
   },
   "dependencies": {
+    "chromadb": "3.5.0",
     "genkit": "1.42.0",
     "genkitx-ollama": "1.42.0"
   }
