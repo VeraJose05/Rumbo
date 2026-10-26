@@ -70,6 +70,19 @@ describe('limpiarWikitexto', () => {
     expect(limpiarWikitexto('Texto\n{{geo|37.37|-5.98}}\n{{Clima\n|enemax=15,9\n}}')).toBe('Texto');
   });
 
+  it('elimina las tablas, que en Wikivoyage son horarios y tarifas', () => {
+    const entrada = 'Precios:\n{| class="wikitable"\n|-\n| Sencillo || 1,50 €\n|}\nDespués';
+    expect(limpiarWikitexto(entrada)).toBe('Precios:\n\nDespués');
+  });
+
+  it('quita las etiquetas HTML conservando su texto, salvo los superíndices de notas', () => {
+    expect(limpiarWikitexto('* <big>Alhambra.</big> Abre<br/>a las 8<small> (aprox.)</small>')).toBe(
+      '* Alhambra. Abre a las 8 (aprox.)',
+    );
+    expect(limpiarWikitexto('del Señor<sup>2</sup>.')).toBe('del Señor.');
+    expect(limpiarWikitexto('C/ Olmo, 31 <metro> Antón Martín')).toBe('C/ Olmo, 31 Antón Martín');
+  });
+
   it('conserva títulos de sección y viñetas, y compacta las líneas en blanco', () => {
     const entrada = '== Ver ==\n\n\n\n* Catedral   \n* Giralda';
     expect(limpiarWikitexto(entrada)).toBe('== Ver ==\n\n* Catedral\n* Giralda');
