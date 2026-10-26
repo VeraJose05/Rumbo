@@ -1,7 +1,7 @@
 // RF-04, RF-06, RF-07: flow de RAG básico: recupera fragmentos del destino y responde con
 // recomendaciones estructuradas, cada una con sus citas comprobadas.
 import { z, type Genkit, type RetrieverArgument } from 'genkit';
-import { citasValidas, construirPromptRag, verificarRecomendacion } from './rag.js';
+import { citasValidas, construirPromptRag, fuentesCitadas, verificarRecomendacion } from './rag.js';
 
 export const OpcionesRecuperacionSchema = z.object({
   k: z.number().int().positive(),
@@ -78,16 +78,7 @@ export function definirPreguntaFlow(ai: Genkit, recuperador: RetrieverArgument<t
       });
 
       const citadas = citasValidas(recomendaciones.flatMap((r) => r.citas), documentos.length);
-      const fuentes = citadas.map((cita) => {
-        const metadatos = documentos[cita - 1]?.metadata ?? {};
-        return {
-          cita,
-          seccion: String(metadatos.seccion ?? ''),
-          fuente: String(metadatos.fuente ?? ''),
-          url: String(metadatos.url ?? ''),
-          licencia: String(metadatos.licencia ?? ''),
-        };
-      });
+      const fuentes = fuentesCitadas(citadas, documentos);
 
       return { hayInformacion: output.hayInformacion, respuesta: output.respuesta, recomendaciones, fuentes };
     },

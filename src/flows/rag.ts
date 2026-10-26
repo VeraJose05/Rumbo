@@ -32,6 +32,20 @@ export function citasValidas(citas: number[], total: number): number[] {
   return [...new Set(citas)].filter((c) => Number.isInteger(c) && c >= 1 && c <= total).sort((a, b) => a - b);
 }
 
+/** Fuente de cada cita, con los metadatos del fragmento citado (citas de 1 a n). */
+export function fuentesCitadas(citas: number[], documentos: { metadata?: Record<string, unknown> }[]) {
+  return citas.map((cita) => {
+    const metadatos = documentos[cita - 1]?.metadata ?? {};
+    return {
+      cita,
+      seccion: String(metadatos.seccion ?? ''),
+      fuente: String(metadatos.fuente ?? ''),
+      url: String(metadatos.url ?? ''),
+      licencia: String(metadatos.licencia ?? ''),
+    };
+  });
+}
+
 const PALABRAS_VACIAS = new Set(['el', 'la', 'los', 'las', 'de', 'del', 'en', 'y', 'a', 'al', 'un', 'una']);
 
 /**

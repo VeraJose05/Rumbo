@@ -2,6 +2,7 @@
 import { cargarConfigChroma } from './config/chroma.js';
 import { cargarConfigModelos } from './config/modelos.js';
 import { definirEntrevistaFlow } from './flows/entrevista.js';
+import { definirPlanificacionFlow } from './flows/planificacion.js';
 import { definirPreguntaFlow } from './flows/pregunta.js';
 import { definirPruebaFlow } from './flows/prueba.js';
 import { definirRecuperadorChroma } from './flows/recuperador.js';
@@ -16,3 +17,4 @@ export const entrevistaFlow = definirEntrevistaFlow(ai);
 const coleccion = await abrirColeccion(cargarConfigChroma());
 const recuperador = definirRecuperadorChroma(ai, coleccion, `ollama/${configModelos.embedder}`);
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
+export const planificacionFlow = definirPlanificacionFlow(ai, recuperador);
