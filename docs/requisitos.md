@@ -89,6 +89,10 @@ El corpus se construye solo con fuentes abiertas; Wikivoyage es la base porque y
 
 **Metadatos por fragmento:** destino, fuente, URL, sección y fecha de descarga, para poder citar y filtrar por destino.
 
+**Cobertura antes de elegir destino:** comprobar el tamaño del artículo en es.wikivoyage antes de añadir un destino. Por ejemplo, Fuengirola tiene unas 1.200 palabras en español frente a 3.600 en inglés.
+
+**Mejora futura (fuera del alcance actual): ocio según intereses con OpenStreetMap.** Wikivoyage cubre lo turístico estable (monumentos, parques, playas, pueblos cercanos en «¿A dónde ir luego?»), pero no el ocio concreto: escape rooms, karting, parques de atracciones, golf. OSM sí lo tiene etiquetado (`leisure=escape_game`, `tourism=theme_park`, `leisure=golf_course`…) con coordenadas, lo que permitiría planes por intereses y cercanía («a menos de 30 km en coche»). Solo da nombre y ubicación, no descripciones. Se retoma si sobra tiempo tras F5.
+
 ## Arquitectura y stack
 
 La aplicación son tres flows de Genkit que comparten una base vectorial y unos modelos locales; la ingesta se ejecuta aparte, una vez por destino.
