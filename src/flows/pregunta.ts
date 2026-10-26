@@ -1,6 +1,7 @@
-// RF-04, RF-06: flow de RAG básico: recupera fragmentos del destino y responde citándolos.
+// RF-04, RF-06, RF-07: flow de RAG básico: recupera fragmentos del destino y responde con
+// recomendaciones estructuradas, cada una con sus citas comprobadas.
 import { z, type Genkit, type RetrieverArgument } from 'genkit';
-import { construirPromptRag, extraerCitas } from './rag.js';
+import { citasValidas, construirPromptRag, verificarRecomendacion } from './rag.js';
 
 export const OpcionesRecuperacionSchema = z.object({
   k: z.number().int().positive(),
@@ -16,6 +17,22 @@ export const PreguntaEntradaSchema = z.object({
 /** Número de fragmentos que se recuperan si no se indica otro. */
 export const K_POR_DEFECTO = 5;
 
+// Lo que genera el modelo. El orden importa: genera de arriba abajo, así que primero decide si hay
+// información, luego las recomendaciones con sus citas y por último el resumen. Con «respuesta»
+// delante, el modelo lo escribía todo ahí y dejaba las recomendaciones vacías.
+const RespuestaModeloSchema = z.object({
+  hayInformacion: z.boolean(),
+  recomendaciones: z.array(
+    z.object({
+      lugar: z.string(),
+      detalle: z.string(),
+      // min(1): el esquema obliga a citar al menos un texto en cada recomendación.
+      citas: z.array(z.number().int()).min(1),
+    }),
+  ),
+  respuesta: z.string(),
+});
+
 export const FuenteSchema = z.object({
   cita: z.number(),
   seccion: z.string(),
@@ -25,7 +42,17 @@ export const FuenteSchema = z.object({
 });
 
 export const PreguntaSalidaSchema = z.object({
+  hayInformacion: z.boolean(),
   respuesta: z.string(),
+  recomendaciones: z.array(
+    z.object({
+      lugar: z.string(),
+      detalle: z.string(),
+      citas: z.array(z.number()),
+      /** El lugar aparece en los textos que cita. */
+      verificada: z.boolean(),
+    }),
+  ),
   fuentes: z.array(FuenteSchema),
 });
 
@@ -41,9 +68,17 @@ export function definirPreguntaFlow(ai: Genkit, recuperador: RetrieverArgument<t
         destino,
         documentos.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })),
       );
-      const { text } = await ai.generate({ system, prompt });
+      const { output } = await ai.generate({ system, prompt, output: { schema: RespuestaModeloSchema } });
+      if (!output) throw new Error('El modelo no devolvió una respuesta con el esquema esperado');
 
-      const fuentes = extraerCitas(text, documentos.length).map((cita) => {
+      const recomendaciones = output.recomendaciones.map((r) => {
+        const citas = citasValidas(r.citas, documentos.length);
+        const textosCitados = citas.map((c) => documentos[c - 1]!.text);
+        return { ...r, citas, verificada: verificarRecomendacion(r.lugar, textosCitados) };
+      });
+
+      const citadas = citasValidas(recomendaciones.flatMap((r) => r.citas), documentos.length);
+      const fuentes = citadas.map((cita) => {
         const metadatos = documentos[cita - 1]?.metadata ?? {};
         return {
           cita,
@@ -53,7 +88,8 @@ export function definirPreguntaFlow(ai: Genkit, recuperador: RetrieverArgument<t
           licencia: String(metadatos.licencia ?? ''),
         };
       });
-      return { respuesta: text, fuentes };
+
+      return { hayInformacion: output.hayInformacion, respuesta: output.respuesta, recomendaciones, fuentes };
     },
   );
 }

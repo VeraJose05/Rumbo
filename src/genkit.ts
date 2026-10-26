@@ -2,16 +2,19 @@
 import { genkit } from 'genkit';
 import { ollama } from 'genkitx-ollama';
 import type { ConfigModelos } from './config/modelos.js';
+import { definirModeloOllama } from './modelos/ollama.js';
 
 export function crearAi(config: ConfigModelos) {
-  return genkit({
+  const ai = genkit({
+    // Del plugin solo se usa el embedder; el LLM va por modelos/ollama.ts para tener salida estructurada.
     plugins: [
       ollama({
         serverAddress: config.ollamaUrl,
-        models: [{ name: config.llm, type: 'chat' }],
         embedders: [{ name: config.embedder, dimensions: config.dimensionesEmbedder }],
       }),
     ],
-    model: `ollama/${config.llm}`,
+    model: `local/${config.llm}`,
   });
+  definirModeloOllama(ai, config.llm, config.ollamaUrl);
+  return ai;
 }

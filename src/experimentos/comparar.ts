@@ -14,6 +14,11 @@ console.log('──── C0 · Solo el modelo (sin RAG) ────');
 console.log(`${sinRag.respuesta}\n`);
 console.log('──── C1 · RAG básico ────');
 console.log(`${conRag.respuesta}\n`);
-console.log('Fuentes citadas:');
+console.log('Recomendaciones:');
+for (const r of conRag.recomendaciones) {
+  console.log(`  ${r.verificada ? '✓' : '✗'} ${r.lugar} [${r.citas.join(', ')}]: ${r.detalle}`);
+}
+if (!conRag.recomendaciones.length) console.log('  (ninguna)');
+console.log('\nFuentes:');
 for (const f of conRag.fuentes) console.log(`  [${f.cita}] ${f.seccion} · ${f.fuente}, ${f.url} (${f.licencia})`);
 if (!conRag.fuentes.length) console.log('  (ninguna)');
