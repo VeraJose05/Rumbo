@@ -1,0 +1,113 @@
+// RF-01: flow de entrevista. Cada llamada es un turno: recibe el estado y el mensaje del viajero
+// y devuelve el estado nuevo y lo que responde Rumbo. El código decide qué preguntar y cuándo
+// terminar; el LLM solo extrae datos del mensaje y redacta la pregunta.
+import { z, type Genkit } from 'genkit';
+import {
+  ETIQUETAS_INTERES,
+  fusionarPerfil,
+  resumirPerfil,
+  siguientePaso,
+  type EstadoEntrevista,
+} from './entrevista-logica.js';
+import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
+
+const EstadoSchema = z.object({
+  perfil: z.record(z.string(), z.unknown()),
+  preguntados: z.array(z.string()),
+});
+
+export const EntrevistaEntradaSchema = z.object({
+  /** Sin estado empieza una entrevista nueva. */
+  estado: EstadoSchema.optional(),
+  mensaje: z.string(),
+});
+
+export const EntrevistaSalidaSchema = z.object({
+  estado: EstadoSchema,
+  respuesta: z.string(),
+  /** El perfil completo y validado cuando la entrevista termina; null mientras tanto. */
+  perfil: PerfilSchema.nullable(),
+});
+
+// Todos los campos están siempre presentes (null si el mensaje no lo dice): con salida restringida
+// el modelo tiene que pronunciarse sobre cada uno en vez de saltárselos.
+const ExtraccionSchema = z.object({
+  destino: z.string().nullable(),
+  dias: z.number().int().nullable(),
+  intereses: z.array(z.enum(INTERESES)),
+  ritmo: z.enum(RITMOS).nullable(),
+  presupuesto: z.enum(PRESUPUESTOS).nullable(),
+  compania: z.enum(COMPANIAS).nullable(),
+});
+
+// Con un modelo pequeño hay que insistir en no deducir: en las pruebas rellenaba intereses
+// («museos, gastronomía») a partir de un simple «me apetece Granada».
+const SISTEMA_EXTRACCION = `Extraes datos de viaje del mensaje de un viajero. Copia solo lo que el mensaje dice de forma explícita; no deduzcas ni completes. Si un dato no aparece, pon null (o lista vacía en intereses).
+- destino: ciudad o lugar al que viaja.
+- dias: número de días del viaje («un fin de semana» son 2).
+- intereses: solo si el viajero habla de lo que le gusta o quiere hacer; elige de esta lista: ${INTERESES.join(', ')}. Decir con quién viaja no es un interés.
+- ritmo: solo si habla del ritmo o la intensidad del viaje (tranquilo, normal o intenso).
+- presupuesto: solo si habla de dinero (bajo, medio o alto).
+- compania: solo, pareja, familia (con hijos o familiares) o amigos.`;
+
+const QUE_PREGUNTAR: Record<'destino' | 'dias' | 'intereses', string> = {
+  destino: 'a qué destino quiere viajar',
+  dias: 'cuántos días va a durar el viaje (de 1 a 7)',
+  intereses: 'qué intereses tiene para el viaje',
+};
+
+// Partes fijas: el modelo resumía mal las opciones (ofrecía solo dos intereses de ocho).
+const OPCIONES_INTERESES = `Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`;
+const PREGUNTA_OPCIONALES =
+  '¿Quieres contarme algo más? Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), ' +
+  'qué ritmo prefieres (tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».';
+
+const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes. Hablas en español, con un tono cercano y breve.
+Escribe solo tu siguiente mensaje al viajero: como mucho una frase de reacción a lo que acaba de decir y una única pregunta. No inventes datos del viaje ni hagas recomendaciones todavía.`;
+
+export function definirEntrevistaFlow(ai: Genkit) {
+  return ai.defineFlow(
+    { name: 'entrevistaFlow', inputSchema: EntrevistaEntradaSchema, outputSchema: EntrevistaSalidaSchema },
+    async ({ estado: estadoPrevio, mensaje }) => {
+      let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
+
+      // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado.
+      if (mensaje.trim()) {
+        const preguntado = siguientePaso(estado);
+        const campoPreguntado = preguntado.tipo === 'preguntar' ? preguntado.campo : 'nada';
+        const { output } = await ai.generate({
+          system: SISTEMA_EXTRACCION,
+          prompt: `Se le acaba de preguntar por: ${campoPreguntado}\nMensaje del viajero: ${mensaje}`,
+          output: { schema: ExtraccionSchema },
+          config: { temperature: 0 },
+        });
+        // 2. Fusionar con lo que ya se sabía (solo valores válidos).
+        if (output) estado = { ...estado, perfil: fusionarPerfil(estado.perfil, output) };
+      }
+
+      // 3. Decidir el siguiente paso.
+      const paso = siguientePaso(estado);
+      if (paso.tipo === 'terminar') {
+        return {
+          estado,
+          respuesta: `¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`,
+          perfil: paso.perfil,
+        };
+      }
+      estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
+      if (paso.campo === 'opcionales') return { estado, respuesta: PREGUNTA_OPCIONALES, perfil: null };
+
+      // 4. Redactar la pregunta.
+      const { text } = await ai.generate({
+        system: SISTEMA_PREGUNTA,
+        prompt: [
+          mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación: saluda brevemente.',
+          `Datos que ya conoces: ${JSON.stringify(estado.perfil)}`,
+          `Pregúntale ${QUE_PREGUNTAR[paso.campo]}.`,
+        ].join('\n'),
+      });
+      const respuesta = paso.campo === 'intereses' ? `${text.trim()} ${OPCIONES_INTERESES}` : text.trim();
+      return { estado, respuesta, perfil: null };
+    },
+  );
+}

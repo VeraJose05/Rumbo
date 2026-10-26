@@ -7,8 +7,8 @@ export type PerfilParcial = Record<string, unknown>;
 
 export interface EstadoEntrevista {
   perfil: PerfilParcial;
-  /** Ritmo, presupuesto y compañía se preguntan una sola vez, al final. */
-  opcionalesPreguntados: boolean;
+  /** Preguntas ya hechas. Intereses y opcionales se preguntan siempre una vez, aunque ya haya datos. */
+  preguntados: string[];
 }
 
 export type Paso =
@@ -59,7 +59,9 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
 export function siguientePaso(estado: EstadoEntrevista): Paso {
   const [pendiente] = camposPendientes(estado.perfil);
   if (pendiente) return { tipo: 'preguntar', campo: pendiente };
-  if (!estado.opcionalesPreguntados) return { tipo: 'preguntar', campo: 'opcionales' };
+  // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero.
+  if (!estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
+  if (!estado.preguntados.includes('opcionales')) return { tipo: 'preguntar', campo: 'opcionales' };
   return { tipo: 'terminar', perfil: PerfilSchema.parse(estado.perfil) };
 }
 

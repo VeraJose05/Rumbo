@@ -34,21 +34,26 @@ describe('fusionarPerfil', () => {
 
 describe('siguientePaso', () => {
   it('pregunta el primer campo obligatorio que falta', () => {
-    expect(siguientePaso({ perfil: {}, opcionalesPreguntados: false })).toEqual({ tipo: 'preguntar', campo: 'destino' });
-    expect(siguientePaso({ perfil: { destino: 'Sevilla', dias: 2 }, opcionalesPreguntados: false })).toEqual({
+    expect(siguientePaso({ perfil: {}, preguntados: [] })).toEqual({ tipo: 'preguntar', campo: 'destino' });
+    expect(siguientePaso({ perfil: { destino: 'Sevilla', dias: 2 }, preguntados: ['destino', 'dias'] })).toEqual({
       tipo: 'preguntar',
       campo: 'intereses',
     });
   });
 
-  it('con lo obligatorio completo, pregunta una vez por los opcionales', () => {
+  it('pregunta por los intereses aunque ya se haya deducido alguno', () => {
+    const perfil = { destino: 'Sevilla', dias: 2, intereses: ['ninos'] };
+    expect(siguientePaso({ perfil, preguntados: ['destino'] })).toEqual({ tipo: 'preguntar', campo: 'intereses' });
+  });
+
+  it('con lo obligatorio completo y los intereses preguntados, pregunta una vez por los opcionales', () => {
     const perfil = { destino: 'Sevilla', dias: 2, intereses: ['museos'] };
-    expect(siguientePaso({ perfil, opcionalesPreguntados: false })).toEqual({ tipo: 'preguntar', campo: 'opcionales' });
+    expect(siguientePaso({ perfil, preguntados: ['intereses'] })).toEqual({ tipo: 'preguntar', campo: 'opcionales' });
   });
 
   it('después termina con el perfil validado y los valores por defecto', () => {
     const perfil = { destino: 'Sevilla', dias: 2, intereses: ['museos'], ritmo: 'tranquilo' };
-    expect(siguientePaso({ perfil, opcionalesPreguntados: true })).toEqual({
+    expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales'] })).toEqual({
       tipo: 'terminar',
       perfil: { ...perfil, presupuesto: 'medio', compania: 'solo' },
     });
