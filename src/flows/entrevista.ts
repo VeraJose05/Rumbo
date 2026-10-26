@@ -1,11 +1,12 @@
 // RF-01: flow de entrevista. Cada llamada es un turno: recibe el estado y el mensaje del viajero
-// y devuelve el estado nuevo y lo que responde Rumbo. El código decide qué preguntar y cuándo
-// terminar; el LLM solo extrae datos del mensaje y redacta la pregunta.
+// y devuelve el estado nuevo y lo que responde Rumbo. El LLM solo extrae datos del mensaje;
+// qué preguntar, cuándo terminar y el texto de las preguntas los pone el código.
 import { z, type Genkit } from 'genkit';
 import {
   avisoDestino,
   ETIQUETAS_INTERES,
   fusionarPerfil,
+  listaDestinos,
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
@@ -51,21 +52,17 @@ const SISTEMA_EXTRACCION = `Extraes datos de viaje del mensaje de un viajero. Co
 - presupuesto: solo si habla de dinero (bajo, medio o alto).
 - compania: solo, pareja, familia (con hijos o familiares) o amigos.`;
 
-const QUE_PREGUNTAR: Record<'destino' | 'dias', string> = {
-  destino: 'a qué destino quiere viajar',
-  dias: 'cuántos días va a durar el viaje (de 1 a 7)',
-};
-
-// Textos fijos: al redactar la pregunta de intereses, el modelo ofrecía solo dos de las ocho
-// opciones o se inventaba lugares («el Parque de Atracciones de Valencia»).
+// Todas las preguntas son textos fijos. Cuando las redactaba el modelo, ofrecía solo dos de los ocho
+// intereses, se inventaba lugares («el Parque de Atracciones de Valencia») y hasta destinos
+// («¿Te apuntas a un viaje al Caribe?»).
+const SALUDO = `¡Hola! Soy Rumbo y te ayudo a planificar tu viaje. ¿A dónde quieres ir? Puedo ayudarte con ${listaDestinos()}.`;
+const PREGUNTA_DESTINO = `¿A dónde quieres ir? Puedo ayudarte con ${listaDestinos()}.`;
+const preguntaDias = (destino: unknown) => `¿Cuántos días vas a estar en ${destino}? Puedo planificar de 1 a 7.`;
 const preguntaIntereses = (destino: unknown) =>
   `¿Qué te gustaría hacer en ${destino}? Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`;
 const PREGUNTA_OPCIONALES =
   '¿Quieres contarme algo más? Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), ' +
   'qué ritmo prefieres (tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».';
-
-const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes. Hablas en español, con un tono cercano y breve.
-Escribe solo tu siguiente mensaje al viajero: como mucho una frase de reacción a lo que acaba de decir y una única pregunta. No inventes datos del viaje ni hagas recomendaciones todavía.`;
 
 export function definirEntrevistaFlow(ai: Genkit) {
   return ai.defineFlow(
@@ -101,19 +98,13 @@ export function definirEntrevistaFlow(ai: Genkit) {
         };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
-      if (paso.campo === 'opcionales') return { estado, respuesta: PREGUNTA_OPCIONALES, perfil: null };
-      if (paso.campo === 'intereses') return { estado, respuesta: preguntaIntereses(estado.perfil.destino), perfil: null };
-
-      // 4. Redactar la pregunta.
-      const { text } = await ai.generate({
-        system: SISTEMA_PREGUNTA,
-        prompt: [
-          mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación: saluda brevemente.',
-          `Datos que ya conoces: ${JSON.stringify(estado.perfil)}`,
-          `Pregúntale ${QUE_PREGUNTAR[paso.campo]}.`,
-        ].join('\n'),
-      });
-      return { estado, respuesta: text.trim(), perfil: null };
+      const preguntas = {
+        destino: mensaje.trim() ? PREGUNTA_DESTINO : SALUDO,
+        dias: preguntaDias(estado.perfil.destino),
+        intereses: preguntaIntereses(estado.perfil.destino),
+        opcionales: PREGUNTA_OPCIONALES,
+      };
+      return { estado, respuesta: preguntas[paso.campo], perfil: null };
     },
   );
 }

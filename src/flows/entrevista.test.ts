@@ -19,18 +19,26 @@ function crearEntorno(extraccion: object = sinDatos) {
 }
 
 describe('entrevistaFlow', () => {
-  it('sin estado ni mensaje, saluda y pregunta el destino sin extraer nada', async () => {
-    const { flow, peticiones, textoDe } = crearEntorno();
+  it('sin estado ni mensaje, saluda y ofrece los destinos disponibles sin llamar al modelo', async () => {
+    const { flow, peticiones } = crearEntorno();
 
     const salida = await flow({ mensaje: '' });
 
     expect(salida).toEqual({
       estado: { perfil: {}, preguntados: ['destino'] },
-      respuesta: 'Pregunta del modelo',
+      respuesta:
+        '¡Hola! Soy Rumbo y te ayudo a planificar tu viaje. ¿A dónde quieres ir? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.',
       perfil: null,
     });
-    expect(peticiones).toHaveLength(1);
-    expect(textoDe(peticiones[0]!)).toMatch(/destino/);
+    expect(peticiones).toHaveLength(0);
+  });
+
+  it('pregunta los días con el destino ya conocido', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
+
+    expect(salida.respuesta).toBe('¿Cuántos días vas a estar en Granada? Puedo planificar de 1 a 7.');
   });
 
   it('guarda lo extraído del mensaje y pregunta por lo siguiente que falta', async () => {

@@ -68,9 +68,13 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
  */
 export function avisoDestino(destino: string): string | null {
   if (buscarDestino(destino)) return null;
+  return `Lo siento, todavía no tengo información de ${destino}. Puedo ayudarte con ${listaDestinos()}. ¿A cuál te gustaría ir?`;
+}
+
+/** «Sevilla, Madrid, Barcelona, Granada y Valencia». */
+export function listaDestinos(): string {
   const nombres = DESTINOS.map((d) => d.nombre);
-  const lista = `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
-  return `Lo siento, todavía no tengo información de ${destino}. Puedo ayudarte con ${lista}. ¿A cuál te gustaría ir?`;
+  return `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
 }
 
 export function siguientePaso(estado: EstadoEntrevista): Paso {
