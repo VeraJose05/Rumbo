@@ -16,8 +16,20 @@ export interface OpcionesTroceado {
 
 export const TROCEADO_POR_DEFECTO: OpcionesTroceado = {
   maxPalabras: 200,
-  // Distritos es solo una lista de nombres; Dormir no aporta al itinerario de actividades.
-  seccionesDescartadas: ['Distritos', 'Dormir', 'Referencias', 'Enlaces externos'],
+  // Alojamiento, estudios, trabajo y contactos no aportan a un itinerario de actividades.
+  // Cada artículo nombra las secciones a su manera («Dormir» o «Alojamiento»).
+  seccionesDescartadas: [
+    'Dormir',
+    'Alojamiento',
+    'Aprender',
+    'Estudios',
+    'Trabajar',
+    'Conectarse',
+    'Contactos de emergencia',
+    'Salud',
+    'Referencias',
+    'Enlaces externos',
+  ],
 };
 
 interface Seccion {

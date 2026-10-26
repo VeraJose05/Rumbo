@@ -12,6 +12,12 @@ export function limpiarWikitexto(wikitexto: string): string {
     // Referencias y comentarios
     .replace(/<ref[^>]*\/>|<ref[^>]*>[\s\S]*?<\/ref>|<references\s*\/>/g, '')
     .replace(/<!--[\s\S]*?-->/g, '')
+    // Tablas (horarios, tarifas): no se buscan bien por significado
+    .replace(/^\s*:?\{\|[\s\S]*?^\s*\|\}/gm, '')
+    // Etiquetas HTML: los superíndices son llamadas a notas; del resto se conserva el texto
+    .replace(/<sup>[\s\S]*?<\/sup>/g, '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<\/?[a-zA-Z][^>]*>/g, '')
     // Imágenes y categorías; el pie de imagen puede llevar enlaces anidados
     .replace(/\[\[(?:Archivo|Imagen|File|Image|Categoría|Category):(?:[^[\]]|\[\[[^\]]*\]\])*\]\]/gi, '')
     // [[destino|texto]] → texto, [[destino]] → destino
@@ -26,7 +32,7 @@ export function limpiarWikitexto(wikitexto: string): string {
 
   return texto
     .split('\n')
-    .map((linea) => linea.trimEnd())
+    .map((linea) => linea.replace(/ {2,}/g, ' ').trimEnd())
     .join('\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();

@@ -1,6 +1,7 @@
 // Punto de entrada: registra los flows para la Developer UI de Genkit (npm run dev).
 import { cargarConfigChroma } from './config/chroma.js';
 import { cargarConfigModelos } from './config/modelos.js';
+import { definirEntrevistaFlow } from './flows/entrevista.js';
 import { definirPreguntaFlow } from './flows/pregunta.js';
 import { definirPruebaFlow } from './flows/prueba.js';
 import { definirRecuperadorChroma } from './flows/recuperador.js';
@@ -10,6 +11,7 @@ import { abrirColeccion } from './ingest/chroma.js';
 const configModelos = cargarConfigModelos();
 export const ai = crearAi(configModelos);
 export const pruebaFlow = definirPruebaFlow(ai);
+export const entrevistaFlow = definirEntrevistaFlow(ai);
 
 const coleccion = await abrirColeccion(cargarConfigChroma());
 const recuperador = definirRecuperadorChroma(ai, coleccion, `ollama/${configModelos.embedder}`);
