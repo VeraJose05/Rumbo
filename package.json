@@ -9,11 +9,21 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev": "npm run build && genkit start -- node --env-file-if-exists=.env dist/index.js",
+    "flow:prueba": "npm run build && node --env-file-if-exists=.env dist/probar.js"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
-    "typescript": "7.0.2"
+    "genkit-cli": "1.44.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "dependencies": {
+    "genkit": "1.42.0",
+    "genkitx-ollama": "1.42.0"
   }
 }
