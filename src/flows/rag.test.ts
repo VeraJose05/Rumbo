@@ -13,7 +13,7 @@ describe('construirPromptRag', () => {
 
     expect(prompt).toBe(
       [
-        'Fragmentos:',
+        'Textos:',
         '[1] (Sevilla › Comer) Los Coloniales es de altísima calidad.',
         '[2] (Sevilla › Beber) Sevilla tiene muchos bares.',
         '',
@@ -22,13 +22,18 @@ describe('construirPromptRag', () => {
     );
   });
 
-  it('pide responder solo con los fragmentos, citar y no inventar', () => {
+  it('pide responder solo con los textos, citar y no inventar', () => {
     const { system } = construirPromptRag('¿Dónde cenar tapas?', 'Sevilla', fragmentos);
 
     expect(system).toMatch(/español/);
     expect(system).toMatch(/SOLO/);
-    expect(system).toMatch(/\[2\]/);
-    expect(system).toMatch(/no contienen/i);
+    expect(system).toMatch(/No tengo información/);
+  });
+
+  it('incluye un ejemplo de respuesta con citas', () => {
+    const { system } = construirPromptRag('¿Dónde cenar tapas?', 'Sevilla', fragmentos);
+
+    expect(system).toMatch(/Ejemplo:[\s\S]*Respuesta: .*\[1\].*\[2\]/);
   });
 });
 
