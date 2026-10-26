@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs';
 import { cargarConfigModelos } from '../config/modelos.js';
 import { crearAi } from '../genkit.js';
-import { TROCEADO_POR_DEFECTO, trocearArticulo } from '../ingest/troceado.js';
+import { TROCEADO_POR_DEFECTO, textoConContexto, trocearArticulo } from '../ingest/troceado.js';
 import { limpiarWikitexto } from '../ingest/wikitexto.js';
 
 const pregunta = process.argv.slice(2).join(' ') || 'quiero ver monumentos';
@@ -18,22 +18,29 @@ const fragmentos = trocearArticulo(limpiarWikitexto(wikitexto), TROCEADO_POR_DEF
 
 // Un embedding es una lista de números (1024 con bge-m3) que resume el significado del texto.
 const [vectorPregunta] = await ai.embed({ embedder, content: pregunta });
-const vectoresFragmentos = await ai.embedMany({ embedder, content: fragmentos.map((f) => f.texto) });
+// Dos versiones de cada fragmento: el texto tal cual, y con «Sevilla › Sección:» delante.
+const vectoresSinContexto = await ai.embedMany({ embedder, content: fragmentos.map((f) => f.texto) });
+const vectoresConContexto = await ai.embedMany({
+  embedder,
+  content: fragmentos.map((f) => textoConContexto('Sevilla', f)),
+});
 
 console.log(`Pregunta: «${pregunta}»`);
-console.log(`Su embedding empieza así: [${vectorPregunta!.embedding.slice(0, 5).map((n) => n.toFixed(3)).join(', ')}, …] (${vectorPregunta!.embedding.length} números)\n`);
+console.log(`Su embedding empieza así: [${vectorPregunta!.embedding.slice(0, 5).map((n) => n.toFixed(3)).join(', ')}, …] (${vectorPregunta!.embedding.length} números)`);
 
-const ranking = fragmentos
-  .map((fragmento, i) => ({ fragmento, similitud: similitudCoseno(vectorPregunta!.embedding, vectoresFragmentos[i]!.embedding) }))
-  .sort((a, b) => b.similitud - a.similitud);
+mostrarRanking('Sin contexto (solo el texto del fragmento)', vectoresSinContexto);
+mostrarRanking('Con contexto («Sevilla › Sección: texto»)', vectoresConContexto);
 
-const mostrar = ({ fragmento, similitud }: (typeof ranking)[number]) =>
-  console.log(`  ${similitud.toFixed(3)}  ${fragmento.seccion.join(' › ').padEnd(28)} ${fragmento.texto.replace(/\s+/g, ' ').slice(0, 70)}…`);
+function mostrarRanking(titulo: string, vectores: { embedding: number[] }[]) {
+  const ranking = fragmentos
+    .map((fragmento, i) => ({ fragmento, similitud: similitudCoseno(vectorPregunta!.embedding, vectores[i]!.embedding) }))
+    .sort((a, b) => b.similitud - a.similitud);
 
-console.log('Los 5 más parecidos:');
-ranking.slice(0, 5).forEach(mostrar);
-console.log('\nLos 3 menos parecidos:');
-ranking.slice(-3).forEach(mostrar);
+  console.log(`\n${titulo}. Los 5 más parecidos:`);
+  for (const { fragmento, similitud } of ranking.slice(0, 5)) {
+    console.log(`  ${similitud.toFixed(3)}  ${fragmento.seccion.join(' › ').padEnd(28)} ${fragmento.texto.replace(/\s+/g, ' ').slice(0, 60)}…`);
+  }
+}
 
 /**
  * Similitud coseno: mide si dos vectores «apuntan en la misma dirección».

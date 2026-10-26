@@ -1,8 +1,16 @@
 // RF-03: troceado de un artículo limpio en fragmentos por sección.
 import { describe, expect, it } from 'vitest';
-import { trocearArticulo } from './troceado.js';
+import { textoConContexto, trocearArticulo } from './troceado.js';
 
 const opciones = { maxPalabras: 10, seccionesDescartadas: [] };
+
+describe('textoConContexto', () => {
+  it('antepone el destino y la ruta de la sección al texto del fragmento', () => {
+    const fragmento = { seccion: ['Comprender', 'Clima'], texto: 'Hace calor.' };
+
+    expect(textoConContexto('Sevilla', fragmento)).toBe('Sevilla › Comprender › Clima: Hace calor.');
+  });
+});
 
 describe('trocearArticulo', () => {
   it('crea un fragmento por sección con su ruta, y llama Introducción al texto inicial', () => {

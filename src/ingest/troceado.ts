@@ -42,6 +42,14 @@ export function trocearArticulo(texto: string, opciones: OpcionesTroceado): Frag
     );
 }
 
+/**
+ * Texto que se convierte en embedding: el fragmento precedido de su destino y sección,
+ * para que el vector sepa de qué trata aunque el texto no lo diga.
+ */
+export function textoConContexto(destino: string, fragmento: Fragmento): string {
+  return `${[destino, ...fragmento.seccion].join(' › ')}: ${fragmento.texto}`;
+}
+
 function separarSecciones(texto: string): Seccion[] {
   const secciones: Seccion[] = [{ ruta: ['Introducción'], lineas: [] }];
   let ruta: string[] = [];
