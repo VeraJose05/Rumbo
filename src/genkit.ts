@@ -15,6 +15,6 @@ export function crearAi(config: ConfigModelos) {
     ],
     model: `local/${config.llm}`,
   });
-  definirModeloOllama(ai, config.llm, config.ollamaUrl);
+  definirModeloOllama(ai, config.llm, config.ollamaUrl, config.contexto);
   return ai;
 }

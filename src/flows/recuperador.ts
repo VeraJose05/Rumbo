@@ -15,7 +15,7 @@ export function definirRecuperadorChroma(ai: Genkit, coleccion: Collection, embe
       });
       const documentos = (resultado.rows()[0] ?? []).map((fila) =>
         // La distancia se guarda para poder estudiar umbrales (RF-07) en las trazas.
-        Document.fromText(fila.document ?? '', { ...fila.metadata, distancia: fila.distance }),
+        Document.fromText(fila.document ?? '', { ...fila.metadata, id: fila.id, distancia: fila.distance }),
       );
       return { documents: documentos };
     },

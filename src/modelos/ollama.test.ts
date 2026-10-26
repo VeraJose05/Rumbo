@@ -10,6 +10,10 @@ const mensajes: GenerateRequest['messages'] = [
 ];
 
 describe('aPeticionOllama', () => {
+  it('fija la ventana de contexto para que Ollama no recorte el prompt', () => {
+    expect(aPeticionOllama('qwen2.5:3b', { messages: mensajes }, 8192).options).toEqual({ num_ctx: 8192 });
+  });
+
   it('convierte los mensajes y renombra el rol model a assistant', () => {
     expect(aPeticionOllama('qwen2.5:3b', { messages: mensajes })).toEqual({
       model: 'qwen2.5:3b',
