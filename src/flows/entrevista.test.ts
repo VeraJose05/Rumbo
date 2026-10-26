@@ -5,13 +5,13 @@ import { definirEntrevistaFlow } from './entrevista.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
 
-/** Modelo simulado: devuelve la extracción indicada cuando se le pide JSON y una pregunta fija si no. */
-function crearEntorno(extraccion: object = sinDatos) {
+/** Modelo simulado: devuelve la extracción indicada cuando se le pide JSON y la pregunta indicada si no. */
+function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?') {
   const peticiones: GenerateRequest[] = [];
   const ai = genkit({ model: 'simulado' });
   ai.defineModel({ name: 'simulado', supports: { constrained: 'all', output: ['json', 'text'] } }, async (peticion) => {
     peticiones.push(peticion);
-    const texto = peticion.output?.schema ? JSON.stringify(extraccion) : 'Pregunta del modelo';
+    const texto = peticion.output?.schema ? JSON.stringify(extraccion) : redaccion;
     return { message: { role: 'model', content: [{ text: texto }] } };
   });
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
@@ -19,26 +19,57 @@ function crearEntorno(extraccion: object = sinDatos) {
 }
 
 describe('entrevistaFlow', () => {
-  it('sin estado ni mensaje, saluda y ofrece los destinos disponibles sin llamar al modelo', async () => {
+  it('sin estado ni mensaje, saluda con el modelo y añade los destinos disponibles', async () => {
     const { flow, peticiones } = crearEntorno();
 
     const salida = await flow({ mensaje: '' });
 
     expect(salida).toEqual({
       estado: { perfil: {}, preguntados: ['destino'] },
-      respuesta:
-        '¡Hola! Soy Rumbo y te ayudo a planificar tu viaje. ¿A dónde quieres ir? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.',
+      respuesta: '¡Genial! ¿Pregunta del modelo? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.',
       perfil: null,
+      respaldo: null,
     });
-    expect(peticiones).toHaveLength(0);
+    expect(peticiones).toHaveLength(1);
   });
 
-  it('pregunta los días con el destino ya conocido', async () => {
-    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' });
+  it('si la redacción del modelo menciona un destino nuevo, usa el texto de reserva', async () => {
+    const { flow } = crearEntorno(sinDatos, '¡Hola! ¿Te apuntas a un viaje al Caribe?');
+
+    const salida = await flow({ mensaje: '' });
+
+    expect(salida.respuesta).toBe('¿A dónde quieres ir? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.');
+    expect(salida.respaldo).toBe('nombre no permitido: Caribe');
+  });
+
+  it('si el modelo solo reacciona sin preguntar, añade la pregunta de reserva tras su frase', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' }, '¡Granada es preciosa!');
 
     const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
 
-    expect(salida.respuesta).toBe('¿Cuántos días vas a estar en Granada? Puedo planificar de 1 a 7.');
+    expect(salida.respuesta).toBe('¡Granada es preciosa! ¿Cuántos días vas a estar en Granada? Puedo planificar de 1 a 7.');
+    expect(salida.respaldo).toBeNull();
+  });
+
+  it('un lugar mencionado al responder otra pregunta no se toma como cambio de destino', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Alhambra', intereses: ['monumentos', 'gastronomia'] });
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Granada', dias: 3 }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'la Alhambra y comer bien',
+    });
+
+    expect(salida.estado.perfil).toEqual({ destino: 'Granada', dias: 3, intereses: ['monumentos', 'gastronomia'] });
+    expect(salida.respuesta).not.toMatch(/no tengo información/);
+  });
+
+  it('pregunta los días con el destino ya conocido', async () => {
+    const { flow, peticiones, textoDe } = crearEntorno({ ...sinDatos, destino: 'Granada' });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
+
+    expect(textoDe(peticiones[1]!)).toContain('cuántos días va a estar en Granada');
+    expect(salida.respuesta).toBe('¡Genial! ¿Pregunta del modelo? Puedo planificar de 1 a 7.');
   });
 
   it('guarda lo extraído del mensaje y pregunta por lo siguiente que falta', async () => {
@@ -48,10 +79,10 @@ describe('entrevistaFlow', () => {
 
     expect(salida.estado.perfil).toEqual({ destino: 'Sevilla', dias: 3 });
     expect(salida.perfil).toBeNull();
-    // La pregunta de intereses es un texto fijo: solo se llama al modelo para extraer.
-    expect(peticiones).toHaveLength(1);
+    // Las opciones de intereses las añade el código detrás de lo que redacta el modelo.
+    expect(peticiones).toHaveLength(2);
     expect(salida.respuesta).toBe(
-      '¿Qué te gustaría hacer en Sevilla? Puedes elegir varios: monumentos, museos, gastronomía, naturaleza, ocio nocturno, compras, playa, niños.',
+      '¡Genial! ¿Pregunta del modelo? Puedes elegir varios: monumentos, museos, gastronomía, naturaleza, ocio nocturno, compras, playa, niños.',
     );
   });
 
@@ -75,7 +106,7 @@ describe('entrevistaFlow', () => {
     expect(textoDe(peticiones[0]!)).toMatch(/Se le acaba de preguntar por: dias/);
   });
 
-  it('con lo obligatorio completo, pregunta una vez por los opcionales con un texto fijo', async () => {
+  it('con lo obligatorio completo, pregunta una vez por los opcionales', async () => {
     const { flow, peticiones } = crearEntorno({ ...sinDatos, intereses: ['museos'] });
 
     const salida = await flow({
@@ -85,8 +116,8 @@ describe('entrevistaFlow', () => {
 
     expect(salida.estado.preguntados).toEqual(['destino', 'dias', 'intereses', 'opcionales']);
     expect(salida.perfil).toBeNull();
-    expect(salida.respuesta).toMatch(/^¿Quieres contarme algo más\?/);
-    expect(peticiones).toHaveLength(1);
+    expect(salida.respuesta).toMatch(/^¡Genial! ¿Pregunta del modelo\? Por ejemplo, con quién viajas/);
+    expect(peticiones).toHaveLength(2);
   });
 
   it('tras los opcionales termina con el perfil válido y un resumen, sin redactar más preguntas', async () => {

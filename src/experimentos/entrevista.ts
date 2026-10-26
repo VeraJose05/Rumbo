@@ -15,6 +15,7 @@ let turno = await entrevistaFlow({ mensaje: '' });
 while (!turno.perfil) {
   console.log(`\nRumbo: ${turno.respuesta}`);
   console.log(`        (perfil hasta ahora: ${JSON.stringify(turno.estado.perfil)})`);
+  if (turno.respaldo) console.log(`        (guardarraíl: texto de reserva, motivo: ${turno.respaldo})`);
   const mensaje = await consola.question('Tú: ');
   if (mensaje.trim().toLowerCase() === 'salir') break;
   turno = await entrevistaFlow({ estado: turno.estado, mensaje });

@@ -1,7 +1,9 @@
 // RF-01: flow de entrevista. Cada llamada es un turno: recibe el estado y el mensaje del viajero
-// y devuelve el estado nuevo y lo que responde Rumbo. El LLM solo extrae datos del mensaje;
-// qué preguntar, cuándo terminar y el texto de las preguntas los pone el código.
+// y devuelve el estado nuevo y lo que responde Rumbo. El código decide qué preguntar y cuándo
+// terminar; el LLM extrae datos del mensaje y redacta la pregunta con naturalidad, y un
+// guardarraíl comprueba lo que redacta antes de enseñarlo.
 import { z, type Genkit } from 'genkit';
+import { DESTINOS } from '../config/destinos.js';
 import {
   avisoDestino,
   ETIQUETAS_INTERES,
@@ -11,6 +13,7 @@ import {
   siguientePaso,
   type EstadoEntrevista,
 } from './entrevista-logica.js';
+import { validarMensaje } from './guardarrail.js';
 import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
 
 const EstadoSchema = z.object({
@@ -29,6 +32,8 @@ export const EntrevistaSalidaSchema = z.object({
   respuesta: z.string(),
   /** El perfil completo y validado cuando la entrevista termina; null mientras tanto. */
   perfil: PerfilSchema.nullable(),
+  /** Por qué se descartó el texto del modelo y se usó el de reserva; null si no hizo falta. */
+  respaldo: z.string().nullable(),
 });
 
 // Todos los campos están siempre presentes (null si el mensaje no lo dice): con salida restringida
@@ -52,17 +57,49 @@ const SISTEMA_EXTRACCION = `Extraes datos de viaje del mensaje de un viajero. Co
 - presupuesto: solo si habla de dinero (bajo, medio o alto).
 - compania: solo, pareja, familia (con hijos o familiares) o amigos.`;
 
-// Todas las preguntas son textos fijos. Cuando las redactaba el modelo, ofrecía solo dos de los ocho
-// intereses, se inventaba lugares («el Parque de Atracciones de Valencia») y hasta destinos
-// («¿Te apuntas a un viaje al Caribe?»).
-const SALUDO = `¡Hola! Soy Rumbo y te ayudo a planificar tu viaje. ¿A dónde quieres ir? Puedo ayudarte con ${listaDestinos()}.`;
-const PREGUNTA_DESTINO = `¿A dónde quieres ir? Puedo ayudarte con ${listaDestinos()}.`;
-const preguntaDias = (destino: unknown) => `¿Cuántos días vas a estar en ${destino}? Puedo planificar de 1 a 7.`;
-const preguntaIntereses = (destino: unknown) =>
-  `¿Qué te gustaría hacer en ${destino}? Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`;
-const PREGUNTA_OPCIONALES =
-  '¿Quieres contarme algo más? Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), ' +
-  'qué ritmo prefieres (tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».';
+type Campo = 'destino' | 'dias' | 'intereses' | 'opcionales';
+
+// Para cada pregunta: qué tiene que preguntar el modelo, el texto de reserva si su redacción no pasa
+// el guardarraíl, y las opciones, que añade siempre el código porque el modelo las recortaba
+// (ofrecía dos de los ocho intereses).
+function pregunta(campo: Campo, destino: unknown): { objetivo: string; reserva: string; opciones: string } {
+  switch (campo) {
+    case 'destino':
+      return {
+        objetivo: 'a dónde quiere viajar',
+        reserva: '¿A dónde quieres ir?',
+        opciones: `Puedo ayudarte con ${listaDestinos()}.`,
+      };
+    case 'dias':
+      return {
+        objetivo: `cuántos días va a estar en ${destino}`,
+        reserva: `¿Cuántos días vas a estar en ${destino}?`,
+        opciones: 'Puedo planificar de 1 a 7.',
+      };
+    case 'intereses':
+      return {
+        objetivo: `qué le gustaría hacer en ${destino}`,
+        reserva: `¿Qué te gustaría hacer en ${destino}?`,
+        opciones: `Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`,
+      };
+    case 'opcionales':
+      return {
+        objetivo: 'si quiere contar algo más del viaje (es opcional)',
+        reserva: '¿Quieres contarme algo más?',
+        opciones:
+          'Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), qué ritmo prefieres ' +
+          '(tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».',
+      };
+  }
+}
+
+const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes. Hablas en español, con un tono cercano y natural.
+Escribe tu siguiente mensaje al viajero: una reacción breve a lo que acaba de decir (o un saludo si es el inicio) y la pregunta que se te indica.
+- Tutea al viajero y no le llames por ningún nombre.
+- Saluda solo si es el inicio de la conversación.
+- Como mucho dos frases cortas, y la segunda es una pregunta.
+- No menciones ningún lugar, destino ni recomendación que el viajero no haya dicho.
+- No enumeres opciones: se añaden después.`;
 
 export function definirEntrevistaFlow(ai: Genkit) {
   return ai.defineFlow(
@@ -84,8 +121,10 @@ export function definirEntrevistaFlow(ai: Genkit) {
         if (output) estado = { ...estado, perfil: fusionarPerfil(estado.perfil, output) };
 
         // Un destino sin guía no se guarda: se dice y se vuelve a pedir, sin seguir con la entrevista.
-        const aviso = output?.destino ? avisoDestino(output.destino) : null;
-        if (aviso) return { estado, respuesta: aviso, perfil: null };
+        // Solo si se preguntaba por el destino: «la Alhambra y comer bien», respondiendo a los
+        // intereses, no es un cambio de destino.
+        const aviso = output?.destino && campoPreguntado === 'destino' ? avisoDestino(output.destino) : null;
+        if (aviso) return { estado, respuesta: aviso, perfil: null, respaldo: null };
       }
 
       // 3. Decidir el siguiente paso.
@@ -95,16 +134,30 @@ export function definirEntrevistaFlow(ai: Genkit) {
           estado,
           respuesta: `¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`,
           perfil: paso.perfil,
+          respaldo: null,
         };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
-      const preguntas = {
-        destino: mensaje.trim() ? PREGUNTA_DESTINO : SALUDO,
-        dias: preguntaDias(estado.perfil.destino),
-        intereses: preguntaIntereses(estado.perfil.destino),
-        opcionales: PREGUNTA_OPCIONALES,
+
+      // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
+      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil.destino);
+      const { text } = await ai.generate({
+        system: SISTEMA_PREGUNTA,
+        prompt: [
+          mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
+          `Pregúntale ${objetivo}.`,
+        ].join('\n'),
+      });
+      const permitidos = [mensaje, reserva, 'Rumbo', ...DESTINOS.map((d) => d.nombre)];
+      const validacion = validarMensaje(text, permitidos);
+      // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
+      const redactada = !validacion.valido ? reserva : text.includes('?') ? text.trim() : `${text.trim()} ${reserva}`;
+      return {
+        estado,
+        respuesta: `${redactada} ${opciones}`,
+        perfil: null,
+        respaldo: validacion.valido ? null : validacion.motivo,
       };
-      return { estado, respuesta: preguntas[paso.campo], perfil: null };
     },
   );
 }
