@@ -17,7 +17,8 @@
     "flow:prueba": "npm run build && node --env-file-if-exists=.env dist/probar.js",
     "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js",
     "ingesta": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar.js",
-    "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js"
+    "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js",
+    "comparar": "npm run build && node --env-file-if-exists=.env dist/experimentos/comparar.js"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
