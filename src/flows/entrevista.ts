@@ -3,6 +3,7 @@
 // terminar; el LLM solo extrae datos del mensaje y redacta la pregunta.
 import { z, type Genkit } from 'genkit';
 import {
+  avisoDestino,
   ETIQUETAS_INTERES,
   fusionarPerfil,
   resumirPerfil,
@@ -71,6 +72,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
     async ({ estado: estadoPrevio, mensaje }) => {
       let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
+      const destinoPrevio = estado.perfil.destino;
+
       // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado.
       if (mensaje.trim()) {
         const preguntado = siguientePaso(estado);
@@ -85,17 +88,22 @@ export function definirEntrevistaFlow(ai: Genkit) {
         if (output) estado = { ...estado, perfil: fusionarPerfil(estado.perfil, output) };
       }
 
+      // Si el destino acaba de cambiar y no tiene guía, se avisa delante de la siguiente pregunta.
+      const destino = estado.perfil.destino;
+      const aviso = typeof destino === 'string' && destino !== destinoPrevio ? avisoDestino(destino) : null;
+      const conAviso = (texto: string) => (aviso ? `${aviso}\n\n${texto}` : texto);
+
       // 3. Decidir el siguiente paso.
       const paso = siguientePaso(estado);
       if (paso.tipo === 'terminar') {
         return {
           estado,
-          respuesta: `¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`,
+          respuesta: conAviso(`¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`),
           perfil: paso.perfil,
         };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
-      if (paso.campo === 'opcionales') return { estado, respuesta: PREGUNTA_OPCIONALES, perfil: null };
+      if (paso.campo === 'opcionales') return { estado, respuesta: conAviso(PREGUNTA_OPCIONALES), perfil: null };
 
       // 4. Redactar la pregunta.
       const { text } = await ai.generate({
@@ -107,7 +115,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
         ].join('\n'),
       });
       const respuesta = paso.campo === 'intereses' ? `${text.trim()} ${OPCIONES_INTERESES}` : text.trim();
-      return { estado, respuesta, perfil: null };
+      return { estado, respuesta: conAviso(respuesta), perfil: null };
     },
   );
 }

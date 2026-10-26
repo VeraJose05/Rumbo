@@ -47,6 +47,15 @@ describe('entrevistaFlow', () => {
     );
   });
 
+  it('avisa delante de la pregunta si el destino no tiene guía', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Bilbao' });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'A Bilbao' });
+
+    expect(salida.estado.perfil).toEqual({ destino: 'Bilbao' });
+    expect(salida.respuesta).toMatch(/^Aviso: todavía no tengo información de Bilbao\.[\s\S]*Pregunta del modelo$/);
+  });
+
   it('indica al extractor qué se acababa de preguntar, para entender respuestas cortas como «3»', async () => {
     const { flow, peticiones, textoDe } = crearEntorno();
 

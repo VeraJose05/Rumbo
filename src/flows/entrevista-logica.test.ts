@@ -1,6 +1,6 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
-import { fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
+import { avisoDestino, fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
 import { PerfilSchema } from './perfil.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
@@ -25,6 +25,11 @@ describe('fusionarPerfil', () => {
     expect(
       fusionarPerfil({ intereses: ['museos'] }, { ...sinDatos, intereses: ['naturaleza', 'museos'] }).intereses,
     ).toEqual(['museos', 'naturaleza']);
+  });
+
+  it('escribe el destino como en el catálogo si lo tiene, y lo deja tal cual si no', () => {
+    expect(fusionarPerfil({}, { ...sinDatos, destino: 'granada' }).destino).toBe('Granada');
+    expect(fusionarPerfil({}, { ...sinDatos, destino: 'Bilbao' }).destino).toBe('Bilbao');
   });
 
   it('descarta los valores inválidos para que se vuelvan a preguntar', () => {
@@ -57,6 +62,18 @@ describe('siguientePaso', () => {
       tipo: 'terminar',
       perfil: { ...perfil, presupuesto: 'medio', compania: 'solo' },
     });
+  });
+});
+
+describe('avisoDestino', () => {
+  it('avisa si el destino no tiene guía y dice cuáles la tienen', () => {
+    expect(avisoDestino('Bilbao')).toBe(
+      'Aviso: todavía no tengo información de Bilbao. Ahora mismo conozco Sevilla, Madrid, Barcelona, Granada y Valencia; si quieres, puedes cambiar de destino.',
+    );
+  });
+
+  it('no avisa si el destino está en el catálogo', () => {
+    expect(avisoDestino('Granada')).toBeNull();
   });
 });
 

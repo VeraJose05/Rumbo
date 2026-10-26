@@ -1,6 +1,7 @@
 // RF-01: lógica determinista de la entrevista: qué se guarda de cada respuesta,
 // qué se pregunta después y cuándo se termina. El LLM no decide nada de esto.
 import { z } from 'genkit';
+import { buscarDestino, DESTINOS } from '../config/destinos.js';
 import { camposPendientes, INTERESES, PerfilSchema, type Perfil } from './perfil.js';
 
 export type PerfilParcial = Record<string, unknown>;
@@ -44,6 +45,10 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
     const validado = forma[campo].safeParse(valor);
     if (validado.success) resultado[campo] = validado.data;
   }
+  // «granada» → «Granada», para que coincida con los metadatos de Chroma.
+  if (typeof resultado.destino === 'string') {
+    resultado.destino = buscarDestino(resultado.destino)?.nombre ?? resultado.destino;
+  }
 
   const interesValido = z.enum(INTERESES);
   const nuevos = (Array.isArray(extraido.intereses) ? extraido.intereses : []).filter(
@@ -54,6 +59,14 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
     resultado.intereses = [...new Set([...anteriores, ...nuevos])];
   }
   return resultado;
+}
+
+/** Aviso para un destino sin guía. Se acepta igualmente: la evaluación incluye destinos fuera del corpus. */
+export function avisoDestino(destino: string): string | null {
+  if (buscarDestino(destino)) return null;
+  const nombres = DESTINOS.map((d) => d.nombre);
+  const lista = `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
+  return `Aviso: todavía no tengo información de ${destino}. Ahora mismo conozco ${lista}; si quieres, puedes cambiar de destino.`;
 }
 
 export function siguientePaso(estado: EstadoEntrevista): Paso {
