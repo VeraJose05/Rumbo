@@ -6,6 +6,7 @@ import { z, type Genkit } from 'genkit';
 import { DESTINOS } from '../config/destinos.js';
 import {
   avisoDestino,
+  esAfirmacion,
   ETIQUETAS_INTERES,
   fusionarPerfil,
   listaDestinos,
@@ -42,6 +43,7 @@ const ExtraccionSchema = z.object({
   destino: z.string().nullable(),
   dias: z.number().int().nullable(),
   intereses: z.array(z.enum(INTERESES)),
+  interesesQuitar: z.array(z.enum(INTERESES)),
   ritmo: z.enum(RITMOS).nullable(),
   presupuesto: z.enum(PRESUPUESTOS).nullable(),
   compania: z.enum(COMPANIAS).nullable(),
@@ -55,7 +57,9 @@ const SISTEMA_EXTRACCION = `Extraes datos de viaje del mensaje de un viajero. Co
 - intereses: solo si el viajero habla de lo que le gusta o quiere hacer; elige de esta lista: ${INTERESES.join(', ')}. Decir con quién viaja no es un interés.
 - ritmo: solo si habla del ritmo o la intensidad del viaje (tranquilo, normal o intenso).
 - presupuesto: solo si habla de dinero (bajo, medio o alto).
-- compania: solo, pareja, familia (con hijos o familiares) o amigos.`;
+- compania: solo, pareja, familia (con hijos o familiares) o amigos.
+- interesesQuitar: intereses de la lista que el viajero pide quitar («quita el ocio nocturno»).
+Si el viajero corrige datos que ya se conocen («mejor 2 días»), pon solo el valor nuevo de lo que cambia; lo que no menciona va a null.`;
 
 type Campo = 'destino' | 'dias' | 'intereses' | 'opcionales';
 
@@ -107,18 +111,52 @@ export function definirEntrevistaFlow(ai: Genkit) {
     async ({ estado: estadoPrevio, mensaje }) => {
       let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
-      // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado.
-      if (mensaje.trim()) {
-        const preguntado = siguientePaso(estado);
-        const campoPreguntado = preguntado.tipo === 'preguntar' ? preguntado.campo : 'nada';
+      // La última pregunta hecha: ayuda a entender respuestas cortas como «3» o «sí».
+      const campoPreguntado = estado.preguntados.at(-1) ?? 'nada';
+
+      // Un «sí» a la confirmación se reconoce en código: el extractor se inventaba datos con él.
+      if (campoPreguntado === 'confirmacion' && esAfirmacion(mensaje)) {
+        estado = { ...estado, preguntados: [...estado.preguntados, 'confirmado'] };
+      }
+      // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado y lo que ya se sabe.
+      else if (mensaje.trim()) {
         const { output } = await ai.generate({
           system: SISTEMA_EXTRACCION,
-          prompt: `Se le acaba de preguntar por: ${campoPreguntado}\nMensaje del viajero: ${mensaje}`,
+          prompt: [
+            `Se le acaba de preguntar por: ${campoPreguntado}`,
+            `Datos que ya se conocen: ${JSON.stringify(estado.perfil)}`,
+            `Mensaje del viajero: ${mensaje}`,
+          ].join('\n'),
           output: { schema: ExtraccionSchema },
           config: { temperature: 0 },
         });
         // 2. Fusionar con lo que ya se sabía (solo valores válidos).
-        if (output) estado = { ...estado, perfil: fusionarPerfil(estado.perfil, output) };
+        const anterior = estado.perfil;
+        if (output) {
+          // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
+          // extractor convertía un «nada más» en «quita monumentos».
+          const extraido = campoPreguntado === 'confirmacion' ? output : { ...output, interesesQuitar: [] };
+          estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
+        }
+
+        // Respuesta a la confirmación que no es un simple «sí»: con cambios, se vuelve a confirmar;
+        // sin cambios, se pregunta qué cambiar. Solo el código da el perfil por confirmado: cuando lo
+        // decidía el modelo, «añade gastronomía» acababa confirmado sin añadir nada.
+        if (campoPreguntado === 'confirmacion') {
+          const cambios = JSON.stringify(anterior) !== JSON.stringify(estado.perfil);
+          if (!cambios) {
+            estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+            const respuesta = 'Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».';
+            return { estado, respuesta, perfil: null, respaldo: null };
+          } else {
+            const paso = siguientePaso(estado);
+            if (paso.tipo === 'confirmar') {
+              estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil)} ¿Está bien así?`;
+              return { estado, respuesta, perfil: null, respaldo: null };
+            }
+          }
+        }
 
         // Un destino sin guía no se guarda: se dice y se vuelve a pedir, sin seguir con la entrevista.
         // Solo si se preguntaba por el destino: «la Alhambra y comer bien», respondiendo a los
@@ -130,12 +168,12 @@ export function definirEntrevistaFlow(ai: Genkit) {
       // 3. Decidir el siguiente paso.
       const paso = siguientePaso(estado);
       if (paso.tipo === 'terminar') {
-        return {
-          estado,
-          respuesta: `¡Perfecto! Ya tengo lo que necesito: ${resumirPerfil(paso.perfil)}`,
-          perfil: paso.perfil,
-          respaldo: null,
-        };
+        return { estado, respuesta: '¡Perfecto! Preparo tu itinerario.', perfil: paso.perfil, respaldo: null };
+      }
+      if (paso.tipo === 'confirmar') {
+        estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+        const respuesta = `Esto es lo que he entendido: ${resumirPerfil(paso.perfil)} ¿Es correcto, o quieres cambiar algo?`;
+        return { estado, respuesta, perfil: null, respaldo: null };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 

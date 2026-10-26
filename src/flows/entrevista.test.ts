@@ -3,7 +3,18 @@ import { genkit, type GenerateRequest } from 'genkit';
 import { describe, expect, it } from 'vitest';
 import { definirEntrevistaFlow } from './entrevista.js';
 
-const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
+const sinDatos = {
+  destino: null,
+  dias: null,
+  intereses: [],
+  interesesQuitar: [],
+  ritmo: null,
+  presupuesto: null,
+  compania: null,
+};
+const completo = { destino: 'Sevilla', dias: 2, intereses: ['museos'] };
+const todoPreguntado = ['destino', 'dias', 'intereses', 'opcionales'];
+const confirmando = [...todoPreguntado, 'confirmacion'];
 
 /** Modelo simulado: devuelve la extracción indicada cuando se le pide JSON y la pregunta indicada si no. */
 function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?') {
@@ -120,26 +131,72 @@ describe('entrevistaFlow', () => {
     expect(peticiones).toHaveLength(2);
   });
 
-  it('tras los opcionales termina con el perfil válido y un resumen, sin redactar más preguntas', async () => {
-    const { flow, peticiones } = crearEntorno({ ...sinDatos, compania: 'pareja' });
+  it('tras los opcionales pide confirmar el perfil, sin terminar todavía', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' });
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: todoPreguntado }, mensaje: 'Voy con mi pareja' });
+
+    expect(salida.perfil).toBeNull();
+    expect(salida.respuesta).toBe(
+      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal, presupuesto medio. Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
+    );
+    expect(salida.estado.preguntados.at(-1)).toBe('confirmacion');
+  });
+
+  it('si el viajero confirma con un «sí», termina con el perfil sin llamar al modelo', async () => {
+    const { flow, peticiones } = crearEntorno({ ...sinDatos, compania: 'amigos' });
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'sí, perfecto' });
+
+    expect(salida.perfil).toEqual({ ...completo, ritmo: 'normal', presupuesto: 'medio', compania: 'solo' });
+    expect(salida.respuesta).toMatch(/^¡Perfecto!/);
+    expect(peticiones).toHaveLength(0);
+  });
+
+  it('una frase sin cambios que no es un simple «sí» no confirma: pregunta qué cambiar', async () => {
+    const { flow } = crearEntorno();
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'me parece estupendo así' });
+
+    expect(salida.perfil).toBeNull();
+    expect(salida.respuesta).toBe('Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».');
+  });
+
+  it('el extractor recibe los datos que ya se conocen, para entender correcciones', async () => {
+    const { flow, peticiones, textoDe } = crearEntorno({ ...sinDatos, dias: 3 });
+
+    await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'mejor 3 días' });
+
+    expect(textoDe(peticiones[0]!)).toContain('Datos que ya se conocen: {"destino":"Sevilla","dias":2,"intereses":["museos"]}');
+  });
+
+  it('si el viajero corrige algo, lo aplica y vuelve a confirmar', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, dias: 3 });
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'mejor 3 días' });
+
+    expect(salida.perfil).toBeNull();
+    expect(salida.estado.perfil).toEqual({ ...completo, dias: 3 });
+    expect(salida.respuesta).toMatch(/^Hecho, ahora queda así: Sevilla, 3 días/);
+  });
+
+  it('solo quita intereses al corregir en la confirmación', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, interesesQuitar: ['museos'] });
 
     const salida = await flow({
-      estado: {
-        perfil: { destino: 'Sevilla', dias: 2, intereses: ['museos'] },
-        preguntados: ['destino', 'dias', 'intereses', 'opcionales'],
-      },
-      mensaje: 'Voy con mi pareja',
+      estado: { perfil: completo, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'nada más',
     });
 
-    expect(salida.perfil).toEqual({
-      destino: 'Sevilla',
-      dias: 2,
-      intereses: ['museos'],
-      ritmo: 'normal',
-      presupuesto: 'medio',
-      compania: 'pareja',
-    });
-    expect(salida.respuesta).toMatch(/Sevilla, 2 días, en pareja/);
-    expect(peticiones).toHaveLength(1);
+    expect(salida.estado.perfil).toEqual(completo);
+  });
+
+  it('si dice que no pero no indica qué cambiar, le pregunta qué quiere cambiar', async () => {
+    const { flow } = crearEntorno();
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'no' });
+
+    expect(salida.perfil).toBeNull();
+    expect(salida.respuesta).toBe('Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».');
   });
 });
