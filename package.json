@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "dev": "npm run build && genkit start -- node --env-file-if-exists=.env dist/index.js",
-    "flow:prueba": "npm run build && node --env-file-if-exists=.env dist/probar.js"
+    "flow:prueba": "npm run build && node --env-file-if-exists=.env dist/probar.js",
+    "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
