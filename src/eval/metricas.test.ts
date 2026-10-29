@@ -26,7 +26,7 @@ type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente' | null;
 const actividad = (lugar: string, verificacion: Verificacion = null) => ({ lugar, descripcion: '', citas: [], verificacion });
 
 function itinerario(modo: 'C0' | 'C1', dias: Itinerario['dias'], hayInformacion = true): Itinerario {
-  return { modo, hayInformacion, dias, fuentes: [] };
+  return { modo, hayInformacion, dias, fuentes: [], recuperados: [] };
 }
 
 // Ritmo tranquilo: 2 actividades por día.

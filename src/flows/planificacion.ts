@@ -43,12 +43,23 @@ export const PlanificacionEntradaSchema = z.object({
   modo: z.enum(MODOS),
 });
 
+/** Fragmento entregado al modelo, con el número con el que se cita en el prompt. */
+const RecuperadoSchema = z.object({
+  cita: z.number().int(),
+  id: z.string(),
+  seccion: z.string(),
+  texto: z.string(),
+  distancia: z.number().optional(),
+});
+
 export const ItinerarioSchema = z.object({
   modo: z.enum(MODOS),
   /** false si no hay fragmentos del destino: no se planifica en vez de inventar (RF-07). */
   hayInformacion: z.boolean(),
   dias: z.array(DiaFinalSchema),
   fuentes: z.array(FuenteSchema),
+  /** Todo lo recuperado, citado o no, para registrar cada ejecución (RNF-04); vacío en C0. */
+  recuperados: z.array(RecuperadoSchema),
 });
 
 export type Itinerario = z.infer<typeof ItinerarioSchema>;
@@ -72,7 +83,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
           listas.push(encontrados.map((d) => Object.assign(d, { id: String(d.metadata?.id ?? '') })));
         }
         documentos = fusionarResultados(listas, TOTAL_FRAGMENTOS);
-        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [] };
+        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [], recuperados: [] };
       }
       const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
 
@@ -117,7 +128,20 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
       const citadas = documentos
         ? citasValidas(diasFinales.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche].flatMap((a) => a.citas)), documentos.length)
         : [];
-      return { modo, hayInformacion: true, dias: diasFinales, fuentes: documentos ? fuentesCitadas(citadas, documentos) : [] };
+      const recuperados = (documentos ?? []).map((d, i) => ({
+        cita: i + 1,
+        id: String(d.metadata?.id ?? ''),
+        seccion: String(d.metadata?.seccion ?? ''),
+        texto: d.text,
+        distancia: typeof d.metadata?.distancia === 'number' ? d.metadata.distancia : undefined,
+      }));
+      return {
+        modo,
+        hayInformacion: true,
+        dias: diasFinales,
+        fuentes: documentos ? fuentesCitadas(citadas, documentos) : [],
+        recuperados,
+      };
     },
   );
 }
