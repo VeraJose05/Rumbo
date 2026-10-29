@@ -17,7 +17,8 @@ export const DESTINOS: Destino[] = [
   { nombre: 'Valencia', articulo: 'Valencia (España)' },
 ];
 
-const normalizar = (texto: string) =>
+/** Para comparar nombres sin importar mayúsculas, tildes ni espacios. */
+export const normalizar = (texto: string) =>
   texto.normalize('NFD').replace(/\p{M}/gu, '').trim().toLowerCase();
 
 export function buscarDestino(nombre: string): Destino | undefined {

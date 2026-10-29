@@ -1,6 +1,6 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
-import { avisoDestino, fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
+import { avisoDestino, esAfirmacion, fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
 import { PerfilSchema } from './perfil.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
@@ -36,6 +36,19 @@ describe('fusionarPerfil', () => {
     expect(fusionarPerfil({ destino: 'Sevilla' }, { ...sinDatos, destino: 'Japón' }).destino).toBe('Sevilla');
   });
 
+  it('quita los intereses que el viajero pide quitar', () => {
+    const perfil = { intereses: ['gastronomia', 'ocio-nocturno', 'monumentos'] };
+    expect(fusionarPerfil(perfil, { ...sinDatos, interesesQuitar: ['ocio-nocturno'] }).intereses).toEqual([
+      'gastronomia',
+      'monumentos',
+    ]);
+  });
+
+  it('si se quitan todos los intereses, el campo queda pendiente', () => {
+    const resultado = fusionarPerfil({ destino: 'Sevilla', dias: 2, intereses: ['museos'] }, { ...sinDatos, interesesQuitar: ['museos'] });
+    expect(resultado.intereses).toBeUndefined();
+  });
+
   it('descarta los valores inválidos para que se vuelvan a preguntar', () => {
     expect(fusionarPerfil({}, { ...sinDatos, destino: 'Sevilla', dias: 15 })).toEqual({ destino: 'Sevilla' });
   });
@@ -60,11 +73,27 @@ describe('siguientePaso', () => {
     expect(siguientePaso({ perfil, preguntados: ['intereses'] })).toEqual({ tipo: 'preguntar', campo: 'opcionales' });
   });
 
-  it('después termina con el perfil validado y los valores por defecto', () => {
+  it('después pide confirmar el perfil validado, con los valores por defecto', () => {
     const perfil = { destino: 'Sevilla', dias: 2, intereses: ['museos'], ritmo: 'tranquilo' };
     expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales'] })).toEqual({
-      tipo: 'terminar',
+      tipo: 'confirmar',
       perfil: { ...perfil, presupuesto: 'medio', compania: 'solo' },
+    });
+  });
+
+  it('termina cuando el viajero ha confirmado', () => {
+    const perfil = { destino: 'Sevilla', dias: 2, intereses: ['museos'] };
+    expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales', 'confirmado'] })).toEqual({
+      tipo: 'terminar',
+      perfil: { ...perfil, ritmo: 'normal', presupuesto: 'medio', compania: 'solo' },
+    });
+  });
+
+  it('si al corregir falta un dato obligatorio, vuelve a preguntarlo antes de confirmar', () => {
+    const perfil = { destino: 'Sevilla', dias: 2 };
+    expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales'] })).toEqual({
+      tipo: 'preguntar',
+      campo: 'intereses',
     });
   });
 });
@@ -101,5 +130,19 @@ describe('resumirPerfil', () => {
     const perfil = PerfilSchema.parse({ destino: 'Sevilla', dias: 1, intereses: ['museos'] });
 
     expect(resumirPerfil(perfil)).toBe('Sevilla, 1 día, viajando solo, ritmo normal, presupuesto medio. Intereses: museos.');
+  });
+});
+
+describe('esAfirmacion', () => {
+  it('reconoce respuestas cortas de acuerdo', () => {
+    for (const mensaje of ['sí', 'Si', 'vale', 'Perfecto!', 'correcto', 'ok', 'de acuerdo', 'sí, perfecto', 'genial, adelante']) {
+      expect(esAfirmacion(mensaje)).toBe(true);
+    }
+  });
+
+  it('no confunde con un sí las correcciones o las negativas', () => {
+    for (const mensaje of ['no', 'sí, pero mejor 2 días', 'perfecto, añade gastronomía', 'vale pero quita museos', 'casi']) {
+      expect(esAfirmacion(mensaje)).toBe(false);
+    }
   });
 });

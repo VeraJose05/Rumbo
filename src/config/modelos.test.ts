@@ -9,6 +9,7 @@ describe('cargarConfigModelos', () => {
       embedder: 'bge-m3',
       dimensionesEmbedder: 1024,
       ollamaUrl: 'http://127.0.0.1:11434',
+      contexto: 8192,
     });
   });
 
@@ -18,12 +19,14 @@ describe('cargarConfigModelos', () => {
       RUMBO_EMBEDDER: 'multilingual-e5-small',
       RUMBO_EMBEDDER_DIMENSIONES: '384',
       OLLAMA_URL: 'http://localhost:9999',
+      RUMBO_CONTEXTO: '16384',
     });
     expect(config).toEqual({
       llm: 'llama3.2:3b',
       embedder: 'multilingual-e5-small',
       dimensionesEmbedder: 384,
       ollamaUrl: 'http://localhost:9999',
+      contexto: 16384,
     });
   });
 

@@ -32,6 +32,20 @@ export function citasValidas(citas: number[], total: number): number[] {
   return [...new Set(citas)].filter((c) => Number.isInteger(c) && c >= 1 && c <= total).sort((a, b) => a - b);
 }
 
+/** Fuente de cada cita, con los metadatos del fragmento citado (citas de 1 a n). */
+export function fuentesCitadas(citas: number[], documentos: { metadata?: Record<string, unknown> }[]) {
+  return citas.map((cita) => {
+    const metadatos = documentos[cita - 1]?.metadata ?? {};
+    return {
+      cita,
+      seccion: String(metadatos.seccion ?? ''),
+      fuente: String(metadatos.fuente ?? ''),
+      url: String(metadatos.url ?? ''),
+      licencia: String(metadatos.licencia ?? ''),
+    };
+  });
+}
+
 const PALABRAS_VACIAS = new Set(['el', 'la', 'los', 'las', 'de', 'del', 'en', 'y', 'a', 'al', 'un', 'una']);
 
 /**
@@ -42,6 +56,19 @@ export function verificarRecomendacion(lugar: string, textosCitados: string[]): 
   const palabrasTextos = new Set(palabras(textosCitados.join(' ')));
   const palabrasLugar = palabras(lugar).filter((p) => !PALABRAS_VACIAS.has(p));
   return palabrasLugar.length > 0 && palabrasLugar.every((p) => palabrasTextos.has(p));
+}
+
+export type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente';
+
+/**
+ * Distingue dos fallos que pesan distinto en la evaluación: citar mal un lugar que sí está en
+ * los textos recuperados (cita errónea) o proponer uno que no aparece en ninguno (sin fuente,
+ * probablemente inventado). `citas` va de 1 a n sobre `textos`.
+ */
+export function clasificarActividad(lugar: string, citas: number[], textos: string[]): Verificacion {
+  const citados = citas.map((c) => textos[c - 1] ?? '');
+  if (verificarRecomendacion(lugar, citados)) return 'verificada';
+  return verificarRecomendacion(lugar, textos) ? 'cita-erronea' : 'sin-fuente';
 }
 
 function palabras(texto: string): string[] {

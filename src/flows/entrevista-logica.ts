@@ -1,7 +1,7 @@
 // RF-01: lógica determinista de la entrevista: qué se guarda de cada respuesta,
 // qué se pregunta después y cuándo se termina. El LLM no decide nada de esto.
 import { z } from 'genkit';
-import { buscarDestino, DESTINOS } from '../config/destinos.js';
+import { buscarDestino, DESTINOS, normalizar } from '../config/destinos.js';
 import { camposPendientes, INTERESES, PerfilSchema, type Perfil } from './perfil.js';
 
 export type PerfilParcial = Record<string, unknown>;
@@ -14,6 +14,7 @@ export interface EstadoEntrevista {
 
 export type Paso =
   | { tipo: 'preguntar'; campo: 'destino' | 'dias' | 'intereses' | 'opcionales' }
+  | { tipo: 'confirmar'; perfil: Perfil }
   | { tipo: 'terminar'; perfil: Perfil };
 
 export const ETIQUETAS_INTERES: Record<(typeof INTERESES)[number], string> = {
@@ -52,14 +53,30 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
   }
 
   const interesValido = z.enum(INTERESES);
-  const nuevos = (Array.isArray(extraido.intereses) ? extraido.intereses : []).filter(
-    (i) => interesValido.safeParse(i).success,
-  );
-  if (nuevos.length) {
-    const anteriores = Array.isArray(perfil.intereses) ? perfil.intereses : [];
-    resultado.intereses = [...new Set([...anteriores, ...nuevos])];
-  }
+  const validos = (lista: unknown) => (Array.isArray(lista) ? lista : []).filter((i) => interesValido.safeParse(i).success);
+  const anteriores = validos(perfil.intereses);
+  const quitar = new Set(validos(extraido.interesesQuitar));
+  // Al corregir («quita el ocio nocturno») se quita aunque el extractor también lo haya puesto en intereses.
+  const intereses = [...new Set([...anteriores, ...validos(extraido.intereses)])].filter((i) => !quitar.has(i));
+  if (intereses.length) resultado.intereses = intereses;
+  else delete resultado.intereses;
   return resultado;
+}
+
+// Palabras de una respuesta de acuerdo, sin tildes («sí, perfecto», «de acuerdo», «vale, adelante»).
+const AFIRMATIVAS = new Set([
+  'si', 'vale', 'perfecto', 'correcto', 'ok', 'okay', 'de', 'acuerdo', 'genial', 'adelante',
+  'claro', 'bien', 'esta', 'todo', 'eso', 'es', 'exacto', 'venga', 'asi',
+]);
+
+/**
+ * Reconoce en código una respuesta corta de acuerdo, sin pasar por el modelo: en las pruebas,
+ * el extractor convertía «perfecto» en «con amigos, ritmo intenso, presupuesto alto».
+ * Si el mensaje tiene cualquier otra palabra («sí, pero mejor 2 días»), no es una simple afirmación.
+ */
+export function esAfirmacion(mensaje: string): boolean {
+  const palabras = normalizar(mensaje).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  return palabras.length > 0 && palabras.every((p) => AFIRMATIVAS.has(p));
 }
 
 /**
@@ -68,9 +85,13 @@ export function fusionarPerfil(perfil: PerfilParcial, extraido: PerfilParcial): 
  */
 export function avisoDestino(destino: string): string | null {
   if (buscarDestino(destino)) return null;
+  return `Lo siento, todavía no tengo información de ${destino}. Puedo ayudarte con ${listaDestinos()}. ¿A cuál te gustaría ir?`;
+}
+
+/** «Sevilla, Madrid, Barcelona, Granada y Valencia». */
+export function listaDestinos(): string {
   const nombres = DESTINOS.map((d) => d.nombre);
-  const lista = `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
-  return `Lo siento, todavía no tengo información de ${destino}. Puedo ayudarte con ${lista}. ¿A cuál te gustaría ir?`;
+  return `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}`;
 }
 
 export function siguientePaso(estado: EstadoEntrevista): Paso {
@@ -79,7 +100,9 @@ export function siguientePaso(estado: EstadoEntrevista): Paso {
   // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero.
   if (!estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
   if (!estado.preguntados.includes('opcionales')) return { tipo: 'preguntar', campo: 'opcionales' };
-  return { tipo: 'terminar', perfil: PerfilSchema.parse(estado.perfil) };
+  // Antes de planificar, el viajero confirma el perfil: así corrige los errores de extracción.
+  const perfil = PerfilSchema.parse(estado.perfil);
+  return estado.preguntados.includes('confirmado') ? { tipo: 'terminar', perfil } : { tipo: 'confirmar', perfil };
 }
 
 export function resumirPerfil(perfil: Perfil): string {

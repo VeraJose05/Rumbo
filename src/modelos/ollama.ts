@@ -9,10 +9,10 @@ interface PeticionOllama {
   stream: false;
   messages: { role: string; content: string }[];
   format?: 'json' | Record<string, unknown>;
-  options: { temperature?: number };
+  options: { temperature?: number; seed?: number; num_ctx?: number };
 }
 
-export function aPeticionOllama(modelo: string, peticion: GenerateRequest): PeticionOllama {
+export function aPeticionOllama(modelo: string, peticion: GenerateRequest, contexto?: number): PeticionOllama {
   const resultado: PeticionOllama = {
     model: modelo,
     stream: false,
@@ -25,13 +25,16 @@ export function aPeticionOllama(modelo: string, peticion: GenerateRequest): Peti
   if (peticion.output?.schema) resultado.format = peticion.output.schema;
   else if (peticion.output?.format === 'json') resultado.format = 'json';
 
-  const temperatura = (peticion.config as { temperature?: number } | undefined)?.temperature;
-  if (temperatura !== undefined) resultado.options.temperature = temperatura;
+  const config = peticion.config as { temperature?: number; seed?: number } | undefined;
+  if (config?.temperature !== undefined) resultado.options.temperature = config.temperature;
+  // Con semilla fija, una temperatura mayor que 0 sigue dando resultados repetibles (RNF-03).
+  if (config?.seed !== undefined) resultado.options.seed = config.seed;
+  if (contexto !== undefined) resultado.options.num_ctx = contexto;
   return resultado;
 }
 
 /** Registra el modelo como `local/<modelo>`. */
-export function definirModeloOllama(ai: Genkit, modelo: string, urlOllama: string) {
+export function definirModeloOllama(ai: Genkit, modelo: string, urlOllama: string, contexto: number) {
   return ai.defineModel(
     {
       name: `local/${modelo}`,
@@ -42,7 +45,7 @@ export function definirModeloOllama(ai: Genkit, modelo: string, urlOllama: strin
       const respuesta = await fetch(`${urlOllama}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(aPeticionOllama(modelo, peticion)),
+        body: JSON.stringify(aPeticionOllama(modelo, peticion, contexto)),
       });
       if (!respuesta.ok) throw new Error(`Ollama respondió ${respuesta.status}: ${await respuesta.text()}`);
       const cuerpo = (await respuesta.json()) as { message: { content: string } };

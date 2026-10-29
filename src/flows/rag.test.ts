@@ -1,6 +1,6 @@
 // RF-04, RF-06: prompt con fragmentos numerados y comprobación de las citas.
 import { describe, expect, it } from 'vitest';
-import { citasValidas, construirPromptRag, verificarRecomendacion } from './rag.js';
+import { citasValidas, clasificarActividad, construirPromptRag, verificarRecomendacion } from './rag.js';
 
 const fragmentos = [
   { texto: 'Los Coloniales es de altísima calidad.', seccion: 'Comer' },
@@ -57,5 +57,21 @@ describe('verificarRecomendacion', () => {
 
   it('rechaza una recomendación sin textos citados', () => {
     expect(verificarRecomendacion('Torre del Oro', [])).toBe(false);
+  });
+});
+
+describe('clasificarActividad', () => {
+  const textos = ['* Torre del Oro - Torre vigía.', 'El Parque del Alamillo es enorme.', 'Bares en la Alameda.'];
+
+  it('verificada si el lugar está en los textos que cita', () => {
+    expect(clasificarActividad('Torre del Oro', [1], textos)).toBe('verificada');
+  });
+
+  it('cita errónea si el lugar está en los textos recuperados, pero no en los que cita', () => {
+    expect(clasificarActividad('Parque del Alamillo', [3], textos)).toBe('cita-erronea');
+  });
+
+  it('sin fuente si el lugar no está en ningún texto recuperado', () => {
+    expect(clasificarActividad('Puerta de Alcántara', [1], textos)).toBe('sin-fuente');
   });
 });
