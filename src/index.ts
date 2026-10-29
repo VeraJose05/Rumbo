@@ -9,12 +9,12 @@ import { definirRecuperadorChroma } from './flows/recuperador.js';
 import { crearAi } from './genkit.js';
 import { abrirColeccion } from './ingest/chroma.js';
 
-const configModelos = cargarConfigModelos();
+export const configModelos = cargarConfigModelos();
 export const ai = crearAi(configModelos);
 export const pruebaFlow = definirPruebaFlow(ai);
 export const entrevistaFlow = definirEntrevistaFlow(ai);
 
-const coleccion = await abrirColeccion(cargarConfigChroma());
+export const coleccion = await abrirColeccion(cargarConfigChroma());
 const recuperador = definirRecuperadorChroma(ai, coleccion, `ollama/${configModelos.embedder}`);
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
 export const planificacionFlow = definirPlanificacionFlow(ai, recuperador);

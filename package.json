@@ -20,7 +20,8 @@
     "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js",
     "comparar": "npm run build && node --env-file-if-exists=.env dist/experimentos/comparar.js",
     "entrevista": "npm run build && node --env-file-if-exists=.env dist/experimentos/entrevista.js",
-    "planificar": "npm run build && node --env-file-if-exists=.env dist/experimentos/planificar.js"
+    "planificar": "npm run build && node --env-file-if-exists=.env dist/experimentos/planificar.js",
+    "evaluar": "npm run build && node --env-file-if-exists=.env dist/eval/evaluar.js"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
