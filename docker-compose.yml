@@ -8,3 +8,19 @@ services:
       # Los datos quedan en data/chroma (ignorado por git) y sobreviven a reinicios del contenedor.
       - ./data/chroma:/data
     restart: unless-stopped
+  reranker:
+    # RF-09 (C2): cross-encoder bge-reranker-v2-m3 (multilingüe, Apache 2.0) servido por
+    # text-embeddings-inference de Hugging Face. En CPU, para dejar la GPU a Ollama.
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.8
+    # Por defecto se prepara para lotes de 16.384 tokens y textos de 8.192: al calentar llegó a
+    # usar 14 GB de RAM. Los fragmentos son de unos cientos de tokens, así que se limita el lote
+    # y se recortan los textos que no quepan.
+    command: --model-id BAAI/bge-reranker-v2-m3 --max-batch-tokens 2048 --max-client-batch-size 32 --auto-truncate
+    # Tope de memoria: si algo va mal, se cae el reranker y no el equipo.
+    mem_limit: 4g
+    ports:
+      - '8080:80'
+    volumes:
+      # El modelo se descarga la primera vez y queda en data/reranker (ignorado por git).
+      - ./data/reranker:/data
+    restart: unless-stopped

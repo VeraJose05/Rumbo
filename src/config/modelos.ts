@@ -12,6 +12,10 @@ export const ConfigModelosSchema = z.object({
   // Ventana de contexto del LLM en tokens. Ollama corta en silencio lo que no cabe: con su valor
   // por defecto solo leía unos 2.000 tokens de un prompt de 7.000.
   contexto: z.coerce.number().int().positive(),
+  // RF-09 (C2): cross-encoder que reordena los fragmentos. Lo sirve el contenedor `reranker`
+  // de docker-compose.yml; el nombre se guarda en cada resultado para saber con cuál se midió.
+  reranker: z.string().min(1),
+  rerankerUrl: z.string().url(),
 });
 
 export type ConfigModelos = z.infer<typeof ConfigModelosSchema>;
@@ -23,6 +27,8 @@ const POR_DEFECTO = {
   dimensionesEmbedder: 1024,
   ollamaUrl: 'http://127.0.0.1:11434',
   contexto: 8192,
+  reranker: 'BAAI/bge-reranker-v2-m3',
+  rerankerUrl: 'http://127.0.0.1:8080',
 };
 
 type Entorno = Record<string, string | undefined>;
@@ -39,5 +45,7 @@ export function cargarConfigModelos(env: Entorno = process.env): ConfigModelos {
     dimensionesEmbedder: leer('RUMBO_EMBEDDER_DIMENSIONES') ?? POR_DEFECTO.dimensionesEmbedder,
     ollamaUrl: leer('OLLAMA_URL') ?? POR_DEFECTO.ollamaUrl,
     contexto: leer('RUMBO_CONTEXTO') ?? POR_DEFECTO.contexto,
+    reranker: leer('RUMBO_RERANKER') ?? POR_DEFECTO.reranker,
+    rerankerUrl: leer('RERANKER_URL') ?? POR_DEFECTO.rerankerUrl,
   });
 }

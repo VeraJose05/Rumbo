@@ -11,6 +11,8 @@ describe('cargarConfigModelos', () => {
       dimensionesEmbedder: 1024,
       ollamaUrl: 'http://127.0.0.1:11434',
       contexto: 8192,
+      reranker: 'BAAI/bge-reranker-v2-m3',
+      rerankerUrl: 'http://127.0.0.1:8080',
     });
   });
 
@@ -22,6 +24,8 @@ describe('cargarConfigModelos', () => {
       RUMBO_EMBEDDER_DIMENSIONES: '384',
       OLLAMA_URL: 'http://localhost:9999',
       RUMBO_CONTEXTO: '16384',
+      RUMBO_RERANKER: 'BAAI/bge-reranker-base',
+      RERANKER_URL: 'http://localhost:9090',
     });
     expect(config).toEqual({
       llm: 'llama3.2:3b',
@@ -30,6 +34,8 @@ describe('cargarConfigModelos', () => {
       dimensionesEmbedder: 384,
       ollamaUrl: 'http://localhost:9999',
       contexto: 16384,
+      reranker: 'BAAI/bge-reranker-base',
+      rerankerUrl: 'http://localhost:9090',
     });
   });
 

@@ -5,7 +5,7 @@ import type { PerfilPrueba } from './perfiles.js';
 
 describe('parsearArgumentos', () => {
   it('por defecto, todos los modos y perfiles en el fichero de resultados habitual', () => {
-    expect(parsearArgumentos([])).toEqual({ modos: ['C0', 'C1'], perfiles: null, salida: 'resultados/evaluacion.jsonl' });
+    expect(parsearArgumentos([])).toEqual({ modos: ['C0', 'C1', 'C2'], perfiles: null, salida: 'resultados/evaluacion.jsonl' });
   });
 
   it('acepta modos, perfiles y fichero de salida', () => {

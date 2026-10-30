@@ -31,9 +31,15 @@ function crearEntorno(respuestasDias: object[], documentos = [doc('s:1', '* Cate
     consultas.push({ texto: consulta.text, opciones });
     return { documents: documentos };
   });
+  // El avanzado (C2) devuelve otro fragmento, para distinguir qué recuperador se usó.
+  const consultasAvanzado: unknown[] = [];
+  const recuperadorAvanzado = ai.defineRetriever({ name: 'simulado-avanzado' }, async (consulta, opciones) => {
+    consultasAvanzado.push(opciones);
+    return { documents: documentos.length ? [doc('s:9', '* Torre del Oro - Torre vigía.', 'Ver')] : [] };
+  });
 
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirPlanificacionFlow(ai, recuperador), peticiones, consultas, textoDe };
+  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado), peticiones, consultas, consultasAvanzado, textoDe };
 }
 
 // El ritmo tranquilo pide 2 actividades por día: la indicada por la mañana y un paseo por la noche.
@@ -156,5 +162,27 @@ describe('planificacionFlow', () => {
     const { flow } = crearEntorno([dia('Catedral de Sevilla', []), dia('Parque de María Luisa', [])]);
 
     expect((await flow({ perfil, modo: 'C0' })).recuperados).toEqual([]);
+  });
+
+  it('en C2 usa el recuperador avanzado con las mismas consultas y el mismo prompt que C1 (RF-09)', async () => {
+    const { flow, consultas, consultasAvanzado, peticiones, textoDe } = crearEntorno([dia('Torre del Oro', [1]), dia('Torre vigía', [1])]);
+
+    const salida = await flow({ perfil, modo: 'C2' });
+
+    expect(consultas).toHaveLength(0);
+    expect(consultasAvanzado).toEqual([
+      { k: 12, destino: 'Sevilla' },
+      { k: 12, destino: 'Sevilla' },
+    ]);
+    expect(textoDe(peticiones[0]!)).toContain('[1] (Sevilla › Ver) * Torre del Oro - Torre vigía.');
+    expect(salida.modo).toBe('C2');
+    expect(salida.dias[0]?.manana[0]?.verificacion).toBe('verificada');
+  });
+
+  it('en C2, si no hay fragmentos del destino, tampoco planifica (RF-07)', async () => {
+    const { flow, peticiones } = crearEntorno([], []);
+
+    expect((await flow({ perfil: { ...perfil, destino: 'Bilbao' }, modo: 'C2' })).hayInformacion).toBe(false);
+    expect(peticiones).toHaveLength(0);
   });
 });

@@ -44,3 +44,29 @@ export function fusionarResultados<T extends { id: string }>(listas: T[][], limi
   }
   return resultado;
 }
+
+/** Constante de Reciprocal Rank Fusion (Cormack et al., 2009): suaviza la ventaja de los primeros puestos. */
+const K_RRF = 60;
+
+/**
+ * RF-09 (C2): junta listas ordenadas de búsquedas distintas (vectorial y por palabras clave)
+ * por su posición, no por su puntuación, que en cada búsqueda va en una escala distinta: cada
+ * elemento suma 1 / (60 + posición) por cada lista en que aparece. A igualdad, queda antes el
+ * que aparece antes recorriendo las listas en orden.
+ */
+export function fusionarRrf<T extends { id: string }>(listas: T[][], limite: number): T[] {
+  const acumulado = new Map<string, { elemento: T; puntuacion: number }>();
+  for (const lista of listas) {
+    lista.forEach((elemento, posicion) => {
+      const previo = acumulado.get(elemento.id);
+      const suma = 1 / (K_RRF + posicion + 1);
+      if (previo) previo.puntuacion += suma;
+      else acumulado.set(elemento.id, { elemento, puntuacion: suma });
+    });
+  }
+  // sort es estable: a igual puntuación se mantiene el orden de primera aparición.
+  return [...acumulado.values()]
+    .sort((a, b) => b.puntuacion - a.puntuacion)
+    .slice(0, limite)
+    .map((e) => e.elemento);
+}
