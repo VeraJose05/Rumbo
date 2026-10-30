@@ -1,6 +1,6 @@
 // F5 (RNF-03): argumentos de la evaluación y qué ejecuciones quedan pendientes para poder retomar.
 import { describe, expect, it } from 'vitest';
-import { clave, leerHechos, parsearArgumentos, pendientes } from './ejecucion.js';
+import { clave, claveDeJuicio, claveJuicio, juiciosPendientes, leerHechos, parsearArgumentos, pendientes } from './ejecucion.js';
 import type { PerfilPrueba } from './perfiles.js';
 
 describe('parsearArgumentos', () => {
@@ -59,5 +59,30 @@ describe('pendientes', () => {
   it('filtra por los perfiles pedidos y avisa si alguno no existe', () => {
     expect(pendientes(perfiles, ['C0'], ['b'], new Set(), 'm').map((p) => p.perfil.id)).toEqual(['b']);
     expect(() => pendientes(perfiles, ['C0'], ['zzz'], new Set(), 'm')).toThrow('zzz');
+  });
+});
+
+describe('juiciosPendientes', () => {
+  const registro = (perfilId: string, modo: string, planificado = true) => ({
+    perfilId,
+    modo,
+    modelos: { llm: 'qwen' },
+    metricas: { planificado },
+  });
+
+  it('pide cada métrica de cada itinerario planificado, saltando lo ya juzgado por el mismo juez', () => {
+    const registros = [registro('a', 'C0'), registro('a', 'C1'), registro('b', 'C1', false)];
+    const hechos = new Set([claveJuicio('a', 'C0', 'qwen', 'gemma', 'relevancia'), claveJuicio('a', 'C1', 'qwen', 'otro', 'relevancia')]);
+
+    expect(juiciosPendientes(registros, ['relevancia', 'viabilidad'], hechos, 'gemma').map((p) => `${p.registro.perfilId}|${p.registro.modo}|${p.metrica}`)).toEqual([
+      'a|C0|viabilidad',
+      'a|C1|relevancia',
+      'a|C1|viabilidad',
+    ]);
+  });
+
+  it('lee las claves de un fichero de juicios', () => {
+    const linea = JSON.stringify({ perfilId: 'a', modo: 'C0', llm: 'qwen', juez: 'gemma', metrica: 'viabilidad', nota: 3 });
+    expect(leerHechos(`${linea}\n`, claveDeJuicio)).toEqual(new Set([claveJuicio('a', 'C0', 'qwen', 'gemma', 'viabilidad')]));
   });
 });

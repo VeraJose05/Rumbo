@@ -30,13 +30,16 @@ export function parsearArgumentos(argv: string[]): Argumentos {
 /** Identifica una ejecución. Incluye el modelo para que cambiarlo no reutilice resultados de otro. */
 export const clave = (perfilId: string, modo: string, llm: string) => `${perfilId}|${modo}|${llm}`;
 
-/** Claves ya guardadas en el fichero de resultados (una ejecución en JSON por línea). */
-export function leerHechos(contenido: string): Set<string> {
+// Una línea de un fichero JSONL; si le falta un campo, su clave no coincidirá con ninguna.
+type Linea = any;
+const claveDeEjecucion = (r: Linea) => clave(r.perfilId, r.modo, r.modelos.llm);
+
+/** Claves ya guardadas en un fichero de resultados o de juicios (un objeto JSON por línea). */
+export function leerHechos(contenido: string, claveDe: (linea: Linea) => string = claveDeEjecucion): Set<string> {
   const hechos = new Set<string>();
   for (const linea of contenido.split('\n')) {
     try {
-      const registro = JSON.parse(linea);
-      hechos.add(clave(registro.perfilId, registro.modo, registro.modelos.llm));
+      hechos.add(claveDe(JSON.parse(linea)));
     } catch {
       // Línea vacía o a medias: la ejecución no terminó de guardarse y se repetirá.
     }
@@ -58,4 +61,30 @@ export function pendientes(
   return elegidos
     .flatMap((perfil) => modos.map((modo) => ({ perfil, modo })))
     .filter(({ perfil, modo }) => !hechos.has(clave(perfil.id, modo, llm)));
+}
+
+/** Identifica un juicio: el itinerario (perfil, modo y generador), el juez y la métrica. */
+export const claveJuicio = (perfilId: string, modo: string, llm: string, juez: string, metrica: string) =>
+  `${perfilId}|${modo}|${llm}|${juez}|${metrica}`;
+
+export const claveDeJuicio = (j: Linea) => claveJuicio(j.perfilId, j.modo, j.llm, j.juez, j.metrica);
+
+interface RegistroEjecucion {
+  perfilId: string;
+  modo: string;
+  modelos: { llm: string };
+  metricas: { planificado: boolean };
+}
+
+/** Juicios que faltan: cada métrica de cada itinerario planificado (los que no planifican no se juzgan). */
+export function juiciosPendientes<R extends RegistroEjecucion, M extends string>(
+  registros: R[],
+  metricas: readonly M[],
+  hechos: Set<string>,
+  juez: string,
+): { registro: R; metrica: M }[] {
+  return registros
+    .filter((r) => r.metricas.planificado)
+    .flatMap((registro) => metricas.map((metrica) => ({ registro, metrica })))
+    .filter(({ registro: r, metrica }) => !hechos.has(claveJuicio(r.perfilId, r.modo, r.modelos.llm, juez, metrica)));
 }
