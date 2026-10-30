@@ -22,11 +22,15 @@ describe('enCorpus', () => {
   });
 });
 
-type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente' | null;
-const actividad = (lugar: string, verificacion: Verificacion = null) => ({ lugar, descripcion: '', citas: [], verificacion });
+// La verificación guardada se pone siempre como «verificada» para comprobar que las métricas la
+// recalculan con la regla actual y no se fían de la que se guardó al generar.
+const actividad = (lugar: string, citas: number[] = []) => ({ lugar, descripcion: '', citas, verificacion: 'verificada' as const });
+
+// Los dos primeros fragmentos del corpus, recuperados como citas 1 y 2.
+const recuperados = corpus.slice(0, 2).map((texto, i) => ({ cita: i + 1, id: `s:${i + 1}`, seccion: 'Ver', texto }));
 
 function itinerario(modo: 'C0' | 'C1', dias: Itinerario['dias'], hayInformacion = true): Itinerario {
-  return { modo, hayInformacion, dias, fuentes: [], recuperados: [] };
+  return { modo, hayInformacion, dias, fuentes: [], recuperados: modo === 'C1' && hayInformacion ? recuperados : [] };
 }
 
 // Ritmo tranquilo: 2 actividades por día.
@@ -36,8 +40,8 @@ describe('metricasItinerario', () => {
   it('en C1 calcula fidelidad, cobertura de citas y ritmo', () => {
     const resultado = metricasItinerario(
       itinerario('C1', [
-        { dia: 1, manana: [actividad('Torre del Oro', 'verificada')], tarde: [actividad('Plaza de España', 'cita-erronea')], noche: [] },
-        { dia: 2, manana: [actividad('Parque de los Robles', 'sin-fuente')], tarde: [], noche: [] },
+        { dia: 1, manana: [actividad('Torre del Oro', [1])], tarde: [actividad('Plaza de España', [1])], noche: [] },
+        { dia: 2, manana: [actividad('Parque de los Robles', [2])], tarde: [], noche: [] },
       ]),
       perfil,
       corpus,
@@ -48,7 +52,7 @@ describe('metricasItinerario', () => {
       actividades: 3,
       // Torre del Oro y Plaza de España están en el corpus; el parque, no.
       fidelidad: 2 / 3,
-      // Solo la Torre del Oro está en el texto que cita.
+      // Solo la Torre del Oro está en el texto que cita; la Plaza de España está en el 2, no en el 1.
       coberturaCitas: 1 / 3,
       // El día 2 tiene 1 actividad en vez de 2.
       ritmoCumplido: 1 / 2,

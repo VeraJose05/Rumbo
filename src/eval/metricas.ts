@@ -3,14 +3,11 @@
 import { actividadesPorDia, totalActividades } from '../flows/itinerario.js';
 import type { Perfil } from '../flows/perfil.js';
 import type { Itinerario } from '../flows/planificacion.js';
-import { verificarRecomendacion } from '../flows/rag.js';
+import { clasificarActividad, verificarRecomendacion } from '../flows/rag.js';
 
-/**
- * Si el lugar aparece en la guía del destino. Se exige que esté en un mismo fragmento: con el
- * corpus entero, juntar todos los textos dejaría pasar nombres inventados con palabras sueltas.
- */
+/** Si el lugar aparece en la guía del destino: su nombre seguido en algún fragmento. */
 export function enCorpus(lugar: string, corpusDestino: string[]): boolean {
-  return corpusDestino.some((texto) => verificarRecomendacion(lugar, [texto]));
+  return verificarRecomendacion(lugar, corpusDestino);
 }
 
 export interface MetricasItinerario {
@@ -34,7 +31,10 @@ export function metricasItinerario(itinerario: Itinerario, perfil: Perfil, corpu
   }
 
   const enGuia = actividades.filter((a) => enCorpus(a.lugar, corpusDestino)).length;
-  const verificadas = actividades.filter((a) => a.verificacion === 'verificada').length;
+  // Se vuelve a verificar con los fragmentos guardados en vez de usar la verificación grabada al
+  // generar: así, si cambia la regla, las métricas se recalculan sin volver a llamar al modelo.
+  const textos = [...itinerario.recuperados].sort((a, b) => a.cita - b.cita).map((r) => r.texto);
+  const verificadas = actividades.filter((a) => clasificarActividad(a.lugar, a.citas, textos) === 'verificada').length;
   const diasCompletos = itinerario.dias.filter((d) => totalActividades(d) === actividadesPorDia(perfil.ritmo)).length;
 
   return {

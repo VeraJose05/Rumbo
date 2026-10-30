@@ -49,13 +49,26 @@ export function fuentesCitadas(citas: number[], documentos: { metadata?: Record<
 const PALABRAS_VACIAS = new Set(['el', 'la', 'los', 'las', 'de', 'del', 'en', 'y', 'a', 'al', 'un', 'una']);
 
 /**
- * Comprueba que el lugar recomendado aparece en los textos que cita: todas sus palabras
- * significativas deben estar en ellos. Detecta citas puestas al azar por el modelo.
+ * Comprueba que el lugar recomendado aparece en alguno de los textos que cita, con su nombre
+ * seguido. Con las palabras sueltas pasaban descripciones inventadas con palabras del fragmento
+ * («Zona de discotecas y música heavy en Marina»), lo que favorecía a los modos con RAG.
  */
 export function verificarRecomendacion(lugar: string, textosCitados: string[]): boolean {
-  const palabrasTextos = new Set(palabras(textosCitados.join(' ')));
-  const palabrasLugar = palabras(lugar).filter((p) => !PALABRAS_VACIAS.has(p));
-  return palabrasLugar.length > 0 && palabrasLugar.every((p) => palabrasTextos.has(p));
+  // Lo que va entre paréntesis suele ser la dirección, que la guía escribe aparte.
+  const nombre = palabras(lugar.replace(/\([^)]*\)/g, ' '));
+  // Sin los artículos de los extremos: «El Serranito» debe encontrar «serranito».
+  while (nombre.length && PALABRAS_VACIAS.has(nombre[0]!)) nombre.shift();
+  while (nombre.length && PALABRAS_VACIAS.has(nombre.at(-1)!)) nombre.pop();
+  // Sin ninguna palabra con letras («[1]») no hay lugar que comprobar.
+  if (!nombre.some((p) => /\p{L}/u.test(p))) return false;
+  return textosCitados.some((texto) => contieneSeguidas(palabras(texto), nombre));
+}
+
+function contieneSeguidas(texto: string[], buscadas: string[]): boolean {
+  for (let i = 0; i + buscadas.length <= texto.length; i++) {
+    if (buscadas.every((p, j) => texto[i + j] === p)) return true;
+  }
+  return false;
 }
 
 export type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente';

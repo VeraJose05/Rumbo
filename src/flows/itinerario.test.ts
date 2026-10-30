@@ -65,6 +65,11 @@ describe('repartirEnFranjas', () => {
     });
   });
 
+  it('descarta los lugares sin letras, como un número de cita puesto como lugar', () => {
+    const actividades = ['[1]', '  ', 'Triana'].map((lugar) => ({ franja: 'tarde' as const, lugar, descripcion: '' }));
+    expect(repartirEnFranjas(1, actividades, []).tarde.map((a) => a.lugar)).toEqual(['Triana']);
+  });
+
   it('no pasa del máximo indicado', () => {
     const actividades = ['A', 'B', 'C'].map((lugar) => ({ franja: 'tarde' as const, lugar, descripcion: '' }));
     expect(totalActividades(repartirEnFranjas(1, actividades, [], 2))).toBe(2);
