@@ -72,7 +72,9 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
       let documentos: Document[] | null = null;
       if (modo === 'C1') {
         const consultas = consultasDelPerfil(perfil);
-        const k = Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
+        // Se pide el doble de la parte de cada consulta: comparten fragmentos y, al quitar repetidos,
+        // con la parte justa quedaban 8 en vez de 12. La fusión recorta después a TOTAL_FRAGMENTOS.
+        const k = 2 * Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
         const listas = [];
         for (const consulta of consultas) {
           const encontrados = await ai.retrieve({

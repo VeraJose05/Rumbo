@@ -50,10 +50,11 @@ describe('planificacionFlow', () => {
 
     const salida = await flow({ perfil, modo: 'C1' });
 
-    // Consulta base + naturaleza, repartiendo 12 fragmentos entre las dos.
+    // Consulta base + naturaleza: cada una pide el doble de su parte (12 / 2 × 2), porque las
+    // consultas comparten fragmentos y al quitar repetidos quedarían menos de 12.
     expect(consultas.map((c) => c.opciones)).toEqual([
-      { k: 6, destino: 'Sevilla' },
-      { k: 6, destino: 'Sevilla' },
+      { k: 12, destino: 'Sevilla' },
+      { k: 12, destino: 'Sevilla' },
     ]);
     expect(peticiones).toHaveLength(2);
     expect(salida.dias.map((d) => d.dia)).toEqual([1, 2]);
