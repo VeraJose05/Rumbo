@@ -10,6 +10,7 @@ import {
   ETIQUETAS_INTERES,
   fusionarPerfil,
   listaDestinos,
+  opcionalesPendientes,
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
@@ -63,10 +64,18 @@ Si el viajero corrige datos que ya se conocen («mejor 2 días»), pon solo el v
 
 type Campo = 'destino' | 'dias' | 'intereses' | 'opcionales';
 
+// Cómo se ofrece cada dato opcional en la pregunta; solo se nombran los que faltan.
+const TEXTO_OPCIONAL = {
+  compania: 'con quién viajas (solo, en pareja, en familia o con amigos)',
+  ritmo: 'qué ritmo prefieres (tranquilo, normal o intenso)',
+  presupuesto: 'tu presupuesto (bajo, medio o alto)',
+};
+
 // Para cada pregunta: qué tiene que preguntar el modelo, el texto de reserva si su redacción no pasa
 // el guardarraíl, y las opciones, que añade siempre el código porque el modelo las recortaba
 // (ofrecía dos de los ocho intereses).
-function pregunta(campo: Campo, destino: unknown): { objetivo: string; reserva: string; opciones: string } {
+function pregunta(campo: Campo, perfil: Record<string, unknown>): { objetivo: string; reserva: string; opciones: string } {
+  const destino = perfil.destino;
   switch (campo) {
     case 'destino':
       return {
@@ -86,14 +95,15 @@ function pregunta(campo: Campo, destino: unknown): { objetivo: string; reserva: 
         reserva: `¿Qué te gustaría hacer en ${destino}?`,
         opciones: `Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`,
       };
-    case 'opcionales':
+    case 'opcionales': {
+      const textos = opcionalesPendientes(perfil).map((c) => TEXTO_OPCIONAL[c]);
+      const lista = textos.length > 1 ? `${textos.slice(0, -1).join(', ')} o ${textos.at(-1)}` : textos[0];
       return {
         objetivo: 'si quiere contar algo más del viaje (es opcional)',
         reserva: '¿Quieres contarme algo más?',
-        opciones:
-          'Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), qué ritmo prefieres ' +
-          '(tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».',
+        opciones: `Por ejemplo, ${lista}. Si no, dime «nada más».`,
       };
+    }
   }
 }
 
@@ -178,7 +188,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 
       // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
-      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil.destino);
+      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
       const { text } = await ai.generate({
         system: SISTEMA_PREGUNTA,
         prompt: [

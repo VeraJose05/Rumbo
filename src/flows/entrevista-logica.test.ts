@@ -1,6 +1,6 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
-import { avisoDestino, esAfirmacion, fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
+import { avisoDestino, esAfirmacion, fusionarPerfil, opcionalesPendientes, resumirPerfil, siguientePaso } from './entrevista-logica.js';
 import { PerfilSchema } from './perfil.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
@@ -89,6 +89,17 @@ describe('siguientePaso', () => {
     });
   });
 
+  it('no vuelve a preguntar los intereses si el viajero ya dijo alguno además de «niños»', () => {
+    const perfil = { destino: 'Sevilla', dias: 4, intereses: ['monumentos', 'gastronomia'] };
+    expect(siguientePaso({ perfil, preguntados: ['destino'] })).toEqual({ tipo: 'preguntar', campo: 'opcionales' });
+  });
+
+  it('si ya sabe compañía, ritmo y presupuesto, no pregunta los opcionales y pasa a confirmar', () => {
+    // Todo dicho de golpe en el primer mensaje.
+    const perfil = { destino: 'Sevilla', dias: 4, intereses: ['monumentos'], ritmo: 'tranquilo', presupuesto: 'bajo', compania: 'familia' };
+    expect(siguientePaso({ perfil, preguntados: ['destino'] })).toEqual({ tipo: 'confirmar', perfil });
+  });
+
   it('si al corregir falta un dato obligatorio, vuelve a preguntarlo antes de confirmar', () => {
     const perfil = { destino: 'Sevilla', dias: 2 };
     expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales'] })).toEqual({
@@ -144,5 +155,17 @@ describe('esAfirmacion', () => {
     for (const mensaje of ['no', 'sí, pero mejor 2 días', 'perfecto, añade gastronomía', 'vale pero quita museos', 'casi']) {
       expect(esAfirmacion(mensaje)).toBe(false);
     }
+  });
+});
+
+describe('opcionalesPendientes', () => {
+  it('ofrece solo los datos opcionales que faltan, en el orden de la pregunta', () => {
+    expect(opcionalesPendientes({ compania: 'familia' })).toEqual(['ritmo', 'presupuesto']);
+    expect(opcionalesPendientes({})).toEqual(['compania', 'ritmo', 'presupuesto']);
+    expect(opcionalesPendientes({ compania: 'solo', ritmo: 'normal', presupuesto: 'alto' })).toEqual([]);
+  });
+
+  it('no cuenta como sabido un valor que no es válido', () => {
+    expect(opcionalesPendientes({ ritmo: 'rapidísimo' })).toEqual(['compania', 'ritmo', 'presupuesto']);
   });
 });

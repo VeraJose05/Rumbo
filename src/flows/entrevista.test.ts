@@ -131,6 +131,20 @@ describe('entrevistaFlow', () => {
     expect(peticiones).toHaveLength(2);
   });
 
+  it('en la pregunta de opcionales solo ofrece los que faltan', async () => {
+    // Caso real: «4 días, con mi esposa y mis dos hijos» ya dio la compañía.
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['monumentos', 'gastronomia'] });
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 4, compania: 'familia' }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'quiero ver monumentos y probar las tapas',
+    });
+
+    expect(salida.respuesta).toContain('qué ritmo prefieres');
+    expect(salida.respuesta).toContain('tu presupuesto');
+    expect(salida.respuesta).not.toContain('con quién viajas');
+  });
+
   it('tras los opcionales pide confirmar el perfil, sin terminar todavía', async () => {
     const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' });
 

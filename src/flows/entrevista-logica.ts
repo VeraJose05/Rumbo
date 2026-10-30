@@ -2,13 +2,13 @@
 // qué se pregunta después y cuándo se termina. El LLM no decide nada de esto.
 import { z } from 'genkit';
 import { buscarDestino, DESTINOS, normalizar } from '../config/destinos.js';
-import { camposPendientes, INTERESES, PerfilSchema, type Perfil } from './perfil.js';
+import { camposPendientes, COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS, type Perfil } from './perfil.js';
 
 export type PerfilParcial = Record<string, unknown>;
 
 export interface EstadoEntrevista {
   perfil: PerfilParcial;
-  /** Preguntas ya hechas. Intereses y opcionales se preguntan siempre una vez, aunque ya haya datos. */
+  /** Preguntas ya hechas, para no repetirlas y para entender respuestas cortas como «3» o «sí». */
   preguntados: string[];
 }
 
@@ -97,12 +97,29 @@ export function listaDestinos(): string {
 export function siguientePaso(estado: EstadoEntrevista): Paso {
   const [pendiente] = camposPendientes(estado.perfil);
   if (pendiente) return { tipo: 'preguntar', campo: pendiente };
-  // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero.
-  if (!estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
-  if (!estado.preguntados.includes('opcionales')) return { tipo: 'preguntar', campo: 'opcionales' };
+  // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero: si es lo
+  // único que se sabe, se pregunta. Si dijo algo más («monumentos y tapas»), no se repite.
+  const intereses = (estado.perfil.intereses as string[] | undefined) ?? [];
+  const soloDeducidos = intereses.every((i) => i === 'ninos');
+  if (soloDeducidos && !estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
+  // Los opcionales se preguntan una vez, y solo si falta alguno: diciéndolo todo de golpe se
+  // pasa directamente a confirmar.
+  if (opcionalesPendientes(estado.perfil).length && !estado.preguntados.includes('opcionales')) {
+    return { tipo: 'preguntar', campo: 'opcionales' };
+  }
   // Antes de planificar, el viajero confirma el perfil: así corrige los errores de extracción.
   const perfil = PerfilSchema.parse(estado.perfil);
   return estado.preguntados.includes('confirmado') ? { tipo: 'terminar', perfil } : { tipo: 'confirmar', perfil };
+}
+
+const OPCIONALES = { compania: COMPANIAS, ritmo: RITMOS, presupuesto: PRESUPUESTOS } as const;
+export type Opcional = keyof typeof OPCIONALES;
+
+/** Datos opcionales que el viajero aún no ha dado (o no son válidos), en el orden de la pregunta. */
+export function opcionalesPendientes(perfil: PerfilParcial): Opcional[] {
+  return (Object.keys(OPCIONALES) as Opcional[]).filter(
+    (campo) => !(OPCIONALES[campo] as readonly unknown[]).includes(perfil[campo]),
+  );
 }
 
 export function resumirPerfil(perfil: Perfil): string {
