@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Itinerario } from '../flows/planificacion.js';
 import { PerfilSchema } from '../flows/perfil.js';
-import { enCorpus, metricasItinerario } from './metricas.js';
+import { enCorpus, metricasItinerario, reverificar } from './metricas.js';
 
 const corpus = ['* Torre del Oro - Torre vigía junto al río.', 'El Parque de María Luisa tiene la Plaza de España.', 'Hay robles en la sierra.'];
 
@@ -88,5 +88,23 @@ describe('metricasItinerario', () => {
       coberturaCitas: null,
       ritmoCumplido: null,
     });
+  });
+});
+
+describe('reverificar', () => {
+  it('vuelve a etiquetar cada actividad con la regla actual y los fragmentos guardados', () => {
+    const original = itinerario('C1', [
+      { dia: 1, manana: [actividad('Torre del Oro', [1])], tarde: [actividad('Plaza de España', [1])], noche: [actividad('[1]', [1])] },
+    ]);
+
+    const dia = reverificar(original).dias[0]!;
+
+    expect([...dia.manana, ...dia.tarde, ...dia.noche].map((a) => a.verificacion)).toEqual(['verificada', 'cita-erronea', 'sin-fuente']);
+  });
+
+  it('en C0 deja la verificación vacía', () => {
+    const original = itinerario('C0', [{ dia: 1, manana: [actividad('Torre del Oro')], tarde: [], noche: [] }]);
+
+    expect(reverificar(original).dias[0]!.manana[0]!.verificacion).toBeNull();
   });
 });

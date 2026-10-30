@@ -10,6 +10,17 @@ export function enCorpus(lugar: string, corpusDestino: string[]): boolean {
   return verificarRecomendacion(lugar, corpusDestino);
 }
 
+/**
+ * Vuelve a verificar cada actividad con la regla actual y los fragmentos guardados en el propio
+ * itinerario: si cambia la regla, se recalcula sin volver a llamar al modelo. En C0, sin fuentes.
+ */
+export function reverificar(itinerario: Itinerario): Itinerario {
+  const textos = [...itinerario.recuperados].sort((a, b) => a.cita - b.cita).map((r) => r.texto);
+  const verificar = (franja: Itinerario['dias'][number]['manana']) =>
+    franja.map((a) => ({ ...a, verificacion: itinerario.modo === 'C0' ? null : clasificarActividad(a.lugar, a.citas, textos) }));
+  return { ...itinerario, dias: itinerario.dias.map((d) => ({ ...d, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) })) };
+}
+
 export interface MetricasItinerario {
   /** false si el sistema dijo que no tenía información (RF-07). */
   planificado: boolean;
@@ -25,16 +36,14 @@ export interface MetricasItinerario {
 const proporcion = (parte: number, total: number) => (total ? parte / total : null);
 
 export function metricasItinerario(itinerario: Itinerario, perfil: Perfil, corpusDestino: string[]): MetricasItinerario {
-  const actividades = itinerario.dias.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche]);
+  // Siempre con la verificación actual, no con la que se grabó al generar.
+  const actividades = reverificar(itinerario).dias.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche]);
   if (!itinerario.hayInformacion) {
     return { planificado: false, actividades: 0, fidelidad: null, coberturaCitas: null, ritmoCumplido: null };
   }
 
   const enGuia = actividades.filter((a) => enCorpus(a.lugar, corpusDestino)).length;
-  // Se vuelve a verificar con los fragmentos guardados en vez de usar la verificación grabada al
-  // generar: así, si cambia la regla, las métricas se recalculan sin volver a llamar al modelo.
-  const textos = [...itinerario.recuperados].sort((a, b) => a.cita - b.cita).map((r) => r.texto);
-  const verificadas = actividades.filter((a) => clasificarActividad(a.lugar, a.citas, textos) === 'verificada').length;
+  const verificadas = actividades.filter((a) => a.verificacion === 'verificada').length;
   const diasCompletos = itinerario.dias.filter((d) => totalActividades(d) === actividadesPorDia(perfil.ritmo)).length;
 
   return {

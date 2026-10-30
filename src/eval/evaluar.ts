@@ -1,13 +1,12 @@
 // F5 (RNF-03, RNF-04): pasa los perfiles de prueba por cada modo y guarda una línea por ejecución
 // con todo lo necesario para repetirla y auditarla (npm run evaluar -- [--modos C0,C1]
 // [--perfiles sevilla-1,bilbao] [--salida resultados/evaluacion.jsonl]).
-import { execSync } from 'node:child_process';
 import { appendFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { buscarDestino } from '../config/destinos.js';
 import { PerfilSchema } from '../flows/perfil.js';
 import { coleccion, configModelos, planificacionFlow } from '../index.js';
 import { leerHechos, parsearArgumentos, pendientes } from './ejecucion.js';
+import { lectorCorpus, versionCodigo } from './entorno.js';
 import { metricasItinerario } from './metricas.js';
 import { PERFILES_PRUEBA } from './perfiles.js';
 
@@ -16,25 +15,8 @@ mkdirSync(dirname(argumentos.salida), { recursive: true });
 const hechos = existsSync(argumentos.salida) ? leerHechos(readFileSync(argumentos.salida, 'utf8')) : new Set<string>();
 const tareas = pendientes(PERFILES_PRUEBA, argumentos.modos, argumentos.perfiles, hechos, configModelos.llm);
 
-// Versión del código con la que se generó cada resultado (RNF-03).
-let commit = 'desconocido';
-try {
-  commit = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
-} catch {
-  // Sin git disponible: se guarda como desconocido.
-}
-
-/** Todos los fragmentos de la guía del destino, para medir la fidelidad; vacío fuera del corpus. */
-const corpus = new Map<string, string[]>();
-async function corpusDe(destino: string): Promise<string[]> {
-  const nombre = buscarDestino(destino)?.nombre;
-  if (!nombre) return [];
-  if (!corpus.has(nombre)) {
-    const { documents } = await coleccion.get({ where: { destino: nombre }, include: ['documents'] });
-    corpus.set(nombre, documents.filter((d): d is string => d !== null));
-  }
-  return corpus.get(nombre)!;
-}
+const commit = versionCodigo();
+const corpusDe = lectorCorpus(coleccion);
 
 console.log(`${tareas.length} ejecuciones pendientes (${hechos.size} ya guardadas) → ${argumentos.salida}\n`);
 const formato = (valor: number | null) => (valor === null ? '—' : valor.toFixed(2));
