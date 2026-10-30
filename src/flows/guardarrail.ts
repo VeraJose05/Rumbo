@@ -40,3 +40,14 @@ export function validarMensaje(texto: string, permitidos: string[]): Validacion 
 function palabras(texto: string): string[] {
   return texto.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
 }
+
+/**
+ * Quita el saludo con que empieza un mensaje: el modelo saludaba en mitad de la entrevista
+ * («Hola, ¿te gustaría…?») aunque el prompt le dice que salude solo al inicio.
+ */
+export function quitarSaludo(texto: string): string {
+  const sin = texto.replace(/^\s*¡?\s*(hola|buenas)\b[^.!?¿]*?([.!,]\s*|\s+(?=¿))/i, '').replace(/^\s*(buenas)[.!,]?\s*/i, '');
+  if (sin === texto) return texto;
+  // Mayúscula en la primera letra, también tras «¿» o «¡».
+  return sin.replace(/^([¿¡]?)(\p{L})/u, (_, signo: string, letra: string) => signo + letra.toUpperCase());
+}

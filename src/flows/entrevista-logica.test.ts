@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   avisoDestino,
   descartarSinRespaldo,
+  respaldarIntereses,
   esAfirmacion,
   fusionarPerfil,
   opcionalesPendientes,
@@ -212,5 +213,39 @@ describe('resumirPerfil con valores por defecto', () => {
     expect(resumirPerfil(perfil, ['ritmo', 'presupuesto'])).toBe(
       'Sevilla, 4 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: playa.',
     );
+  });
+});
+
+// El extractor convirtió «la comida y la cultura» en gastronomía y naturaleza.
+describe('respaldarIntereses', () => {
+  it('quita los intereses de los que el mensaje no habla y traduce «cultura» a monumentos y museos', () => {
+    expect(respaldarIntereses(['gastronomia', 'naturaleza'], 'quiero viajar a granada con mi familia, 4 dias y nos gusta la comida y la cultura')).toEqual([
+      'gastronomia',
+      'monumentos',
+      'museos',
+    ]);
+  });
+
+  it('conserva los intereses respaldados, aunque se digan con otras palabras', () => {
+    // Con la errata «monumetos», que el modelo sí entendía.
+    expect(respaldarIntereses(['monumentos', 'gastronomia'], 'quiero ver monumetos y probar las tapas andaluzas')).toEqual(['monumentos', 'gastronomia']);
+    expect(respaldarIntereses(['monumentos', 'gastronomia'], 'ver la catedral y comer bien')).toEqual(['monumentos', 'gastronomia']);
+    expect(respaldarIntereses(['naturaleza', 'ocio-nocturno'], 'pasear por el parque y salir de copas')).toEqual(['naturaleza', 'ocio-nocturno']);
+    expect(respaldarIntereses(['ninos'], 'vamos con nuestros hijos')).toEqual(['ninos']);
+  });
+
+  it('deja al modelo los intereses que se deducen de nombres de sitios o platos', () => {
+    // Una lista de palabras no puede saber que el Prado es un museo: eso sí lo sabe el modelo.
+    expect(respaldarIntereses(['ocio-nocturno', 'museos'], 'queremos salir de fiesta y ver el Prado')).toEqual(['ocio-nocturno', 'museos']);
+    expect(respaldarIntereses(['playa', 'gastronomia', 'ninos'], 'playa y paella con los niños')).toEqual(['playa', 'gastronomia', 'ninos']);
+    expect(respaldarIntereses(['monumentos'], 'Gaudí y la Sagrada Familia')).toEqual(['monumentos']);
+  });
+
+  it('no deduce «niños» de «familia»', () => {
+    expect(respaldarIntereses(['ninos', 'gastronomia'], 'con mi familia, nos gusta comer')).toEqual(['gastronomia']);
+  });
+
+  it('acepta los nombres de la lista tal cual, como respuesta a la pregunta', () => {
+    expect(respaldarIntereses(['museos', 'playa'], 'museos y playa')).toEqual(['museos', 'playa']);
   });
 });

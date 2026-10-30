@@ -166,6 +166,29 @@ describe('entrevistaFlow', () => {
     expect(salida.respuesta).toContain('qué ritmo prefieres');
   });
 
+  it('guarda solo los intereses de los que habla el viajero y traduce «cultura»', async () => {
+    // Caso real: «la comida y la cultura» salía como gastronomía y naturaleza.
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada', dias: 4, compania: 'familia', intereses: ['gastronomia', 'naturaleza'] });
+
+    const salida = await flow({
+      estado: { perfil: {}, preguntados: ['destino'] },
+      mensaje: 'quiero viajar a granada con mi familia, 4 dias y nos gusta la comida y la cultura',
+    });
+
+    expect(salida.estado.perfil.intereses).toEqual(['gastronomia', 'monumentos', 'museos']);
+  });
+
+  it('no saluda en mitad de la conversación aunque el modelo lo haga', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, 'Hola, ¿te gustaría contar algo más del viaje?');
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 2 }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'Me gustan los museos',
+    });
+
+    expect(salida.respuesta).toMatch(/^¿Te gustaría contar algo más del viaje\?/);
+  });
+
   it('en la confirmación marca los datos que el viajero no ha dado', async () => {
     const { flow } = crearEntorno(sinDatos);
 

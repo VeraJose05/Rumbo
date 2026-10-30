@@ -1,6 +1,6 @@
 // RF-01: validación de los mensajes que redacta el modelo en la entrevista.
 import { describe, expect, it } from 'vitest';
-import { validarMensaje } from './guardarrail.js';
+import { quitarSaludo, validarMensaje } from './guardarrail.js';
 
 const permitidos = ['Madrid con amigos', 'Sevilla', 'Madrid', 'Barcelona', 'Granada', 'Valencia', 'Rumbo'];
 
@@ -41,5 +41,17 @@ describe('validarMensaje', () => {
 
   it('rechaza un mensaje vacío', () => {
     expect(validarMensaje('  ', permitidos)).toEqual({ valido: false, motivo: 'vacío' });
+  });
+});
+
+describe('quitarSaludo', () => {
+  it('quita el saludo del principio fuera del inicio de la conversación', () => {
+    expect(quitarSaludo('Hola, ¿te gustaría contar algo más del viaje?')).toBe('¿Te gustaría contar algo más del viaje?');
+    expect(quitarSaludo('¡Hola! Cuatro días suenan genial.')).toBe('Cuatro días suenan genial.');
+    expect(quitarSaludo('Hola, buenas. ¿Cuántos días vas a estar?')).toBe('¿Cuántos días vas a estar?');
+  });
+
+  it('no toca un mensaje sin saludo', () => {
+    expect(quitarSaludo('¡Genial! ¿Cuántos días?')).toBe('¡Genial! ¿Cuántos días?');
   });
 });

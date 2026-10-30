@@ -140,6 +140,28 @@ const RESPALDO = {
   presupuesto: /\b(presupuesto|barat\w*|economic\w*|gast\w*|dinero|euros?|car[oa]s?|lujo\w*|ahorr\w*|low cost|bajo|medio|alto)\b/,
 };
 
+// Raíces que respaldan los intereses que el extractor se inventaba (sin tildes): convirtió «la
+// cultura» en naturaleza. Son raíces y no palabras para tolerar erratas y variantes. Monumentos,
+// museos y gastronomía no se filtran: se deducen de nombres que ninguna lista cubre («el Prado»,
+// «la Sagrada Familia», «paella»), y eso el modelo sí lo hace bien.
+const RESPALDO_INTERES: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
+  naturaleza: /\b(natur|parque|jardin|monta|sender|sierra|rio\b|campo|aire libre|pase|excursion)/,
+  'ocio-nocturno': /\b(noche|nocturn|bar\b|bares|copa|fiesta|discotec|salir|marcha|ocio)/,
+  compras: /\b(compr|tienda|mercad|shopping|moda)/,
+  playa: /\b(playa|mar\b|costa|banar|arena)/,
+  ninos: /\b(nin[oa]s?\b|hij|crio|peque|chaval)/,
+};
+// Palabras que el extractor traducía mal y que el código traduce: «cultura» son monumentos y museos.
+const CULTURA = /\b(cultur|histori|arte\b)/;
+
+/** Quita los intereses inventados (sin respaldo en el mensaje) y añade monumentos y museos si habla de cultura. */
+export function respaldarIntereses(intereses: (typeof INTERESES)[number][], mensaje: string): (typeof INTERESES)[number][] {
+  const texto = normalizar(mensaje);
+  const respaldados = intereses.filter((i) => RESPALDO_INTERES[i]?.test(texto) ?? true);
+  if (CULTURA.test(texto)) for (const i of ['monumentos', 'museos'] as const) if (!respaldados.includes(i)) respaldados.push(i);
+  return respaldados;
+}
+
 /** Quita el ritmo y el presupuesto extraídos si el mensaje no habla de ellos. */
 export function descartarSinRespaldo<T extends { ritmo: unknown; presupuesto: unknown }>(extraido: T, mensaje: string): T {
   const texto = normalizar(mensaje);

@@ -12,11 +12,12 @@ import {
   fusionarPerfil,
   listaDestinos,
   opcionalesPendientes,
+  respaldarIntereses,
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
 } from './entrevista-logica.js';
-import { validarMensaje } from './guardarrail.js';
+import { quitarSaludo, validarMensaje } from './guardarrail.js';
 import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
 
 const EstadoSchema = z.object({
@@ -146,7 +147,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
         if (output) {
           // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
           // extractor convertía un «nada más» en «quita monumentos».
-          const conRespaldo = descartarSinRespaldo(output, mensaje);
+          // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
+          const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje) };
           const extraido = campoPreguntado === 'confirmacion' ? conRespaldo : { ...conRespaldo, interesesQuitar: [] };
           estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
         }
@@ -202,7 +204,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
       const permitidos = [mensaje, reserva, 'Rumbo', ...DESTINOS.map((d) => d.nombre)];
       const validacion = validarMensaje(text, permitidos);
       // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
-      const redactada = !validacion.valido ? reserva : text.includes('?') ? text.trim() : `${text.trim()} ${reserva}`;
+      const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
+      const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
       return {
         estado,
         respuesta: `${redactada} ${opciones}`,
