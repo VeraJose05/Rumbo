@@ -123,7 +123,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
         franja.map((a) => {
           if (!documentos) return { ...a, citas: [], verificacion: null };
           const citas = citasValidas(a.citas, documentos.length);
-          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos) };
+          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos, perfil.destino) };
         });
       const diasFinales = dias.map((d) => ({ ...d, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) }));
 

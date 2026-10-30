@@ -70,6 +70,18 @@ describe('verificarRecomendacion', () => {
     expect(verificarRecomendacion('[1]', ['Abre de 1 a 5.'])).toBe(false);
   });
 
+  it('quita el nombre del destino al final, que la guía no escribe', () => {
+    const fragmentos = ['* Museo de Bellas Artes - Pintura sevillana.', 'En la Plaza Nueva empieza la subida.'];
+    expect(verificarRecomendacion('Museo de Bellas Artes de Sevilla', fragmentos, 'Sevilla')).toBe(true);
+    expect(verificarRecomendacion('Plaza Nueva, Granada', fragmentos, 'Granada')).toBe(true);
+    // Sin destino no se quita nada.
+    expect(verificarRecomendacion('Museo de Bellas Artes de Sevilla', fragmentos)).toBe(false);
+  });
+
+  it('rechaza como lugar el propio destino', () => {
+    expect(verificarRecomendacion('Valencia', ['Valencia es la tercera ciudad de España.'], 'Valencia')).toBe(false);
+  });
+
   it('ignora lo que va entre paréntesis, como la dirección', () => {
     expect(verificarRecomendacion('Casa Lolea (Carrer de Sant Pere 49)', ['* Casa Lolea - Sangría casera.'])).toBe(true);
   });

@@ -46,22 +46,35 @@ export function fuentesCitadas(citas: number[], documentos: { metadata?: Record<
   });
 }
 
-const PALABRAS_VACIAS = new Set(['el', 'la', 'los', 'las', 'de', 'del', 'en', 'y', 'a', 'al', 'un', 'una']);
+export const PALABRAS_VACIAS = new Set(['el', 'la', 'los', 'las', 'de', 'del', 'en', 'y', 'a', 'al', 'un', 'una']);
+
+/**
+ * Palabras que identifican el lugar, tal como se buscan en los textos; vacío si no hay lugar que
+ * comprobar. Lo que va entre paréntesis suele ser la dirección, que la guía escribe aparte.
+ */
+export function nombreDeLugar(lugar: string, destino?: string): string[] {
+  const nombre = palabras(lugar.replace(/\([^)]*\)/g, ' '));
+  // Sin el destino al final: «Alcazaba de Granada» debe encontrar «Alcazaba» en la guía de Granada.
+  // Si el lugar es solo el destino, queda vacío: la ciudad no es un lugar que visitar dentro de ella.
+  const ciudad = destino ? palabras(destino) : [];
+  if (ciudad.length && ciudad.every((p, i) => nombre[nombre.length - ciudad.length + i] === p)) {
+    nombre.splice(nombre.length - ciudad.length);
+  }
+  // Sin los artículos de los extremos: «El Serranito» debe encontrar «serranito».
+  while (nombre.length && PALABRAS_VACIAS.has(nombre[0]!)) nombre.shift();
+  while (nombre.length && PALABRAS_VACIAS.has(nombre.at(-1)!)) nombre.pop();
+  // Sin ninguna palabra con letras («[1]») no hay lugar que comprobar.
+  return nombre.some((p) => /\p{L}/u.test(p)) ? nombre : [];
+}
 
 /**
  * Comprueba que el lugar recomendado aparece en alguno de los textos que cita, con su nombre
  * seguido. Con las palabras sueltas pasaban descripciones inventadas con palabras del fragmento
  * («Zona de discotecas y música heavy en Marina»), lo que favorecía a los modos con RAG.
  */
-export function verificarRecomendacion(lugar: string, textosCitados: string[]): boolean {
-  // Lo que va entre paréntesis suele ser la dirección, que la guía escribe aparte.
-  const nombre = palabras(lugar.replace(/\([^)]*\)/g, ' '));
-  // Sin los artículos de los extremos: «El Serranito» debe encontrar «serranito».
-  while (nombre.length && PALABRAS_VACIAS.has(nombre[0]!)) nombre.shift();
-  while (nombre.length && PALABRAS_VACIAS.has(nombre.at(-1)!)) nombre.pop();
-  // Sin ninguna palabra con letras («[1]») no hay lugar que comprobar.
-  if (!nombre.some((p) => /\p{L}/u.test(p))) return false;
-  return textosCitados.some((texto) => contieneSeguidas(palabras(texto), nombre));
+export function verificarRecomendacion(lugar: string, textosCitados: string[], destino?: string): boolean {
+  const nombre = nombreDeLugar(lugar, destino);
+  return nombre.length > 0 && textosCitados.some((texto) => contieneSeguidas(palabras(texto), nombre));
 }
 
 function contieneSeguidas(texto: string[], buscadas: string[]): boolean {
@@ -78,13 +91,13 @@ export type Verificacion = 'verificada' | 'cita-erronea' | 'sin-fuente';
  * los textos recuperados (cita errónea) o proponer uno que no aparece en ninguno (sin fuente,
  * probablemente inventado). `citas` va de 1 a n sobre `textos`.
  */
-export function clasificarActividad(lugar: string, citas: number[], textos: string[]): Verificacion {
+export function clasificarActividad(lugar: string, citas: number[], textos: string[], destino?: string): Verificacion {
   const citados = citas.map((c) => textos[c - 1] ?? '');
-  if (verificarRecomendacion(lugar, citados)) return 'verificada';
-  return verificarRecomendacion(lugar, textos) ? 'cita-erronea' : 'sin-fuente';
+  if (verificarRecomendacion(lugar, citados, destino)) return 'verificada';
+  return verificarRecomendacion(lugar, textos, destino) ? 'cita-erronea' : 'sin-fuente';
 }
 
-function palabras(texto: string): string[] {
+export function palabras(texto: string): string[] {
   return texto
     .normalize('NFD')
     .replace(/\p{M}/gu, '')

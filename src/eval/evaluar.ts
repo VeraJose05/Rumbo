@@ -46,7 +46,7 @@ for (const [i, { perfil: prueba, modo }] of tareas.entries()) {
   console.log(
     `[${i + 1}/${tareas.length}] ${prueba.id} ${modo} · ${segundos.toFixed(0)} s · ` +
       (metricas.planificado
-        ? `fidelidad ${formato(metricas.fidelidad)} · citas ${formato(metricas.coberturaCitas)} · ritmo ${formato(metricas.ritmoCumplido)}`
+        ? `fidelidad ${formato(metricas.fidelidad)}–${formato(metricas.fidelidadLaxa)} · citas ${formato(metricas.coberturaCitas)} · ritmo ${formato(metricas.ritmoCumplido)}`
         : 'sin información (no planifica)'),
   );
 }

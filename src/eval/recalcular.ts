@@ -18,7 +18,7 @@ const salida: string[] = [];
 for (const linea of lineas) {
   const registro = JSON.parse(linea);
   const perfil = PerfilSchema.parse(registro.perfil);
-  const itinerario = reverificar(ItinerarioSchema.parse(registro.itinerario));
+  const itinerario = reverificar(ItinerarioSchema.parse(registro.itinerario), perfil.destino);
   const metricas = metricasItinerario(itinerario, perfil, await corpusDe(perfil.destino));
   // `commit` sigue siendo el de la generación; `commitMetricas`, el del código que midió.
   salida.push(JSON.stringify({ ...registro, itinerario, metricas, commitMetricas }));

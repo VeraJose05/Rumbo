@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Itinerario } from '../flows/planificacion.js';
 import { PerfilSchema } from '../flows/perfil.js';
-import { enCorpus, metricasItinerario, reverificar } from './metricas.js';
+import { enCorpus, enCorpusLaxo, metricasItinerario, reverificar } from './metricas.js';
 
 const corpus = ['* Torre del Oro - Torre vigía junto al río.', 'El Parque de María Luisa tiene la Plaza de España.', 'Hay robles en la sierra.'];
 
@@ -19,6 +19,23 @@ describe('enCorpus', () => {
 
   it('rechaza cualquier lugar si no hay corpus (destino fuera del corpus)', () => {
     expect(enCorpus('Torre del Oro', [])).toBe(false);
+  });
+
+  it('quita el destino al final del nombre', () => {
+    expect(enCorpus('Torre del Oro de Sevilla', corpus, 'Sevilla')).toBe(true);
+  });
+});
+
+// Cota alta de la fidelidad: la regla de palabras sueltas, dentro de un mismo fragmento.
+describe('enCorpusLaxo', () => {
+  it('acepta las palabras del lugar en otro orden dentro de un fragmento', () => {
+    expect(enCorpus('Oro de la Torre', corpus)).toBe(false);
+    expect(enCorpusLaxo('Oro de la Torre', corpus)).toBe(true);
+  });
+
+  it('sigue exigiendo un mismo fragmento y alguna letra', () => {
+    expect(enCorpusLaxo('Parque de los Robles', corpus)).toBe(false);
+    expect(enCorpusLaxo('[1]', ['Abre de 1 a 5.'])).toBe(false);
   });
 });
 
@@ -52,6 +69,7 @@ describe('metricasItinerario', () => {
       actividades: 3,
       // Torre del Oro y Plaza de España están en el corpus; el parque, no.
       fidelidad: 2 / 3,
+      fidelidadLaxa: 2 / 3,
       // Solo la Torre del Oro está en el texto que cita; la Plaza de España está en el 2, no en el 1.
       coberturaCitas: 1 / 3,
       // El día 2 tiene 1 actividad en vez de 2.
@@ -70,6 +88,16 @@ describe('metricasItinerario', () => {
     expect(resultado.coberturaCitas).toBeNull();
   });
 
+  it('da la fidelidad como intervalo: nombre seguido (cota baja) y palabras sueltas (cota alta)', () => {
+    const resultado = metricasItinerario(
+      itinerario('C0', [{ dia: 1, manana: [actividad('Torre del Oro')], tarde: [actividad('Oro de la Torre')], noche: [] }]),
+      perfil,
+      corpus,
+    );
+
+    expect([resultado.fidelidad, resultado.fidelidadLaxa]).toEqual([1 / 2, 1]);
+  });
+
   it('un día que falta cuenta como ritmo no cumplido', () => {
     const resultado = metricasItinerario(
       itinerario('C0', [{ dia: 1, manana: [actividad('a'), actividad('b')], tarde: [], noche: [] }]),
@@ -85,6 +113,7 @@ describe('metricasItinerario', () => {
       planificado: false,
       actividades: 0,
       fidelidad: null,
+      fidelidadLaxa: null,
       coberturaCitas: null,
       ritmoCumplido: null,
     });
@@ -97,7 +126,7 @@ describe('reverificar', () => {
       { dia: 1, manana: [actividad('Torre del Oro', [1])], tarde: [actividad('Plaza de España', [1])], noche: [actividad('[1]', [1])] },
     ]);
 
-    const dia = reverificar(original).dias[0]!;
+    const dia = reverificar(original, 'Sevilla').dias[0]!;
 
     expect([...dia.manana, ...dia.tarde, ...dia.noche].map((a) => a.verificacion)).toEqual(['verificada', 'cita-erronea', 'sin-fuente']);
   });
@@ -105,6 +134,6 @@ describe('reverificar', () => {
   it('en C0 deja la verificación vacía', () => {
     const original = itinerario('C0', [{ dia: 1, manana: [actividad('Torre del Oro')], tarde: [], noche: [] }]);
 
-    expect(reverificar(original).dias[0]!.manana[0]!.verificacion).toBeNull();
+    expect(reverificar(original, 'Sevilla').dias[0]!.manana[0]!.verificacion).toBeNull();
   });
 });
