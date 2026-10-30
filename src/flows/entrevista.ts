@@ -6,6 +6,7 @@ import { z, type Genkit } from 'genkit';
 import { DESTINOS } from '../config/destinos.js';
 import {
   avisoDestino,
+  descartarSinRespaldo,
   esAfirmacion,
   ETIQUETAS_INTERES,
   fusionarPerfil,
@@ -145,7 +146,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
         if (output) {
           // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
           // extractor convertía un «nada más» en «quita monumentos».
-          const extraido = campoPreguntado === 'confirmacion' ? output : { ...output, interesesQuitar: [] };
+          const conRespaldo = descartarSinRespaldo(output, mensaje);
+          const extraido = campoPreguntado === 'confirmacion' ? conRespaldo : { ...conRespaldo, interesesQuitar: [] };
           estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
         }
 
@@ -162,7 +164,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
             const paso = siguientePaso(estado);
             if (paso.tipo === 'confirmar') {
               estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil)} ¿Está bien así?`;
+              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil))} ¿Está bien así?`;
               return { estado, respuesta, perfil: null, respaldo: null };
             }
           }
@@ -182,7 +184,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
       }
       if (paso.tipo === 'confirmar') {
         estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-        const respuesta = `Esto es lo que he entendido: ${resumirPerfil(paso.perfil)} ¿Es correcto, o quieres cambiar algo?`;
+        const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
+        const respuesta = `Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`;
         return { estado, respuesta, perfil: null, respaldo: null };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };

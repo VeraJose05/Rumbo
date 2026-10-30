@@ -145,6 +145,38 @@ describe('entrevistaFlow', () => {
     expect(salida.respuesta).not.toContain('con quién viajas');
   });
 
+  it('no guarda ritmo ni presupuesto que el viajero no ha dicho, aunque el modelo los extraiga', async () => {
+    // Caso real: el extractor rellenaba «normal» y «medio» por su cuenta.
+    const { flow } = crearEntorno({
+      ...sinDatos,
+      destino: 'Sevilla',
+      dias: 4,
+      compania: 'pareja',
+      intereses: ['playa', 'gastronomia', 'monumentos'],
+      ritmo: 'normal',
+      presupuesto: 'medio',
+    });
+
+    const salida = await flow({
+      estado: { perfil: {}, preguntados: ['destino'] },
+      mensaje: 'quiero ir a sevilla unos 4-5 dias, con mi pareja, nos interesa la playa las tapas y los monumentos',
+    });
+
+    expect(salida.estado.perfil).toEqual({ destino: 'Sevilla', dias: 4, compania: 'pareja', intereses: ['playa', 'gastronomia', 'monumentos'] });
+    expect(salida.respuesta).toContain('qué ritmo prefieres');
+  });
+
+  it('en la confirmación marca los datos que el viajero no ha dado', async () => {
+    const { flow } = crearEntorno(sinDatos);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 4, compania: 'pareja', intereses: ['playa'] }, preguntados: ['destino', 'opcionales'] },
+      mensaje: 'nada más',
+    });
+
+    expect(salida.respuesta).toContain('ritmo normal (por defecto), presupuesto medio (por defecto)');
+  });
+
   it('tras los opcionales pide confirmar el perfil, sin terminar todavía', async () => {
     const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' });
 
@@ -152,7 +184,7 @@ describe('entrevistaFlow', () => {
 
     expect(salida.perfil).toBeNull();
     expect(salida.respuesta).toBe(
-      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal, presupuesto medio. Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
+      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
     );
     expect(salida.estado.preguntados.at(-1)).toBe('confirmacion');
   });

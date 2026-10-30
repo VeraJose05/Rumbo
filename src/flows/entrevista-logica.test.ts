@@ -1,6 +1,14 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
-import { avisoDestino, esAfirmacion, fusionarPerfil, opcionalesPendientes, resumirPerfil, siguientePaso } from './entrevista-logica.js';
+import {
+  avisoDestino,
+  descartarSinRespaldo,
+  esAfirmacion,
+  fusionarPerfil,
+  opcionalesPendientes,
+  resumirPerfil,
+  siguientePaso,
+} from './entrevista-logica.js';
 import { PerfilSchema } from './perfil.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
@@ -167,5 +175,42 @@ describe('opcionalesPendientes', () => {
 
   it('no cuenta como sabido un valor que no es válido', () => {
     expect(opcionalesPendientes({ ritmo: 'rapidísimo' })).toEqual(['compania', 'ritmo', 'presupuesto']);
+  });
+});
+
+// El extractor (3B) rellenaba ritmo «normal» y presupuesto «medio» aunque el viajero no dijera nada.
+describe('descartarSinRespaldo', () => {
+  const extraido = { ...sinDatos, destino: 'Sevilla', dias: 4, compania: 'pareja', ritmo: 'normal', presupuesto: 'medio' };
+
+  it('quita el ritmo y el presupuesto si el mensaje no habla de ellos', () => {
+    const mensaje = 'quiero ir a sevilla unos 4-5 dias, con mi pareja, nos interesa la playa las tapas y los monumentos';
+    expect(descartarSinRespaldo(extraido, mensaje)).toEqual({ ...extraido, ritmo: null, presupuesto: null });
+  });
+
+  it('los conserva si el mensaje habla de ellos, aunque sea de forma indirecta', () => {
+    expect(descartarSinRespaldo({ ...extraido, ritmo: 'tranquilo', presupuesto: 'bajo' }, 'tranquilos y sin gastar mucho')).toMatchObject({
+      ritmo: 'tranquilo',
+      presupuesto: 'bajo',
+    });
+    expect(descartarSinRespaldo(extraido, 'Vamos en pareja, ritmo normal, presupuesto medio')).toMatchObject({ ritmo: 'normal', presupuesto: 'medio' });
+    expect(descartarSinRespaldo({ ...extraido, presupuesto: 'alto' }, 'queremos darnos un lujo')).toMatchObject({ presupuesto: 'alto' });
+  });
+
+  it('acepta respuestas cortas a la pregunta («intenso», «medio»)', () => {
+    expect(descartarSinRespaldo({ ...extraido, ritmo: 'intenso', presupuesto: null }, 'intenso')).toMatchObject({ ritmo: 'intenso' });
+    expect(descartarSinRespaldo({ ...extraido, ritmo: null }, 'medio')).toMatchObject({ presupuesto: 'medio' });
+  });
+
+  it('no toca el resto de datos', () => {
+    expect(descartarSinRespaldo(extraido, 'playa')).toMatchObject({ destino: 'Sevilla', dias: 4, compania: 'pareja' });
+  });
+});
+
+describe('resumirPerfil con valores por defecto', () => {
+  it('marca los datos que el viajero no ha dado', () => {
+    const perfil = PerfilSchema.parse({ destino: 'Sevilla', dias: 4, intereses: ['playa'], compania: 'pareja' });
+    expect(resumirPerfil(perfil, ['ritmo', 'presupuesto'])).toBe(
+      'Sevilla, 4 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: playa.',
+    );
   });
 });

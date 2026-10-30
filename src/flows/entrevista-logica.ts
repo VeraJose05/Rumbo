@@ -122,11 +122,30 @@ export function opcionalesPendientes(perfil: PerfilParcial): Opcional[] {
   );
 }
 
-export function resumirPerfil(perfil: Perfil): string {
+/** El perfil en una frase. Los datos de `porDefecto` se marcan: el viajero no los ha dado. */
+export function resumirPerfil(perfil: Perfil, porDefecto: Opcional[] = []): string {
   const dias = perfil.dias === 1 ? '1 día' : `${perfil.dias} días`;
   const intereses = perfil.intereses.map((i) => ETIQUETAS_INTERES[i]).join(', ');
+  const marca = (campo: Opcional) => (porDefecto.includes(campo) ? ' (por defecto)' : '');
   return (
-    `${perfil.destino}, ${dias}, ${ETIQUETAS_COMPANIA[perfil.compania]}, ritmo ${perfil.ritmo}, ` +
-    `presupuesto ${perfil.presupuesto}. Intereses: ${intereses}.`
+    `${perfil.destino}, ${dias}, ${ETIQUETAS_COMPANIA[perfil.compania]}${marca('compania')}, ` +
+    `ritmo ${perfil.ritmo}${marca('ritmo')}, presupuesto ${perfil.presupuesto}${marca('presupuesto')}. Intereses: ${intereses}.`
   );
+}
+
+// Palabras que respaldan cada dato en el mensaje (sin tildes). El extractor rellenaba ritmo
+// «normal» y presupuesto «medio» sin que el viajero dijera nada, aunque el prompt lo prohíbe.
+const RESPALDO = {
+  ritmo: /\b(ritmo|tranquil\w*|relaj\w*|calma\w*|pausad\w*|despacio|sin prisas?|intens\w*|a tope|aprovechar|normal)\b/,
+  presupuesto: /\b(presupuesto|barat\w*|economic\w*|gast\w*|dinero|euros?|car[oa]s?|lujo\w*|ahorr\w*|low cost|bajo|medio|alto)\b/,
+};
+
+/** Quita el ritmo y el presupuesto extraídos si el mensaje no habla de ellos. */
+export function descartarSinRespaldo<T extends { ritmo: unknown; presupuesto: unknown }>(extraido: T, mensaje: string): T {
+  const texto = normalizar(mensaje);
+  return {
+    ...extraido,
+    ritmo: RESPALDO.ritmo.test(texto) ? extraido.ritmo : null,
+    presupuesto: RESPALDO.presupuesto.test(texto) ? extraido.presupuesto : null,
+  };
 }
