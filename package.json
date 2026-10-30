@@ -21,19 +21,23 @@
     "comparar": "npm run build && node --env-file-if-exists=.env dist/experimentos/comparar.js",
     "entrevista": "npm run build && node --env-file-if-exists=.env dist/experimentos/entrevista.js",
     "planificar": "npm run build && node --env-file-if-exists=.env dist/experimentos/planificar.js",
+    "api": "npm run build && node --env-file-if-exists=.env dist/servidor.js",
     "evaluar": "npm run build && node --env-file-if-exists=.env dist/eval/evaluar.js",
     "recalcular": "npm run build && node --env-file-if-exists=.env dist/eval/recalcular.js",
     "juzgar": "npm run build && node --env-file-if-exists=.env dist/eval/juzgar.js",
     "tabla": "npm run build && node --env-file-if-exists=.env dist/eval/mostrar-tabla.js"
   },
   "devDependencies": {
+    "@types/express": "4.17.21",
     "@types/node": "24.19.2",
     "genkit-cli": "1.44.1",
     "typescript": "7.0.2",
     "vitest": "5.0.5"
   },
   "dependencies": {
+    "@genkit-ai/express": "1.42.0",
     "chromadb": "3.5.0",
+    "express": "4.22.3",
     "genkit": "1.42.0",
     "genkitx-ollama": "1.42.0"
   }
