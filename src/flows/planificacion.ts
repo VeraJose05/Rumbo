@@ -1,5 +1,6 @@
 // RF-05, RF-06, RF-07, RF-09: flow de planificación. Del perfil al itinerario día a día,
-// en el modo indicado: C0 sin recuperación, C1 con RAG básico.
+// en el modo indicado: C0 sin recuperación, C1 con RAG básico y C2 con RAG avanzado
+// (búsqueda híbrida y reranking). C1 y C2 solo se diferencian en el recuperador.
 import { z, type Document, type Genkit, type RetrieverArgument } from 'genkit';
 import { consultasDelPerfil, fusionarResultados } from './consultas.js';
 import {
@@ -16,7 +17,7 @@ import { FuenteSchema, type OpcionesRecuperacionSchema } from './pregunta.js';
 import { construirPromptDia } from './prompt-dia.js';
 import { citasValidas, clasificarActividad, fuentesCitadas } from './rag.js';
 
-export const MODOS = ['C0', 'C1'] as const;
+export const MODOS = ['C0', 'C1', 'C2'] as const;
 
 /** Fragmentos que se recuperan en total, repartidos entre las consultas del perfil. */
 export const TOTAL_FRAGMENTOS = 12;
@@ -50,6 +51,8 @@ const RecuperadoSchema = z.object({
   seccion: z.string(),
   texto: z.string(),
   distancia: z.number().optional(),
+  /** Nota del reranker (solo C2). */
+  puntuacionReranker: z.number().optional(),
 });
 
 export const ItinerarioSchema = z.object({
@@ -64,13 +67,17 @@ export const ItinerarioSchema = z.object({
 
 export type Itinerario = z.infer<typeof ItinerarioSchema>;
 
-export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgument<typeof OpcionesRecuperacionSchema>) {
+type Recuperador = RetrieverArgument<typeof OpcionesRecuperacionSchema>;
+
+export function definirPlanificacionFlow(ai: Genkit, recuperador: Recuperador, recuperadorAvanzado?: Recuperador) {
   return ai.defineFlow(
     { name: 'planificacionFlow', inputSchema: PlanificacionEntradaSchema, outputSchema: ItinerarioSchema },
     async ({ perfil, modo }) => {
-      // 1. Recuperación (solo C1): una consulta por interés, fusionadas por turnos.
+      // 1. Recuperación (C1 y C2): una consulta por interés, fusionadas por turnos.
       let documentos: Document[] | null = null;
-      if (modo === 'C1') {
+      if (modo !== 'C0') {
+        const elegido = modo === 'C2' ? recuperadorAvanzado : recuperador;
+        if (!elegido) throw new Error('El modo C2 necesita el recuperador avanzado');
         const consultas = consultasDelPerfil(perfil);
         // Se pide el doble de la parte de cada consulta: comparten fragmentos y, al quitar repetidos,
         // con la parte justa quedaban 8 en vez de 12. La fusión recorta después a TOTAL_FRAGMENTOS.
@@ -78,7 +85,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
         const listas = [];
         for (const consulta of consultas) {
           const encontrados = await ai.retrieve({
-            retriever: recuperador,
+            retriever: elegido,
             query: consulta.texto,
             options: { k, destino: perfil.destino },
           });
@@ -136,6 +143,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
         seccion: String(d.metadata?.seccion ?? ''),
         texto: d.text,
         distancia: typeof d.metadata?.distancia === 'number' ? d.metadata.distancia : undefined,
+        puntuacionReranker: typeof d.metadata?.puntuacionReranker === 'number' ? d.metadata.puntuacionReranker : undefined,
       }));
       return {
         modo,
