@@ -58,6 +58,33 @@ describe('verificarRecomendacion', () => {
   it('rechaza una recomendación sin textos citados', () => {
     expect(verificarRecomendacion('Torre del Oro', [])).toBe(false);
   });
+
+  it('exige el nombre seguido en un mismo texto, no sus palabras repartidas', () => {
+    // Caso real de C1: una descripción inventada con palabras copiadas del fragmento.
+    const fragmento = 'En la zona de Marina hay discotecas y un bar de música heavy.';
+    expect(verificarRecomendacion('Zona de discotecas y música heavy en Marina', [fragmento])).toBe(false);
+    expect(verificarRecomendacion('Torre del Oro', ['La Torre está junto al río.', 'Oro del siglo XIII.'])).toBe(false);
+  });
+
+  it('rechaza un lugar sin letras (el modelo puso el número de cita como lugar)', () => {
+    expect(verificarRecomendacion('[1]', ['Abre de 1 a 5.'])).toBe(false);
+  });
+
+  it('quita el nombre del destino al final, que la guía no escribe', () => {
+    const fragmentos = ['* Museo de Bellas Artes - Pintura sevillana.', 'En la Plaza Nueva empieza la subida.'];
+    expect(verificarRecomendacion('Museo de Bellas Artes de Sevilla', fragmentos, 'Sevilla')).toBe(true);
+    expect(verificarRecomendacion('Plaza Nueva, Granada', fragmentos, 'Granada')).toBe(true);
+    // Sin destino no se quita nada.
+    expect(verificarRecomendacion('Museo de Bellas Artes de Sevilla', fragmentos)).toBe(false);
+  });
+
+  it('rechaza como lugar el propio destino', () => {
+    expect(verificarRecomendacion('Valencia', ['Valencia es la tercera ciudad de España.'], 'Valencia')).toBe(false);
+  });
+
+  it('ignora lo que va entre paréntesis, como la dirección', () => {
+    expect(verificarRecomendacion('Casa Lolea (Carrer de Sant Pere 49)', ['* Casa Lolea - Sangría casera.'])).toBe(true);
+  });
 });
 
 describe('clasificarActividad', () => {

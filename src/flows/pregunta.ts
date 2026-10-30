@@ -74,7 +74,7 @@ export function definirPreguntaFlow(ai: Genkit, recuperador: RetrieverArgument<t
       const recomendaciones = output.recomendaciones.map((r) => {
         const citas = citasValidas(r.citas, documentos.length);
         const textosCitados = citas.map((c) => documentos[c - 1]!.text);
-        return { ...r, citas, verificada: verificarRecomendacion(r.lugar, textosCitados) };
+        return { ...r, citas, verificada: verificarRecomendacion(r.lugar, textosCitados, destino) };
       });
 
       const citadas = citasValidas(recomendaciones.flatMap((r) => r.citas), documentos.length);

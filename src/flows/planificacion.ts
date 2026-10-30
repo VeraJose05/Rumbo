@@ -43,12 +43,23 @@ export const PlanificacionEntradaSchema = z.object({
   modo: z.enum(MODOS),
 });
 
+/** Fragmento entregado al modelo, con el número con el que se cita en el prompt. */
+const RecuperadoSchema = z.object({
+  cita: z.number().int(),
+  id: z.string(),
+  seccion: z.string(),
+  texto: z.string(),
+  distancia: z.number().optional(),
+});
+
 export const ItinerarioSchema = z.object({
   modo: z.enum(MODOS),
   /** false si no hay fragmentos del destino: no se planifica en vez de inventar (RF-07). */
   hayInformacion: z.boolean(),
   dias: z.array(DiaFinalSchema),
   fuentes: z.array(FuenteSchema),
+  /** Todo lo recuperado, citado o no, para registrar cada ejecución (RNF-04); vacío en C0. */
+  recuperados: z.array(RecuperadoSchema),
 });
 
 export type Itinerario = z.infer<typeof ItinerarioSchema>;
@@ -61,7 +72,9 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
       let documentos: Document[] | null = null;
       if (modo === 'C1') {
         const consultas = consultasDelPerfil(perfil);
-        const k = Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
+        // Se pide el doble de la parte de cada consulta: comparten fragmentos y, al quitar repetidos,
+        // con la parte justa quedaban 8 en vez de 12. La fusión recorta después a TOTAL_FRAGMENTOS.
+        const k = 2 * Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
         const listas = [];
         for (const consulta of consultas) {
           const encontrados = await ai.retrieve({
@@ -72,7 +85,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
           listas.push(encontrados.map((d) => Object.assign(d, { id: String(d.metadata?.id ?? '') })));
         }
         documentos = fusionarResultados(listas, TOTAL_FRAGMENTOS);
-        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [] };
+        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [], recuperados: [] };
       }
       const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
 
@@ -110,14 +123,27 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: RetrieverArgum
         franja.map((a) => {
           if (!documentos) return { ...a, citas: [], verificacion: null };
           const citas = citasValidas(a.citas, documentos.length);
-          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos) };
+          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos, perfil.destino) };
         });
       const diasFinales = dias.map((d) => ({ ...d, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) }));
 
       const citadas = documentos
         ? citasValidas(diasFinales.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche].flatMap((a) => a.citas)), documentos.length)
         : [];
-      return { modo, hayInformacion: true, dias: diasFinales, fuentes: documentos ? fuentesCitadas(citadas, documentos) : [] };
+      const recuperados = (documentos ?? []).map((d, i) => ({
+        cita: i + 1,
+        id: String(d.metadata?.id ?? ''),
+        seccion: String(d.metadata?.seccion ?? ''),
+        texto: d.text,
+        distancia: typeof d.metadata?.distancia === 'number' ? d.metadata.distancia : undefined,
+      }));
+      return {
+        modo,
+        hayInformacion: true,
+        dias: diasFinales,
+        fuentes: documentos ? fuentesCitadas(citadas, documentos) : [],
+        recuperados,
+      };
     },
   );
 }

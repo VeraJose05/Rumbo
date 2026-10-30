@@ -43,7 +43,8 @@ export function esquemaDiaModelo({ conCitas, actividades }: { conCitas: boolean;
 
 /**
  * Agrupa por franja las actividades generadas, quitando las repetidas en el día o ya usadas antes,
- * hasta un máximo opcional.
+ * hasta un máximo opcional. También quita los lugares sin letras: el modelo llegó a poner el número
+ * de cita («[1]») como lugar. Si por eso faltan actividades, el día se reintenta.
  */
 export function repartirEnFranjas(
   dia: number,
@@ -54,7 +55,7 @@ export function repartirEnFranjas(
   const vistos = new Set(usados.map(normalizar));
   const resultado: Dia = { dia, manana: [], tarde: [], noche: [] };
   for (const { franja, lugar, descripcion, citas = [] } of actividades) {
-    if (vistos.has(normalizar(lugar)) || totalActividades(resultado) >= maximo) continue;
+    if (!/\p{L}/u.test(lugar) || vistos.has(normalizar(lugar)) || totalActividades(resultado) >= maximo) continue;
     vistos.add(normalizar(lugar));
     resultado[franja].push({ lugar, descripcion, citas });
   }

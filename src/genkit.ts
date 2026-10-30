@@ -16,5 +16,7 @@ export function crearAi(config: ConfigModelos) {
     model: `local/${config.llm}`,
   });
   definirModeloOllama(ai, config.llm, config.ollamaUrl, config.contexto);
+  // El juez de la evaluación (F5); si es el mismo modelo que el generador, ya está registrado.
+  if (config.juez !== config.llm) definirModeloOllama(ai, config.juez, config.ollamaUrl, config.contexto);
   return ai;
 }
