@@ -19,3 +19,6 @@ data/
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# Resultados de la evaluación (para la memoria, no van a git)
+resultados/
