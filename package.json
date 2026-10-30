@@ -22,6 +22,7 @@
     "entrevista": "npm run build && node --env-file-if-exists=.env dist/experimentos/entrevista.js",
     "planificar": "npm run build && node --env-file-if-exists=.env dist/experimentos/planificar.js",
     "api": "npm run build && node --env-file-if-exists=.env dist/servidor.js",
+    "demo": "demo/.venv/bin/python demo/app.py",
     "evaluar": "npm run build && node --env-file-if-exists=.env dist/eval/evaluar.js",
     "recalcular": "npm run build && node --env-file-if-exists=.env dist/eval/recalcular.js",
     "juzgar": "npm run build && node --env-file-if-exists=.env dist/eval/juzgar.js",

@@ -22,3 +22,8 @@ data/
 
 # Resultados de la evaluación (para la memoria, no van a git)
 resultados/
+
+# Entorno de Python de la demo
+demo/.venv/
+__pycache__/
+.pytest_cache/
