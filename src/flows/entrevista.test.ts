@@ -30,25 +30,27 @@ function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pr
 }
 
 describe('entrevistaFlow', () => {
-  it('sin estado ni mensaje, saluda con el modelo y añade los destinos disponibles', async () => {
+  it('sin estado ni mensaje, saluda con un texto fijo, sin llamar al modelo', async () => {
+    // Caso real: el modelo saludaba con «¡Bienvenido Rumbo!», como si Rumbo fuera el viajero.
     const { flow, peticiones } = crearEntorno();
 
     const salida = await flow({ mensaje: '' });
 
-    const respuesta = '¡Genial! ¿Pregunta del modelo? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.';
+    const respuesta =
+      '¡Hola! Bienvenido a Rumbo, te ayudo a planificar tu viaje. ¿A dónde te gustaría ir? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.';
     expect(salida).toEqual({
       estado: { perfil: {}, preguntados: ['destino'], historial: [{ rol: 'rumbo', texto: respuesta }] },
       respuesta,
       perfil: null,
       respaldo: null,
     });
-    expect(peticiones).toHaveLength(1);
+    expect(peticiones).toHaveLength(0);
   });
 
   it('si la redacción del modelo menciona un destino nuevo, usa el texto de reserva', async () => {
-    const { flow } = crearEntorno(sinDatos, '¡Hola! ¿Te apuntas a un viaje al Caribe?');
+    const { flow } = crearEntorno(sinDatos, '¿Te apuntas a un viaje al Caribe?');
 
-    const salida = await flow({ mensaje: '' });
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'no sé' });
 
     expect(salida.respuesta).toBe('¿A dónde quieres ir? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.');
     expect(salida.respaldo).toBe('nombre no permitido: Caribe');

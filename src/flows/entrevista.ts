@@ -264,6 +264,12 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
 
   // 5. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
   const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
+
+  // El saludo es fijo: el modelo saludaba con «¡Bienvenido Rumbo!», como si Rumbo fuera el viajero.
+  if (!estadoPrevio && !mensaje.trim()) {
+    const respuesta = `¡Hola! Bienvenido a Rumbo, te ayudo a planificar tu viaje. ¿A dónde te gustaría ir? ${opciones}`;
+    return { estado, respuesta, perfil: null, respaldo: null };
+  }
   const { text } = await ai.generate({
     system: SISTEMA_PREGUNTA,
     // La conversación anterior va como mensajes de chat; el turno actual, en el prompt.
