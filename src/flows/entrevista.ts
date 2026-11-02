@@ -163,6 +163,8 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
 
   // La última pregunta hecha: ayuda a entender respuestas cortas como «3» o «sí».
   const campoPreguntado = estado.preguntados.at(-1) ?? 'nada';
+  const preguntaDelViajero = esPregunta(mensaje);
+  const anterior = estado.perfil;
 
   // Un «sí» a la confirmación se reconoce en código: el extractor se inventaba datos con él.
   if (campoPreguntado === 'confirmacion' && esAfirmacion(mensaje)) {
@@ -181,7 +183,6 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
       config: { temperature: 0 },
     });
     // 2. Fusionar con lo que ya se sabía (solo valores válidos).
-    const anterior = estado.perfil;
     if (output) {
       // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
       // extractor convertía un «nada más» en «quita monumentos».
@@ -192,15 +193,16 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
     }
 
     // Respuesta a la confirmación que no es un simple «sí»: con cambios, se vuelve a confirmar;
-    // sin cambios, se pregunta qué cambiar. Solo el código da el perfil por confirmado: cuando lo
-    // decidía el modelo, «añade gastronomía» acababa confirmado sin añadir nada.
+    // sin cambios, se pregunta qué cambiar. Una pregunta sin cambios sigue adelante: se contesta y se
+    // vuelve a confirmar. Solo el código da el perfil por confirmado: cuando lo decidía el modelo,
+    // «añade gastronomía» acababa confirmado sin añadir nada.
     if (campoPreguntado === 'confirmacion') {
       const cambios = JSON.stringify(anterior) !== JSON.stringify(estado.perfil);
-      if (!cambios) {
+      if (!cambios && !preguntaDelViajero) {
         estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
         const respuesta = 'Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».';
         return { estado, respuesta, perfil: null, respaldo: null };
-      } else {
+      } else if (cambios) {
         const paso = siguientePaso(estado);
         if (paso.tipo === 'confirmar') {
           estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
@@ -217,12 +219,20 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
     if (aviso) return { estado, respuesta: aviso, perfil: null, respaldo: null };
   }
 
+  // Una pregunta sin datos nuevos no contesta a lo que se le había preguntado: se deshace esa
+  // pregunta para volver a hacerla. Si no, preguntar algo cuando tocaban los opcionales los daba
+  // por contestados y saltaba a la confirmación.
+  const sinCambios = JSON.stringify(anterior) === JSON.stringify(estado.perfil);
+  if (preguntaDelViajero && sinCambios && campoPreguntado !== 'confirmacion') {
+    estado = { ...estado, preguntados: estado.preguntados.slice(0, -1) };
+  }
+
   // 3. Si el viajero pregunta algo del destino, lo contesta la guía, con fuente, y no el modelo de la
   // entrevista: el modelo pequeño no seguía la orden de contestar y luego preguntar, y sin la guía
   // se lo habría inventado.
   const destino = typeof estado.perfil.destino === 'string' ? estado.perfil.destino : null;
   let contestado: string | null = null;
-  if (responder && destino && esPregunta(mensaje)) {
+  if (responder && destino && preguntaDelViajero) {
     const guia = await responder(mensaje, destino);
     if (guia.hayInformacion) {
       const enlace = guia.fuentes[0] ? ` ([Wikivoyage](${guia.fuentes[0].url}))` : '';
@@ -242,8 +252,9 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
     const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`);
     return { estado, respuesta, perfil: null, respaldo: null };
   }
-  // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las opciones.
-  const repetida = campoPreguntado === paso.campo;
+  // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las
+  // opciones. Si lo que hizo fue preguntar algo, no: las opciones detrás de la respuesta sobran.
+  const repetida = campoPreguntado === paso.campo && !preguntaDelViajero;
   estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 
   // 5. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.

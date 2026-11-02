@@ -102,7 +102,7 @@ describe('entrevistaFlow', () => {
 
     const salida = await flow({
       estado: { perfil: { destino: 'Granada', dias: 3 }, preguntados: ['destino', 'dias', 'intereses'] },
-      mensaje: 'no sé, ¿qué se puede hacer allí?',
+      mensaje: 'no sé, la verdad',
     });
 
     expect(salida.respuesta).toBe(
@@ -368,6 +368,43 @@ describe('entrevistaFlow con preguntas del viajero', () => {
     const salida = await flow({ estado: enGranada, mensaje: '¿hay playa?' });
 
     expect(salida.respuesta).toMatch(/^¿Cuántos días te planteas\?/);
+  });
+
+  it('una pregunta sin datos nuevos no da por contestados los opcionales: los vuelve a preguntar', async () => {
+    // Caso real: «qué se puede comer allí?» respondiendo a los opcionales saltaba a la confirmación.
+    const { responder } = guia();
+    const { flow } = crearEntorno(sinDatos, '¿Quieres contarme algo más?', responder);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['museos'] }, preguntados: ['destino', 'dias', 'intereses', 'opcionales'] },
+      mensaje: '¿qué se puede comer allí?',
+    });
+
+    expect(salida.estado.preguntados.at(-1)).toBe('opcionales');
+    expect(salida.respuesta).toMatch(/^Con dos o tres días/);
+    expect(salida.respuesta).toContain('qué ritmo prefieres');
+  });
+
+  it('en la confirmación, una pregunta se contesta y se vuelve a pedir confirmación', async () => {
+    const { responder } = guia();
+    const { flow } = crearEntorno(sinDatos, undefined, responder);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['museos'] }, preguntados: [...todoPreguntado, 'confirmacion'] },
+      mensaje: '¿hay playa?',
+    });
+
+    expect(salida.respuesta).toMatch(/^Con dos o tres días.*Esto es lo que he entendido: Granada, 3 días/);
+    expect(salida.perfil).toBeNull();
+  });
+
+  it('tras una pregunta del viajero, vuelve a preguntar lo pendiente sin pegar las opciones', async () => {
+    const { responder } = guia();
+    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+
+    const salida = await flow({ estado: enGranada, mensaje: '¿cuántos días hacen falta?' });
+
+    expect(salida.respuesta).not.toContain('Puedo planificar');
   });
 
   it('no consulta la guía si el mensaje no es una pregunta', async () => {
