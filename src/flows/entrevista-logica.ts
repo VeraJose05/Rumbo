@@ -10,6 +10,13 @@ export interface EstadoEntrevista {
   perfil: PerfilParcial;
   /** Preguntas ya hechas, para no repetirlas y para entender respuestas cortas como «3» o «sí». */
   preguntados: string[];
+  /** La conversación hasta ahora, para que el modelo que redacta sepa de qué se ha hablado. */
+  historial?: MensajeConversacion[];
+}
+
+export interface MensajeConversacion {
+  rol: 'viajero' | 'rumbo';
+  texto: string;
 }
 
 export type Paso =
@@ -77,6 +84,18 @@ const AFIRMATIVAS = new Set([
 export function esAfirmacion(mensaje: string): boolean {
   const palabras = normalizar(mensaje).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
   return palabras.length > 0 && palabras.every((p) => AFIRMATIVAS.has(p));
+}
+
+// Palabras con las que empieza una pregunta escrita sin signos. Solo con tilde: sin ella, «como»,
+// «que» o «cuando» son también conjunciones («como 3 días», «cuando haga bueno»). «cuantos» y
+// «cuantas» sí se admiten sin tilde porque al principio de frase casi siempre preguntan.
+const INTERROGATIVAS = new Set(['qué', 'cuánto', 'cuánta', 'cuántos', 'cuántas', 'cuantos', 'cuantas', 'cómo', 'dónde', 'cuál', 'cuáles', 'cuándo']);
+
+/** Si el mensaje del viajero es una pregunta: lleva «?» o empieza por una palabra interrogativa. */
+export function esPregunta(mensaje: string): boolean {
+  if (mensaje.includes('?')) return true;
+  const [primera] = mensaje.trim().toLowerCase().split(/[^\p{L}]+/u);
+  return INTERROGATIVAS.has(primera ?? '');
 }
 
 /**

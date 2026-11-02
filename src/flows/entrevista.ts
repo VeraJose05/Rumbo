@@ -8,6 +8,7 @@ import {
   avisoDestino,
   descartarSinRespaldo,
   esAfirmacion,
+  esPregunta,
   ETIQUETAS_INTERES,
   fusionarPerfil,
   listaDestinos,
@@ -16,13 +17,16 @@ import {
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
+  type MensajeConversacion,
 } from './entrevista-logica.js';
-import { quitarSaludo, validarMensaje } from './guardarrail.js';
+import { quitarPreguntas, quitarSaludo, validarMensaje } from './guardarrail.js';
 import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
 
 const EstadoSchema = z.object({
   perfil: z.record(z.string(), z.unknown()),
   preguntados: z.array(z.string()),
+  // Opcional para seguir aceptando estados de antes de guardar la conversación.
+  historial: z.array(z.object({ rol: z.enum(['viajero', 'rumbo']), texto: z.string() })).optional(),
 });
 
 export const EntrevistaEntradaSchema = z.object({
@@ -109,109 +113,208 @@ function pregunta(campo: Campo, perfil: Record<string, unknown>): { objetivo: st
   }
 }
 
-const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes. Hablas en español, con un tono cercano y natural.
-Escribe tu siguiente mensaje al viajero: una reacción breve a lo que acaba de decir (o un saludo si es el inicio) y la pregunta que se te indica.
-- Tutea al viajero y no le llames por ningún nombre.
+// El modelo ya no solo pone la frase bonita a una pregunta fija: ve la conversación, contesta lo que
+// le pregunten y luego retoma lo que falta. Qué falta lo sigue decidiendo el código.
+const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes por España. Hablas en español, con un tono cercano y natural, como en una charla.
+Tienes delante la conversación con el viajero. Escribe tu siguiente mensaje:
+- Si el viajero te ha preguntado algo o tiene dudas, contéstale primero, en una frase y en términos generales.
+- Después, averigua lo que se te indica, con tus palabras y enlazando con lo que ha dicho.
 - Saluda solo si es el inicio de la conversación.
-- Como mucho dos frases cortas, y la segunda es una pregunta.
-- No menciones ningún lugar, destino ni recomendación que el viajero no haya dicho.
-- No enumeres opciones: se añaden después.`;
+- Tutea al viajero y no le llames por ningún nombre.
+- Como mucho tres frases cortas, y termina con una pregunta.
+- Puedes nombrar algún lugar muy conocido del destino para animar al viajero, pero no recomiendes restaurantes ni te inventes nada.
+- No enumeres opciones.`;
 
-export function definirEntrevistaFlow(ai: Genkit) {
+/**
+ * Contesta una pregunta del viajero con la guía del destino (RAG). En la aplicación es el
+ * preguntaFlow; en los tests, uno simulado. Sin ella, la entrevista no contesta preguntas.
+ */
+export type ResponderPregunta = (
+  pregunta: string,
+  destino: string,
+) => Promise<{ hayInformacion: boolean; respuesta: string; fuentes: { url: string }[] }>;
+
+/** Lo que la entrevista usa del resto de la aplicación; en los tests, simulado. Sin ello, funciona igual pero sin guía. */
+export interface DependenciasEntrevista {
+  responder?: ResponderPregunta;
+  /** Todos los fragmentos de la guía de un destino: los lugares que nombran se pueden mencionar. */
+  leerGuia?: (destino: string) => Promise<string[]>;
+}
+
+type Entrada = z.infer<typeof EntrevistaEntradaSchema>;
+type Salida = z.infer<typeof EntrevistaSalidaSchema>;
+
+export function definirEntrevistaFlow(ai: Genkit, dependencias: DependenciasEntrevista = {}) {
   return ai.defineFlow(
     { name: 'entrevistaFlow', inputSchema: EntrevistaEntradaSchema, outputSchema: EntrevistaSalidaSchema },
-    async ({ estado: estadoPrevio, mensaje }) => {
-      let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
-
-      // La última pregunta hecha: ayuda a entender respuestas cortas como «3» o «sí».
-      const campoPreguntado = estado.preguntados.at(-1) ?? 'nada';
-
-      // Un «sí» a la confirmación se reconoce en código: el extractor se inventaba datos con él.
-      if (campoPreguntado === 'confirmacion' && esAfirmacion(mensaje)) {
-        estado = { ...estado, preguntados: [...estado.preguntados, 'confirmado'] };
-      }
-      // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado y lo que ya se sabe.
-      else if (mensaje.trim()) {
-        const { output } = await ai.generate({
-          system: SISTEMA_EXTRACCION,
-          prompt: [
-            `Se le acaba de preguntar por: ${campoPreguntado}`,
-            `Datos que ya se conocen: ${JSON.stringify(estado.perfil)}`,
-            `Mensaje del viajero: ${mensaje}`,
-          ].join('\n'),
-          output: { schema: ExtraccionSchema },
-          config: { temperature: 0 },
-        });
-        // 2. Fusionar con lo que ya se sabía (solo valores válidos).
-        const anterior = estado.perfil;
-        if (output) {
-          // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
-          // extractor convertía un «nada más» en «quita monumentos».
-          // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
-          const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje) };
-          const extraido = campoPreguntado === 'confirmacion' ? conRespaldo : { ...conRespaldo, interesesQuitar: [] };
-          estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
-        }
-
-        // Respuesta a la confirmación que no es un simple «sí»: con cambios, se vuelve a confirmar;
-        // sin cambios, se pregunta qué cambiar. Solo el código da el perfil por confirmado: cuando lo
-        // decidía el modelo, «añade gastronomía» acababa confirmado sin añadir nada.
-        if (campoPreguntado === 'confirmacion') {
-          const cambios = JSON.stringify(anterior) !== JSON.stringify(estado.perfil);
-          if (!cambios) {
-            estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-            const respuesta = 'Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».';
-            return { estado, respuesta, perfil: null, respaldo: null };
-          } else {
-            const paso = siguientePaso(estado);
-            if (paso.tipo === 'confirmar') {
-              estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil))} ¿Está bien así?`;
-              return { estado, respuesta, perfil: null, respaldo: null };
-            }
-          }
-        }
-
-        // Un destino sin guía no se guarda: se dice y se vuelve a pedir, sin seguir con la entrevista.
-        // Solo si se preguntaba por el destino: «la Alhambra y comer bien», respondiendo a los
-        // intereses, no es un cambio de destino.
-        const aviso = output?.destino && campoPreguntado === 'destino' ? avisoDestino(output.destino) : null;
-        if (aviso) return { estado, respuesta: aviso, perfil: null, respaldo: null };
-      }
-
-      // 3. Decidir el siguiente paso.
-      const paso = siguientePaso(estado);
-      if (paso.tipo === 'terminar') {
-        return { estado, respuesta: '¡Perfecto! Preparo tu itinerario.', perfil: paso.perfil, respaldo: null };
-      }
-      if (paso.tipo === 'confirmar') {
-        estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-        const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
-        const respuesta = `Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`;
-        return { estado, respuesta, perfil: null, respaldo: null };
-      }
-      estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
-
-      // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
-      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
-      const { text } = await ai.generate({
-        system: SISTEMA_PREGUNTA,
-        prompt: [
-          mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
-          `Pregúntale ${objetivo}.`,
-        ].join('\n'),
-      });
-      const permitidos = [mensaje, reserva, 'Rumbo', ...DESTINOS.map((d) => d.nombre)];
-      const validacion = validarMensaje(text, permitidos);
-      // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
-      const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
-      const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
-      return {
-        estado,
-        respuesta: `${redactada} ${opciones}`,
-        perfil: null,
-        respaldo: validacion.valido ? null : validacion.motivo,
-      };
+    async (entrada) => {
+      // El historial se apunta aquí, en un solo sitio, sea cual sea el camino que tome el turno.
+      const salida = await turno(ai, entrada, dependencias);
+      const historial: MensajeConversacion[] = [
+        ...(entrada.estado?.historial ?? []),
+        ...(entrada.mensaje.trim() ? [{ rol: 'viajero' as const, texto: entrada.mensaje }] : []),
+        { rol: 'rumbo', texto: salida.respuesta },
+      ];
+      return { ...salida, estado: { ...salida.estado, historial } };
     },
   );
+}
+
+// Roles de Genkit: el viajero es el usuario y Rumbo es el modelo.
+const ROL_GENKIT = { viajero: 'user', rumbo: 'model' } as const;
+
+/** Un turno de la entrevista, sin ocuparse del historial. */
+async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { responder, leerGuia }: DependenciasEntrevista): Promise<Salida> {
+  const historialPrevio = estadoPrevio?.historial ?? [];
+  let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
+
+  // La última pregunta hecha: ayuda a entender respuestas cortas como «3» o «sí».
+  const campoPreguntado = estado.preguntados.at(-1) ?? 'nada';
+  const preguntaDelViajero = esPregunta(mensaje);
+  const anterior = estado.perfil;
+
+  // Un «sí» a la confirmación se reconoce en código: el extractor se inventaba datos con él.
+  if (campoPreguntado === 'confirmacion' && esAfirmacion(mensaje)) {
+    estado = { ...estado, preguntados: [...estado.preguntados, 'confirmado'] };
+  }
+  // 1. Extraer datos del mensaje, sabiendo qué se le había preguntado y lo que ya se sabe.
+  else if (mensaje.trim()) {
+    const { output } = await ai.generate({
+      system: SISTEMA_EXTRACCION,
+      prompt: [
+        `Se le acaba de preguntar por: ${campoPreguntado}`,
+        `Datos que ya se conocen: ${JSON.stringify(estado.perfil)}`,
+        `Mensaje del viajero: ${mensaje}`,
+      ].join('\n'),
+      output: { schema: ExtraccionSchema },
+      config: { temperature: 0 },
+    });
+    // 2. Fusionar con lo que ya se sabía (solo valores válidos).
+    if (output) {
+      // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
+      // extractor convertía un «nada más» en «quita monumentos».
+      // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
+      const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje) };
+      // Una pregunta tampoco añade intereses fuera de la confirmación: «qué se puede comer allí?»
+      // acababa como gastronomía sin que el viajero hubiera dicho qué le gusta.
+      const extraido =
+        campoPreguntado === 'confirmacion'
+          ? conRespaldo
+          : { ...conRespaldo, interesesQuitar: [], intereses: preguntaDelViajero ? [] : conRespaldo.intereses };
+      estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
+    }
+
+    // Respuesta a la confirmación que no es un simple «sí»: con cambios, se vuelve a confirmar;
+    // sin cambios, se pregunta qué cambiar. Una pregunta sin cambios sigue adelante: se contesta y se
+    // vuelve a confirmar. Solo el código da el perfil por confirmado: cuando lo decidía el modelo,
+    // «añade gastronomía» acababa confirmado sin añadir nada.
+    if (campoPreguntado === 'confirmacion') {
+      const cambios = JSON.stringify(anterior) !== JSON.stringify(estado.perfil);
+      if (!cambios && !preguntaDelViajero) {
+        estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+        const respuesta = 'Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».';
+        return { estado, respuesta, perfil: null, respaldo: null };
+      } else if (cambios) {
+        const paso = siguientePaso(estado);
+        if (paso.tipo === 'confirmar') {
+          estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+          const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil))} ¿Está bien así?`;
+          return { estado, respuesta, perfil: null, respaldo: null };
+        }
+      }
+    }
+
+    // Un destino sin guía no se guarda: se dice y se vuelve a pedir, sin seguir con la entrevista.
+    // Solo si se preguntaba por el destino: «la Alhambra y comer bien», respondiendo a los
+    // intereses, no es un cambio de destino.
+    const aviso = output?.destino && campoPreguntado === 'destino' ? avisoDestino(output.destino) : null;
+    if (aviso) return { estado, respuesta: aviso, perfil: null, respaldo: null };
+  }
+
+  // Una pregunta sin datos nuevos no contesta a lo que se le había preguntado: se deshace esa
+  // pregunta para volver a hacerla. Si no, preguntar algo cuando tocaban los opcionales los daba
+  // por contestados y saltaba a la confirmación.
+  const sinCambios = JSON.stringify(anterior) === JSON.stringify(estado.perfil);
+  if (preguntaDelViajero && sinCambios && campoPreguntado !== 'confirmacion') {
+    estado = { ...estado, preguntados: estado.preguntados.slice(0, -1) };
+  }
+
+  // 3. Si el viajero pregunta algo del destino, lo contesta la guía, con fuente, y no el modelo de la
+  // entrevista: el modelo pequeño no seguía la orden de contestar y luego preguntar, y sin la guía
+  // se lo habría inventado.
+  const destino = typeof estado.perfil.destino === 'string' ? estado.perfil.destino : null;
+  let contestado: string | null = null;
+  if (responder && destino && preguntaDelViajero) {
+    const guia = await responder(mensaje, destino);
+    if (guia.hayInformacion) {
+      const enlace = guia.fuentes[0] ? ` ([Wikivoyage](${guia.fuentes[0].url}))` : '';
+      contestado = `${guia.respuesta.trim()}${enlace}`;
+    }
+  }
+  const delante = (texto: string) => (contestado ? `${contestado} ${texto}` : texto);
+
+  // 4. Decidir el siguiente paso.
+  const paso = siguientePaso(estado);
+  if (paso.tipo === 'terminar') {
+    return { estado, respuesta: '¡Perfecto! Preparo tu itinerario.', perfil: paso.perfil, respaldo: null };
+  }
+  if (paso.tipo === 'confirmar') {
+    estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
+    const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
+    const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`);
+    return { estado, respuesta, perfil: null, respaldo: null };
+  }
+  // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las
+  // opciones. Si lo que hizo fue preguntar algo, no: las opciones detrás de la respuesta sobran.
+  const repetida = campoPreguntado === paso.campo && !preguntaDelViajero;
+  estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
+
+  // 5. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
+  const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
+
+  // El saludo es fijo: el modelo saludaba con «¡Bienvenido Rumbo!», como si Rumbo fuera el viajero.
+  if (!estadoPrevio && !mensaje.trim()) {
+    const respuesta = `¡Hola! Bienvenido a Rumbo, te ayudo a planificar tu viaje. ¿A dónde te gustaría ir? ${opciones}`;
+    return { estado, respuesta, perfil: null, respaldo: null };
+  }
+
+  // En los opcionales pregunta solo el código, con las opciones; el modelo solo reacciona a lo que ha
+  // dicho el viajero. Si preguntaban los dos, las preguntas se solapaban («¿hay algo específico…?
+  // Por ejemplo, qué ritmo prefieres…»). Tras una respuesta de la guía no hace falta ni la reacción.
+  const soloReaccion = paso.campo === 'opcionales';
+  if (soloReaccion && contestado) {
+    return { estado, respuesta: delante(`${reserva} ${opciones}`), perfil: null, respaldo: null };
+  }
+  const { text } = await ai.generate({
+    system: SISTEMA_PREGUNTA,
+    // La conversación anterior va como mensajes de chat; el turno actual, en el prompt.
+    messages: historialPrevio.map((m) => ({ role: ROL_GENKIT[m.rol], content: [{ text: m.texto }] })),
+    prompt: [
+      mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
+      ...(contestado ? [`Ya le has contestado: «${contestado}». No vuelvas a contestarlo: solo retoma la conversación.`] : []),
+      soloReaccion
+        ? 'Reacciona en una frase a lo que ha dicho, sin preguntar nada: la pregunta se añade después.'
+        : `Lo que necesitas averiguar ahora: ${objetivo}.`,
+    ].join('\n'),
+  });
+  // Lo dicho por el viajero en cualquier momento de la conversación se puede repetir.
+  const delViajero = historialPrevio.filter((m) => m.rol === 'viajero').map((m) => m.texto);
+  // También los lugares de la guía del destino: el modelo puede animar con «la Alhambra», pero no
+  // nombrar nada que no esté en la guía (prohibírselo todo hacía saltar el guardarraíl a menudo).
+  const guia = destino && leerGuia ? await leerGuia(destino) : [];
+  const permitidos = [mensaje, ...delViajero, contestado ?? '', ...guia, reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
+  const validacion = validarMensaje(text, permitidos);
+  // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
+  const sinSaludo = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
+  const propia = soloReaccion ? quitarPreguntas(sinSaludo) : sinSaludo;
+  const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
+  // Las opciones salen al pedir el destino (solo hay unos pocos) y los opcionales (son la pregunta en sí);
+  // en el resto, solo al repetir la pregunta: ponerlas siempre hacía que pareciera un formulario.
+  const conOpciones = paso.campo === 'destino' || paso.campo === 'opcionales' || repetida;
+  return {
+    estado,
+    respuesta: delante(conOpciones ? `${redactada} ${opciones}` : redactada),
+    perfil: null,
+    respaldo: validacion.valido ? null : validacion.motivo,
+  };
 }

@@ -1,6 +1,6 @@
 // RF-01: validación de los mensajes que redacta el modelo en la entrevista.
 import { describe, expect, it } from 'vitest';
-import { quitarSaludo, validarMensaje } from './guardarrail.js';
+import { quitarPreguntas, quitarSaludo, validarMensaje } from './guardarrail.js';
 
 const permitidos = ['Madrid con amigos', 'Sevilla', 'Madrid', 'Barcelona', 'Granada', 'Valencia', 'Rumbo'];
 
@@ -34,6 +34,16 @@ describe('validarMensaje', () => {
     expect(validarMensaje('¡Hola, encantado! Perfecto, ¿a dónde vamos?', permitidos)).toEqual({ valido: true });
   });
 
+  it('acepta tres frases cortas, lo que pide el prompt de la entrevista', () => {
+    // Caso real: con hasta tres frases, el límite de 240 caracteres descartaba mensajes correctos.
+    const tres =
+      'Perfecto, tres días dan para conocer bien la ciudad sin ir con prisas y disfrutando de cada rincón. ' +
+      'Así podréis combinar las visitas con algún rato de descanso por la tarde, que se agradece mucho. ' +
+      '¿Os apetece contarme qué tipo de cosas os gusta hacer cuando viajáis?';
+    expect(tres.length).toBeGreaterThan(240);
+    expect(validarMensaje(tres, permitidos)).toEqual({ valido: true });
+  });
+
   it('rechaza mensajes largos', () => {
     const largo = `${'Qué buen viaje vas a hacer, de verdad. '.repeat(8)}¿Cuántos días?`;
     expect(validarMensaje(largo, permitidos)).toEqual({ valido: false, motivo: 'demasiado largo' });
@@ -53,5 +63,25 @@ describe('quitarSaludo', () => {
 
   it('no toca un mensaje sin saludo', () => {
     expect(quitarSaludo('¡Genial! ¿Cuántos días?')).toBe('¡Genial! ¿Cuántos días?');
+  });
+});
+
+describe('quitarPreguntas', () => {
+  it('deja solo las frases que no preguntan', () => {
+    // Caso real: la pregunta del modelo se solapaba con la pregunta fija de los opcionales.
+    expect(quitarPreguntas('Entendido, me encanta. ¿Hay algo específico que quieras incluir?')).toBe('Entendido, me encanta.');
+    expect(quitarPreguntas('Vale, perfecto. ¿Hay algo más? Por ejemplo, el ritmo.')).toBe('Vale, perfecto. Por ejemplo, el ritmo.');
+  });
+
+  it('quita también las preguntas sin signo de apertura', () => {
+    expect(quitarPreguntas('¡Qué bien! Te apetece algo más?')).toBe('¡Qué bien!');
+  });
+
+  it('devuelve vacío si todo son preguntas', () => {
+    expect(quitarPreguntas('¿Quieres contarme algo más?')).toBe('');
+  });
+
+  it('no toca un mensaje sin preguntas', () => {
+    expect(quitarPreguntas('¡Genial! Pasear por Granada es un placer.')).toBe('¡Genial! Pasear por Granada es un placer.');
   });
 });

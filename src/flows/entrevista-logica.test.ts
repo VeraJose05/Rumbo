@@ -5,6 +5,7 @@ import {
   descartarSinRespaldo,
   respaldarIntereses,
   esAfirmacion,
+  esPregunta,
   fusionarPerfil,
   opcionalesPendientes,
   resumirPerfil,
@@ -247,5 +248,26 @@ describe('respaldarIntereses', () => {
 
   it('acepta los nombres de la lista tal cual, como respuesta a la pregunta', () => {
     expect(respaldarIntereses(['museos', 'playa'], 'museos y playa')).toEqual(['museos', 'playa']);
+  });
+});
+
+describe('esPregunta', () => {
+  it('reconoce preguntas con signo de interrogación', () => {
+    expect(esPregunta('no sé, ¿cuántos días hacen falta para verla bien?')).toBe(true);
+    expect(esPregunta('merece la pena ir en verano?')).toBe(true);
+  });
+
+  it('reconoce preguntas sin signos que empiezan por una palabra interrogativa', () => {
+    expect(esPregunta('qué se puede ver en Granada')).toBe(true);
+    expect(esPregunta('Cuántos días recomiendas')).toBe(true);
+    expect(esPregunta('dónde se come bien')).toBe(true);
+  });
+
+  it('no toma por pregunta una respuesta normal', () => {
+    expect(esPregunta('3 días')).toBe(false);
+    expect(esPregunta('nos gusta mucho pasear y comer bien')).toBe(false);
+    // «como» y «cuando» sin tilde no se cuentan: son también conjunciones.
+    expect(esPregunta('como 3 días')).toBe(false);
+    expect(esPregunta('cuando haga bueno')).toBe(false);
   });
 });
