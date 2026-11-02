@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   avisoDestino,
   descartarSinRespaldo,
+  diasDelMensaje,
   respaldarIntereses,
   respaldarQuitar,
   esAfirmacion,
@@ -266,6 +267,37 @@ describe('respaldarIntereses fuera de la pregunta de intereses', () => {
 
   it('los deja si el mensaje nombra un lugar que no es el destino', () => {
     expect(respaldarIntereses(['museos'], 'quiero ver el Prado en Madrid', true)).toEqual(['museos']);
+  });
+});
+
+describe('diasDelMensaje', () => {
+  it('entiende «fin de semana» y «una semana» en código', () => {
+    // Caso de la evaluación: «un fin de semana» salía como 7 días.
+    expect(diasDelMensaje('un fin de semana')).toBe(2);
+    expect(diasDelMensaje('Un finde en Granada')).toBe(2);
+    expect(diasDelMensaje('una semana')).toBe(7);
+  });
+
+  it('deja el resto al extractor', () => {
+    expect(diasDelMensaje('3 días')).toBeNull();
+    expect(diasDelMensaje('Barcelona')).toBeNull();
+  });
+});
+
+describe('respaldarIntereses: intereses nombrados', () => {
+  it('añade los intereses que el mensaje nombra aunque el modelo los pierda', () => {
+    // Casos de la evaluación: «salir de noche y tapas» perdía gastronomía; «playa», todo.
+    expect(respaldarIntereses(['ocio-nocturno'], 'salir de noche y tapas')).toEqual(['ocio-nocturno', 'gastronomia']);
+    expect(respaldarIntereses([], 'playa')).toEqual(['playa']);
+    expect(respaldarIntereses(['compras'], 'compras y museos')).toEqual(['compras', 'museos']);
+  });
+
+  it('no los añade si el mensaje es una pregunta («¿hay playa?» no es un interés)', () => {
+    expect(respaldarIntereses([], '¿hay playa?')).toEqual([]);
+  });
+
+  it('no añade nada si el mensaje no nombra ningún interés', () => {
+    expect(respaldarIntereses([], 'Un fin de semana en Granada', true)).toEqual([]);
   });
 });
 

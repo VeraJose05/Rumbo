@@ -61,6 +61,10 @@ describe('quitarSaludo', () => {
     expect(quitarSaludo('Hola, buenas. ¿Cuántos días vas a estar?')).toBe('¿Cuántos días vas a estar?');
   });
 
+  it('quita también la bienvenida repetida a mitad de conversación', () => {
+    expect(quitarSaludo('Bienvenido a Rumbo, ¿a dónde te gustaría ir?')).toBe('¿A dónde te gustaría ir?');
+  });
+
   it('no toca un mensaje sin saludo', () => {
     expect(quitarSaludo('¡Genial! ¿Cuántos días?')).toBe('¡Genial! ¿Cuántos días?');
   });

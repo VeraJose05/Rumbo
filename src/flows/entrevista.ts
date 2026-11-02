@@ -7,6 +7,7 @@ import { DESTINOS } from '../config/destinos.js';
 import {
   avisoDestino,
   descartarSinRespaldo,
+  diasDelMensaje,
   esAfirmacion,
   esPregunta,
   ETIQUETAS_INTERES,
@@ -195,7 +196,8 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
       // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
       // extractor convertía un «nada más» en «quita monumentos».
       // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
-      const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje, campoPreguntado !== 'intereses') };
+      // «Un fin de semana» lo entiende el código: el modelo lo convertía a veces en 7 días.
+      const conRespaldo = { ...descartarSinRespaldo(output, mensaje), dias: diasDelMensaje(mensaje) ?? output.dias, intereses: respaldarIntereses(output.intereses, mensaje, campoPreguntado !== 'intereses') };
       // Una pregunta tampoco añade intereses fuera de la confirmación: «qué se puede comer allí?»
       // acababa como gastronomía sin que el viajero hubiera dicho qué le gusta.
       const extraido =
@@ -311,7 +313,9 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
   const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
   // Las opciones salen al pedir el destino (solo hay unos pocos) y los opcionales (son la pregunta en sí);
   // en el resto, solo al repetir la pregunta: ponerlas siempre hacía que pareciera un formulario.
-  const conOpciones = paso.campo === 'destino' || paso.campo === 'opcionales' || repetida;
+  // Si el modelo ya ha nombrado todos los destinos, no se repite la lista.
+  const yaListados = paso.campo === 'destino' && DESTINOS.every((d) => redactada.includes(d.nombre));
+  const conOpciones = !yaListados && (paso.campo === 'destino' || paso.campo === 'opcionales' || repetida);
   return {
     estado,
     respuesta: delante(conOpciones ? `${redactada} ${opciones}` : redactada),
