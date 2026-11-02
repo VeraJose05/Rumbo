@@ -112,13 +112,17 @@ function pregunta(campo: Campo, perfil: Record<string, unknown>): { objetivo: st
   }
 }
 
-const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes. Hablas en español, con un tono cercano y natural.
-Escribe tu siguiente mensaje al viajero: una reacción breve a lo que acaba de decir (o un saludo si es el inicio) y la pregunta que se te indica.
-- Tutea al viajero y no le llames por ningún nombre.
+// El modelo ya no solo pone la frase bonita a una pregunta fija: ve la conversación, contesta lo que
+// le pregunten y luego retoma lo que falta. Qué falta lo sigue decidiendo el código.
+const SISTEMA_PREGUNTA = `Eres Rumbo, un asistente que ayuda a planificar viajes por España. Hablas en español, con un tono cercano y natural, como en una charla.
+Tienes delante la conversación con el viajero. Escribe tu siguiente mensaje:
+- Si el viajero te ha preguntado algo o tiene dudas, contéstale primero, en una frase y en términos generales.
+- Después, averigua lo que se te indica, con tus palabras y enlazando con lo que ha dicho.
 - Saluda solo si es el inicio de la conversación.
-- Como mucho dos frases cortas, y la segunda es una pregunta.
-- No menciones ningún lugar, destino ni recomendación que el viajero no haya dicho.
-- No enumeres opciones: se añaden después.`;
+- Tutea al viajero y no le llames por ningún nombre.
+- Como mucho tres frases cortas, y termina con una pregunta.
+- No nombres monumentos, barrios, restaurantes ni otros lugares concretos que el viajero no haya dicho: todavía no tienes la guía delante.
+- No enumeres opciones.`;
 
 type Entrada = z.infer<typeof EntrevistaEntradaSchema>;
 type Salida = z.infer<typeof EntrevistaSalidaSchema>;
@@ -214,6 +218,8 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
     const respuesta = `Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`;
     return { estado, respuesta, perfil: null, respaldo: null };
   }
+  // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las opciones.
+  const repetida = campoPreguntado === paso.campo;
   estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 
   // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
@@ -224,17 +230,22 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
     messages: historialPrevio.map((m) => ({ role: ROL_GENKIT[m.rol], content: [{ text: m.texto }] })),
     prompt: [
       mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
-      `Pregúntale ${objetivo}.`,
+      `Lo que necesitas averiguar ahora: ${objetivo}.`,
     ].join('\n'),
   });
-  const permitidos = [mensaje, reserva, 'Rumbo', ...DESTINOS.map((d) => d.nombre)];
+  // Lo dicho por el viajero en cualquier momento de la conversación se puede repetir.
+  const delViajero = historialPrevio.filter((m) => m.rol === 'viajero').map((m) => m.texto);
+  const permitidos = [mensaje, ...delViajero, reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
   const validacion = validarMensaje(text, permitidos);
   // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
   const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
   const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
+  // Las opciones salen al pedir el destino (solo hay unos pocos) y los opcionales (son la pregunta en sí);
+  // en el resto, solo al repetir la pregunta: ponerlas siempre hacía que pareciera un formulario.
+  const conOpciones = paso.campo === 'destino' || paso.campo === 'opcionales' || repetida;
   return {
     estado,
-    respuesta: `${redactada} ${opciones}`,
+    respuesta: conOpciones ? `${redactada} ${opciones}` : redactada,
     perfil: null,
     respaldo: validacion.valido ? null : validacion.motivo,
   };

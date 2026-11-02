@@ -59,7 +59,7 @@ describe('entrevistaFlow', () => {
 
     const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
 
-    expect(salida.respuesta).toBe('¡Granada es preciosa! ¿Cuántos días vas a estar en Granada? Puedo planificar de 1 a 7.');
+    expect(salida.respuesta).toBe('¡Granada es preciosa! ¿Cuántos días vas a estar en Granada?');
     expect(salida.respaldo).toBeNull();
   });
 
@@ -81,7 +81,8 @@ describe('entrevistaFlow', () => {
     const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
 
     expect(textoDe(peticiones[1]!)).toContain('cuántos días va a estar en Granada');
-    expect(salida.respuesta).toBe('¡Genial! ¿Pregunta del modelo? Puedo planificar de 1 a 7.');
+    // La primera vez pregunta el modelo con sus palabras, sin opciones pegadas detrás.
+    expect(salida.respuesta).toBe('¡Genial! ¿Pregunta del modelo?');
   });
 
   it('guarda lo extraído del mensaje y pregunta por lo siguiente que falta', async () => {
@@ -91,8 +92,19 @@ describe('entrevistaFlow', () => {
 
     expect(salida.estado.perfil).toEqual({ destino: 'Sevilla', dias: 3 });
     expect(salida.perfil).toBeNull();
-    // Las opciones de intereses las añade el código detrás de lo que redacta el modelo.
     expect(peticiones).toHaveLength(2);
+    expect(salida.respuesta).toBe('¡Genial! ¿Pregunta del modelo?');
+  });
+
+  it('si el viajero no contesta a lo preguntado, vuelve a preguntarlo y añade las opciones', async () => {
+    // Caso real: «no sé, ¿cuántos días hacen falta?» respondiendo a los días.
+    const { flow } = crearEntorno(sinDatos);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Granada', dias: 3 }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'no sé, ¿qué se puede hacer allí?',
+    });
+
     expect(salida.respuesta).toBe(
       '¡Genial! ¿Pregunta del modelo? Puedes elegir varios: monumentos, museos, gastronomía, naturaleza, ocio nocturno, compras, playa, niños.',
     );
