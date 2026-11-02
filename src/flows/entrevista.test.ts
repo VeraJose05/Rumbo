@@ -407,6 +407,27 @@ describe('entrevistaFlow con preguntas del viajero', () => {
     expect(salida.respuesta).not.toContain('Puedo planificar');
   });
 
+  it('una pregunta no añade intereses: el viajero pregunta, no dice lo que le gusta', async () => {
+    // Caso real: «¿cuántos días hacen falta para verla bien?» y «qué se puede comer allí?» dejaban
+    // monumentos y gastronomía como intereses sin habérselos preguntado.
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['gastronomia'] }, undefined, guia().responder);
+
+    const salida = await flow({ estado: enGranada, mensaje: '¿qué se puede comer allí?' });
+
+    expect(salida.estado.perfil.intereses).toBeUndefined();
+  });
+
+  it('en la confirmación, una pregunta sí puede añadir intereses («¿podemos añadir museos?»)', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, undefined, guia().responder);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['monumentos'] }, preguntados: [...todoPreguntado, 'confirmacion'] },
+      mensaje: '¿podemos añadir museos?',
+    });
+
+    expect(salida.estado.perfil.intereses).toEqual(['monumentos', 'museos']);
+  });
+
   it('no consulta la guía si el mensaje no es una pregunta', async () => {
     const { responder, llamadas } = guia();
     const { flow } = crearEntorno({ ...sinDatos, dias: 3 }, undefined, responder);
