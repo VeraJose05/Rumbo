@@ -98,6 +98,22 @@ describe('entrevistaFlow', () => {
     expect(salida.respuesta).toBe('¡Genial! ¿Pregunta del modelo?');
   });
 
+  it('no repite la lista de destinos si el modelo ya la ha dicho', async () => {
+    const { flow } = crearEntorno(sinDatos, '¿Tienes alguna ciudad en mente? Puedo guiarte por Sevilla, Madrid, Barcelona, Granada o Valencia.');
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'hola' });
+
+    expect(salida.respuesta).toBe('¿Tienes alguna ciudad en mente? Puedo guiarte por Sevilla, Madrid, Barcelona, Granada o Valencia.');
+  });
+
+  it('un fin de semana son 2 días aunque el modelo diga otra cosa', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, dias: 7 });
+
+    const salida = await flow({ estado: { perfil: { destino: 'Barcelona' }, preguntados: ['destino', 'dias'] }, mensaje: 'un fin de semana' });
+
+    expect(salida.estado.perfil.dias).toBe(2);
+  });
+
   it('si el viajero no contesta a lo preguntado, vuelve a preguntarlo y añade las opciones', async () => {
     // Caso real: «no sé, ¿cuántos días hacen falta?» respondiendo a los días.
     const { flow } = crearEntorno(sinDatos);

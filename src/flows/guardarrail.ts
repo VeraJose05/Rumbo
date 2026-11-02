@@ -44,10 +44,10 @@ function palabras(texto: string): string[] {
 
 /**
  * Quita el saludo con que empieza un mensaje: el modelo saludaba en mitad de la entrevista
- * («Hola, ¿te gustaría…?») aunque el prompt le dice que salude solo al inicio.
+ * («Hola, ¿te gustaría…?», «Bienvenido a Rumbo, …») aunque el prompt le dice que salude solo al inicio.
  */
 export function quitarSaludo(texto: string): string {
-  const sin = texto.replace(/^\s*¡?\s*(hola|buenas)\b[^.!?¿]*?([.!,]\s*|\s+(?=¿))/i, '').replace(/^\s*(buenas)[.!,]?\s*/i, '');
+  const sin = texto.replace(/^\s*¡?\s*(hola|buenas|bienvenid[oa])\b[^.!?¿]*?([.!,]\s*|\s+(?=¿))/i, '').replace(/^\s*(buenas)[.!,]?\s*/i, '');
   if (sin === texto) return texto;
   // Mayúscula en la primera letra, también tras «¿» o «¡».
   return sin.replace(/^([¿¡]?)(\p{L})/u, (_, signo: string, letra: string) => signo + letra.toUpperCase());

@@ -203,6 +203,26 @@ function nombraLugar(mensaje: string): boolean {
   );
 }
 
+// Intereses nombrados de forma explícita: si el mensaje los dice, se añaden aunque el modelo los
+// pierda (en la evaluación, «salir de noche y tapas» perdía gastronomía y «playa» se perdía entero).
+const NOMBRADOS: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
+  monumentos: /\bmonumentos?\b/,
+  museos: /\bmuseos?\b/,
+  gastronomia: /\b(tapas?|tapeo|tapear|comer|comida|gastronomia|paella)\b/,
+  naturaleza: /\b(naturaleza|senderismo)\b/,
+  'ocio-nocturno': /\b(de noche|fiesta|copas|discotecas?|ocio nocturno|vida nocturna)\b/,
+  compras: /\b(compras|tiendas|shopping)\b/,
+  playa: /\bplayas?\b/,
+};
+
+/** Días que el código entiende sin el modelo: «un fin de semana» salía como 7. El resto, null. */
+export function diasDelMensaje(mensaje: string): number | null {
+  const texto = normalizar(mensaje);
+  if (/\b(fin de semana|finde)\b/.test(texto)) return 2;
+  if (/\buna semana\b/.test(texto)) return 7;
+  return null;
+}
+
 // Palabras que el extractor traducía mal y que el código traduce: «cultura» son monumentos y museos.
 const CULTURA = /\b(cultur|histori|arte\b)/;
 
@@ -228,6 +248,12 @@ export function respaldarIntereses(intereses: (typeof INTERESES)[number][], mens
     return !estricto || conNombre || (RESPALDO_DEDUCIBLE[i]?.test(texto) ?? true);
   });
   if (CULTURA.test(texto)) for (const i of ['monumentos', 'museos'] as const) if (!respaldados.includes(i)) respaldados.push(i);
+  // Una pregunta no nombra intereses: «¿hay playa?» pregunta por el destino.
+  if (!esPregunta(mensaje)) {
+    for (const [interes, patron] of Object.entries(NOMBRADOS) as [(typeof INTERESES)[number], RegExp][]) {
+      if (patron.test(texto) && !respaldados.includes(interes)) respaldados.push(interes);
+    }
+  }
   return respaldados;
 }
 
