@@ -1,6 +1,7 @@
 // RF-12: lógica de la web de Rumbo. La API no guarda estado: aquí se guarda el de la entrevista y
 // se envía en cada mensaje. Al confirmar el perfil se planifica con C1 (RAG básico): en la
-// evaluación, C2 no mejoraba los resultados y tardaba 2,5 veces más.
+// evaluación, C2 no mejoraba los resultados y tardaba 2,5 veces más. Con el itinerario hecho, los
+// mensajes son ajustes («más tranquilo», «quita la Catedral»: RF-11).
 import { escapar, itinerarioAHtml, textoAHtml } from './formato.js';
 
 const MODO = 'C1';
@@ -14,7 +15,8 @@ const enviar = document.querySelector('#enviar');
 
 let estado = null;
 let ocupado = false;
-let terminado = false;
+// Con el itinerario hecho se guardan el perfil y el itinerario para ajustarlos.
+let viaje = null;
 // Cada conversación tiene un número: si se pulsa «Nuevo viaje» con una respuesta en camino, esa
 // respuesta llega a una conversación que ya no existe y se descarta.
 let conversacionActual = 0;
@@ -46,9 +48,8 @@ function anadir(rol, html, clase = '') {
 const ESCRIBIENDO = '<span class="escribiendo" aria-label="Rumbo está escribiendo"><span></span><span></span><span></span></span>';
 
 function actualizarControles() {
-  entrada.disabled = terminado;
-  enviar.disabled = ocupado || terminado || !entrada.value.trim();
-  entrada.placeholder = terminado ? '¿Otro viaje? Pulsa «Nuevo viaje»' : 'Escribe tu mensaje…';
+  enviar.disabled = ocupado || !entrada.value.trim();
+  entrada.placeholder = viaje ? '¿Quieres cambiar algo del itinerario?' : 'Escribe tu mensaje…';
 }
 
 /** Hace una llamada mostrando el indicador; si falla, deja un aviso con «Reintentar». */
@@ -84,7 +85,7 @@ async function conIndicador(accion, reintentar, nota = '') {
 async function empezar() {
   conversacionActual += 1;
   estado = null;
-  terminado = false;
+  viaje = null;
   ocupado = false;
   mensajes.replaceChildren();
   sugerencias.hidden = true;
@@ -116,19 +117,35 @@ async function planificar(perfil) {
   );
   if (!itinerario) return;
   anadir('rumbo', itinerarioAHtml(perfil, itinerario), 'tarjeta');
-  anadir('rumbo', '¡Buen viaje! Si quieres planear otro, pulsa «Nuevo viaje».');
-  terminado = true;
+  anadir('rumbo', '¿Quieres cambiar algo? Por ejemplo, «más tranquilo», «quita la Catedral», «añade museos» o «un día más». Si no, ¡buen viaje!');
+  viaje = { perfil, itinerario };
   actualizarControles();
+}
+
+async function ajustar(texto) {
+  const resultado = await conIndicador(
+    () => llamar('ajusteFlow', { ...viaje, mensaje: texto }),
+    () => ajustar(texto),
+    'Ajustando el itinerario…',
+  );
+  if (!resultado) return;
+  anadir('rumbo', textoAHtml(resultado.respuesta));
+  // Solo se vuelve a mostrar la tarjeta si ha cambiado algo.
+  if (JSON.stringify(resultado.itinerario) !== JSON.stringify(viaje.itinerario)) {
+    anadir('rumbo', itinerarioAHtml(resultado.perfil, resultado.itinerario), 'tarjeta');
+  }
+  viaje = { perfil: resultado.perfil, itinerario: resultado.itinerario };
 }
 
 function mandar(texto) {
   texto = texto.trim();
-  if (!texto || ocupado || terminado) return;
+  if (!texto || ocupado) return;
   sugerencias.hidden = true;
   anadir('viajero', escapar(texto).replace(/\n/g, '<br>'));
   entrada.value = '';
   ajustarAltura();
-  responder(texto);
+  if (viaje) ajustar(texto);
+  else responder(texto);
 }
 
 function ajustarAltura() {

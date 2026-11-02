@@ -214,7 +214,7 @@ function nombraLugar(mensaje: string): boolean {
 
 // Intereses nombrados de forma explícita: si el mensaje los dice, se añaden aunque el modelo los
 // pierda (en la evaluación, «salir de noche y tapas» perdía gastronomía y «playa» se perdía entero).
-const NOMBRADOS: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
+export const NOMBRADOS: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
   monumentos: /\bmonumentos?\b/,
   museos: /\bmuseos?\b/,
   gastronomia: /\b(tapas?|tapeo|tapear|comer|comida|gastronomia|paella)\b/,

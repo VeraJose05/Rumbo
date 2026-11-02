@@ -5,7 +5,7 @@
 import { expressHandler } from '@genkit-ai/express';
 import express from 'express';
 import { fileURLToPath } from 'node:url';
-import { entrevistaFlow, planificacionFlow } from './index.js';
+import { ajusteFlow, entrevistaFlow, planificacionFlow } from './index.js';
 
 const PUERTO = Number(process.env.RUMBO_API_PUERTO) || 3400;
 
@@ -16,10 +16,11 @@ app.use(express.static(fileURLToPath(new URL('../web', import.meta.url))));
 // Cada flow en POST /<nombre>, con el cuerpo {"data": entrada}; responde {"result": salida}.
 app.post('/entrevistaFlow', expressHandler(entrevistaFlow));
 app.post('/planificacionFlow', expressHandler(planificacionFlow));
+app.post('/ajusteFlow', expressHandler(ajusteFlow));
 app.get('/salud', (_peticion, respuesta) => {
   respuesta.json({ ok: true });
 });
 
 app.listen(PUERTO, '127.0.0.1', () => {
-  console.log(`Rumbo en http://127.0.0.1:${PUERTO} (web y API: entrevistaFlow, planificacionFlow)`);
+  console.log(`Rumbo en http://127.0.0.1:${PUERTO} (web y API: entrevistaFlow, planificacionFlow, ajusteFlow)`);
 });
