@@ -194,7 +194,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
       // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
       // extractor convertía un «nada más» en «quita monumentos».
       // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
-      const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje) };
+      const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje, campoPreguntado !== 'intereses') };
       // Una pregunta tampoco añade intereses fuera de la confirmación: «qué se puede comer allí?»
       // acababa como gastronomía sin que el viajero hubiera dicho qué le gusta.
       const extraido =

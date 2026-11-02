@@ -157,6 +157,8 @@ export function resumirPerfil(perfil: Perfil, porDefecto: Opcional[] = []): stri
 const RESPALDO = {
   ritmo: /\b(ritmo|tranquil\w*|relaj\w*|calma\w*|pausad\w*|despacio|sin prisas?|intens\w*|a tope|aprovechar|normal)\b/,
   presupuesto: /\b(presupuesto|barat\w*|economic\w*|gast\w*|dinero|euros?|car[oa]s?|lujo\w*|ahorr\w*|low cost|bajo|medio|alto)\b/,
+  // «Un fin de semana en Granada» salía como viaje en pareja.
+  compania: /\b(sol[oa]s?|pareja|novi[oa]s?|mujer|marido|espos[oa]s?|famili\w*|hij[oa]s?|nin[oa]s?|peques?|padres?|madre|herman\w*|abuel\w*|amig[oa]s?|colegas|grupo|companer\w*)\b/,
 };
 
 // Raíces que respaldan los intereses que el extractor se inventaba (sin tildes): convirtió «la
@@ -170,23 +172,51 @@ const RESPALDO_INTERES: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
   playa: /\b(playa|mar\b|costa|banar|arena)/,
   ninos: /\b(nin[oa]s?\b|hij|crio|peque|chaval)/,
 };
+// Monumentos, museos y gastronomía, fuera de la pregunta de intereses: con un simple «Un fin de
+// semana en Granada» el extractor los rellenaba. Ahí se exige una de estas raíces o un nombre propio.
+const RESPALDO_DEDUCIBLE: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
+  monumentos: /\b(monument|catedral|palaci|castill|iglesi|templo|alcazar|alhambra|mezquita|muralla|torre|histori|arquitect|cultur)/,
+  museos: /\b(muse|arte\b|pintur|exposic|galeri|cuadro|cultur)/,
+  gastronomia: /\b(comer|comid|tapa|tape|gastronom|restaur|cocina|plato|vino|cerve|paella|jamon|marisc|pescad|probar|degust|churro)/,
+};
+
+/** Si el mensaje nombra algo con nombre propio que no sea un destino («el Prado», «la Sagrada Familia»). */
+function nombraLugar(mensaje: string): boolean {
+  return mensaje.split(/[.!?¡¿]+/).some((frase) =>
+    frase
+      .split(/[^\p{L}]+/u)
+      .filter(Boolean)
+      .slice(1)
+      .some((p) => /^\p{Lu}/u.test(p) && !buscarDestino(p) && normalizar(p) !== 'espana'),
+  );
+}
+
 // Palabras que el extractor traducía mal y que el código traduce: «cultura» son monumentos y museos.
 const CULTURA = /\b(cultur|histori|arte\b)/;
 
-/** Quita los intereses inventados (sin respaldo en el mensaje) y añade monumentos y museos si habla de cultura. */
-export function respaldarIntereses(intereses: (typeof INTERESES)[number][], mensaje: string): (typeof INTERESES)[number][] {
+/**
+ * Quita los intereses inventados (sin respaldo en el mensaje) y añade monumentos y museos si habla de
+ * cultura. Con `estricto` (el mensaje no responde a la pregunta de intereses) también exige respaldo
+ * para los que se deducen de nombres, salvo que el mensaje nombre algún lugar.
+ */
+export function respaldarIntereses(intereses: (typeof INTERESES)[number][], mensaje: string, estricto = false): (typeof INTERESES)[number][] {
   const texto = normalizar(mensaje);
-  const respaldados = intereses.filter((i) => RESPALDO_INTERES[i]?.test(texto) ?? true);
+  const conNombre = nombraLugar(mensaje);
+  const respaldados = intereses.filter((i) => {
+    if (RESPALDO_INTERES[i]) return RESPALDO_INTERES[i].test(texto);
+    return !estricto || conNombre || (RESPALDO_DEDUCIBLE[i]?.test(texto) ?? true);
+  });
   if (CULTURA.test(texto)) for (const i of ['monumentos', 'museos'] as const) if (!respaldados.includes(i)) respaldados.push(i);
   return respaldados;
 }
 
 /** Quita el ritmo y el presupuesto extraídos si el mensaje no habla de ellos. */
-export function descartarSinRespaldo<T extends { ritmo: unknown; presupuesto: unknown }>(extraido: T, mensaje: string): T {
+export function descartarSinRespaldo<T extends { ritmo: unknown; presupuesto: unknown; compania: unknown }>(extraido: T, mensaje: string): T {
   const texto = normalizar(mensaje);
   return {
     ...extraido,
     ritmo: RESPALDO.ritmo.test(texto) ? extraido.ritmo : null,
     presupuesto: RESPALDO.presupuesto.test(texto) ? extraido.presupuesto : null,
+    compania: RESPALDO.compania.test(texto) ? extraido.compania : null,
   };
 }

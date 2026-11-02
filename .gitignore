@@ -24,6 +24,5 @@ data/
 resultados/
 
 # Entorno de Python de la demo
-demo/.venv/
 __pycache__/
 .pytest_cache/

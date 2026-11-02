@@ -1,5 +1,0 @@
-# F6 (RF-12): demo web de Rumbo. Instalar con:
-#   python3 -m venv demo/.venv && demo/.venv/bin/pip install -r demo/requirements.txt
-gradio==5.49.1
-requests==2.32.3
-pytest==8.3.4
