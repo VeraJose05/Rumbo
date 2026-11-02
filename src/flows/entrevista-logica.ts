@@ -2,13 +2,13 @@
 // qué se pregunta después y cuándo se termina. El LLM no decide nada de esto.
 import { z } from 'genkit';
 import { buscarDestino, DESTINOS, normalizar } from '../config/destinos.js';
-import { camposPendientes, INTERESES, PerfilSchema, type Perfil } from './perfil.js';
+import { camposPendientes, COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS, type Perfil } from './perfil.js';
 
 export type PerfilParcial = Record<string, unknown>;
 
 export interface EstadoEntrevista {
   perfil: PerfilParcial;
-  /** Preguntas ya hechas. Intereses y opcionales se preguntan siempre una vez, aunque ya haya datos. */
+  /** Preguntas ya hechas, para no repetirlas y para entender respuestas cortas como «3» o «sí». */
   preguntados: string[];
 }
 
@@ -97,19 +97,77 @@ export function listaDestinos(): string {
 export function siguientePaso(estado: EstadoEntrevista): Paso {
   const [pendiente] = camposPendientes(estado.perfil);
   if (pendiente) return { tipo: 'preguntar', campo: pendiente };
-  // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero.
-  if (!estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
-  if (!estado.preguntados.includes('opcionales')) return { tipo: 'preguntar', campo: 'opcionales' };
+  // «Voy con mis hijos» da el interés «niños», pero no dice qué más le gusta al viajero: si es lo
+  // único que se sabe, se pregunta. Si dijo algo más («monumentos y tapas»), no se repite.
+  const intereses = (estado.perfil.intereses as string[] | undefined) ?? [];
+  const soloDeducidos = intereses.every((i) => i === 'ninos');
+  if (soloDeducidos && !estado.preguntados.includes('intereses')) return { tipo: 'preguntar', campo: 'intereses' };
+  // Los opcionales se preguntan una vez, y solo si falta alguno: diciéndolo todo de golpe se
+  // pasa directamente a confirmar.
+  if (opcionalesPendientes(estado.perfil).length && !estado.preguntados.includes('opcionales')) {
+    return { tipo: 'preguntar', campo: 'opcionales' };
+  }
   // Antes de planificar, el viajero confirma el perfil: así corrige los errores de extracción.
   const perfil = PerfilSchema.parse(estado.perfil);
   return estado.preguntados.includes('confirmado') ? { tipo: 'terminar', perfil } : { tipo: 'confirmar', perfil };
 }
 
-export function resumirPerfil(perfil: Perfil): string {
+const OPCIONALES = { compania: COMPANIAS, ritmo: RITMOS, presupuesto: PRESUPUESTOS } as const;
+export type Opcional = keyof typeof OPCIONALES;
+
+/** Datos opcionales que el viajero aún no ha dado (o no son válidos), en el orden de la pregunta. */
+export function opcionalesPendientes(perfil: PerfilParcial): Opcional[] {
+  return (Object.keys(OPCIONALES) as Opcional[]).filter(
+    (campo) => !(OPCIONALES[campo] as readonly unknown[]).includes(perfil[campo]),
+  );
+}
+
+/** El perfil en una frase. Los datos de `porDefecto` se marcan: el viajero no los ha dado. */
+export function resumirPerfil(perfil: Perfil, porDefecto: Opcional[] = []): string {
   const dias = perfil.dias === 1 ? '1 día' : `${perfil.dias} días`;
   const intereses = perfil.intereses.map((i) => ETIQUETAS_INTERES[i]).join(', ');
+  const marca = (campo: Opcional) => (porDefecto.includes(campo) ? ' (por defecto)' : '');
   return (
-    `${perfil.destino}, ${dias}, ${ETIQUETAS_COMPANIA[perfil.compania]}, ritmo ${perfil.ritmo}, ` +
-    `presupuesto ${perfil.presupuesto}. Intereses: ${intereses}.`
+    `${perfil.destino}, ${dias}, ${ETIQUETAS_COMPANIA[perfil.compania]}${marca('compania')}, ` +
+    `ritmo ${perfil.ritmo}${marca('ritmo')}, presupuesto ${perfil.presupuesto}${marca('presupuesto')}. Intereses: ${intereses}.`
   );
+}
+
+// Palabras que respaldan cada dato en el mensaje (sin tildes). El extractor rellenaba ritmo
+// «normal» y presupuesto «medio» sin que el viajero dijera nada, aunque el prompt lo prohíbe.
+const RESPALDO = {
+  ritmo: /\b(ritmo|tranquil\w*|relaj\w*|calma\w*|pausad\w*|despacio|sin prisas?|intens\w*|a tope|aprovechar|normal)\b/,
+  presupuesto: /\b(presupuesto|barat\w*|economic\w*|gast\w*|dinero|euros?|car[oa]s?|lujo\w*|ahorr\w*|low cost|bajo|medio|alto)\b/,
+};
+
+// Raíces que respaldan los intereses que el extractor se inventaba (sin tildes): convirtió «la
+// cultura» en naturaleza. Son raíces y no palabras para tolerar erratas y variantes. Monumentos,
+// museos y gastronomía no se filtran: se deducen de nombres que ninguna lista cubre («el Prado»,
+// «la Sagrada Familia», «paella»), y eso el modelo sí lo hace bien.
+const RESPALDO_INTERES: Partial<Record<(typeof INTERESES)[number], RegExp>> = {
+  naturaleza: /\b(natur|parque|jardin|monta|sender|sierra|rio\b|campo|aire libre|pase|excursion)/,
+  'ocio-nocturno': /\b(noche|nocturn|bar\b|bares|copa|fiesta|discotec|salir|marcha|ocio)/,
+  compras: /\b(compr|tienda|mercad|shopping|moda)/,
+  playa: /\b(playa|mar\b|costa|banar|arena)/,
+  ninos: /\b(nin[oa]s?\b|hij|crio|peque|chaval)/,
+};
+// Palabras que el extractor traducía mal y que el código traduce: «cultura» son monumentos y museos.
+const CULTURA = /\b(cultur|histori|arte\b)/;
+
+/** Quita los intereses inventados (sin respaldo en el mensaje) y añade monumentos y museos si habla de cultura. */
+export function respaldarIntereses(intereses: (typeof INTERESES)[number][], mensaje: string): (typeof INTERESES)[number][] {
+  const texto = normalizar(mensaje);
+  const respaldados = intereses.filter((i) => RESPALDO_INTERES[i]?.test(texto) ?? true);
+  if (CULTURA.test(texto)) for (const i of ['monumentos', 'museos'] as const) if (!respaldados.includes(i)) respaldados.push(i);
+  return respaldados;
+}
+
+/** Quita el ritmo y el presupuesto extraídos si el mensaje no habla de ellos. */
+export function descartarSinRespaldo<T extends { ritmo: unknown; presupuesto: unknown }>(extraido: T, mensaje: string): T {
+  const texto = normalizar(mensaje);
+  return {
+    ...extraido,
+    ritmo: RESPALDO.ritmo.test(texto) ? extraido.ritmo : null,
+    presupuesto: RESPALDO.presupuesto.test(texto) ? extraido.presupuesto : null,
+  };
 }

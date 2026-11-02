@@ -6,15 +6,18 @@ import { z, type Genkit } from 'genkit';
 import { DESTINOS } from '../config/destinos.js';
 import {
   avisoDestino,
+  descartarSinRespaldo,
   esAfirmacion,
   ETIQUETAS_INTERES,
   fusionarPerfil,
   listaDestinos,
+  opcionalesPendientes,
+  respaldarIntereses,
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
 } from './entrevista-logica.js';
-import { validarMensaje } from './guardarrail.js';
+import { quitarSaludo, validarMensaje } from './guardarrail.js';
 import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
 
 const EstadoSchema = z.object({
@@ -63,10 +66,18 @@ Si el viajero corrige datos que ya se conocen («mejor 2 días»), pon solo el v
 
 type Campo = 'destino' | 'dias' | 'intereses' | 'opcionales';
 
+// Cómo se ofrece cada dato opcional en la pregunta; solo se nombran los que faltan.
+const TEXTO_OPCIONAL = {
+  compania: 'con quién viajas (solo, en pareja, en familia o con amigos)',
+  ritmo: 'qué ritmo prefieres (tranquilo, normal o intenso)',
+  presupuesto: 'tu presupuesto (bajo, medio o alto)',
+};
+
 // Para cada pregunta: qué tiene que preguntar el modelo, el texto de reserva si su redacción no pasa
 // el guardarraíl, y las opciones, que añade siempre el código porque el modelo las recortaba
 // (ofrecía dos de los ocho intereses).
-function pregunta(campo: Campo, destino: unknown): { objetivo: string; reserva: string; opciones: string } {
+function pregunta(campo: Campo, perfil: Record<string, unknown>): { objetivo: string; reserva: string; opciones: string } {
+  const destino = perfil.destino;
   switch (campo) {
     case 'destino':
       return {
@@ -86,14 +97,15 @@ function pregunta(campo: Campo, destino: unknown): { objetivo: string; reserva: 
         reserva: `¿Qué te gustaría hacer en ${destino}?`,
         opciones: `Puedes elegir varios: ${Object.values(ETIQUETAS_INTERES).join(', ')}.`,
       };
-    case 'opcionales':
+    case 'opcionales': {
+      const textos = opcionalesPendientes(perfil).map((c) => TEXTO_OPCIONAL[c]);
+      const lista = textos.length > 1 ? `${textos.slice(0, -1).join(', ')} o ${textos.at(-1)}` : textos[0];
       return {
         objetivo: 'si quiere contar algo más del viaje (es opcional)',
         reserva: '¿Quieres contarme algo más?',
-        opciones:
-          'Por ejemplo, con quién viajas (solo, en pareja, en familia o con amigos), qué ritmo prefieres ' +
-          '(tranquilo, normal o intenso) o tu presupuesto (bajo, medio o alto). Si no, dime «nada más».',
+        opciones: `Por ejemplo, ${lista}. Si no, dime «nada más».`,
       };
+    }
   }
 }
 
@@ -135,7 +147,9 @@ export function definirEntrevistaFlow(ai: Genkit) {
         if (output) {
           // Quitar intereses solo al corregir en la confirmación: respondiendo a otra pregunta, el
           // extractor convertía un «nada más» en «quita monumentos».
-          const extraido = campoPreguntado === 'confirmacion' ? output : { ...output, interesesQuitar: [] };
+          // Lo que el viajero no ha dicho no se guarda, aunque el modelo lo extraiga (ver entrevista-logica).
+          const conRespaldo = { ...descartarSinRespaldo(output, mensaje), intereses: respaldarIntereses(output.intereses, mensaje) };
+          const extraido = campoPreguntado === 'confirmacion' ? conRespaldo : { ...conRespaldo, interesesQuitar: [] };
           estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
         }
 
@@ -152,7 +166,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
             const paso = siguientePaso(estado);
             if (paso.tipo === 'confirmar') {
               estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil)} ¿Está bien así?`;
+              const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil))} ¿Está bien así?`;
               return { estado, respuesta, perfil: null, respaldo: null };
             }
           }
@@ -172,13 +186,14 @@ export function definirEntrevistaFlow(ai: Genkit) {
       }
       if (paso.tipo === 'confirmar') {
         estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-        const respuesta = `Esto es lo que he entendido: ${resumirPerfil(paso.perfil)} ¿Es correcto, o quieres cambiar algo?`;
+        const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
+        const respuesta = `Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`;
         return { estado, respuesta, perfil: null, respaldo: null };
       }
       estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 
       // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
-      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil.destino);
+      const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
       const { text } = await ai.generate({
         system: SISTEMA_PREGUNTA,
         prompt: [
@@ -189,7 +204,8 @@ export function definirEntrevistaFlow(ai: Genkit) {
       const permitidos = [mensaje, reserva, 'Rumbo', ...DESTINOS.map((d) => d.nombre)];
       const validacion = validarMensaje(text, permitidos);
       // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
-      const redactada = !validacion.valido ? reserva : text.includes('?') ? text.trim() : `${text.trim()} ${reserva}`;
+      const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
+      const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
       return {
         estado,
         respuesta: `${redactada} ${opciones}`,

@@ -131,6 +131,75 @@ describe('entrevistaFlow', () => {
     expect(peticiones).toHaveLength(2);
   });
 
+  it('en la pregunta de opcionales solo ofrece los que faltan', async () => {
+    // Caso real: «4 días, con mi esposa y mis dos hijos» ya dio la compañía.
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['monumentos', 'gastronomia'] });
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 4, compania: 'familia' }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'quiero ver monumentos y probar las tapas',
+    });
+
+    expect(salida.respuesta).toContain('qué ritmo prefieres');
+    expect(salida.respuesta).toContain('tu presupuesto');
+    expect(salida.respuesta).not.toContain('con quién viajas');
+  });
+
+  it('no guarda ritmo ni presupuesto que el viajero no ha dicho, aunque el modelo los extraiga', async () => {
+    // Caso real: el extractor rellenaba «normal» y «medio» por su cuenta.
+    const { flow } = crearEntorno({
+      ...sinDatos,
+      destino: 'Sevilla',
+      dias: 4,
+      compania: 'pareja',
+      intereses: ['playa', 'gastronomia', 'monumentos'],
+      ritmo: 'normal',
+      presupuesto: 'medio',
+    });
+
+    const salida = await flow({
+      estado: { perfil: {}, preguntados: ['destino'] },
+      mensaje: 'quiero ir a sevilla unos 4-5 dias, con mi pareja, nos interesa la playa las tapas y los monumentos',
+    });
+
+    expect(salida.estado.perfil).toEqual({ destino: 'Sevilla', dias: 4, compania: 'pareja', intereses: ['playa', 'gastronomia', 'monumentos'] });
+    expect(salida.respuesta).toContain('qué ritmo prefieres');
+  });
+
+  it('guarda solo los intereses de los que habla el viajero y traduce «cultura»', async () => {
+    // Caso real: «la comida y la cultura» salía como gastronomía y naturaleza.
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada', dias: 4, compania: 'familia', intereses: ['gastronomia', 'naturaleza'] });
+
+    const salida = await flow({
+      estado: { perfil: {}, preguntados: ['destino'] },
+      mensaje: 'quiero viajar a granada con mi familia, 4 dias y nos gusta la comida y la cultura',
+    });
+
+    expect(salida.estado.perfil.intereses).toEqual(['gastronomia', 'monumentos', 'museos']);
+  });
+
+  it('no saluda en mitad de la conversación aunque el modelo lo haga', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, 'Hola, ¿te gustaría contar algo más del viaje?');
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 2 }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'Me gustan los museos',
+    });
+
+    expect(salida.respuesta).toMatch(/^¿Te gustaría contar algo más del viaje\?/);
+  });
+
+  it('en la confirmación marca los datos que el viajero no ha dado', async () => {
+    const { flow } = crearEntorno(sinDatos);
+
+    const salida = await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 4, compania: 'pareja', intereses: ['playa'] }, preguntados: ['destino', 'opcionales'] },
+      mensaje: 'nada más',
+    });
+
+    expect(salida.respuesta).toContain('ritmo normal (por defecto), presupuesto medio (por defecto)');
+  });
+
   it('tras los opcionales pide confirmar el perfil, sin terminar todavía', async () => {
     const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' });
 
@@ -138,7 +207,7 @@ describe('entrevistaFlow', () => {
 
     expect(salida.perfil).toBeNull();
     expect(salida.respuesta).toBe(
-      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal, presupuesto medio. Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
+      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
     );
     expect(salida.estado.preguntados.at(-1)).toBe('confirmacion');
   });

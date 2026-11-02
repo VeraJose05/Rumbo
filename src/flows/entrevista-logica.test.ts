@@ -1,6 +1,15 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
-import { avisoDestino, esAfirmacion, fusionarPerfil, resumirPerfil, siguientePaso } from './entrevista-logica.js';
+import {
+  avisoDestino,
+  descartarSinRespaldo,
+  respaldarIntereses,
+  esAfirmacion,
+  fusionarPerfil,
+  opcionalesPendientes,
+  resumirPerfil,
+  siguientePaso,
+} from './entrevista-logica.js';
 import { PerfilSchema } from './perfil.js';
 
 const sinDatos = { destino: null, dias: null, intereses: [], ritmo: null, presupuesto: null, compania: null };
@@ -89,6 +98,17 @@ describe('siguientePaso', () => {
     });
   });
 
+  it('no vuelve a preguntar los intereses si el viajero ya dijo alguno además de «niños»', () => {
+    const perfil = { destino: 'Sevilla', dias: 4, intereses: ['monumentos', 'gastronomia'] };
+    expect(siguientePaso({ perfil, preguntados: ['destino'] })).toEqual({ tipo: 'preguntar', campo: 'opcionales' });
+  });
+
+  it('si ya sabe compañía, ritmo y presupuesto, no pregunta los opcionales y pasa a confirmar', () => {
+    // Todo dicho de golpe en el primer mensaje.
+    const perfil = { destino: 'Sevilla', dias: 4, intereses: ['monumentos'], ritmo: 'tranquilo', presupuesto: 'bajo', compania: 'familia' };
+    expect(siguientePaso({ perfil, preguntados: ['destino'] })).toEqual({ tipo: 'confirmar', perfil });
+  });
+
   it('si al corregir falta un dato obligatorio, vuelve a preguntarlo antes de confirmar', () => {
     const perfil = { destino: 'Sevilla', dias: 2 };
     expect(siguientePaso({ perfil, preguntados: ['intereses', 'opcionales'] })).toEqual({
@@ -144,5 +164,88 @@ describe('esAfirmacion', () => {
     for (const mensaje of ['no', 'sí, pero mejor 2 días', 'perfecto, añade gastronomía', 'vale pero quita museos', 'casi']) {
       expect(esAfirmacion(mensaje)).toBe(false);
     }
+  });
+});
+
+describe('opcionalesPendientes', () => {
+  it('ofrece solo los datos opcionales que faltan, en el orden de la pregunta', () => {
+    expect(opcionalesPendientes({ compania: 'familia' })).toEqual(['ritmo', 'presupuesto']);
+    expect(opcionalesPendientes({})).toEqual(['compania', 'ritmo', 'presupuesto']);
+    expect(opcionalesPendientes({ compania: 'solo', ritmo: 'normal', presupuesto: 'alto' })).toEqual([]);
+  });
+
+  it('no cuenta como sabido un valor que no es válido', () => {
+    expect(opcionalesPendientes({ ritmo: 'rapidísimo' })).toEqual(['compania', 'ritmo', 'presupuesto']);
+  });
+});
+
+// El extractor (3B) rellenaba ritmo «normal» y presupuesto «medio» aunque el viajero no dijera nada.
+describe('descartarSinRespaldo', () => {
+  const extraido = { ...sinDatos, destino: 'Sevilla', dias: 4, compania: 'pareja', ritmo: 'normal', presupuesto: 'medio' };
+
+  it('quita el ritmo y el presupuesto si el mensaje no habla de ellos', () => {
+    const mensaje = 'quiero ir a sevilla unos 4-5 dias, con mi pareja, nos interesa la playa las tapas y los monumentos';
+    expect(descartarSinRespaldo(extraido, mensaje)).toEqual({ ...extraido, ritmo: null, presupuesto: null });
+  });
+
+  it('los conserva si el mensaje habla de ellos, aunque sea de forma indirecta', () => {
+    expect(descartarSinRespaldo({ ...extraido, ritmo: 'tranquilo', presupuesto: 'bajo' }, 'tranquilos y sin gastar mucho')).toMatchObject({
+      ritmo: 'tranquilo',
+      presupuesto: 'bajo',
+    });
+    expect(descartarSinRespaldo(extraido, 'Vamos en pareja, ritmo normal, presupuesto medio')).toMatchObject({ ritmo: 'normal', presupuesto: 'medio' });
+    expect(descartarSinRespaldo({ ...extraido, presupuesto: 'alto' }, 'queremos darnos un lujo')).toMatchObject({ presupuesto: 'alto' });
+  });
+
+  it('acepta respuestas cortas a la pregunta («intenso», «medio»)', () => {
+    expect(descartarSinRespaldo({ ...extraido, ritmo: 'intenso', presupuesto: null }, 'intenso')).toMatchObject({ ritmo: 'intenso' });
+    expect(descartarSinRespaldo({ ...extraido, ritmo: null }, 'medio')).toMatchObject({ presupuesto: 'medio' });
+  });
+
+  it('no toca el resto de datos', () => {
+    expect(descartarSinRespaldo(extraido, 'playa')).toMatchObject({ destino: 'Sevilla', dias: 4, compania: 'pareja' });
+  });
+});
+
+describe('resumirPerfil con valores por defecto', () => {
+  it('marca los datos que el viajero no ha dado', () => {
+    const perfil = PerfilSchema.parse({ destino: 'Sevilla', dias: 4, intereses: ['playa'], compania: 'pareja' });
+    expect(resumirPerfil(perfil, ['ritmo', 'presupuesto'])).toBe(
+      'Sevilla, 4 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: playa.',
+    );
+  });
+});
+
+// El extractor convirtió «la comida y la cultura» en gastronomía y naturaleza.
+describe('respaldarIntereses', () => {
+  it('quita los intereses de los que el mensaje no habla y traduce «cultura» a monumentos y museos', () => {
+    expect(respaldarIntereses(['gastronomia', 'naturaleza'], 'quiero viajar a granada con mi familia, 4 dias y nos gusta la comida y la cultura')).toEqual([
+      'gastronomia',
+      'monumentos',
+      'museos',
+    ]);
+  });
+
+  it('conserva los intereses respaldados, aunque se digan con otras palabras', () => {
+    // Con la errata «monumetos», que el modelo sí entendía.
+    expect(respaldarIntereses(['monumentos', 'gastronomia'], 'quiero ver monumetos y probar las tapas andaluzas')).toEqual(['monumentos', 'gastronomia']);
+    expect(respaldarIntereses(['monumentos', 'gastronomia'], 'ver la catedral y comer bien')).toEqual(['monumentos', 'gastronomia']);
+    expect(respaldarIntereses(['naturaleza', 'ocio-nocturno'], 'pasear por el parque y salir de copas')).toEqual(['naturaleza', 'ocio-nocturno']);
+    expect(respaldarIntereses(['ninos'], 'vamos con nuestros hijos')).toEqual(['ninos']);
+  });
+
+  it('deja al modelo los intereses que se deducen de nombres de sitios o platos', () => {
+    // Una lista de palabras no puede saber que el Prado es un museo: eso sí lo sabe el modelo.
+    expect(respaldarIntereses(['ocio-nocturno', 'museos'], 'queremos salir de fiesta y ver el Prado')).toEqual(['ocio-nocturno', 'museos']);
+    expect(respaldarIntereses(['playa', 'gastronomia', 'ninos'], 'playa y paella con los niños')).toEqual(['playa', 'gastronomia', 'ninos']);
+    expect(respaldarIntereses(['monumentos'], 'Gaudí y la Sagrada Familia')).toEqual(['monumentos']);
+  });
+
+  it('no deduce «niños» de «familia»', () => {
+    expect(respaldarIntereses(['ninos', 'gastronomia'], 'con mi familia, nos gusta comer')).toEqual(['gastronomia']);
+  });
+
+  it('acepta los nombres de la lista tal cual, como respuesta a la pregunta', () => {
+    expect(respaldarIntereses(['museos', 'playa'], 'museos y playa')).toEqual(['museos', 'playa']);
   });
 });
