@@ -4,6 +4,7 @@ import {
   avisoDestino,
   descartarSinRespaldo,
   respaldarIntereses,
+  respaldarQuitar,
   esAfirmacion,
   esPregunta,
   fusionarPerfil,
@@ -165,6 +166,29 @@ describe('esAfirmacion', () => {
     for (const mensaje of ['no', 'sí, pero mejor 2 días', 'perfecto, añade gastronomía', 'vale pero quita museos', 'casi']) {
       expect(esAfirmacion(mensaje)).toBe(false);
     }
+  });
+
+  it('reconoce que no quiere cambiar nada', () => {
+    // Caso real: «no» a «¿Es correcto, o quieres cambiar algo?» quería decir «no cambies nada».
+    for (const mensaje of ['nada', 'no quiero cambiar nada', 'no, está bien así', 'todo bien, gracias', 'así está bien', 'no, nada más']) {
+      expect(esAfirmacion(mensaje), mensaje).toBe(true);
+    }
+  });
+
+  it('no toma por conformidad un «no» solo ni un «no está bien»', () => {
+    for (const mensaje of ['no', 'no está bien', 'no, no está bien', 'no, quita los monumentos', 'nada de museos']) {
+      expect(esAfirmacion(mensaje), mensaje).toBe(false);
+    }
+  });
+});
+
+describe('respaldarQuitar', () => {
+  it('solo quita los intereses que el mensaje nombra', () => {
+    // Caso real: un simple «no» en la confirmación quitaba los monumentos.
+    expect(respaldarQuitar(['monumentos'], 'no')).toEqual([]);
+    expect(respaldarQuitar(['museos', 'monumentos'], 'quita los museos')).toEqual(['museos']);
+    expect(respaldarQuitar(['ocio-nocturno'], 'sin salir de noche')).toEqual(['ocio-nocturno']);
+    expect(respaldarQuitar(['gastronomia'], 'quita lo de comer')).toEqual(['gastronomia']);
   });
 });
 

@@ -14,6 +14,7 @@ import {
   listaDestinos,
   opcionalesPendientes,
   respaldarIntereses,
+  respaldarQuitar,
   resumirPerfil,
   siguientePaso,
   type EstadoEntrevista,
@@ -199,7 +200,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
       // acababa como gastronomía sin que el viajero hubiera dicho qué le gusta.
       const extraido =
         campoPreguntado === 'confirmacion'
-          ? conRespaldo
+          ? { ...conRespaldo, interesesQuitar: respaldarQuitar(output.interesesQuitar, mensaje) }
           : { ...conRespaldo, interesesQuitar: [], intereses: preguntaDelViajero ? [] : conRespaldo.intereses };
       estado = { ...estado, perfil: fusionarPerfil(estado.perfil, extraido) };
     }
@@ -261,7 +262,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
   if (paso.tipo === 'confirmar') {
     estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
     const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
-    const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`);
+    const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Está todo bien?`);
     return { estado, respuesta, perfil: null, respaldo: null };
   }
   // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las

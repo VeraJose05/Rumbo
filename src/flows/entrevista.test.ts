@@ -252,7 +252,7 @@ describe('entrevistaFlow', () => {
 
     expect(salida.perfil).toBeNull();
     expect(salida.respuesta).toBe(
-      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: museos. ¿Es correcto, o quieres cambiar algo?',
+      'Esto es lo que he entendido: Sevilla, 2 días, en pareja, ritmo normal (por defecto), presupuesto medio (por defecto). Intereses: museos. ¿Está todo bien?',
     );
     expect(salida.estado.preguntados.at(-1)).toBe('confirmacion');
   });
@@ -346,12 +346,23 @@ describe('entrevistaFlow', () => {
   });
 
   it('si dice que no pero no indica qué cambiar, le pregunta qué quiere cambiar', async () => {
-    const { flow } = crearEntorno();
+    // El extractor marcaba a veces los intereses para quitar con un simple «no».
+    const { flow } = crearEntorno({ ...sinDatos, interesesQuitar: ['museos'] });
 
     const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'no' });
 
     expect(salida.perfil).toBeNull();
     expect(salida.respuesta).toBe('Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».');
+    expect(salida.estado.perfil).toEqual(completo);
+  });
+
+  it('«no quiero cambiar nada» en la confirmación termina, sin llamar al modelo', async () => {
+    const { flow, peticiones } = crearEntorno();
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: confirmando }, mensaje: 'no quiero cambiar nada' });
+
+    expect(salida.perfil).not.toBeNull();
+    expect(peticiones).toHaveLength(0);
   });
 });
 
