@@ -8,6 +8,7 @@ import {
   avisoDestino,
   descartarSinRespaldo,
   esAfirmacion,
+  esPregunta,
   ETIQUETAS_INTERES,
   fusionarPerfil,
   listaDestinos,
@@ -124,15 +125,24 @@ Tienes delante la conversación con el viajero. Escribe tu siguiente mensaje:
 - No nombres monumentos, barrios, restaurantes ni otros lugares concretos que el viajero no haya dicho: todavía no tienes la guía delante.
 - No enumeres opciones.`;
 
+/**
+ * Contesta una pregunta del viajero con la guía del destino (RAG). En la aplicación es el
+ * preguntaFlow; en los tests, uno simulado. Sin ella, la entrevista no contesta preguntas.
+ */
+export type ResponderPregunta = (
+  pregunta: string,
+  destino: string,
+) => Promise<{ hayInformacion: boolean; respuesta: string; fuentes: { url: string }[] }>;
+
 type Entrada = z.infer<typeof EntrevistaEntradaSchema>;
 type Salida = z.infer<typeof EntrevistaSalidaSchema>;
 
-export function definirEntrevistaFlow(ai: Genkit) {
+export function definirEntrevistaFlow(ai: Genkit, responder?: ResponderPregunta) {
   return ai.defineFlow(
     { name: 'entrevistaFlow', inputSchema: EntrevistaEntradaSchema, outputSchema: EntrevistaSalidaSchema },
     async (entrada) => {
       // El historial se apunta aquí, en un solo sitio, sea cual sea el camino que tome el turno.
-      const salida = await turno(ai, entrada);
+      const salida = await turno(ai, entrada, responder);
       const historial: MensajeConversacion[] = [
         ...(entrada.estado?.historial ?? []),
         ...(entrada.mensaje.trim() ? [{ rol: 'viajero' as const, texto: entrada.mensaje }] : []),
@@ -147,7 +157,7 @@ export function definirEntrevistaFlow(ai: Genkit) {
 const ROL_GENKIT = { viajero: 'user', rumbo: 'model' } as const;
 
 /** Un turno de la entrevista, sin ocuparse del historial. */
-async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Promise<Salida> {
+async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, responder?: ResponderPregunta): Promise<Salida> {
   const historialPrevio = estadoPrevio?.historial ?? [];
   let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
@@ -207,7 +217,21 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
     if (aviso) return { estado, respuesta: aviso, perfil: null, respaldo: null };
   }
 
-  // 3. Decidir el siguiente paso.
+  // 3. Si el viajero pregunta algo del destino, lo contesta la guía, con fuente, y no el modelo de la
+  // entrevista: el modelo pequeño no seguía la orden de contestar y luego preguntar, y sin la guía
+  // se lo habría inventado.
+  const destino = typeof estado.perfil.destino === 'string' ? estado.perfil.destino : null;
+  let contestado: string | null = null;
+  if (responder && destino && esPregunta(mensaje)) {
+    const guia = await responder(mensaje, destino);
+    if (guia.hayInformacion) {
+      const enlace = guia.fuentes[0] ? ` ([Wikivoyage](${guia.fuentes[0].url}))` : '';
+      contestado = `${guia.respuesta.trim()}${enlace}`;
+    }
+  }
+  const delante = (texto: string) => (contestado ? `${contestado} ${texto}` : texto);
+
+  // 4. Decidir el siguiente paso.
   const paso = siguientePaso(estado);
   if (paso.tipo === 'terminar') {
     return { estado, respuesta: '¡Perfecto! Preparo tu itinerario.', perfil: paso.perfil, respaldo: null };
@@ -215,14 +239,14 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
   if (paso.tipo === 'confirmar') {
     estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
     const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
-    const respuesta = `Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`;
+    const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Es correcto, o quieres cambiar algo?`);
     return { estado, respuesta, perfil: null, respaldo: null };
   }
   // Si ya se había preguntado esto y sigue faltando, el viajero no ha contestado: se le ayuda con las opciones.
   const repetida = campoPreguntado === paso.campo;
   estado = { ...estado, preguntados: [...estado.preguntados, paso.campo] };
 
-  // 4. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
+  // 5. Redactar la pregunta con el modelo y validarla; si no pasa, texto de reserva.
   const { objetivo, reserva, opciones } = pregunta(paso.campo, estado.perfil);
   const { text } = await ai.generate({
     system: SISTEMA_PREGUNTA,
@@ -230,12 +254,13 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
     messages: historialPrevio.map((m) => ({ role: ROL_GENKIT[m.rol], content: [{ text: m.texto }] })),
     prompt: [
       mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
+      ...(contestado ? [`Ya le has contestado: «${contestado}». No vuelvas a contestarlo: solo retoma la conversación.`] : []),
       `Lo que necesitas averiguar ahora: ${objetivo}.`,
     ].join('\n'),
   });
   // Lo dicho por el viajero en cualquier momento de la conversación se puede repetir.
   const delViajero = historialPrevio.filter((m) => m.rol === 'viajero').map((m) => m.texto);
-  const permitidos = [mensaje, ...delViajero, reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
+  const permitidos = [mensaje, ...delViajero, contestado ?? '', reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
   const validacion = validarMensaje(text, permitidos);
   // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
   const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
@@ -245,7 +270,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada): Pr
   const conOpciones = paso.campo === 'destino' || paso.campo === 'opcionales' || repetida;
   return {
     estado,
-    respuesta: conOpciones ? `${redactada} ${opciones}` : redactada,
+    respuesta: delante(conOpciones ? `${redactada} ${opciones}` : redactada),
     perfil: null,
     respaldo: validacion.valido ? null : validacion.motivo,
   };

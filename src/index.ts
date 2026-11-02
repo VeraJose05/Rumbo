@@ -13,11 +13,12 @@ import { crearReranker } from './modelos/reranker.js';
 export const configModelos = cargarConfigModelos();
 export const ai = crearAi(configModelos);
 export const pruebaFlow = definirPruebaFlow(ai);
-export const entrevistaFlow = definirEntrevistaFlow(ai);
 
 export const coleccion = await abrirColeccion(cargarConfigChroma());
 const recuperador = definirRecuperadorChroma(ai, coleccion, `ollama/${configModelos.embedder}`);
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
+// La entrevista contesta las preguntas del viajero con la guía (RAG básico, C1).
+export const entrevistaFlow = definirEntrevistaFlow(ai, (pregunta, destino) => preguntaFlow({ pregunta, destino }));
 // C2: el reranker solo se llama al planificar en ese modo, así que C0 y C1 funcionan sin él.
 const recuperadorAvanzado = definirRecuperadorHibrido(ai, coleccion, `ollama/${configModelos.embedder}`, crearReranker(configModelos.rerankerUrl));
 export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado);

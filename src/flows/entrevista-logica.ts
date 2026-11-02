@@ -86,6 +86,18 @@ export function esAfirmacion(mensaje: string): boolean {
   return palabras.length > 0 && palabras.every((p) => AFIRMATIVAS.has(p));
 }
 
+// Palabras con las que empieza una pregunta escrita sin signos. Solo con tilde: sin ella, «como»,
+// «que» o «cuando» son también conjunciones («como 3 días», «cuando haga bueno»). «cuantos» y
+// «cuantas» sí se admiten sin tilde porque al principio de frase casi siempre preguntan.
+const INTERROGATIVAS = new Set(['qué', 'cuánto', 'cuánta', 'cuántos', 'cuántas', 'cuantos', 'cuantas', 'cómo', 'dónde', 'cuál', 'cuáles', 'cuándo']);
+
+/** Si el mensaje del viajero es una pregunta: lleva «?» o empieza por una palabra interrogativa. */
+export function esPregunta(mensaje: string): boolean {
+  if (mensaje.includes('?')) return true;
+  const [primera] = mensaje.trim().toLowerCase().split(/[^\p{L}]+/u);
+  return INTERROGATIVAS.has(primera ?? '');
+}
+
 /**
  * Respuesta para un destino sin guía. La entrevista no lo acepta (el perfil sí admitiría cualquier
  * destino: los perfiles de prueba de la evaluación se crean directamente, sin entrevista).

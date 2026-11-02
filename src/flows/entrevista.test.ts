@@ -1,7 +1,7 @@
 // RF-01: flow de entrevista, probado con un modelo simulado.
 import { genkit, type GenerateRequest } from 'genkit';
 import { describe, expect, it } from 'vitest';
-import { definirEntrevistaFlow } from './entrevista.js';
+import { definirEntrevistaFlow, type ResponderPregunta } from './entrevista.js';
 
 const sinDatos = {
   destino: null,
@@ -17,7 +17,7 @@ const todoPreguntado = ['destino', 'dias', 'intereses', 'opcionales'];
 const confirmando = [...todoPreguntado, 'confirmacion'];
 
 /** Modelo simulado: devuelve la extracción indicada cuando se le pide JSON y la pregunta indicada si no. */
-function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?') {
+function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?', responder?: ResponderPregunta) {
   const peticiones: GenerateRequest[] = [];
   const ai = genkit({ model: 'simulado' });
   ai.defineModel({ name: 'simulado', supports: { constrained: 'all', output: ['json', 'text'] } }, async (peticion) => {
@@ -26,7 +26,7 @@ function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pr
     return { message: { role: 'model', content: [{ text: texto }] } };
   });
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirEntrevistaFlow(ai), peticiones, textoDe };
+  return { flow: definirEntrevistaFlow(ai, responder), peticiones, textoDe };
 }
 
 describe('entrevistaFlow', () => {
@@ -320,5 +320,71 @@ describe('entrevistaFlow', () => {
 
     expect(salida.perfil).toBeNull();
     expect(salida.respuesta).toBe('Vale, ¿qué quieres cambiar? Si está todo bien, dime «sí».');
+  });
+});
+
+describe('entrevistaFlow con preguntas del viajero', () => {
+  const URL = 'https://es.wikivoyage.org/wiki/Granada';
+  /** Guía simulada que apunta lo que se le pregunta. */
+  function guia(hayInformacion = true) {
+    const llamadas: [string, string][] = [];
+    const responder: ResponderPregunta = async (pregunta, destino) => {
+      llamadas.push([pregunta, destino]);
+      return hayInformacion
+        ? { hayInformacion, respuesta: 'Con dos o tres días ves la Alhambra y el Albaicín.', fuentes: [{ url: URL }] }
+        : { hayInformacion, respuesta: 'No tengo información.', fuentes: [] };
+    };
+    return { responder, llamadas };
+  }
+  const enGranada = { perfil: { destino: 'Granada' }, preguntados: ['destino', 'dias'] };
+
+  it('contesta con la guía lo que pregunta el viajero y luego retoma lo que falta', async () => {
+    const { responder, llamadas } = guia();
+    const { flow, peticiones, textoDe } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+
+    const salida = await flow({ estado: enGranada, mensaje: 'no sé, ¿cuántos días hacen falta para verla bien?' });
+
+    expect(llamadas).toEqual([['no sé, ¿cuántos días hacen falta para verla bien?', 'Granada']]);
+    expect(salida.respuesta).toMatch(
+      /^Con dos o tres días ves la Alhambra y el Albaicín\. \(\[Wikivoyage\]\(https:\/\/es\.wikivoyage\.org\/wiki\/Granada\)\) ¿Cuántos días te planteas\?/,
+    );
+    // El modelo que redacta sabe lo que ya se ha contestado, para no volver a hacerlo.
+    expect(textoDe(peticiones.at(-1)!)).toContain('Ya le has contestado: «Con dos o tres días');
+  });
+
+  it('el modelo puede repetir los lugares de la respuesta de la guía sin que salte el guardarraíl', async () => {
+    const { responder } = guia();
+    const { flow } = crearEntorno(sinDatos, 'La Alhambra merece la pena. ¿Cuántos días te planteas?', responder);
+
+    const salida = await flow({ estado: enGranada, mensaje: '¿qué es lo más importante?' });
+
+    expect(salida.respaldo).toBeNull();
+  });
+
+  it('si la guía no tiene información, no añade su respuesta', async () => {
+    const { responder } = guia(false);
+    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+
+    const salida = await flow({ estado: enGranada, mensaje: '¿hay playa?' });
+
+    expect(salida.respuesta).toMatch(/^¿Cuántos días te planteas\?/);
+  });
+
+  it('no consulta la guía si el mensaje no es una pregunta', async () => {
+    const { responder, llamadas } = guia();
+    const { flow } = crearEntorno({ ...sinDatos, dias: 3 }, undefined, responder);
+
+    await flow({ estado: enGranada, mensaje: '3 días' });
+
+    expect(llamadas).toEqual([]);
+  });
+
+  it('no consulta la guía si todavía no se sabe el destino', async () => {
+    const { responder, llamadas } = guia();
+    const { flow } = crearEntorno(sinDatos, undefined, responder);
+
+    await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: '¿qué me recomiendas?' });
+
+    expect(llamadas).toEqual([]);
   });
 });
