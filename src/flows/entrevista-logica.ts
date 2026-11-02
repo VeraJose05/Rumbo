@@ -76,14 +76,26 @@ const AFIRMATIVAS = new Set([
   'claro', 'bien', 'esta', 'todo', 'eso', 'es', 'exacto', 'venga', 'asi',
 ]);
 
+// Palabras que pueden acompañar a la conformidad sin cambiar nada («no quiero cambiar nada»,
+// «no, nada más», «todo bien, gracias»). Solas no bastan: un «no» a secas pide un cambio.
+const NEUTRAS = new Set(['no', 'nada', 'mas', 'quiero', 'cambiar', 'cambies', 'cambio', 'que', 'gracias', 'me', 'parece', 'lo', 'dejamos', 'deja', 'dejalo']);
+
 /**
  * Reconoce en código una respuesta corta de acuerdo, sin pasar por el modelo: en las pruebas,
  * el extractor convertía «perfecto» en «con amigos, ritmo intenso, presupuesto alto».
  * Si el mensaje tiene cualquier otra palabra («sí, pero mejor 2 días»), no es una simple afirmación.
+ * También cuenta decir que no hay nada que cambiar («nada», «no, está bien así»).
  */
 export function esAfirmacion(mensaje: string): boolean {
-  const palabras = normalizar(mensaje).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
-  return palabras.length > 0 && palabras.every((p) => AFIRMATIVAS.has(p));
+  const texto = normalizar(mensaje);
+  // «no está bien» dice lo contrario que «no, está bien».
+  if (/\bno\s+esta\b/.test(texto)) return false;
+  const palabras = texto.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  return (
+    palabras.length > 0 &&
+    palabras.every((p) => AFIRMATIVAS.has(p) || NEUTRAS.has(p)) &&
+    palabras.some((p) => AFIRMATIVAS.has(p) || p === 'nada')
+  );
 }
 
 // Palabras con las que empieza una pregunta escrita sin signos. Solo con tilde: sin ella, «como»,
@@ -193,6 +205,15 @@ function nombraLugar(mensaje: string): boolean {
 
 // Palabras que el extractor traducía mal y que el código traduce: «cultura» son monumentos y museos.
 const CULTURA = /\b(cultur|histori|arte\b)/;
+
+/**
+ * Intereses que se pueden quitar: solo los que el mensaje nombra. Con un simple «no» en la
+ * confirmación, el extractor marcaba los monumentos para quitar.
+ */
+export function respaldarQuitar(quitar: (typeof INTERESES)[number][], mensaje: string): (typeof INTERESES)[number][] {
+  const texto = normalizar(mensaje);
+  return quitar.filter((i) => (RESPALDO_INTERES[i] ?? RESPALDO_DEDUCIBLE[i])?.test(texto) ?? false);
+}
 
 /**
  * Quita los intereses inventados (sin respaldo en el mensaje) y añade monumentos y museos si habla de
