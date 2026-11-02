@@ -203,8 +203,19 @@ describe('descartarSinRespaldo', () => {
     expect(descartarSinRespaldo({ ...extraido, ritmo: null }, 'medio')).toMatchObject({ presupuesto: 'medio' });
   });
 
-  it('no toca el resto de datos', () => {
-    expect(descartarSinRespaldo(extraido, 'playa')).toMatchObject({ destino: 'Sevilla', dias: 4, compania: 'pareja' });
+  it('no toca el destino ni los días', () => {
+    expect(descartarSinRespaldo(extraido, 'playa')).toMatchObject({ destino: 'Sevilla', dias: 4 });
+  });
+
+  it('quita la compañía si el mensaje no habla de ella', () => {
+    // Caso real: «Un fin de semana en Granada» salía como viaje en pareja.
+    expect(descartarSinRespaldo(extraido, 'Un fin de semana en Granada')).toMatchObject({ compania: null });
+  });
+
+  it('conserva la compañía si el mensaje habla de ella', () => {
+    for (const mensaje of ['con mi pareja', 'voy sola', 'con mi mujer y mis dos hijos', 'en familia', 'con unos amigos', 'mi novio y yo']) {
+      expect(descartarSinRespaldo(extraido, mensaje), mensaje).toMatchObject({ compania: 'pareja' });
+    }
   });
 });
 
@@ -218,7 +229,27 @@ describe('resumirPerfil con valores por defecto', () => {
 });
 
 // El extractor convirtió «la comida y la cultura» en gastronomía y naturaleza.
+describe('respaldarIntereses fuera de la pregunta de intereses', () => {
+  it('no deja intereses si el mensaje solo dice destino y días', () => {
+    // Caso real: «Un fin de semana en Granada» dejaba gastronomía y monumentos.
+    expect(respaldarIntereses(['gastronomia', 'monumentos'], 'Un fin de semana en Granada', true)).toEqual([]);
+  });
+
+  it('los deja si el mensaje habla de ellos', () => {
+    expect(respaldarIntereses(['monumentos', 'gastronomia'], '4 días en Sevilla, monumentos y tapas', true)).toEqual(['monumentos', 'gastronomia']);
+    expect(respaldarIntereses(['museos'], 'Madrid, que quiero ver museos', true)).toEqual(['museos']);
+  });
+
+  it('los deja si el mensaje nombra un lugar que no es el destino', () => {
+    expect(respaldarIntereses(['museos'], 'quiero ver el Prado en Madrid', true)).toEqual(['museos']);
+  });
+});
+
 describe('respaldarIntereses', () => {
+  it('respondiendo a los intereses, confía en lo que el modelo deduce de los nombres', () => {
+    expect(respaldarIntereses(['monumentos'], 'me encanta todo lo de Gaudí')).toEqual(['monumentos']);
+  });
+
   it('quita los intereses de los que el mensaje no habla y traduce «cultura» a monumentos y museos', () => {
     expect(respaldarIntereses(['gastronomia', 'naturaleza'], 'quiero viajar a granada con mi familia, 4 dias y nos gusta la comida y la cultura')).toEqual([
       'gastronomia',

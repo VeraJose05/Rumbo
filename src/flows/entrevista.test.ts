@@ -182,6 +182,16 @@ describe('entrevistaFlow', () => {
     expect(salida.respuesta).toContain('qué ritmo prefieres');
   });
 
+  it('con solo destino y días no guarda compañía ni intereses que el viajero no ha dicho', async () => {
+    // Caso real con la sugerencia de la web «Un fin de semana en Granada».
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada', dias: 2, compania: 'pareja', intereses: ['gastronomia', 'monumentos'] });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Un fin de semana en Granada' });
+
+    expect(salida.estado.perfil).toEqual({ destino: 'Granada', dias: 2 });
+    expect(salida.estado.preguntados.at(-1)).toBe('intereses');
+  });
+
   it('guarda solo los intereses de los que habla el viajero y traduce «cultura»', async () => {
     // Caso real: «la comida y la cultura» salía como gastronomía y naturaleza.
     const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada', dias: 4, compania: 'familia', intereses: ['gastronomia', 'naturaleza'] });
