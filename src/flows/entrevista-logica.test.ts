@@ -1,6 +1,7 @@
 // RF-01: lógica determinista de la entrevista (qué guardar, qué preguntar y cuándo terminar).
 import { describe, expect, it } from 'vitest';
 import {
+  avisoCobertura,
   avisoDestino,
   descartarSinRespaldo,
   diasDelMensaje,
@@ -356,5 +357,27 @@ describe('esPregunta', () => {
     // «como» y «cuando» sin tilde no se cuentan: son también conjunciones.
     expect(esPregunta('como 3 días')).toBe(false);
     expect(esPregunta('cuando haga bueno')).toBe(false);
+  });
+});
+
+describe('avisoCobertura', () => {
+  it('avisa de los intereses que la guía no cubre', () => {
+    expect(avisoCobertura('Sevilla', ['monumentos', 'playa'], ['playa'])).toBe(
+      'Ojo: la guía de Sevilla no habla de playa, así que el itinerario se centrará en lo demás.',
+    );
+    expect(avisoCobertura('Sevilla', ['playa', 'ninos'], ['playa', 'ninos'])).toBe(
+      'Ojo: la guía de Sevilla no habla de playa ni de niños, así que el itinerario se centrará en lo imprescindible.',
+    );
+  });
+
+  it('sin intereses sin cubrir, no dice nada', () => {
+    expect(avisoCobertura('Sevilla', ['monumentos'], [])).toBe('');
+  });
+});
+
+describe('resumirPerfil sin intereses', () => {
+  it('dice «lo imprescindible» en vez de dejarlo vacío (para la planificación sin intereses cubiertos)', () => {
+    const perfil = { ...PerfilSchema.parse({ destino: 'Sevilla', dias: 2, intereses: ['playa'] }), intereses: [] };
+    expect(resumirPerfil(perfil)).toMatch(/Intereses: lo imprescindible\.$/);
   });
 });

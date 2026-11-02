@@ -2,6 +2,7 @@
 // en el modo indicado: C0 sin recuperación, C1 con RAG básico y C2 con RAG avanzado
 // (búsqueda híbrida y reranking). C1 y C2 solo se diferencian en el recuperador.
 import { z, type Document, type Genkit, type RetrieverArgument } from 'genkit';
+import { sinCobertura } from '../config/cobertura.js';
 import { consultasDelPerfil, fusionarResultados } from './consultas.js';
 import {
   actividadesPorDia,
@@ -61,6 +62,9 @@ export const ItinerarioSchema = z.object({
   hayInformacion: z.boolean(),
   dias: z.array(DiaFinalSchema),
   fuentes: z.array(FuenteSchema),
+  /** Intereses que la guía no cubre (RF-07): no se buscan ni se piden al modelo; vacío en C0. */
+  // Opcional: los registros de la evaluación anteriores a RF-07 no lo tienen.
+  interesesSinCobertura: z.array(z.string()).optional(),
   /** Todo lo recuperado, citado o no, para registrar cada ejecución (RNF-04); vacío en C0. */
   recuperados: z.array(RecuperadoSchema),
 });
@@ -69,10 +73,20 @@ export type Itinerario = z.infer<typeof ItinerarioSchema>;
 
 type Recuperador = RetrieverArgument<typeof OpcionesRecuperacionSchema>;
 
-export function definirPlanificacionFlow(ai: Genkit, recuperador: Recuperador, recuperadorAvanzado?: Recuperador) {
+export function definirPlanificacionFlow(
+  ai: Genkit,
+  recuperador: Recuperador,
+  recuperadorAvanzado?: Recuperador,
+  calcularSinCobertura: (destino: string, intereses: string[]) => string[] = sinCobertura,
+) {
   return ai.defineFlow(
     { name: 'planificacionFlow', inputSchema: PlanificacionEntradaSchema, outputSchema: ItinerarioSchema },
-    async ({ perfil, modo }) => {
+    async ({ perfil: perfilViajero, modo }) => {
+      // 0. RF-07: con la guía (C1, C2), los intereses que no cubre no se buscan ni se piden al modelo:
+      // si no, rellenaba «playa en Sevilla» con bares. Sin ninguno cubierto, planifica lo imprescindible.
+      const interesesSinCobertura = modo === 'C0' ? [] : calcularSinCobertura(perfilViajero.destino, perfilViajero.intereses);
+      const perfil = { ...perfilViajero, intereses: perfilViajero.intereses.filter((i) => !interesesSinCobertura.includes(i)) };
+
       // 1. Recuperación (C1 y C2): una consulta por interés, fusionadas por turnos.
       let documentos: Document[] | null = null;
       if (modo !== 'C0') {
@@ -92,7 +106,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: Recuperador, r
           listas.push(encontrados.map((d) => Object.assign(d, { id: String(d.metadata?.id ?? '') })));
         }
         documentos = fusionarResultados(listas, TOTAL_FRAGMENTOS);
-        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [], recuperados: [] };
+        if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [], interesesSinCobertura, recuperados: [] };
       }
       const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
 
@@ -150,6 +164,7 @@ export function definirPlanificacionFlow(ai: Genkit, recuperador: Recuperador, r
         hayInformacion: true,
         dias: diasFinales,
         fuentes: documentos ? fuentesCitadas(citadas, documentos) : [],
+        interesesSinCobertura,
         recuperados,
       };
     },

@@ -69,6 +69,11 @@ describe('itinerarioAHtml', () => {
     expect(html).toContain('CC BY-SA 4.0');
   });
 
+  it('avisa de los intereses que la guía no cubre (RF-07)', () => {
+    const html = itinerarioAHtml(perfil, itinerario([], { interesesSinCobertura: ['playa', 'ninos'] }));
+    expect(html).toContain('La guía de Granada no habla de playa ni de niños');
+  });
+
   it('sin información del destino, lo dice en vez de planificar', () => {
     const html = itinerarioAHtml(perfil, itinerario([], { hayInformacion: false, fuentes: [] }));
     expect(html).toContain('No tengo información de Granada');

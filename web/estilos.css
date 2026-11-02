@@ -380,6 +380,15 @@ main {
   padding-left: 24px;
 }
 
+.nota-cobertura {
+  margin: 0;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--borde);
+  background: var(--aviso-fondo);
+  color: var(--aviso);
+  font-size: 0.92rem;
+}
+
 /* Compositor */
 .pie {
   padding: 8px 16px 12px;

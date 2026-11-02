@@ -273,6 +273,19 @@ describe('entrevistaFlow', () => {
     expect(salida.estado.preguntados.at(-1)).toBe('confirmacion');
   });
 
+  it('en la confirmación avisa de los intereses que la guía no cubre (RF-07)', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' }, undefined, {
+      sinCobertura: (_destino, intereses) => intereses.filter((i) => i === 'playa'),
+    });
+
+    const salida = await flow({
+      estado: { perfil: { ...completo, intereses: ['museos', 'playa'] }, preguntados: todoPreguntado },
+      mensaje: 'Voy con mi pareja',
+    });
+
+    expect(salida.respuesta).toContain('Ojo: la guía de Sevilla no habla de playa, así que el itinerario se centrará en lo demás. ¿Está todo bien?');
+  });
+
   it('si el viajero confirma con un «sí», termina con el perfil sin llamar al modelo', async () => {
     const { flow, peticiones } = crearEntorno({ ...sinDatos, compania: 'amigos' });
 

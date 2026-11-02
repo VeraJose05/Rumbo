@@ -153,10 +153,19 @@ export function opcionalesPendientes(perfil: PerfilParcial): Opcional[] {
   );
 }
 
+/** Aviso de los intereses que la guía no cubre (RF-07); vacío si los cubre todos. */
+export function avisoCobertura(destino: string, intereses: string[], sin: string[]): string {
+  if (!sin.length) return '';
+  const nombres = sin.map((i) => ETIQUETAS_INTERES[i as (typeof INTERESES)[number]] ?? i).join(' ni de ');
+  const resto = sin.length === intereses.length ? 'lo imprescindible' : 'lo demás';
+  return `Ojo: la guía de ${destino} no habla de ${nombres}, así que el itinerario se centrará en ${resto}.`;
+}
+
 /** El perfil en una frase. Los datos de `porDefecto` se marcan: el viajero no los ha dado. */
 export function resumirPerfil(perfil: Perfil, porDefecto: Opcional[] = []): string {
   const dias = perfil.dias === 1 ? '1 día' : `${perfil.dias} días`;
-  const intereses = perfil.intereses.map((i) => ETIQUETAS_INTERES[i]).join(', ');
+  // Sin intereses solo se llega al planificar sin ninguno cubierto por la guía (RF-07).
+  const intereses = perfil.intereses.length ? perfil.intereses.map((i) => ETIQUETAS_INTERES[i]).join(', ') : 'lo imprescindible';
   const marca = (campo: Opcional) => (porDefecto.includes(campo) ? ' (por defecto)' : '');
   return (
     `${perfil.destino}, ${dias}, ${ETIQUETAS_COMPANIA[perfil.compania]}${marca('compania')}, ` +
