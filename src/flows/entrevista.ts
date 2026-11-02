@@ -122,7 +122,7 @@ Tienes delante la conversación con el viajero. Escribe tu siguiente mensaje:
 - Saluda solo si es el inicio de la conversación.
 - Tutea al viajero y no le llames por ningún nombre.
 - Como mucho tres frases cortas, y termina con una pregunta.
-- No nombres monumentos, barrios, restaurantes ni otros lugares concretos que el viajero no haya dicho: todavía no tienes la guía delante.
+- Puedes nombrar algún lugar muy conocido del destino para animar al viajero, pero no recomiendes restaurantes ni te inventes nada.
 - No enumeres opciones.`;
 
 /**
@@ -134,15 +134,22 @@ export type ResponderPregunta = (
   destino: string,
 ) => Promise<{ hayInformacion: boolean; respuesta: string; fuentes: { url: string }[] }>;
 
+/** Lo que la entrevista usa del resto de la aplicación; en los tests, simulado. Sin ello, funciona igual pero sin guía. */
+export interface DependenciasEntrevista {
+  responder?: ResponderPregunta;
+  /** Todos los fragmentos de la guía de un destino: los lugares que nombran se pueden mencionar. */
+  leerGuia?: (destino: string) => Promise<string[]>;
+}
+
 type Entrada = z.infer<typeof EntrevistaEntradaSchema>;
 type Salida = z.infer<typeof EntrevistaSalidaSchema>;
 
-export function definirEntrevistaFlow(ai: Genkit, responder?: ResponderPregunta) {
+export function definirEntrevistaFlow(ai: Genkit, dependencias: DependenciasEntrevista = {}) {
   return ai.defineFlow(
     { name: 'entrevistaFlow', inputSchema: EntrevistaEntradaSchema, outputSchema: EntrevistaSalidaSchema },
     async (entrada) => {
       // El historial se apunta aquí, en un solo sitio, sea cual sea el camino que tome el turno.
-      const salida = await turno(ai, entrada, responder);
+      const salida = await turno(ai, entrada, dependencias);
       const historial: MensajeConversacion[] = [
         ...(entrada.estado?.historial ?? []),
         ...(entrada.mensaje.trim() ? [{ rol: 'viajero' as const, texto: entrada.mensaje }] : []),
@@ -157,7 +164,7 @@ export function definirEntrevistaFlow(ai: Genkit, responder?: ResponderPregunta)
 const ROL_GENKIT = { viajero: 'user', rumbo: 'model' } as const;
 
 /** Un turno de la entrevista, sin ocuparse del historial. */
-async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, responder?: ResponderPregunta): Promise<Salida> {
+async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { responder, leerGuia }: DependenciasEntrevista): Promise<Salida> {
   const historialPrevio = estadoPrevio?.historial ?? [];
   let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
@@ -292,7 +299,10 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
   });
   // Lo dicho por el viajero en cualquier momento de la conversación se puede repetir.
   const delViajero = historialPrevio.filter((m) => m.rol === 'viajero').map((m) => m.texto);
-  const permitidos = [mensaje, ...delViajero, contestado ?? '', reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
+  // También los lugares de la guía del destino: el modelo puede animar con «la Alhambra», pero no
+  // nombrar nada que no esté en la guía (prohibírselo todo hacía saltar el guardarraíl a menudo).
+  const guia = destino && leerGuia ? await leerGuia(destino) : [];
+  const permitidos = [mensaje, ...delViajero, contestado ?? '', ...guia, reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
   const validacion = validarMensaje(text, permitidos);
   // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
   const sinSaludo = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();

@@ -8,6 +8,7 @@ import { definirPruebaFlow } from './flows/prueba.js';
 import { definirRecuperadorChroma, definirRecuperadorHibrido } from './flows/recuperador.js';
 import { crearAi } from './genkit.js';
 import { abrirColeccion } from './ingest/chroma.js';
+import { lectorCorpus } from './eval/entorno.js';
 import { crearReranker } from './modelos/reranker.js';
 
 export const configModelos = cargarConfigModelos();
@@ -18,7 +19,10 @@ export const coleccion = await abrirColeccion(cargarConfigChroma());
 const recuperador = definirRecuperadorChroma(ai, coleccion, `ollama/${configModelos.embedder}`);
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
 // La entrevista contesta las preguntas del viajero con la guía (RAG básico, C1).
-export const entrevistaFlow = definirEntrevistaFlow(ai, (pregunta, destino) => preguntaFlow({ pregunta, destino }));
+export const entrevistaFlow = definirEntrevistaFlow(ai, {
+  responder: (pregunta, destino) => preguntaFlow({ pregunta, destino }),
+  leerGuia: lectorCorpus(coleccion),
+});
 // C2: el reranker solo se llama al planificar en ese modo, así que C0 y C1 funcionan sin él.
 const recuperadorAvanzado = definirRecuperadorHibrido(ai, coleccion, `ollama/${configModelos.embedder}`, crearReranker(configModelos.rerankerUrl));
 export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado);

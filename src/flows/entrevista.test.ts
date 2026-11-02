@@ -1,7 +1,7 @@
 // RF-01: flow de entrevista, probado con un modelo simulado.
 import { genkit, type GenerateRequest } from 'genkit';
 import { describe, expect, it } from 'vitest';
-import { definirEntrevistaFlow, type ResponderPregunta } from './entrevista.js';
+import { definirEntrevistaFlow, type DependenciasEntrevista, type ResponderPregunta } from './entrevista.js';
 
 const sinDatos = {
   destino: null,
@@ -17,7 +17,7 @@ const todoPreguntado = ['destino', 'dias', 'intereses', 'opcionales'];
 const confirmando = [...todoPreguntado, 'confirmacion'];
 
 /** Modelo simulado: devuelve la extracción indicada cuando se le pide JSON y la pregunta indicada si no. */
-function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?', responder?: ResponderPregunta) {
+function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pregunta del modelo?', dependencias: DependenciasEntrevista = {}) {
   const peticiones: GenerateRequest[] = [];
   const ai = genkit({ model: 'simulado' });
   ai.defineModel({ name: 'simulado', supports: { constrained: 'all', output: ['json', 'text'] } }, async (peticion) => {
@@ -26,7 +26,7 @@ function crearEntorno(extraccion: object = sinDatos, redaccion = '¡Genial! ¿Pr
     return { message: { role: 'model', content: [{ text: texto }] } };
   });
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirEntrevistaFlow(ai, responder), peticiones, textoDe };
+  return { flow: definirEntrevistaFlow(ai, dependencias), peticiones, textoDe };
 }
 
 describe('entrevistaFlow', () => {
@@ -362,7 +362,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('contesta con la guía lo que pregunta el viajero y luego retoma lo que falta', async () => {
     const { responder, llamadas } = guia();
-    const { flow, peticiones, textoDe } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+    const { flow, peticiones, textoDe } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', { responder });
 
     const salida = await flow({ estado: enGranada, mensaje: 'no sé, ¿cuántos días hacen falta para verla bien?' });
 
@@ -376,7 +376,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('el modelo puede repetir los lugares de la respuesta de la guía sin que salte el guardarraíl', async () => {
     const { responder } = guia();
-    const { flow } = crearEntorno(sinDatos, 'La Alhambra merece la pena. ¿Cuántos días te planteas?', responder);
+    const { flow } = crearEntorno(sinDatos, 'La Alhambra merece la pena. ¿Cuántos días te planteas?', { responder });
 
     const salida = await flow({ estado: enGranada, mensaje: '¿qué es lo más importante?' });
 
@@ -385,7 +385,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('si la guía no tiene información, no añade su respuesta', async () => {
     const { responder } = guia(false);
-    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', { responder });
 
     const salida = await flow({ estado: enGranada, mensaje: '¿hay playa?' });
 
@@ -395,7 +395,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
   it('una pregunta sin datos nuevos no da por contestados los opcionales: los vuelve a preguntar', async () => {
     // Caso real: «qué se puede comer allí?» respondiendo a los opcionales saltaba a la confirmación.
     const { responder } = guia();
-    const { flow } = crearEntorno(sinDatos, '¿Quieres contarme algo más?', responder);
+    const { flow } = crearEntorno(sinDatos, '¿Quieres contarme algo más?', { responder });
 
     const salida = await flow({
       estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['museos'] }, preguntados: ['destino', 'dias', 'intereses', 'opcionales'] },
@@ -409,7 +409,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('en la confirmación, una pregunta se contesta y se vuelve a pedir confirmación', async () => {
     const { responder } = guia();
-    const { flow } = crearEntorno(sinDatos, undefined, responder);
+    const { flow } = crearEntorno(sinDatos, undefined, { responder });
 
     const salida = await flow({
       estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['museos'] }, preguntados: [...todoPreguntado, 'confirmacion'] },
@@ -422,7 +422,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('tras una pregunta del viajero, vuelve a preguntar lo pendiente sin pegar las opciones', async () => {
     const { responder } = guia();
-    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', responder);
+    const { flow } = crearEntorno(sinDatos, '¿Cuántos días te planteas?', { responder });
 
     const salida = await flow({ estado: enGranada, mensaje: '¿cuántos días hacen falta?' });
 
@@ -432,7 +432,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
   it('una pregunta no añade intereses: el viajero pregunta, no dice lo que le gusta', async () => {
     // Caso real: «¿cuántos días hacen falta para verla bien?» y «qué se puede comer allí?» dejaban
     // monumentos y gastronomía como intereses sin habérselos preguntado.
-    const { flow } = crearEntorno({ ...sinDatos, intereses: ['gastronomia'] }, undefined, guia().responder);
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['gastronomia'] }, undefined, { responder: guia().responder });
 
     const salida = await flow({ estado: enGranada, mensaje: '¿qué se puede comer allí?' });
 
@@ -440,7 +440,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
   });
 
   it('en la confirmación, una pregunta sí puede añadir intereses («¿podemos añadir museos?»)', async () => {
-    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, undefined, guia().responder);
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, undefined, { responder: guia().responder });
 
     const salida = await flow({
       estado: { perfil: { destino: 'Granada', dias: 3, intereses: ['monumentos'] }, preguntados: [...todoPreguntado, 'confirmacion'] },
@@ -452,7 +452,7 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('no consulta la guía si el mensaje no es una pregunta', async () => {
     const { responder, llamadas } = guia();
-    const { flow } = crearEntorno({ ...sinDatos, dias: 3 }, undefined, responder);
+    const { flow } = crearEntorno({ ...sinDatos, dias: 3 }, undefined, { responder });
 
     await flow({ estado: enGranada, mensaje: '3 días' });
 
@@ -461,10 +461,36 @@ describe('entrevistaFlow con preguntas del viajero', () => {
 
   it('no consulta la guía si todavía no se sabe el destino', async () => {
     const { responder, llamadas } = guia();
-    const { flow } = crearEntorno(sinDatos, undefined, responder);
+    const { flow } = crearEntorno(sinDatos, undefined, { responder });
 
     await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: '¿qué me recomiendas?' });
 
     expect(llamadas).toEqual([]);
+  });
+});
+
+describe('entrevistaFlow con la guía del destino en el guardarraíl', () => {
+  const guiaGranada = async (destino: string) => (destino === 'Granada' ? ['La Alhambra es el monumento más visitado de España.'] : []);
+
+  it('deja nombrar lugares que aparecen en la guía del destino', async () => {
+    // Caso real: «la Alhambra» hacía saltar el guardarraíl y salía el texto de reserva, más seco.
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' }, 'La Alhambra te va a encantar. ¿Cuántos días vas a estar?', {
+      leerGuia: guiaGranada,
+    });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
+
+    expect(salida.respaldo).toBeNull();
+    expect(salida.respuesta).toBe('La Alhambra te va a encantar. ¿Cuántos días vas a estar?');
+  });
+
+  it('sigue rechazando los lugares que no están en la guía', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' }, 'La Giralda te va a encantar. ¿Cuántos días vas a estar?', {
+      leerGuia: guiaGranada,
+    });
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Granada' });
+
+    expect(salida.respaldo).toBe('nombre no permitido: Giralda');
   });
 });
