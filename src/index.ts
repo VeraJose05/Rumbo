@@ -1,6 +1,7 @@
 // Punto de entrada: registra los flows para la Developer UI de Genkit (npm run dev).
 import { cargarConfigChroma } from './config/chroma.js';
 import { cargarConfigModelos } from './config/modelos.js';
+import { definirAjusteFlow } from './flows/ajuste.js';
 import { definirEntrevistaFlow } from './flows/entrevista.js';
 import { definirPlanificacionFlow } from './flows/planificacion.js';
 import { definirPreguntaFlow } from './flows/pregunta.js';
@@ -26,3 +27,4 @@ export const entrevistaFlow = definirEntrevistaFlow(ai, {
 // C2: el reranker solo se llama al planificar en ese modo, así que C0 y C1 funcionan sin él.
 const recuperadorAvanzado = definirRecuperadorHibrido(ai, coleccion, `ollama/${configModelos.embedder}`, crearReranker(configModelos.rerankerUrl));
 export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado);
+export const ajusteFlow = definirAjusteFlow(ai, recuperador, recuperadorAvanzado);

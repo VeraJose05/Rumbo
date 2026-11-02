@@ -13,7 +13,7 @@ import {
   totalActividades,
   type Dia,
 } from './itinerario.js';
-import { PerfilSchema } from './perfil.js';
+import { PerfilSchema, type Perfil } from './perfil.js';
 import { FuenteSchema, type OpcionesRecuperacionSchema } from './pregunta.js';
 import { construirPromptDia } from './prompt-dia.js';
 import { citasValidas, clasificarActividad, fuentesCitadas } from './rag.js';
@@ -71,7 +71,7 @@ export const ItinerarioSchema = z.object({
 
 export type Itinerario = z.infer<typeof ItinerarioSchema>;
 
-type Recuperador = RetrieverArgument<typeof OpcionesRecuperacionSchema>;
+export type Recuperador = RetrieverArgument<typeof OpcionesRecuperacionSchema>;
 
 export function definirPlanificacionFlow(
   ai: Genkit,
@@ -92,81 +92,110 @@ export function definirPlanificacionFlow(
       if (modo !== 'C0') {
         const elegido = modo === 'C2' ? recuperadorAvanzado : recuperador;
         if (!elegido) throw new Error('El modo C2 necesita el recuperador avanzado');
-        const consultas = consultasDelPerfil(perfil);
-        // Se pide el doble de la parte de cada consulta: comparten fragmentos y, al quitar repetidos,
-        // con la parte justa quedaban 8 en vez de 12. La fusión recorta después a TOTAL_FRAGMENTOS.
-        const k = 2 * Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
-        const listas = [];
-        for (const consulta of consultas) {
-          const encontrados = await ai.retrieve({
-            retriever: elegido,
-            query: consulta.texto,
-            options: { k, destino: perfil.destino },
-          });
-          listas.push(encontrados.map((d) => Object.assign(d, { id: String(d.metadata?.id ?? '') })));
-        }
-        documentos = fusionarResultados(listas, TOTAL_FRAGMENTOS);
+        documentos = await recuperar(ai, elegido, perfil.destino, consultasDelPerfil(perfil).map((c) => c.texto));
         if (!documentos.length) return { modo, hayInformacion: false, dias: [], fuentes: [], interesesSinCobertura, recuperados: [] };
       }
-      const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
 
       // 2. Generación: un día por llamada, con los lugares ya usados para no repetir.
-      const actividades = actividadesPorDia(perfil.ritmo);
-      const esquema = esquemaDiaModelo({ conCitas: documentos !== null, actividades });
       const dias: Dia[] = [];
       for (let numero = 1; numero <= perfil.dias; numero++) {
-        const usados = lugaresUsados(dias);
-        const candidatas: z.infer<typeof esquema>['actividades'] = [];
-        let dia = repartirEnFranjas(numero, [], usados);
-        // Los repetidos se quitan en código («no repitas» en el prompt no bastaba). Si faltan
-        // actividades, se reintenta con todo lo propuesto en la lista de lugares a evitar.
-        for (let intento = 0; intento <= REINTENTOS && totalActividades(dia) < actividades; intento++) {
-          const evitar = [...new Set([...usados, ...candidatas.map((a) => a.lugar)])];
-          const { system, prompt } = construirPromptDia({ perfil, dia: numero, usados: evitar, fragmentos });
-          const { output } = await ai.generate({
-            system,
-            prompt,
-            output: { schema: esquema },
-            // Temperatura 0 para que los experimentos sean repetibles (RNF-03). En los reintentos se sube,
-            // con semilla fija: a temperatura 0 el modelo volvía a proponer exactamente los mismos lugares.
-            config: intento === 0 ? { temperature: 0 } : { temperature: 0.8, seed: intento },
-          });
-          if (!output) throw new Error(`El modelo no devolvió el día ${numero} con el esquema esperado`);
-          candidatas.push(...output.actividades);
-          dia = repartirEnFranjas(numero, candidatas, usados, actividades);
-        }
-        dias.push(dia);
+        dias.push(await generarDia(ai, { perfil, numero, usados: lugaresUsados(dias), documentos }));
       }
 
       // 3. Verificación de cada actividad contra los textos que cita.
-      const textos = documentos?.map((d) => d.text) ?? [];
-      const verificar = (franja: Dia['manana']) =>
-        franja.map((a) => {
-          if (!documentos) return { ...a, citas: [], verificacion: null };
-          const citas = citasValidas(a.citas, documentos.length);
-          return { ...a, citas, verificacion: clasificarActividad(a.lugar, citas, textos, perfil.destino) };
-        });
-      const diasFinales = dias.map((d) => ({ ...d, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) }));
-
-      const citadas = documentos
-        ? citasValidas(diasFinales.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche].flatMap((a) => a.citas)), documentos.length)
-        : [];
-      const recuperados = (documentos ?? []).map((d, i) => ({
-        cita: i + 1,
-        id: String(d.metadata?.id ?? ''),
-        seccion: String(d.metadata?.seccion ?? ''),
-        texto: d.text,
-        distancia: typeof d.metadata?.distancia === 'number' ? d.metadata.distancia : undefined,
-        puntuacionReranker: typeof d.metadata?.puntuacionReranker === 'number' ? d.metadata.puntuacionReranker : undefined,
-      }));
-      return {
-        modo,
-        hayInformacion: true,
-        dias: diasFinales,
-        fuentes: documentos ? fuentesCitadas(citadas, documentos) : [],
-        interesesSinCobertura,
-        recuperados,
-      };
+      return montarItinerario({ modo, destino: perfil.destino, dias, documentos, interesesSinCobertura });
     },
   );
+}
+
+/** Documento recuperado: el texto y sus metadatos (sección, fuente, URL, licencia…). */
+export type Recuperado = { text: string; metadata?: Record<string, unknown> };
+
+/**
+ * Una búsqueda por consulta, fusionadas por turnos hasta TOTAL_FRAGMENTOS. Se pide el doble de la
+ * parte de cada consulta: comparten fragmentos y, al quitar repetidos, con la parte justa quedaban
+ * 8 en vez de 12.
+ */
+export async function recuperar(ai: Genkit, recuperador: Recuperador, destino: string, consultas: string[]): Promise<Document[]> {
+  const k = 2 * Math.ceil(TOTAL_FRAGMENTOS / consultas.length);
+  const listas = [];
+  for (const consulta of consultas) {
+    const encontrados = await ai.retrieve({ retriever: recuperador, query: consulta, options: { k, destino } });
+    listas.push(encontrados.map((d) => Object.assign(d, { id: String(d.metadata?.id ?? '') })));
+  }
+  return fusionarResultados(listas, TOTAL_FRAGMENTOS);
+}
+
+/** Genera un día con el modelo; null en documentos es C0 (sin textos ni citas). */
+export async function generarDia(
+  ai: Genkit,
+  { perfil, numero, usados, documentos }: { perfil: Perfil; numero: number; usados: string[]; documentos: Recuperado[] | null },
+): Promise<Dia> {
+  const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
+  const actividades = actividadesPorDia(perfil.ritmo);
+  const esquema = esquemaDiaModelo({ conCitas: documentos !== null, actividades });
+  const candidatas: z.infer<typeof esquema>['actividades'] = [];
+  let dia = repartirEnFranjas(numero, [], usados);
+  // Los repetidos se quitan en código («no repitas» en el prompt no bastaba). Si faltan
+  // actividades, se reintenta con todo lo propuesto en la lista de lugares a evitar.
+  for (let intento = 0; intento <= REINTENTOS && totalActividades(dia) < actividades; intento++) {
+    const evitar = [...new Set([...usados, ...candidatas.map((a) => a.lugar)])];
+    const { system, prompt } = construirPromptDia({ perfil, dia: numero, usados: evitar, fragmentos });
+    const { output } = await ai.generate({
+      system,
+      prompt,
+      output: { schema: esquema },
+      // Temperatura 0 para que los experimentos sean repetibles (RNF-03). En los reintentos se sube,
+      // con semilla fija: a temperatura 0 el modelo volvía a proponer exactamente los mismos lugares.
+      config: intento === 0 ? { temperature: 0 } : { temperature: 0.8, seed: intento },
+    });
+    if (!output) throw new Error(`El modelo no devolvió el día ${numero} con el esquema esperado`);
+    candidatas.push(...output.actividades);
+    dia = repartirEnFranjas(numero, candidatas, usados, actividades);
+  }
+  return dia;
+}
+
+/** Verifica cada actividad contra los textos que cita y monta el itinerario con sus fuentes. */
+export function montarItinerario({
+  modo,
+  destino,
+  dias,
+  documentos,
+  interesesSinCobertura,
+}: {
+  modo: Itinerario['modo'];
+  destino: string;
+  dias: Dia[];
+  documentos: Recuperado[] | null;
+  interesesSinCobertura: string[];
+}): Itinerario {
+  const textos = documentos?.map((d) => d.text) ?? [];
+  const verificar = (franja: Dia['manana']) =>
+    franja.map((a) => {
+      if (!documentos) return { lugar: a.lugar, descripcion: a.descripcion, citas: [], verificacion: null };
+      const citas = citasValidas(a.citas, documentos.length);
+      return { lugar: a.lugar, descripcion: a.descripcion, citas, verificacion: clasificarActividad(a.lugar, citas, textos, destino) };
+    });
+  const diasFinales = dias.map((d) => ({ dia: d.dia, manana: verificar(d.manana), tarde: verificar(d.tarde), noche: verificar(d.noche) }));
+
+  const citadas = documentos
+    ? citasValidas(diasFinales.flatMap((d) => [...d.manana, ...d.tarde, ...d.noche].flatMap((a) => a.citas)), documentos.length)
+    : [];
+  const recuperados = (documentos ?? []).map((d, i) => ({
+    cita: i + 1,
+    id: String(d.metadata?.id ?? ''),
+    seccion: String(d.metadata?.seccion ?? ''),
+    texto: d.text,
+    distancia: typeof d.metadata?.distancia === 'number' ? d.metadata.distancia : undefined,
+    puntuacionReranker: typeof d.metadata?.puntuacionReranker === 'number' ? d.metadata.puntuacionReranker : undefined,
+  }));
+  return {
+    modo,
+    hayInformacion: true,
+    dias: diasFinales,
+    fuentes: documentos ? fuentesCitadas(citadas, documentos) : [],
+    interesesSinCobertura,
+    recuperados,
+  };
 }
