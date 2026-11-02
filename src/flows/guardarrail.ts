@@ -3,7 +3,8 @@
 // comprobación, el modelo proponía destinos («¿Te apuntas a un viaje al Caribe?») y lugares inventados.
 import { normalizar } from '../config/destinos.js';
 
-const LONGITUD_MAXIMA = 240;
+// Tres frases cortas, como pide el prompt de la entrevista (con 240 se descartaban mensajes correctos).
+const LONGITUD_MAXIMA = 320;
 
 // Palabras con las que el modelo suele empezar una frase seguida de coma («Vale, ¿y cuántos días?»).
 // Sin tildes, porque se comparan normalizadas.

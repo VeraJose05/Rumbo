@@ -34,6 +34,16 @@ describe('validarMensaje', () => {
     expect(validarMensaje('¡Hola, encantado! Perfecto, ¿a dónde vamos?', permitidos)).toEqual({ valido: true });
   });
 
+  it('acepta tres frases cortas, lo que pide el prompt de la entrevista', () => {
+    // Caso real: con hasta tres frases, el límite de 240 caracteres descartaba mensajes correctos.
+    const tres =
+      'Perfecto, tres días dan para conocer bien la ciudad sin ir con prisas y disfrutando de cada rincón. ' +
+      'Así podréis combinar las visitas con algún rato de descanso por la tarde, que se agradece mucho. ' +
+      '¿Os apetece contarme qué tipo de cosas os gusta hacer cuando viajáis?';
+    expect(tres.length).toBeGreaterThan(240);
+    expect(validarMensaje(tres, permitidos)).toEqual({ valido: true });
+  });
+
   it('rechaza mensajes largos', () => {
     const largo = `${'Qué buen viaje vas a hacer, de verdad. '.repeat(8)}¿Cuántos días?`;
     expect(validarMensaje(largo, permitidos)).toEqual({ valido: false, motivo: 'demasiado largo' });
