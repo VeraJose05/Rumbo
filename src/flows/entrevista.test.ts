@@ -35,9 +35,10 @@ describe('entrevistaFlow', () => {
 
     const salida = await flow({ mensaje: '' });
 
+    const respuesta = '¡Genial! ¿Pregunta del modelo? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.';
     expect(salida).toEqual({
-      estado: { perfil: {}, preguntados: ['destino'] },
-      respuesta: '¡Genial! ¿Pregunta del modelo? Puedo ayudarte con Sevilla, Madrid, Barcelona, Granada y Valencia.',
+      estado: { perfil: {}, preguntados: ['destino'], historial: [{ rol: 'rumbo', texto: respuesta }] },
+      respuesta,
       perfil: null,
       respaldo: null,
     });
@@ -258,6 +259,46 @@ describe('entrevistaFlow', () => {
     });
 
     expect(salida.estado.perfil).toEqual(completo);
+  });
+
+  it('añade al historial el mensaje del viajero y la respuesta de Rumbo', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Granada' });
+    const historial = [{ rol: 'rumbo' as const, texto: '¿A dónde quieres ir?' }];
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'], historial }, mensaje: 'Granada' });
+
+    expect(salida.estado.historial).toEqual([
+      ...historial,
+      { rol: 'viajero', texto: 'Granada' },
+      { rol: 'rumbo', texto: salida.respuesta },
+    ]);
+  });
+
+  it('también guarda en el historial las respuestas fijas, como la confirmación', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, compania: 'pareja' });
+
+    const salida = await flow({ estado: { perfil: completo, preguntados: todoPreguntado }, mensaje: 'Voy con mi pareja' });
+
+    expect(salida.estado.historial?.at(-1)).toEqual({ rol: 'rumbo', texto: salida.respuesta });
+  });
+
+  it('el modelo que redacta recibe la conversación anterior como mensajes de chat', async () => {
+    const { flow, peticiones } = crearEntorno({ ...sinDatos, destino: 'Granada' });
+    const historial = [
+      { rol: 'rumbo' as const, texto: '¡Hola! ¿A dónde te apetece viajar?' },
+      { rol: 'viajero' as const, texto: 'Estoy dudando entre varias ciudades' },
+      { rol: 'rumbo' as const, texto: '¿Cuál te llama más?' },
+    ];
+
+    await flow({ estado: { perfil: {}, preguntados: ['destino'], historial }, mensaje: 'Granada' });
+
+    // peticiones[0] es la extracción; peticiones[1], la redacción.
+    const mensajes = peticiones[1]!.messages.filter((m) => m.role !== 'system');
+    expect(mensajes.slice(0, 3).map((m) => [m.role, m.content[0]?.text])).toEqual([
+      ['model', '¡Hola! ¿A dónde te apetece viajar?'],
+      ['user', 'Estoy dudando entre varias ciudades'],
+      ['model', '¿Cuál te llama más?'],
+    ]);
   });
 
   it('si dice que no pero no indica qué cambiar, le pregunta qué quiere cambiar', async () => {

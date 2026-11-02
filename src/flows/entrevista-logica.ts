@@ -10,6 +10,13 @@ export interface EstadoEntrevista {
   perfil: PerfilParcial;
   /** Preguntas ya hechas, para no repetirlas y para entender respuestas cortas como «3» o «sí». */
   preguntados: string[];
+  /** La conversación hasta ahora, para que el modelo que redacta sepa de qué se ha hablado. */
+  historial?: MensajeConversacion[];
+}
+
+export interface MensajeConversacion {
+  rol: 'viajero' | 'rumbo';
+  texto: string;
 }
 
 export type Paso =
