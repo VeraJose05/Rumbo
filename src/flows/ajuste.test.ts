@@ -75,6 +75,19 @@ describe('ajusteFlow', () => {
     expect(prompt).toContain('Catedral de Sevilla');
   });
 
+  it('los lugares quitados no vuelven en ajustes posteriores', async () => {
+    // Caso real: tras «quita la Catedral», «más tranquilo» rehacía todos los días y la volvía a poner.
+    const { flow, peticiones } = crearEntorno();
+
+    const primera = await flow({ perfil, itinerario, mensaje: 'quita la Catedral' });
+    const segunda = await flow({ perfil: primera.perfil, itinerario: primera.itinerario, quitados: primera.quitados, mensaje: 'más intenso' });
+
+    expect(primera.quitados).toEqual(['Catedral de Sevilla']);
+    expect(segunda.quitados).toEqual(['Catedral de Sevilla']);
+    const prompts = peticiones.slice(1).map((p) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n'));
+    for (const prompt of prompts) expect(prompt).toContain('Catedral de Sevilla');
+  });
+
   it('cambiar el ritmo rehace todos los días con el ritmo nuevo', async () => {
     const { flow, peticiones } = crearEntorno();
 

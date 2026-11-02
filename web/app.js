@@ -118,7 +118,7 @@ async function planificar(perfil) {
   if (!itinerario) return;
   anadir('rumbo', itinerarioAHtml(perfil, itinerario), 'tarjeta');
   anadir('rumbo', '¿Quieres cambiar algo? Por ejemplo, «más tranquilo», «quita la Catedral», «añade museos» o «un día más». Si no, ¡buen viaje!');
-  viaje = { perfil, itinerario };
+  viaje = { perfil, itinerario, quitados: [] };
   actualizarControles();
 }
 
@@ -134,7 +134,7 @@ async function ajustar(texto) {
   if (JSON.stringify(resultado.itinerario) !== JSON.stringify(viaje.itinerario)) {
     anadir('rumbo', itinerarioAHtml(resultado.perfil, resultado.itinerario), 'tarjeta');
   }
-  viaje = { perfil: resultado.perfil, itinerario: resultado.itinerario };
+  viaje = { perfil: resultado.perfil, itinerario: resultado.itinerario, quitados: resultado.quitados };
 }
 
 function mandar(texto) {

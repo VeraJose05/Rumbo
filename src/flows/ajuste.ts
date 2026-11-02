@@ -18,8 +18,19 @@ import {
   type Recuperador,
 } from './planificacion.js';
 
-export const AjusteEntradaSchema = z.object({ perfil: PerfilSchema, itinerario: ItinerarioSchema, mensaje: z.string() });
-export const AjusteSalidaSchema = z.object({ perfil: PerfilSchema, itinerario: ItinerarioSchema, respuesta: z.string() });
+export const AjusteEntradaSchema = z.object({
+  perfil: PerfilSchema,
+  itinerario: ItinerarioSchema,
+  mensaje: z.string(),
+  /** Lugares quitados en ajustes anteriores: no vuelven aunque se rehagan todos los días. */
+  quitados: z.array(z.string()).optional(),
+});
+export const AjusteSalidaSchema = z.object({
+  perfil: PerfilSchema,
+  itinerario: ItinerarioSchema,
+  respuesta: z.string(),
+  quitados: z.array(z.string()),
+});
 
 const NO_ENTENDIDO =
   'No he entendido qué quieres cambiar. Puedes pedirme, por ejemplo, «más tranquilo», «quita la Catedral», «añade museos» o «un día más».';
@@ -36,7 +47,7 @@ export function definirAjusteFlow(
 ) {
   return ai.defineFlow(
     { name: 'ajusteFlow', inputSchema: AjusteEntradaSchema, outputSchema: AjusteSalidaSchema },
-    async ({ perfil, itinerario, mensaje }) => {
+    async ({ perfil, itinerario, mensaje, quitados: quitadosAntes = [] }) => {
       const conGuia = itinerario.modo !== 'C0';
       const lugares = itinerario.dias.flatMap((d) => actividades(d).map((a) => a.lugar));
       const avisos: string[] = [];
@@ -49,7 +60,7 @@ export function definirAjusteFlow(
         const resto = c.intereses.filter((i) => !sin.includes(i));
         return resto.length ? [{ ...c, intereses: resto }] : [];
       });
-      if (!cambios.length) return { perfil, itinerario, respuesta: avisos.length ? avisos.join(' ') : NO_ENTENDIDO };
+      if (!cambios.length) return { perfil, itinerario, quitados: quitadosAntes, respuesta: avisos.length ? avisos.join(' ') : NO_ENTENDIDO };
 
       // 2. El perfil nuevo.
       const nuevo: Perfil = { ...perfil, intereses: [...perfil.intereses] };
@@ -83,7 +94,8 @@ export function definirAjusteFlow(
       // 4. Solo se rehacen los días afectados; los días de más se quitan y los nuevos se añaden al final.
       const sinCubrir = conGuia ? calcularSinCobertura(nuevo.destino, nuevo.intereses) : [];
       const paraModelo = { ...nuevo, intereses: nuevo.intereses.filter((i) => !sinCubrir.includes(i)) };
-      const quitados = cambios.flatMap((c) => (c.tipo === 'quitar-lugares' ? c.lugares : []));
+      // Los quitados ahora y en ajustes anteriores: si no, «más tranquilo» rehacía todo y los volvía a poner.
+      const quitados = [...new Set([...quitadosAntes, ...cambios.flatMap((c) => (c.tipo === 'quitar-lugares' ? c.lugares : []))])];
       const dias: Dia[] = itinerario.dias.slice(0, nuevo.dias);
       const rehechos = diasAfectados(cambios, dias);
       for (const numero of rehechos) {
@@ -93,7 +105,7 @@ export function definirAjusteFlow(
       }
       const anteriores = dias.length;
       for (let numero = anteriores + 1; numero <= nuevo.dias; numero++) {
-        dias.push(await generarDia(ai, { perfil: paraModelo, numero, usados: lugaresUsados(dias), documentos }));
+        dias.push(await generarDia(ai, { perfil: paraModelo, numero, usados: [...lugaresUsados(dias), ...quitados], documentos }));
       }
       const nuevosDias = dias.slice(anteriores).map((d) => d.dia);
 
@@ -104,7 +116,7 @@ export function definirAjusteFlow(
         documentos,
         interesesSinCobertura: sinCubrir,
       });
-      return { perfil: nuevo, itinerario: resultado, respuesta: describir(cambios, rehechos, nuevosDias, dias.length, avisos) };
+      return { perfil: nuevo, itinerario: resultado, quitados, respuesta: describir(cambios, rehechos, nuevosDias, dias.length, avisos) };
     },
   );
 }
