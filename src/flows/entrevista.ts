@@ -19,7 +19,7 @@ import {
   type EstadoEntrevista,
   type MensajeConversacion,
 } from './entrevista-logica.js';
-import { quitarSaludo, validarMensaje } from './guardarrail.js';
+import { quitarPreguntas, quitarSaludo, validarMensaje } from './guardarrail.js';
 import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
 
 const EstadoSchema = z.object({
@@ -270,6 +270,14 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
     const respuesta = `¡Hola! Bienvenido a Rumbo, te ayudo a planificar tu viaje. ¿A dónde te gustaría ir? ${opciones}`;
     return { estado, respuesta, perfil: null, respaldo: null };
   }
+
+  // En los opcionales pregunta solo el código, con las opciones; el modelo solo reacciona a lo que ha
+  // dicho el viajero. Si preguntaban los dos, las preguntas se solapaban («¿hay algo específico…?
+  // Por ejemplo, qué ritmo prefieres…»). Tras una respuesta de la guía no hace falta ni la reacción.
+  const soloReaccion = paso.campo === 'opcionales';
+  if (soloReaccion && contestado) {
+    return { estado, respuesta: delante(`${reserva} ${opciones}`), perfil: null, respaldo: null };
+  }
   const { text } = await ai.generate({
     system: SISTEMA_PREGUNTA,
     // La conversación anterior va como mensajes de chat; el turno actual, en el prompt.
@@ -277,7 +285,9 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
     prompt: [
       mensaje.trim() ? `El viajero acaba de decir: «${mensaje}»` : 'Es el inicio de la conversación.',
       ...(contestado ? [`Ya le has contestado: «${contestado}». No vuelvas a contestarlo: solo retoma la conversación.`] : []),
-      `Lo que necesitas averiguar ahora: ${objetivo}.`,
+      soloReaccion
+        ? 'Reacciona en una frase a lo que ha dicho, sin preguntar nada: la pregunta se añade después.'
+        : `Lo que necesitas averiguar ahora: ${objetivo}.`,
     ].join('\n'),
   });
   // Lo dicho por el viajero en cualquier momento de la conversación se puede repetir.
@@ -285,7 +295,8 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, res
   const permitidos = [mensaje, ...delViajero, contestado ?? '', reserva, 'Rumbo', 'España', ...DESTINOS.map((d) => d.nombre)];
   const validacion = validarMensaje(text, permitidos);
   // Si el modelo solo reacciona sin preguntar («¡Qué bien!»), se conserva su frase y se añade la pregunta.
-  const propia = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
+  const sinSaludo = mensaje.trim() ? quitarSaludo(text.trim()) : text.trim();
+  const propia = soloReaccion ? quitarPreguntas(sinSaludo) : sinSaludo;
   const redactada = !validacion.valido || !propia ? reserva : propia.includes('?') ? propia : `${propia} ${reserva}`;
   // Las opciones salen al pedir el destino (solo hay unos pocos) y los opcionales (son la pregunta en sí);
   // en el resto, solo al repetir la pregunta: ponerlas siempre hacía que pareciera un formulario.

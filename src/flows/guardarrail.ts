@@ -52,3 +52,15 @@ export function quitarSaludo(texto: string): string {
   // Mayúscula en la primera letra, también tras «¿» o «¡».
   return sin.replace(/^([¿¡]?)(\p{L})/u, (_, signo: string, letra: string) => signo + letra.toUpperCase());
 }
+
+/**
+ * Quita las frases que preguntan algo. En la pregunta de opcionales pregunta el código, con las
+ * opciones; si el modelo también preguntaba, las dos preguntas se solapaban.
+ */
+export function quitarPreguntas(texto: string): string {
+  const frases = texto.match(/[^.!?]+[.!?]*/g) ?? [];
+  return frases
+    .map((f) => f.trim())
+    .filter((f) => f && !f.includes('?') && !f.includes('¿'))
+    .join(' ');
+}

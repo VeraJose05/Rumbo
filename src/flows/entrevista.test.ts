@@ -142,7 +142,8 @@ describe('entrevistaFlow', () => {
 
     expect(salida.estado.preguntados).toEqual(['destino', 'dias', 'intereses', 'opcionales']);
     expect(salida.perfil).toBeNull();
-    expect(salida.respuesta).toMatch(/^¡Genial! ¿Pregunta del modelo\? Por ejemplo, con quién viajas/);
+    // Pregunta solo el código: del modelo se queda su reacción, sin su pregunta.
+    expect(salida.respuesta).toMatch(/^¡Genial! ¿Quieres contarme algo más\? Por ejemplo, con quién viajas/);
     expect(peticiones).toHaveLength(2);
   });
 
@@ -194,14 +195,33 @@ describe('entrevistaFlow', () => {
   });
 
   it('no saluda en mitad de la conversación aunque el modelo lo haga', async () => {
-    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, 'Hola, ¿te gustaría contar algo más del viaje?');
+    const { flow } = crearEntorno({ ...sinDatos, destino: 'Sevilla' }, 'Hola, ¿cuántos días vas a estar?');
+
+    const salida = await flow({ estado: { perfil: {}, preguntados: ['destino'] }, mensaje: 'Sevilla' });
+
+    expect(salida.respuesta).toBe('¿Cuántos días vas a estar?');
+  });
+
+  it('en los opcionales, si el modelo solo pregunta, queda solo la pregunta fija', async () => {
+    const { flow } = crearEntorno({ ...sinDatos, intereses: ['museos'] }, '¿Hay algo específico que quieras incluir en tu viaje?');
 
     const salida = await flow({
       estado: { perfil: { destino: 'Sevilla', dias: 2 }, preguntados: ['destino', 'dias', 'intereses'] },
       mensaje: 'Me gustan los museos',
     });
 
-    expect(salida.respuesta).toMatch(/^¿Te gustaría contar algo más del viaje\?/);
+    expect(salida.respuesta).toMatch(/^¿Quieres contarme algo más\? Por ejemplo/);
+  });
+
+  it('en los opcionales, al modelo se le pide solo una reacción, sin preguntar', async () => {
+    const { flow, peticiones, textoDe } = crearEntorno({ ...sinDatos, intereses: ['museos'] });
+
+    await flow({
+      estado: { perfil: { destino: 'Sevilla', dias: 2 }, preguntados: ['destino', 'dias', 'intereses'] },
+      mensaje: 'Me gustan los museos',
+    });
+
+    expect(textoDe(peticiones.at(-1)!)).toContain('sin preguntar nada');
   });
 
   it('en la confirmación marca los datos que el viajero no ha dado', async () => {
@@ -383,8 +403,8 @@ describe('entrevistaFlow con preguntas del viajero', () => {
     });
 
     expect(salida.estado.preguntados.at(-1)).toBe('opcionales');
-    expect(salida.respuesta).toMatch(/^Con dos o tres días/);
-    expect(salida.respuesta).toContain('qué ritmo prefieres');
+    // Tras la respuesta de la guía va directamente la pregunta fija, sin reacción del modelo.
+    expect(salida.respuesta).toMatch(/^Con dos o tres días.*\)\) ¿Quieres contarme algo más\? Por ejemplo, con quién viajas/);
   });
 
   it('en la confirmación, una pregunta se contesta y se vuelve a pedir confirmación', async () => {
