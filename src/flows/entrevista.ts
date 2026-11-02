@@ -4,7 +4,9 @@
 // guardarraíl comprueba lo que redacta antes de enseñarlo.
 import { z, type Genkit } from 'genkit';
 import { DESTINOS } from '../config/destinos.js';
+import { sinCobertura as sinCoberturaGuia } from '../config/cobertura.js';
 import {
+  avisoCobertura,
   avisoDestino,
   descartarSinRespaldo,
   diasDelMensaje,
@@ -22,7 +24,7 @@ import {
   type MensajeConversacion,
 } from './entrevista-logica.js';
 import { quitarPreguntas, quitarSaludo, validarMensaje } from './guardarrail.js';
-import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS } from './perfil.js';
+import { COMPANIAS, INTERESES, PerfilSchema, PRESUPUESTOS, RITMOS, type Perfil } from './perfil.js';
 
 const EstadoSchema = z.object({
   perfil: z.record(z.string(), z.unknown()),
@@ -141,6 +143,8 @@ export interface DependenciasEntrevista {
   responder?: ResponderPregunta;
   /** Todos los fragmentos de la guía de un destino: los lugares que nombran se pueden mencionar. */
   leerGuia?: (destino: string) => Promise<string[]>;
+  /** Intereses que la guía del destino no cubre (RF-07); por defecto, las notas calculadas. */
+  sinCobertura?: (destino: string, intereses: string[]) => string[];
 }
 
 type Entrada = z.infer<typeof EntrevistaEntradaSchema>;
@@ -166,7 +170,16 @@ export function definirEntrevistaFlow(ai: Genkit, dependencias: DependenciasEntr
 const ROL_GENKIT = { viajero: 'user', rumbo: 'model' } as const;
 
 /** Un turno de la entrevista, sin ocuparse del historial. */
-async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { responder, leerGuia }: DependenciasEntrevista): Promise<Salida> {
+async function turno(
+  ai: Genkit,
+  { estado: estadoPrevio, mensaje }: Entrada,
+  { responder, leerGuia, sinCobertura = sinCoberturaGuia }: DependenciasEntrevista,
+): Promise<Salida> {
+  // Resumen para confirmar, con el aviso de lo que la guía no cubre (RF-07): mejor saberlo antes de planificar.
+  const resumenConAviso = (perfil: Perfil) => {
+    const aviso = avisoCobertura(perfil.destino, perfil.intereses, sinCobertura(perfil.destino, perfil.intereses));
+    return `${resumirPerfil(perfil, opcionalesPendientes(estado.perfil))}${aviso ? ` ${aviso}` : ''}`;
+  };
   const historialPrevio = estadoPrevio?.historial ?? [];
   let estado: EstadoEntrevista = estadoPrevio ?? { perfil: {}, preguntados: [] };
 
@@ -221,7 +234,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
         const paso = siguientePaso(estado);
         if (paso.tipo === 'confirmar') {
           estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-          const respuesta = `Hecho, ahora queda así: ${resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil))} ¿Está bien así?`;
+          const respuesta = `Hecho, ahora queda así: ${resumenConAviso(paso.perfil)} ¿Está bien así?`;
           return { estado, respuesta, perfil: null, respaldo: null };
         }
       }
@@ -263,7 +276,7 @@ async function turno(ai: Genkit, { estado: estadoPrevio, mensaje }: Entrada, { r
   }
   if (paso.tipo === 'confirmar') {
     estado = { ...estado, preguntados: [...estado.preguntados, 'confirmacion'] };
-    const resumen = resumirPerfil(paso.perfil, opcionalesPendientes(estado.perfil));
+    const resumen = resumenConAviso(paso.perfil);
     const respuesta = delante(`Esto es lo que he entendido: ${resumen} ¿Está todo bien?`);
     return { estado, respuesta, perfil: null, respaldo: null };
   }

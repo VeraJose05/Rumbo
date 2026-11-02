@@ -17,7 +17,11 @@ const doc = (id: string, texto: string, seccion: string) =>
   });
 
 /** Modelo simulado que devuelve los días indicados, uno por llamada. */
-function crearEntorno(respuestasDias: object[], documentos = [doc('s:1', '* Catedral de Sevilla - Gótica.', 'Ver'), doc('s:2', 'Parque de María Luisa.', 'Ver')]) {
+function crearEntorno(
+  respuestasDias: object[],
+  documentos = [doc('s:1', '* Catedral de Sevilla - Gótica.', 'Ver'), doc('s:2', 'Parque de María Luisa.', 'Ver')],
+  sinCobertura: (destino: string, intereses: string[]) => string[] = () => [],
+) {
   const peticiones: GenerateRequest[] = [];
   const consultas: { texto: string; opciones: unknown }[] = [];
   const ai = genkit({ model: 'simulado' });
@@ -39,7 +43,7 @@ function crearEntorno(respuestasDias: object[], documentos = [doc('s:1', '* Cate
   });
 
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado), peticiones, consultas, consultasAvanzado, textoDe };
+  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura), peticiones, consultas, consultasAvanzado, textoDe };
 }
 
 // El ritmo tranquilo pide 2 actividades por día: la indicada por la mañana y un paseo por la noche.
@@ -143,7 +147,7 @@ describe('planificacionFlow', () => {
 
     const salida = await flow({ perfil: { ...perfil, destino: 'Bilbao' }, modo: 'C1' });
 
-    expect(salida).toEqual({ modo: 'C1', hayInformacion: false, dias: [], fuentes: [], recuperados: [] });
+    expect(salida).toEqual({ modo: 'C1', hayInformacion: false, dias: [], fuentes: [], interesesSinCobertura: [], recuperados: [] });
     expect(peticiones).toHaveLength(0);
   });
 
@@ -184,5 +188,44 @@ describe('planificacionFlow', () => {
 
     expect((await flow({ perfil: { ...perfil, destino: 'Bilbao' }, modo: 'C2' })).hayInformacion).toBe(false);
     expect(peticiones).toHaveLength(0);
+  });
+});
+
+describe('planificacionFlow con intereses que la guía no cubre (RF-07)', () => {
+  const playaYNaturaleza = PerfilSchema.parse({ destino: 'Sevilla', dias: 1, intereses: ['naturaleza', 'playa'], ritmo: 'tranquilo' });
+  const sinPlaya = (_destino: string, intereses: string[]) => intereses.filter((i) => i === 'playa');
+
+  it('no busca el interés sin cobertura, no se lo pide al modelo y lo devuelve', async () => {
+    const { flow, consultas, peticiones, textoDe } = crearEntorno([dia('Catedral de Sevilla', [1])], undefined, sinPlaya);
+
+    const salida = await flow({ perfil: playaYNaturaleza, modo: 'C1' });
+
+    expect(consultas.map((c) => c.texto).join(' ')).not.toMatch(/playa/);
+    expect(textoDe(peticiones[0]!)).not.toMatch(/playa/);
+    expect(salida.interesesSinCobertura).toEqual(['playa']);
+  });
+
+  it('si no queda ningún interés cubierto, planifica lo imprescindible', async () => {
+    const soloPlaya = PerfilSchema.parse({ destino: 'Sevilla', dias: 1, intereses: ['playa'], ritmo: 'tranquilo' });
+    const { flow, consultas, peticiones, textoDe } = crearEntorno([dia('Catedral de Sevilla', [1])], undefined, sinPlaya);
+
+    const salida = await flow({ perfil: soloPlaya, modo: 'C1' });
+
+    expect(consultas).toHaveLength(1);
+    expect(textoDe(peticiones[0]!)).toContain('Intereses: lo imprescindible');
+    expect(salida.hayInformacion).toBe(true);
+  });
+
+  it('en C0 no filtra: no usa la guía', async () => {
+    const { flow, peticiones, textoDe } = crearEntorno(
+      [{ actividades: [{ franja: 'manana', lugar: 'Playa', descripcion: 'x' }, { franja: 'noche', lugar: 'Paseo', descripcion: 'y' }] }],
+      undefined,
+      sinPlaya,
+    );
+
+    const salida = await flow({ perfil: playaYNaturaleza, modo: 'C0' });
+
+    expect(textoDe(peticiones[0]!)).toMatch(/playa/);
+    expect(salida.interesesSinCobertura).toEqual([]);
   });
 });

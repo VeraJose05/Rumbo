@@ -7,6 +7,18 @@ const FRANJAS = [
   ['noche', 'Noche'],
 ];
 
+// Nombres de los intereses para el aviso de cobertura (RF-07).
+const INTERESES = {
+  monumentos: 'monumentos',
+  museos: 'museos',
+  gastronomia: 'gastronomía',
+  naturaleza: 'naturaleza',
+  'ocio-nocturno': 'ocio nocturno',
+  compras: 'compras',
+  playa: 'playa',
+  ninos: 'niños',
+};
+
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 
 /** Escapa un texto para insertarlo en HTML (también en atributos). */
@@ -50,6 +62,12 @@ export function itinerarioAHtml(perfil, itinerario) {
     return `<article class="itinerario">${cabecera}<p>${texto}</p></article>`;
   }
 
+  // RF-07: lo que la guía no cubre no se ha planificado; se dice en vez de rellenarlo.
+  const sin = itinerario.interesesSinCobertura ?? [];
+  const aviso = sin.length
+    ? `<p class="nota-cobertura">La guía de ${escapar(perfil.destino)} no habla de ${sin.map((i) => escapar(INTERESES[i] ?? i)).join(' ni de ')}, así que no lo he incluido.</p>`
+    : '';
+
   const fuentes = new Map(itinerario.fuentes.map((f) => [f.cita, f]));
   const bloques = itinerario.dias.map((dia) => {
     const franjas = FRANJAS.filter(([clave]) => dia[clave].length)
@@ -63,5 +81,5 @@ export function itinerarioAHtml(perfil, itinerario) {
     .join('');
   const pie = lista ? `<details class="fuentes"><summary>Fuentes (${itinerario.fuentes.length})</summary><ol>${lista}</ol></details>` : '';
 
-  return `<article class="itinerario">${cabecera}${bloques.join('')}${pie}</article>`;
+  return `<article class="itinerario">${cabecera}${aviso}${bloques.join('')}${pie}</article>`;
 }

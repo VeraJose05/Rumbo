@@ -1,7 +1,8 @@
 // RF-07: experimento para calibrar cuándo la guía de un destino no cubre un interés (playas en
 // Sevilla). Para cada destino × interés lanza la consulta de la planificación y anota la distancia
 // del mejor fragmento (búsqueda vectorial, C1) y la mejor nota del reranker sobre los 20 primeros
-// (como C2). Salida: tabla ordenada y resultados/cobertura.json (npm run experimento:cobertura).
+// (como C2). Salida: tabla ordenada, resultados/cobertura.json y src/config/cobertura-datos.ts
+// (npm run experimento:cobertura).
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { DESTINOS } from '../config/destinos.js';
 import { consultasDelPerfil } from '../flows/consultas.js';
@@ -41,4 +42,14 @@ for (const f of filas) {
 }
 mkdirSync('resultados', { recursive: true });
 writeFileSync('resultados/cobertura.json', JSON.stringify(filas, null, 2));
+// Las notas que usa la planificación (src/config/cobertura.ts), en un módulo para no leer JSON en ejecución.
+const notas: Record<string, Record<string, number>> = {};
+for (const f of filas) (notas[f.destino] ??= {})[f.interes] = Math.round((f.reranker ?? 0) * 1000) / 1000;
+writeFileSync(
+  'src/config/cobertura-datos.ts',
+  `// RF-07: GENERADO por npm run experimento:cobertura; no editar a mano. Nota del reranker del mejor\n` +
+    `// fragmento de la guía de cada destino para la consulta de cada interés (0 = la guía no habla de ello).\n` +
+    `// Hay que regenerarlo si cambia el corpus.\n` +
+    `export const NOTAS_COBERTURA: Record<string, Record<string, number>> = ${JSON.stringify(notas, null, 2)};\n`,
+);
 process.exit(0);
