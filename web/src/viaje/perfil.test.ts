@@ -2,8 +2,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   COMPANIAS, DIAS_MAX, DIAS_MIN, INTERESES, PRESUPUESTOS, RITMOS,
-  cambiarDias, decidirInteres, elegir, etiquetaDias, perfilInicial,
-} from './viaje-estado.js';
+  cambiarDias, decidirInteres, elegir, etiquetaDias, perfilInicial, type Perfil,
+} from './perfil';
 
 describe('perfilInicial', () => {
   it('empieza con 3 días y los valores por defecto del planificador', () => {
@@ -66,7 +66,7 @@ describe('INTERESES', () => {
       expect(i.nombre).toBeTruthy();
       expect(i.descripcion).toBeTruthy();
       // Foto de Wikimedia Commons con el crédito que exige su licencia.
-      expect(i.foto).toBe(`fotos/gustos/${i.id}.webp`);
+      expect(i.foto).toBe(`/fotos/gustos/${i.id}.webp`);
       expect(i.credito.autor).toBeTruthy();
       expect(i.credito.licencia).toMatch(/^CC/);
     }
@@ -80,7 +80,7 @@ describe('decidirInteres', () => {
   });
 
   it('«paso» lo quita si estaba', () => {
-    const perfil = { ...perfilInicial(), intereses: ['museos', 'playa'] };
+    const perfil: Perfil = { ...perfilInicial(), intereses: ['museos', 'playa'] };
     expect(decidirInteres(perfil, 'museos', false).intereses).toEqual(['playa']);
   });
 

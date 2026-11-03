@@ -1,6 +1,7 @@
-/* RF-12: portada. Las fotos ocupan la pantalla como historias y el billete queda abajo. */
+/* RF-12: portada (pantallas/Portada.tsx). Las fotos ocupan la pantalla como historias y el billete queda abajo. */
 
 .portada {
+  min-height: 100dvh;
   background-color: var(--panel);
 }
 
