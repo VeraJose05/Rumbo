@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed": "#001c37", "secondary-fixed": "#d2e4ff", "primary-fixed-dim": "#ffb4a2", "error-container": "#ffdad6", "on-tertiary": "#ffffff", "outline-variant": "#dec0b9", "surface-container-lowest": "#ffffff", "on-tertiary-fixed": "#271900", "surface": "#fff8f5", "inverse-primary": "#ffb4a2", "surface-bright": "#fff8f5", "secondary-fixed-dim": "#a0c9ff", "on-tertiary-container": "#fffbff", "background": "#fff8f5", "on-tertiary-fixed-variant": "#5f4100", "on-error-container": "#93000a", "on-background": "#1f1b17", "outline": "#8a716c", "surface-tint": "#a33d24", "primary": "#a03b22", "on-error": "#ffffff", "on-primary-fixed-variant": "#83260f", "on-secondary": "#ffffff", "surface-container-high": "#f1e6e0", "secondary": "#366190", "secondary-container": "#a0c9ff", "tertiary-fixed-dim": "#fabc4a", "surface-container-highest": "#ebe1da", "on-secondary-fixed-variant": "#194976", "primary-container": "#c05237", "on-surface-variant": "#57423d", "on-surface": "#1f1b17", "surface-container": "#f6ece5", "error": "#ba1a1a", "inverse-on-surface": "#f9efe8", "on-primary-fixed": "#3c0700", "on-secondary-container": "#285483", "surface-variant": "#ebe1da", "on-primary": "#ffffff", "tertiary-container": "#9a6c00", "tertiary": "#7b5500", "on-primary-container": "#fffbff", "surface-container-low": "#fcf2eb", "tertiary-fixed": "#ffdeab", "primary-fixed": "#ffdad2", "inverse-surface": "#352f2b", "surface-dim": "#e2d8d2" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "2rem", "margin-desktop": "3rem", "margin": "1rem", "space-lg": "1.5rem", "gutter": "1rem", "gutter-tablet": "1.5rem", "space-md": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "margin-tablet": "2rem" }, "fontFamily": { "headline-lg-mobile": ["Literata"], "body-md": ["Inter"], "headline-sm": ["Literata"], "headline-md": ["Literata"], "headline-lg": ["Literata"], "label-lg": ["Inter"], "body-sm": ["Inter"], "display-mobile": ["Literata"], "body-lg": ["Inter"], "display": ["Literata"], "label-sm": ["Inter"], "label-md": ["Inter"] }, "fontSize": { "headline-lg-mobile": ["22px", { "lineHeight": "30px", "letterSpacing": "0em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "500" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "display": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen pt-safe pb-safe"><main class="flex flex-col relative w-full bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface select-none pb-24">
+<!-- Washi Tape decorative top bar -->
+<div class="w-full flex justify-center py-2">
+<div class="h-3 w-28 bg-tertiary-fixed-dim/70 rounded-sm shadow-sm rotate-1"></div>
+</div>
+<!-- Train Track Progress Stepper (4 Estaciones) -->
+<section class="w-full px-4 mb-4">
+<div class="bg-surface-container-low rounded-xl p-3 shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-on-surface-variant mb-2">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">Cuaderno de Ruta</span>
+<span class="bg-surface-container-highest px-2 py-0.5 rounded-full text-label-sm font-label-sm font-semibold text-on-surface">Etapa 2 de 4</span>
+</div>
+<!-- Train Line Graphic -->
+<div class="relative py-2">
+<!-- Railway Sleepers (Traviesas de madera) -->
+<div class="absolute inset-x-2 top-1/2 -translate-y-1/2 h-2 flex justify-between items-center pointer-events-none opacity-40">
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+<span class="w-1 h-3 bg-outline rounded-xs"></span>
+</div>
+<!-- Steel Rail Lines -->
+<div class="absolute inset-x-2 top-1/2 -translate-y-1.5 h-0.5 bg-outline-variant"></div>
+<div class="absolute inset-x-2 top-1/2 translate-y-1 h-0.5 bg-outline-variant"></div>
+<!-- Station Nodes -->
+<div class="relative flex justify-between items-center z-10 px-1">
+<!-- Station 1: Destino (Completed) -->
+<div class="flex flex-col items-center group">
+<div class="w-7 h-7 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-on-surface-variant font-medium">Destino</span>
+</div>
+<!-- Station 2: Gustos (Active / Illuminated Terracotta Station) -->
+<div class="flex flex-col items-center">
+<div class="relative flex items-center justify-center">
+<span class="absolute w-9 h-9 rounded-full bg-primary-fixed animate-ping opacity-60"></span>
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md scale-110">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm mt-1 font-bold text-primary tracking-wide">Gustos</span>
+</div>
+<!-- Station 3: Estilo (Pending) -->
+<div class="flex flex-col items-center opacity-65">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shadow-sm">
+<span class="font-label-sm text-label-sm font-bold">3</span>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-on-surface-variant">Estilo</span>
+</div>
+<!-- Station 4: Billete (Pending) -->
+<div class="flex flex-col items-center opacity-65">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[13px]">confirmation_number</span>
+</div>
+<span class="font-label-sm text-label-sm mt-1 text-on-surface-variant">Billete</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Section Header -->
+<header class="px-5 mb-3">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm tracking-wider font-semibold uppercase mb-1 shadow-xs">
+<span class="material-symbols-outlined text-[13px]">edit_note</span>
+      Paso 02 · Afinando la brújula
+    </div>
+<div class="flex items-baseline justify-between">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight text-on-surface">
+        ¿Te va esto?
+      </h1>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-primary-fixed/60 px-2 py-0.5 rounded-full">
+        Carta 3 de 8
+      </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 flex items-center gap-1">
+<span>Desliza a la derecha si te apetece, a la izquierda si pasas</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">pan_tool_alt</span>
+</p>
+</header>
+<!-- Physical Card Deck Area (Tinder-like analog stack) -->
+<section class="relative px-5 py-2 flex flex-col items-center w-full">
+<div class="relative w-full max-w-sm h-[375px] flex items-center justify-center">
+<!-- Under-card 2 (Deepest stacked sheet) -->
+<div class="absolute w-[91%] h-[345px] rounded-2xl bg-surface-container-highest shadow-sm translate-y-4 -rotate-3 transition-transform duration-300 pointer-events-none opacity-60"></div>
+<!-- Under-card 1 (Intermediate card) -->
+<div class="absolute w-[95%] h-[352px] rounded-2xl bg-surface-container shadow-sm translate-y-2 rotate-2 transition-transform duration-300 pointer-events-none opacity-90"></div>
+<!-- ACTIVE TOP CARD: Gastronomía -->
+<article class="absolute w-full h-[360px] bg-surface-container-lowest rounded-2xl p-3 shadow-md flex flex-col justify-between transition-transform duration-200 cursor-grab active:cursor-grabbing border-none" id="swipeCard">
+<!-- Postcard Photo Frame -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden bg-surface-container-high shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Rustic sun-drenched Spanish tavern wooden table spread with tapas including patatas bravas in spicy red salsa, jamon serrano on ceramic plate, albondigas in tomato sauce, olives, crusty bread with olive oil, chilled white wine in a glass, and ceramic sangria jug in an idyllic warm Mediterranean courtyard with terracotta pots and olive trees." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6kcJL6VqIOibgMq5zbayMu0a3_eeVln2Zoc-KSzN48RxsTVB7B2ySJ7pkV4v3wD7wFBq5TVRclRWyp69puJWpIyoZtAVXP1a8t3Qv4fiAUlmggvnX1P7W67zWAXsanLBDjpObR4KMtNVJAqtmZP7K1dyJ8wro_v2NzT2n4qoEOZXUzbB10x2CMSP3hkMM8vXfnHASlZ7bQuJp1OjzhlUmxUUBFe2stxwYq65R4g"/>
+<!-- Vintage Postcard Stamp Badge -->
+<div class="absolute top-2.5 left-2.5 bg-surface-container-lowest/95 backdrop-blur-xs px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5 -rotate-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wider text-on-surface uppercase">Sabor local · Tapeo</span>
+</div>
+<!-- Ink Stamp Overlay -->
+<div class="absolute bottom-2 right-2 border-none bg-surface-container-lowest/90 text-primary px-2 py-0.5 rounded text-label-sm font-label-sm font-bold tracking-widest uppercase shadow-xs rotate-[-3deg]">
+            TABERNA Nº 12
+          </div>
+<!-- Micro Hint indicators -->
+<div class="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-on-surface/30 to-transparent flex items-center justify-start pl-2 pointer-events-none opacity-0 transition-opacity" id="leftBadge">
+<span class="material-symbols-outlined text-white text-2xl drop-shadow">close</span>
+</div>
+<div class="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-primary/40 to-transparent flex items-center justify-end pr-2 pointer-events-none opacity-0 transition-opacity" id="rightBadge">
+<span class="material-symbols-outlined text-white text-2xl drop-shadow" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="pt-2 px-1 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Gastronomía</h2>
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 leading-snug">
+              Tapeo, mercados y bares de toda la vida
+            </p>
+</div>
+<!-- Swipe Hints Bar -->
+<div class="flex items-center justify-between text-label-sm font-label-sm pt-2 text-outline">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>Paso</span>
+</div>
+<div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
+<div class="flex items-center gap-1 font-semibold text-primary">
+<span>¡Me va!</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Tactile Decision Buttons -->
+<div class="flex items-center justify-center gap-8 mt-3 w-full max-w-xs">
+<!-- Button: Paso (Reject) -->
+<button aria-label="Paso" class="w-14 h-14 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center shadow-md active:scale-90 transition-transform focus:outline-none" id="btnPass" type="button">
+<span class="material-symbols-outlined text-2xl font-bold">close</span>
+</button>
+<!-- Central Utility: Undo / Info -->
+<button aria-label="Deshacer" class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center shadow-sm active:scale-95 transition-transform focus:outline-none" type="button">
+<span class="material-symbols-outlined text-lg">undo</span>
+</button>
+<!-- Button: ¡Me va! (Accept / Terracotta) -->
+<button aria-label="Me encanta" class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-md active:scale-90 transition-transform focus:outline-none" id="btnLove" type="button">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</section>
+<!-- Sticker Scrapbook Section (Pegatinas Coleccionadas) -->
+<section class="mt-4 px-5">
+<div class="bg-surface-container-low rounded-2xl p-4 shadow-sm">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Tus pegatinas del cuaderno</h3>
+</div>
+<span class="font-label-sm text-label-sm font-bold bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded-full">
+          2 de 8
+        </span>
+</div>
+<!-- Sticker Tray Horizontal Scroll -->
+<div class="flex items-center gap-3 overflow-x-auto pb-2 pt-1 -mx-1 px-1">
+<!-- Sticker 1: Monumentos -->
+<div class="flex-shrink-0 flex flex-col items-center p-2 rounded-xl bg-surface-container-lowest shadow-sm -rotate-2 transform transition-transform hover:scale-105 relative group">
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[10px] font-bold">check</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary mb-1">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Monumentos</span>
+<span class="text-[10px] text-outline font-mono">#01 SEV</span>
+</div>
+<!-- Sticker 2: Museos -->
+<div class="flex-shrink-0 flex flex-col items-center p-2 rounded-xl bg-surface-container-lowest shadow-sm rotate-2 transform transition-transform hover:scale-105 relative group">
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[10px] font-bold">check</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/60 flex items-center justify-center text-tertiary mb-1">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">palette</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Museos</span>
+<span class="text-[10px] text-outline font-mono">#02 SEV</span>
+</div>
+<!-- Empty Slot 1: Gastronomía (In progress) -->
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-20 h-20 rounded-xl bg-surface-container-highest/60 text-outline-variant">
+<span class="material-symbols-outlined text-lg text-outline animate-pulse">hourglass_top</span>
+<span class="font-label-sm text-label-sm mt-1 text-on-surface-variant font-medium">Actual</span>
+</div>
+<!-- Empty Slot 2 -->
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-16 h-20 rounded-xl bg-surface-container text-outline-variant/60">
+<span class="text-sm font-bold text-outline-variant">···</span>
+</div>
+<!-- Empty Slot 3 -->
+<div class="flex-shrink-0 flex flex-col items-center justify-center w-16 h-20 rounded-xl bg-surface-container text-outline-variant/60">
+<span class="text-sm font-bold text-outline-variant">···</span>
+</div>
+</div>
+<!-- Categories Footnote -->
+<div class="mt-2 pt-2 text-[11px] leading-tight text-on-surface-variant/80">
+<span class="font-semibold text-on-surface">Categorías totales:</span>
+        Monumentos, Museos, Gastronomía, Naturaleza, Ocio nocturno, Compras, Playa y Con niños.
+      </div>
+</div>
+</section>
+<!-- Sticky Bottom Travel Summary & CTA Bar -->
+<div class="fixed bottom-0 inset-x-0 bg-surface/95 backdrop-blur-md px-4 py-3 shadow-lg z-30 flex items-center justify-between gap-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 text-on-surface font-semibold text-body-sm font-body-sm truncate">
+<span class="material-symbols-outlined text-primary text-[17px]">location_on</span>
+<span class="truncate">Sevilla · 3 días</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">
+        2 gustos elegidos hasta ahora
+      </span>
+</div>
+<!-- Active Terracotta CTA -->
+<button class="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-bold shadow-md active:translate-y-0.5 transition-all" type="button">
+<span>Continuar a Estilo</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<script>
+  (function() {
+    const card = document.getElementById('swipeCard');
+    const btnPass = document.getElementById('btnPass');
+    const btnLove = document.getElementById('btnLove');
+    const leftBadge = document.getElementById('leftBadge');
+    const rightBadge = document.getElementById('rightBadge');
+
+    if (!card) return;
+
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    function handleStart(x) {
+      isDragging = true;
+      startX = x;
+    }
+
+    function handleMove(x) {
+      if (!isDragging) return;
+      currentX = x - startX;
+      const rotate = currentX * 0.05;
+      card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
+
+      if (currentX > 20) {
+        if (rightBadge) rightBadge.style.opacity = Math.min(currentX / 80, 1);
+        if (leftBadge) leftBadge.style.opacity = 0;
+      } else if (currentX < -20) {
+        if (leftBadge) leftBadge.style.opacity = Math.min(-currentX / 80, 1);
+        if (rightBadge) rightBadge.style.opacity = 0;
+      } else {
+        if (leftBadge) leftBadge.style.opacity = 0;
+        if (rightBadge) rightBadge.style.opacity = 0;
+      }
+    }
+
+    function handleEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      if (currentX > 100) {
+        flyOut('right');
+      } else if (currentX < -100) {
+        flyOut('left');
+      } else {
+        card.style.transform = 'translateX(0) rotate(0deg)';
+        if (leftBadge) leftBadge.style.opacity = 0;
+        if (rightBadge) rightBadge.style.opacity = 0;
+      }
+    }
+
+    function flyOut(direction) {
+      const x = direction === 'right' ? 450 : -450;
+      const rot = direction === 'right' ? 20 : -20;
+      card.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
+      card.style.transform = `translateX(${x}px) rotate(${rot}deg)`;
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.style.transition = 'none';
+        card.style.transform = 'translateX(0) rotate(0deg)';
+        card.style.opacity = '1';
+        if (leftBadge) leftBadge.style.opacity = 0;
+        if (rightBadge) rightBadge.style.opacity = 0;
+      }, 350);
+    }
+
+    card.addEventListener('mousedown', (e) => handleStart(e.clientX));
+    window.addEventListener('mousemove', (e) => handleMove(e.clientX));
+    window.addEventListener('mouseup', handleEnd);
+
+    card.addEventListener('touchstart', (e) => handleStart(e.touches[0].clientX));
+    window.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX));
+    window.addEventListener('touchend', handleEnd);
+
+    if (btnPass) btnPass.addEventListener('click', () => flyOut('left'));
+    if (btnLove) btnLove.addEventListener('click', () => flyOut('right'));
+  })();
+</script></main></body></html>
