@@ -4,7 +4,7 @@
 import { appendFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { PerfilSchema } from '../flows/perfil.js';
-import { coleccion, configModelos, planificacionFlow } from '../index.js';
+import { almacen, configModelos, planificacionFlow } from '../index.js';
 import { leerHechos, parsearArgumentos, pendientes } from './ejecucion.js';
 import { lectorCorpus, versionCodigo } from './entorno.js';
 import { metricasItinerario } from './metricas.js';
@@ -16,7 +16,7 @@ const hechos = existsSync(argumentos.salida) ? leerHechos(readFileSync(argumento
 const tareas = pendientes(PERFILES_PRUEBA, argumentos.modos, argumentos.perfiles, hechos, configModelos.llm);
 
 const commit = versionCodigo();
-const corpusDe = lectorCorpus(coleccion);
+const corpusDe = lectorCorpus(almacen);
 
 console.log(`${tareas.length} ejecuciones pendientes (${hechos.size} ya guardadas) → ${argumentos.salida}\n`);
 const formato = (valor: number | null) => (valor === null ? '—' : valor.toFixed(2));

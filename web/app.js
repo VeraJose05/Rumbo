@@ -28,7 +28,12 @@ async function llamar(flow, data) {
     body: JSON.stringify({ data }),
   });
   const cuerpo = await respuesta.json().catch(() => ({}));
-  if (!respuesta.ok || !('result' in cuerpo)) throw new Error(cuerpo.error?.message ?? `error ${respuesta.status}`);
+  if (!respuesta.ok || !('result' in cuerpo)) {
+    // Genkit responde {status, message}; con 429 (cuota gratuita agotada, RNF-10) el mensaje es para el viajero.
+    const error = new Error(cuerpo.message ?? cuerpo.error?.message ?? `error ${respuesta.status}`);
+    error.cuota = respuesta.status === 429;
+    throw error;
+  }
   return cuerpo.result;
 }
 
@@ -63,7 +68,8 @@ async function conIndicador(accion, reintentar, nota = '') {
     return numero === conversacionActual ? resultado : null;
   } catch (error) {
     if (numero !== conversacionActual) return null;
-    const aviso = anadir('rumbo', `No he podido contactar con el servidor de Rumbo (${escapar(error.message)}).`, 'error');
+    const texto = error.cuota ? escapar(error.message) : `No he podido contactar con el servidor de Rumbo (${escapar(error.message)}).`;
+    const aviso = anadir('rumbo', texto, 'error');
     const boton = document.createElement('button');
     boton.className = 'boton-secundario';
     boton.textContent = 'Reintentar';

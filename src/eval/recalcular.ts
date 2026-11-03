@@ -6,11 +6,12 @@ import { cargarConfigChroma } from '../config/chroma.js';
 import { PerfilSchema } from '../flows/perfil.js';
 import { ItinerarioSchema } from '../flows/planificacion.js';
 import { abrirColeccion } from '../ingest/chroma.js';
+import { almacenChroma } from '../almacen/chroma.js';
 import { lectorCorpus, versionCodigo } from './entorno.js';
 import { metricasItinerario, reverificar } from './metricas.js';
 
 const fichero = process.argv[2] ?? 'resultados/evaluacion.jsonl';
-const corpusDe = lectorCorpus(await abrirColeccion(cargarConfigChroma()));
+const corpusDe = lectorCorpus(almacenChroma(await abrirColeccion(cargarConfigChroma())));
 const commitMetricas = versionCodigo();
 
 const lineas = readFileSync(fichero, 'utf8').split('\n').filter(Boolean);

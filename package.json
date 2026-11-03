@@ -18,6 +18,7 @@
     "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js",
     "experimento:cobertura": "npm run build && node --env-file-if-exists=.env dist/experimentos/cobertura.js",
     "ingesta": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar.js",
+    "exportar-indice": "npm run build && node --env-file-if-exists=.env dist/ingest/exportar-indice.js",
     "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js",
     "comparar": "npm run build && node --env-file-if-exists=.env dist/experimentos/comparar.js",
     "entrevista": "npm run build && node --env-file-if-exists=.env dist/experimentos/entrevista.js",
@@ -37,7 +38,6 @@
     "vitest": "5.0.5"
   },
   "dependencies": {
-    "@genkit-ai/express": "1.42.0",
     "chromadb": "3.5.0",
     "express": "4.22.3",
     "genkit": "1.42.0",
