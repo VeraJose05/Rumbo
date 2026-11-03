@@ -65,14 +65,15 @@ Fijan las restricciones que hacen defendible el trabajo: stack abierto, ejecuci�
 | ID | Requisito | Criterio de aceptación | Estado |
 | --- | --- | --- | --- |
 | RNF-01 | Todo el stack usa software con licencia abierta. | Cada dependencia principal figura con su licencia en la memoria. | Borrador |
-| RNF-02 | Ejecución local con modelos abiertos, sin depender de APIs de pago. | El sistema completo funciona con Ollama en el equipo (hardware por confirmar). | Borrador |
+| RNF-02 | Ejecución local con modelos abiertos, sin depender de APIs de pago. | El sistema completo funciona con Ollama en el equipo; la versión pública (RNF-10) cambia solo de proveedor por configuración. | Borrador |
 | RNF-03 | Experimentos reproducibles. | Versiones fijadas, semillas y un comando que repite la evaluación completa. | Borrador |
 | RNF-04 | Trazabilidad de cada ejecución. | Se registran configuración, fragmentos recuperados y salida (trazas de Genkit). | Borrador |
 | RNF-05 | Idioma español en entrevista, corpus de prueba e itinerario. | Los embeddings elegidos rinden bien en español. | Borrador |
 | RNF-06 | Latencia aceptable en la demo. | Umbral por definir tras medir en el equipo real. | Borrador |
 | RNF-07 | Cumplimiento de licencias de los datos. | Atribución visible a Wikivoyage, Wikipedia (CC BY-SA) y OpenStreetMap (ODbL). | Borrador |
 | RNF-08 | Código mantenible. | Flows separados por responsabilidad, README y pruebas mínimas. | Borrador |
-| RNF-09 | Privacidad del viajero. | Los datos del perfil no salen del equipo. | Borrador |
+| RNF-09 | Privacidad del viajero. | En modo local los datos del perfil no salen del equipo; la versión pública avisa de que usa un proveedor externo. | Borrador |
+| RNF-10 | Despliegue público a coste 0. | La app funciona en una URL pública con planes gratuitos sin tarjeta (Hugging Face Spaces y un LLM abierto por API gratuita); al agotar la cuota se avisa en lugar de fallar. | Borrador |
 
 ## Datos y fuentes
 
@@ -160,7 +161,7 @@ El orden prioriza tener cuanto antes un sistema completo y medible: la interfaz 
 | F4 · Planificación completa | Itinerario JSON día a día en los tres modos de ejecución | RF-05, RF-07, RF-08, RF-09 | Sistema de extremo a extremo (MVP) funcionando |
 | F5 · Evaluación | Crear los perfiles de prueba, implementar métricas, ejecutar C0, C1 y C2 | RNF-03, RNF-04 | Tabla de resultados por configuración y por métrica |
 | F6 · Demo y extras | Interfaz web, ajuste por chat, clima y exportación, según tiempo | RF-10, RF-11, RF-12, RF-13 | Demo utilizable sin consola |
-| F7 · Memoria | Redactar en paralelo desde F2 y cerrar con los resultados | Todos | Memoria completa con resultados y conclusiones |
+| F7 · Despliegue y entrega | Despliegue a coste 0, mejoras visibles (mapa, destinos, exportación, PWA) y entregables del máster: README, slides y vídeo | RNF-10, RNF-08 | URL pública funcionando y entregables enlazados en el README |
 
 **Regla de recorte:** si el tiempo aprieta, se sacrifica F6 antes que F5. Sin evaluación no hay TFM; sin demo bonita, sí.
 
@@ -194,3 +195,6 @@ Una fila por cambio en un requisito.
 
 | Fecha | Requisito | Qué cambia | Motivo |
 | --- | --- | --- | --- |
+| 2026-11-03 | RNF-10 (nuevo) | Despliegue público a coste 0 | Los requisitos del máster piden despliegue, slides y vídeo, no una memoria académica |
+| 2026-11-03 | RNF-02, RNF-09 | El modo local se mantiene; la versión pública usa un LLM abierto por API gratuita y lo avisa | Ningún hosting gratuito ofrece GPU para Ollama |
+| 2026-11-03 | F7 | De «Memoria» a «Despliegue y entrega» | Mismo motivo que RNF-10 |
