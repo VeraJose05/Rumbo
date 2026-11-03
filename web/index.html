@@ -1,51 +1,58 @@
 <!doctype html>
-<!-- RF-12: interfaz web de Rumbo. La sirve la API (npm run api) en http://127.0.0.1:3400 o el despliegue (RNF-10). -->
+<!-- RF-12: portada de Rumbo («cuaderno de viaje»): historias de los destinos y billete para empezar.
+     La sirve la API (npm run api) o el despliegue (RNF-10). -->
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#2b2622" />
     <title>Rumbo · Planifica tu viaje</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c4553a'/%3E%3Cpath d='M16 6l4 10-4 10-4-10z' fill='%23fff'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="estilos.css" />
+    <meta name="description" content="Planifica conversando. Viaja con fundamento: itinerarios por España con lugares sacados de la guía." />
+    <link rel="icon" href="marca/simbolo.svg" />
+    <link rel="preload" href="fuentes/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="cuaderno.css" />
+    <link rel="stylesheet" href="inicio.css" />
   </head>
-  <body>
-    <header class="barra">
-      <div class="marca">
-        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
-          <circle cx="16" cy="16" r="15" />
-          <path d="M16 6l4 10-4 10-4-10z" />
-        </svg>
-        <span>Rumbo</span>
-      </div>
-      <button id="nuevo" class="boton-secundario" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-        Nuevo viaje
-      </button>
-    </header>
+  <body class="portada">
+    <main class="inicio">
+      <section class="historias" aria-roledescription="carrusel" aria-label="Destinos con guía">
+        <div class="historias-fotos"></div>
+        <div class="historias-velo"></div>
+        <ol class="historias-progreso" aria-hidden="true"></ol>
 
-    <main id="conversacion" aria-live="polite">
-      <div id="mensajes"></div>
-      <div id="sugerencias" class="sugerencias" hidden>
-        <button type="button">4 días en Sevilla con mi pareja</button>
-        <button type="button">Un fin de semana en Granada</button>
-        <button type="button">Barcelona con niños, sin gastar mucho</button>
+        <header class="inicio-barra">
+          <a class="inicio-marca" href="./" aria-label="Rumbo, inicio">
+            <img src="marca/simbolo.svg" alt="" width="34" height="34" />
+            <span>rumbo</span>
+          </a>
+        </header>
+
+        <div class="historia-texto" aria-live="polite">
+          <span class="historia-region pegatina"></span>
+          <h1 class="titulo-xl historia-nombre"></h1>
+        </div>
+
+        <button class="historias-zona historias-anterior" type="button" aria-label="Destino anterior"></button>
+        <button class="historias-zona historias-siguiente" type="button" aria-label="Destino siguiente"></button>
+        <a class="historia-credito" target="_blank" rel="noopener"></a>
+      </section>
+
+      <div class="billete inicio-billete aparece">
+        <p class="antetitulo">Billete de viaje</p>
+        <h2 class="titulo">¿A dónde vamos?</h2>
+        <p class="suave inicio-lema">Arma tu ruta sin prisas y a tu rollo.</p>
+        <a id="empezar" class="boton boton-ancho" href="chat.html">
+          Empezar mi viaje
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+        <a class="inicio-chat" href="chat.html">o cuéntamelo por chat</a>
+        <div class="billete-talon">
+          <span>Sin registro ni cuentas</span>
+          <span id="privacidad" class="inicio-privacidad"></span>
+        </div>
       </div>
     </main>
 
-    <footer class="pie">
-      <form id="formulario" class="compositor">
-        <textarea id="entrada" rows="1" placeholder="Escribe tu mensaje…" aria-label="Tu mensaje" autofocus></textarea>
-        <button id="enviar" type="submit" aria-label="Enviar">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-        </button>
-      </form>
-      <p class="atribucion">
-        Guías de <a href="https://es.wikivoyage.org" target="_blank" rel="noopener">Wikivoyage</a>
-        (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-SA 4.0</a>) ·
-        <span id="privacidad"></span>
-      </p>
-    </footer>
-
-    <script type="module" src="app.js"></script>
+    <script type="module" src="inicio.js"></script>
   </body>
 </html>
