@@ -58,10 +58,37 @@
         </div>
       </section>
 
-      <!-- Paso 2: gustos (siguiente iteración) -->
+      <!-- Paso 2: gustos, con un mazo de cartas que se deslizan -->
       <section class="paso" data-paso="gustos" hidden>
-        <h1 class="titulo">¿Te va esto?</h1>
-        <p class="suave">Este paso llega en la siguiente iteración.</p>
+        <div class="gustos-cabecera">
+          <h1 class="titulo">¿Te va <span class="manuscrito acento">esto?</span></h1>
+          <span class="pegatina gustos-contador" aria-live="polite"></span>
+        </div>
+        <p class="suave">Desliza a la derecha si te apetece y a la izquierda si pasas.</p>
+
+        <div class="mazo" aria-live="polite"></div>
+        <div class="mazo-fin tarjeta" hidden>
+          <p class="manuscrito acento">¡Mazo terminado!</p>
+          <p class="suave mazo-fin-texto"></p>
+          <button class="boton boton-papel" type="button" data-barajar>Repasar las cartas</button>
+        </div>
+
+        <div class="mazo-botones">
+          <button class="boton boton-redondo boton-papel" type="button" data-decision="paso" aria-label="Paso">
+            <svg class="icono" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+          </button>
+          <button class="boton boton-redondo boton-papel mazo-deshacer" type="button" data-deshacer aria-label="Deshacer la última carta">
+            <svg class="icono" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></svg>
+          </button>
+          <button class="boton boton-redondo" type="button" data-decision="meva" aria-label="Me va">
+            <svg class="icono" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+          </button>
+        </div>
+
+        <div class="pegatinas-elegidas">
+          <p class="antetitulo">Tus pegatinas</p>
+          <ul class="pegatinas-lista"></ul>
+        </div>
       </section>
 
       <footer class="barra-inferior viaje-barra">

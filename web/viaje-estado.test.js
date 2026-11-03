@@ -1,6 +1,6 @@
 // RF-01, RF-12: perfil del viajero construido paso a paso en la web (sin chat).
 import { describe, expect, it } from 'vitest';
-import { DIAS_MAX, DIAS_MIN, cambiarDias, etiquetaDias, perfilInicial } from './viaje-estado.js';
+import { DIAS_MAX, DIAS_MIN, INTERESES, cambiarDias, decidirInteres, etiquetaDias, perfilInicial } from './viaje-estado.js';
 
 describe('perfilInicial', () => {
   it('empieza con 3 días y los valores por defecto del planificador', () => {
@@ -51,5 +51,39 @@ describe('etiquetaDias', () => {
     expect(etiquetaDias(3)).toBe('Escapada larga');
     expect(etiquetaDias(5)).toBe('Viaje con calma');
     expect(etiquetaDias(7)).toBe('Una semana entera');
+  });
+});
+
+describe('INTERESES', () => {
+  it('son los 8 del planificador, en su orden y con nombre y descripción', () => {
+    expect(INTERESES.map((i) => i.id)).toEqual([
+      'monumentos', 'museos', 'gastronomia', 'naturaleza', 'ocio-nocturno', 'compras', 'playa', 'ninos',
+    ]);
+    for (const i of INTERESES) {
+      expect(i.nombre).toBeTruthy();
+      expect(i.descripcion).toBeTruthy();
+    }
+  });
+});
+
+describe('decidirInteres', () => {
+  it('«me va» lo añade una sola vez', () => {
+    const una = decidirInteres(perfilInicial(), 'museos', true);
+    expect(decidirInteres(una, 'museos', true).intereses).toEqual(['museos']);
+  });
+
+  it('«paso» lo quita si estaba', () => {
+    const perfil = { ...perfilInicial(), intereses: ['museos', 'playa'] };
+    expect(decidirInteres(perfil, 'museos', false).intereses).toEqual(['playa']);
+  });
+
+  it('mantiene el orden del planificador aunque se elijan desordenados', () => {
+    let perfil = decidirInteres(perfilInicial(), 'playa', true);
+    perfil = decidirInteres(perfil, 'monumentos', true);
+    expect(perfil.intereses).toEqual(['monumentos', 'playa']);
+  });
+
+  it('ignora un interés que no existe', () => {
+    expect(decidirInteres(perfilInicial(), 'surf', true).intereses).toEqual([]);
   });
 });
