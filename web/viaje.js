@@ -3,7 +3,17 @@
 // sessionStorage para no perderlo al recargar.
 import { DESTINOS_PORTADA, creditoFoto } from './destinos.js';
 import { escapar } from './formato.js';
-import { INTERESES, cambiarDias, decidirInteres, etiquetaDias, perfilInicial } from './viaje-estado.js';
+import {
+  COMPANIAS,
+  INTERESES,
+  PRESUPUESTOS,
+  RITMOS,
+  cambiarDias,
+  decidirInteres,
+  elegir,
+  etiquetaDias,
+  perfilInicial,
+} from './viaje-estado.js';
 
 const PASOS = ['destino', 'gustos', 'estilo', 'billete'];
 const NOMBRES = { destino: 'Destino', gustos: 'Gustos', estilo: 'Estilo', billete: 'Billete' };
@@ -230,6 +240,54 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') decidir(false);
 });
 
+// ---------- Paso 3: estilo ----------
+
+const ritmo = document.querySelector('.ritmo-control');
+document.querySelector('.ritmo-etiquetas').innerHTML = RITMOS.map(
+  (r) => `<button type="button" data-ritmo="${r.id}" aria-pressed="false">${r.nombre}</button>`,
+).join('');
+ritmo.addEventListener('input', () => actualizar(elegir(perfil, 'ritmo', RITMOS[Number(ritmo.value)].id)));
+document.querySelector('.ritmo-etiquetas').addEventListener('click', (e) => {
+  const id = e.target.closest('[data-ritmo]')?.dataset.ritmo;
+  if (id) actualizar(elegir(perfil, 'ritmo', id));
+});
+
+const HUCHA = 'M5 13a6 5 0 0 1 11-3h2.5l.5 2 1.5.5v3l-2 .5-1 2.5h-2v-2h-6v2H7.5l-1-2.5A5 5 0 0 1 5 13zM10 8.5h3M16.5 12.5h.01';
+const PERSONAJES = {
+  solo: 'M12 3.5a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM6.5 21v-2.5a5.5 5.5 0 0 1 11 0V21M15.5 12.5l2.5-1 1 5-2 .5',
+  pareja: 'M8 6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM16 6a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 20v-1.5a5 5 0 0 1 9 0M12 18.5a5 5 0 0 1 9 0V20M12 4.2c-.5-.8-1.8-.6-1.8.4 0 .9 1.8 1.9 1.8 1.9s1.8-1 1.8-1.9c0-1-1.3-1.2-1.8-.4',
+  familia: 'M8 4a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 20v-2a5 5 0 0 1 10 0v2M17.5 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM14.5 20v-1a3 3 0 0 1 6 0v1',
+  amigos: 'M12 5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM5 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM19 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM8 20v-1.5a4 4 0 0 1 8 0V20M2 19a3.5 3.5 0 0 1 5-3M22 19a3.5 3.5 0 0 0-5-3',
+};
+const opcion = (campo, id, contenido) => `
+  <label class="opcion">
+    <input type="radio" name="${campo}" value="${id}" />
+    ${contenido}
+  </label>`;
+document.querySelector('[data-campo="presupuesto"]').innerHTML = PRESUPUESTOS.map((p) =>
+  opcion('presupuesto', p.id, `
+    <span class="monedas" aria-hidden="true">${'<i></i>'.repeat(p.monedas)}</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="${HUCHA}" /></svg>
+    <strong>${p.nombre}</strong><small>${escapar(p.descripcion)}</small>`),
+).join('');
+document.querySelector('[data-campo="compania"]').innerHTML = COMPANIAS.map((c) =>
+  opcion('compania', c.id, `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${PERSONAJES[c.id]}" /></svg><strong>${c.nombre}</strong>`),
+).join('');
+document.querySelectorAll('.opciones').forEach((grupo) =>
+  grupo.addEventListener('change', (e) => actualizar(elegir(perfil, grupo.dataset.campo, e.target.value))),
+);
+
+function pintarEstilo() {
+  const indice = RITMOS.findIndex((r) => r.id === perfil.ritmo);
+  ritmo.value = String(indice);
+  ritmo.setAttribute('aria-valuetext', RITMOS[indice].nombre);
+  document.querySelectorAll('[data-ritmo]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ritmo === perfil.ritmo)));
+  document.querySelector('.ritmo-planes .manuscrito').textContent = `${RITMOS[indice].planes} planes`;
+  document.querySelectorAll('.opciones input').forEach((input) => {
+    input.checked = perfil[input.name] === input.value;
+  });
+}
+
 // ---------- Navegación entre pasos ----------
 
 const pasoActual = () => (PASOS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'destino');
@@ -242,6 +300,11 @@ const PUEDE_SEGUIR = {
 };
 
 function pintar() {
+  // Si falta algo de un paso anterior (p. ej. se entra por la URL a #estilo sin gustos), se vuelve a él.
+  const pendiente = PASOS.slice(0, PASOS.indexOf(pasoActual())).find((p) => !PUEDE_SEGUIR[p]());
+  if (pendiente) {
+    history.replaceState(null, '', `#${pendiente}`);
+  }
   const paso = pasoActual();
   const indice = PASOS.indexOf(paso);
   document.querySelectorAll('section.paso').forEach((s) => {
@@ -255,6 +318,7 @@ function pintar() {
 
   if (paso === 'destino') pintarDestino();
   if (paso === 'gustos') pintarGustos();
+  if (paso === 'estilo') pintarEstilo();
 
   const resumen = [perfil.destino ?? 'Elige destino', `${perfil.dias} ${perfil.dias === 1 ? 'día' : 'días'}`];
   const n = perfil.intereses.length;

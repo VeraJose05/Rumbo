@@ -1,6 +1,9 @@
 // RF-01, RF-12: perfil del viajero construido paso a paso en la web (sin chat).
 import { describe, expect, it } from 'vitest';
-import { DIAS_MAX, DIAS_MIN, INTERESES, cambiarDias, decidirInteres, etiquetaDias, perfilInicial } from './viaje-estado.js';
+import {
+  COMPANIAS, DIAS_MAX, DIAS_MIN, INTERESES, PRESUPUESTOS, RITMOS,
+  cambiarDias, decidirInteres, elegir, etiquetaDias, perfilInicial,
+} from './viaje-estado.js';
 
 describe('perfilInicial', () => {
   it('empieza con 3 días y los valores por defecto del planificador', () => {
@@ -89,5 +92,30 @@ describe('decidirInteres', () => {
 
   it('ignora un interés que no existe', () => {
     expect(decidirInteres(perfilInicial(), 'surf', true).intereses).toEqual([]);
+  });
+});
+
+describe('opciones de estilo', () => {
+  it('son las del planificador', () => {
+    expect(RITMOS.map((r) => r.id)).toEqual(['tranquilo', 'normal', 'intenso']);
+    expect(PRESUPUESTOS.map((p) => p.id)).toEqual(['bajo', 'medio', 'alto']);
+    expect(COMPANIAS.map((c) => c.id)).toEqual(['solo', 'pareja', 'familia', 'amigos']);
+  });
+
+  it('el ritmo dice cuántos planes hay al día, como el planificador (2, 3 y 4)', () => {
+    expect(RITMOS.map((r) => r.planes)).toEqual([2, 3, 4]);
+  });
+});
+
+describe('elegir', () => {
+  it('cambia ritmo, presupuesto o compañía', () => {
+    const perfil = elegir(elegir(perfilInicial(), 'ritmo', 'intenso'), 'compania', 'familia');
+    expect(perfil.ritmo).toBe('intenso');
+    expect(perfil.compania).toBe('familia');
+  });
+
+  it('ignora valores o campos que no existen', () => {
+    expect(elegir(perfilInicial(), 'ritmo', 'frenético').ritmo).toBe('normal');
+    expect(elegir(perfilInicial(), 'destino', 'Bilbao').destino).toBeNull();
   });
 });

@@ -83,3 +83,32 @@ export function decidirInteres(perfil, id, meVa) {
   else elegidos.delete(id);
   return { ...perfil, intereses: ORDEN.filter((i) => elegidos.has(i)) };
 }
+
+// Estilo de viaje: los valores del planificador. «planes» es lo que hace con cada ritmo
+// (ACTIVIDADES_POR_RITMO en src/flows/itinerario.ts).
+export const RITMOS = [
+  { id: 'tranquilo', nombre: 'Tranquilo', planes: 2 },
+  { id: 'normal', nombre: 'Normal', planes: 3 },
+  { id: 'intenso', nombre: 'Intenso', planes: 4 },
+];
+
+export const PRESUPUESTOS = [
+  { id: 'bajo', nombre: 'Bajo', monedas: 1, descripcion: 'Tapeo y planes gratis' },
+  { id: 'medio', nombre: 'Medio', monedas: 2, descripcion: 'Algún capricho' },
+  { id: 'alto', nombre: 'Alto', monedas: 3, descripcion: 'Sin mirar la cuenta' },
+];
+
+export const COMPANIAS = [
+  { id: 'solo', nombre: 'Solo' },
+  { id: 'pareja', nombre: 'En pareja' },
+  { id: 'familia', nombre: 'En familia' },
+  { id: 'amigos', nombre: 'Con amigos' },
+];
+
+const OPCIONES = { ritmo: RITMOS, presupuesto: PRESUPUESTOS, compania: COMPANIAS };
+
+/** Cambia ritmo, presupuesto o compañía si el valor es uno de los que acepta el planificador. */
+export function elegir(perfil, campo, valor) {
+  if (!OPCIONES[campo]?.some((o) => o.id === valor)) return perfil;
+  return { ...perfil, [campo]: valor };
+}
