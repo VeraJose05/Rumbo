@@ -10,6 +10,7 @@ import { definirRecuperadorChroma, definirRecuperadorHibrido } from './flows/rec
 import { crearAi } from './genkit.js';
 import { abrirColeccion } from './ingest/chroma.js';
 import { almacenChroma } from './almacen/chroma.js';
+import { abrirIndice } from './almacen/memoria.js';
 import { lectorCorpus } from './eval/entorno.js';
 import { crearReranker } from './modelos/reranker.js';
 
@@ -17,8 +18,10 @@ export const configModelos = cargarConfigModelos();
 export const ai = crearAi(configModelos);
 export const pruebaFlow = definirPruebaFlow(ai);
 
-export const coleccion = await abrirColeccion(cargarConfigChroma());
-export const almacen = almacenChroma(coleccion);
+// RNF-10: con RUMBO_INDICE se usa el índice exportado en memoria (despliegue); si no, Chroma.
+export const almacen = process.env.RUMBO_INDICE
+  ? await abrirIndice(process.env.RUMBO_INDICE, configModelos.embedder)
+  : almacenChroma(await abrirColeccion(cargarConfigChroma()));
 const recuperador = definirRecuperadorChroma(ai, almacen, `ollama/${configModelos.embedder}`);
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
 // La entrevista contesta las preguntas del viajero con la guía (RAG básico, C1).

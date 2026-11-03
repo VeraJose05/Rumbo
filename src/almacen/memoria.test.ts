@@ -1,6 +1,6 @@
 // RNF-10: índice vectorial en memoria, para desplegar sin Chroma.
 import { describe, expect, it } from 'vitest';
-import { crearAlmacenMemoria, distanciaCoseno, type RegistroIndice } from './memoria.js';
+import { crearAlmacenMemoria, distanciaCoseno, leerIndice, type RegistroIndice } from './memoria.js';
 
 describe('distanciaCoseno', () => {
   it('es 0 para vectores con el mismo sentido, aunque tengan distinta longitud', () => {
@@ -36,5 +36,24 @@ describe('crearAlmacenMemoria', () => {
 
   it('lista todos los fragmentos de un destino (lo necesita BM25)', async () => {
     expect((await almacen.fragmentos('Sevilla')).map((f) => f.id)).toEqual(['s1', 's2', 's3']);
+  });
+});
+
+describe('leerIndice', () => {
+  const valido = { modeloEmbeddings: 'bge-m3', registros };
+
+  it('lee un índice exportado de Chroma', () => {
+    const indice = leerIndice(JSON.stringify(valido));
+    expect(indice.modeloEmbeddings).toBe('bge-m3');
+    expect(indice.registros).toHaveLength(4);
+  });
+
+  it('rechaza un índice sin fragmentos', () => {
+    expect(() => leerIndice(JSON.stringify({ ...valido, registros: [] }))).toThrow();
+  });
+
+  it('rechaza vectores de distinta dimensión (mezcla de modelos de embeddings)', () => {
+    const mezclado = [...registros, { id: 'x', texto: 'x', metadata: { destino: 'Sevilla' }, embedding: [1, 0, 0] }];
+    expect(() => leerIndice(JSON.stringify({ ...valido, registros: mezclado }))).toThrow(/dimensi/);
   });
 });

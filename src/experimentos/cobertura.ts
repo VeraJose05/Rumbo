@@ -7,7 +7,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { DESTINOS } from '../config/destinos.js';
 import { consultasDelPerfil } from '../flows/consultas.js';
 import { INTERESES, type Perfil } from '../flows/perfil.js';
-import { coleccion, configModelos, ai } from '../index.js';
+import { almacen, configModelos, ai } from '../index.js';
 import { crearReranker } from '../modelos/reranker.js';
 
 const CANDIDATOS = 20;
@@ -18,17 +18,16 @@ for (const destino of DESTINOS) {
   for (const interes of INTERESES) {
     const consulta = consultasDelPerfil({ intereses: [interes] } as Perfil)[1]!.texto;
     const [vector] = await ai.embed({ embedder: `ollama/${configModelos.embedder}`, content: consulta });
-    const resultado = await coleccion.query({ queryEmbeddings: [vector!.embedding], nResults: CANDIDATOS, where: { destino: destino.nombre } });
-    const candidatos = resultado.rows()[0] ?? [];
-    const [mejor] = await reordenar(consulta, candidatos.map((c) => c.document ?? ''), 1);
+    const candidatos = await almacen.buscar(vector!.embedding, CANDIDATOS, destino.nombre);
+    const [mejor] = await reordenar(consulta, candidatos.map((c) => c.texto), 1);
     const elegido = candidatos[mejor?.indice ?? 0];
     filas.push({
       destino: destino.nombre,
       interes,
-      distancia: candidatos[0]?.distance ?? null,
+      distancia: candidatos[0]?.distancia ?? null,
       reranker: mejor?.puntuacion ?? null,
       seccion: String(elegido?.metadata?.seccion ?? ''),
-      texto: (elegido?.document ?? '').replace(/\s+/g, ' ').slice(0, 90),
+      texto: (elegido?.texto ?? '').replace(/\s+/g, ' ').slice(0, 90),
     });
     process.stdout.write('.');
   }
