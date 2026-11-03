@@ -51,4 +51,26 @@ describe('cargarConfigModelos', () => {
     expect(() => cargarConfigModelos({ RUMBO_EMBEDDER_DIMENSIONES: 'mil' })).toThrow();
     expect(() => cargarConfigModelos({ RUMBO_EMBEDDER_DIMENSIONES: '-3' })).toThrow();
   });
+
+  // RNF-10: sin URL del LLM se usa Ollama; con ella, una API compatible con OpenAI (p. ej. Groq).
+  it('no define LLM remoto si no hay URL', () => {
+    const config = cargarConfigModelos({});
+    expect(config.llmUrl).toBeUndefined();
+    expect(config.llmClave).toBeUndefined();
+  });
+
+  it('lee la URL y la clave del LLM remoto', () => {
+    const config = cargarConfigModelos({
+      RUMBO_LLM: 'openai/gpt-oss-120b',
+      RUMBO_LLM_URL: 'https://api.groq.com/openai/v1',
+      RUMBO_LLM_CLAVE: 'gsk_prueba',
+    });
+    expect(config.llm).toBe('openai/gpt-oss-120b');
+    expect(config.llmUrl).toBe('https://api.groq.com/openai/v1');
+    expect(config.llmClave).toBe('gsk_prueba');
+  });
+
+  it('rechaza una URL de LLM remoto inválida', () => {
+    expect(() => cargarConfigModelos({ RUMBO_LLM_URL: 'groq' })).toThrow();
+  });
 });

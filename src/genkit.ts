@@ -1,8 +1,10 @@
-// RNF-02, RF-08: instancia de Genkit con los modelos locales de Ollama definidos en la configuración.
+// RNF-02, RF-08, RNF-10: instancia de Genkit con los modelos definidos en la configuración:
+// Ollama en local o, si hay RUMBO_LLM_URL, un LLM remoto compatible con OpenAI (despliegue).
 import { genkit } from 'genkit';
 import { ollama } from 'genkitx-ollama';
 import type { ConfigModelos } from './config/modelos.js';
 import { definirModeloOllama } from './modelos/ollama.js';
+import { definirModeloRemoto } from './modelos/remoto.js';
 
 export function crearAi(config: ConfigModelos) {
   const ai = genkit({
@@ -13,10 +15,11 @@ export function crearAi(config: ConfigModelos) {
         embedders: [{ name: config.embedder, dimensions: config.dimensionesEmbedder }],
       }),
     ],
-    model: `local/${config.llm}`,
+    model: config.llmUrl ? `remoto/${config.llm}` : `local/${config.llm}`,
   });
-  definirModeloOllama(ai, config.llm, config.ollamaUrl, config.contexto);
+  if (config.llmUrl) definirModeloRemoto(ai, config.llm, config.llmUrl, config.llmClave);
+  else definirModeloOllama(ai, config.llm, config.ollamaUrl, config.contexto);
   // El juez de la evaluación (F5); si es el mismo modelo que el generador, ya está registrado.
-  if (config.juez !== config.llm) definirModeloOllama(ai, config.juez, config.ollamaUrl, config.contexto);
+  if (config.llmUrl || config.juez !== config.llm) definirModeloOllama(ai, config.juez, config.ollamaUrl, config.contexto);
   return ai;
 }
