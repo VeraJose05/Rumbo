@@ -38,7 +38,6 @@
     "vitest": "5.0.5"
   },
   "dependencies": {
-    "@genkit-ai/express": "1.42.0",
     "chromadb": "3.5.0",
     "express": "4.22.3",
     "genkit": "1.42.0",

@@ -2,7 +2,7 @@
 // Es el gemelo de ollama.ts: los flows no saben qué proveedor responde.
 // Salida estructurada con response_format json_schema en modo estricto: el proveedor obliga a que
 // cada token encaje en el esquema. Sin modo estricto, qwen en Groq devolvió caracteres corruptos.
-import type { Genkit, GenerateRequest } from 'genkit';
+import { UserFacingError, type Genkit, type GenerateRequest } from 'genkit';
 
 type Esquema = Record<string, unknown>;
 
@@ -16,11 +16,17 @@ interface PeticionOpenAI {
     | { type: 'json_schema'; json_schema: { name: string; strict: boolean; schema: Esquema } };
 }
 
-/** Error que la web muestra como aviso: el plan gratuito del proveedor se ha agotado por ahora. */
-export class CuotaAgotadaError extends Error {
+/**
+ * Error que la web muestra como aviso: el plan gratuito del proveedor se ha agotado por ahora.
+ * Como UserFacingError, Genkit lo devuelve con código 429 y su mensaje; el detalle del proveedor
+ * (que incluye el id de la organización) solo queda en el servidor.
+ */
+export class CuotaAgotadaError extends UserFacingError {
+  readonly detalleProveedor: string;
   constructor(detalle: string) {
-    super(`Se ha agotado la cuota gratuita del modelo; inténtalo de nuevo en unos minutos. (${detalle})`);
+    super('RESOURCE_EXHAUSTED', 'Rumbo ha agotado por ahora la cuota gratuita del modelo. Inténtalo de nuevo en unos minutos.');
     this.name = 'CuotaAgotadaError';
+    this.detalleProveedor = detalle;
   }
 }
 
@@ -120,7 +126,11 @@ export function definirModeloRemoto(ai: Genkit, modelo: string, url: string, cla
           cuerpo: detalle,
           intento,
         });
-        if (espera === null) throw errorDeRespuesta(respuesta.status, detalle);
+        if (espera === null) {
+          const error = errorDeRespuesta(respuesta.status, detalle);
+          console.error(error instanceof CuotaAgotadaError ? `${error.message} ${detalle}` : error.message);
+          throw error;
+        }
         await new Promise((resolver) => setTimeout(resolver, espera));
       }
       const cuerpo = (await respuesta.json()) as { choices?: { message?: { content?: string } }[] };

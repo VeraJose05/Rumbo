@@ -92,6 +92,12 @@ describe('errorDeRespuesta', () => {
     expect(error.message).toMatch(/cuota/i);
   });
 
+  it('el error de cuota llega a la web como 429 y sin el detalle técnico del proveedor', () => {
+    const error = errorDeRespuesta(429, '{"error":"Rate limit reached for org_123"}') as CuotaAgotadaError;
+    expect(error.code).toBe(429);
+    expect(error.toJSON().message).not.toContain('org_123');
+  });
+
   it('deja el resto de errores con el código y el detalle', () => {
     const error = errorDeRespuesta(500, 'fallo interno');
     expect(error).not.toBeInstanceOf(CuotaAgotadaError);
