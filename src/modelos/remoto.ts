@@ -29,6 +29,29 @@ export function errorDeRespuesta(estado: number, detalle: string): Error {
   return new Error(`El proveedor del LLM respondió ${estado}: ${detalle}`);
 }
 
+/** Reintentos ante un 429 y espera máxima: más allá es el límite diario y no merece la pena esperar. */
+const MAX_REINTENTOS = 3;
+const MAX_ESPERA_MS = 60_000;
+
+/** Milisegundos que esperar antes de reintentar, o null si no hay que reintentar. */
+export function esperaAntesDeReintentar({
+  estado,
+  retryAfter,
+  cuerpo,
+  intento,
+}: {
+  estado: number;
+  retryAfter: string | null;
+  cuerpo: string;
+  intento: number;
+}): number | null {
+  if (estado !== 429 || intento >= MAX_REINTENTOS) return null;
+  const segundos = retryAfter ? Number(retryAfter) : Number(/try again in ([\d.]+)s/.exec(cuerpo)?.[1]);
+  if (!Number.isFinite(segundos)) return null;
+  const ms = Math.ceil(segundos * 1000);
+  return ms <= MAX_ESPERA_MS ? ms : null;
+}
+
 /**
  * Adapta el esquema de Genkit al modo estricto de OpenAI: cada objeto con additionalProperties
  * false y sin $schema. Si algún objeto tiene campos opcionales, el modo estricto no se puede usar.
@@ -81,12 +104,25 @@ export function definirModeloRemoto(ai: Genkit, modelo: string, url: string, cla
       supports: { multiturn: true, systemRole: true, constrained: 'all', output: ['text', 'json'] },
     },
     async (peticion) => {
-      const respuesta = await fetch(`${url}/chat/completions`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...(clave ? { Authorization: `Bearer ${clave}` } : {}) },
-        body: JSON.stringify(aPeticionOpenAI(modelo, peticion)),
-      });
-      if (!respuesta.ok) throw errorDeRespuesta(respuesta.status, await respuesta.text());
+      const cuerpoPeticion = JSON.stringify(aPeticionOpenAI(modelo, peticion));
+      let respuesta: Response;
+      for (let intento = 0; ; intento++) {
+        respuesta = await fetch(`${url}/chat/completions`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...(clave ? { Authorization: `Bearer ${clave}` } : {}) },
+          body: cuerpoPeticion,
+        });
+        if (respuesta.ok) break;
+        const detalle = await respuesta.text();
+        const espera = esperaAntesDeReintentar({
+          estado: respuesta.status,
+          retryAfter: respuesta.headers.get('retry-after'),
+          cuerpo: detalle,
+          intento,
+        });
+        if (espera === null) throw errorDeRespuesta(respuesta.status, detalle);
+        await new Promise((resolver) => setTimeout(resolver, espera));
+      }
       const cuerpo = (await respuesta.json()) as { choices?: { message?: { content?: string } }[] };
       const texto = cuerpo.choices?.[0]?.message?.content;
       if (texto === undefined) throw new Error(`El proveedor del LLM respondió sin texto: ${JSON.stringify(cuerpo)}`);

@@ -1,7 +1,7 @@
 // RNF-10: traducción de una petición de Genkit a una API compatible con OpenAI (Groq).
 import type { GenerateRequest } from 'genkit';
 import { describe, expect, it } from 'vitest';
-import { aEsquemaEstricto, aPeticionOpenAI, CuotaAgotadaError, errorDeRespuesta } from './remoto.js';
+import { aEsquemaEstricto, aPeticionOpenAI, CuotaAgotadaError, errorDeRespuesta, esperaAntesDeReintentar } from './remoto.js';
 
 const mensajes: GenerateRequest['messages'] = [
   { role: 'system', content: [{ text: 'Eres un asistente.' }] },
@@ -97,5 +97,32 @@ describe('errorDeRespuesta', () => {
     expect(error).not.toBeInstanceOf(CuotaAgotadaError);
     expect(error.message).toContain('500');
     expect(error.message).toContain('fallo interno');
+  });
+});
+
+// El plan gratuito de Groq limita los tokens por minuto (8.000): un itinerario de varios días lo
+// supera, pero basta con esperar unos segundos. El límite diario, en cambio, no merece la espera.
+describe('esperaAntesDeReintentar', () => {
+  const cuota = { estado: 429, retryAfter: '12', cuerpo: '', intento: 0 };
+
+  it('espera lo que indica la cabecera retry-after, en milisegundos', () => {
+    expect(esperaAntesDeReintentar(cuota)).toBe(12_000);
+  });
+
+  it('si no hay cabecera, lee la espera del mensaje de error', () => {
+    const cuerpo = '{"error":{"message":"Rate limit reached ... Please try again in 12.3375s. Need more tokens?"}}';
+    expect(esperaAntesDeReintentar({ ...cuota, retryAfter: null, cuerpo })).toBe(12_338);
+  });
+
+  it('no reintenta si la espera es larga (límite diario)', () => {
+    expect(esperaAntesDeReintentar({ ...cuota, retryAfter: '600' })).toBeNull();
+  });
+
+  it('no reintenta indefinidamente', () => {
+    expect(esperaAntesDeReintentar({ ...cuota, intento: 3 })).toBeNull();
+  });
+
+  it('no reintenta otros errores', () => {
+    expect(esperaAntesDeReintentar({ ...cuota, estado: 500 })).toBeNull();
   });
 });
