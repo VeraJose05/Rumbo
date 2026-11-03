@@ -2,7 +2,7 @@
 // se envía en cada mensaje. Al confirmar el perfil se planifica con C1 (RAG básico): en la
 // evaluación, C2 no mejoraba los resultados y tardaba 2,5 veces más. Con el itinerario hecho, los
 // mensajes son ajustes («más tranquilo», «quita la Catedral»: RF-11).
-import { escapar, itinerarioAHtml, textoAHtml } from './formato.js';
+import { avisoPrivacidad, escapar, itinerarioAHtml, textoAHtml } from './formato.js';
 
 const MODO = 'C1';
 
@@ -182,3 +182,11 @@ sugerencias.addEventListener('click', (evento) => {
 document.querySelector('#nuevo').addEventListener('click', empezar);
 
 empezar();
+
+// RNF-09: el pie dice si los mensajes salen del equipo (versión pública) o no (local).
+fetch('/info')
+  .then((respuesta) => respuesta.json())
+  .then(({ proveedores }) => {
+    document.querySelector('#privacidad').innerHTML = avisoPrivacidad(proveedores ?? []);
+  })
+  .catch(() => {});

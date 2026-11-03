@@ -61,3 +61,19 @@ export function cargarConfigModelos(env: Entorno = process.env): ConfigModelos {
     embedderClave: leer('RUMBO_EMBEDDER_CLAVE'),
   });
 }
+
+export interface ProveedorExterno {
+  uso: string;
+  servicio: string;
+  modelo: string;
+}
+
+/** RNF-09: servicios externos que reciben los mensajes del viajero (vacío si todo va por Ollama). */
+export function proveedoresExternos(config: ConfigModelos): ProveedorExterno[] {
+  const lista: ProveedorExterno[] = [];
+  if (config.llmUrl) lista.push({ uso: 'modelo de lenguaje', servicio: new URL(config.llmUrl).host, modelo: config.llm });
+  if (config.embedderUrl) {
+    lista.push({ uso: 'búsqueda en la guía', servicio: new URL(config.embedderUrl).host, modelo: config.embedder });
+  }
+  return lista;
+}

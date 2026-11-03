@@ -83,3 +83,16 @@ export function itinerarioAHtml(perfil, itinerario) {
 
   return `<article class="itinerario">${cabecera}${aviso}${bloques.join('')}${pie}</article>`;
 }
+
+// Nombre legible de cada servicio a partir de su host; si no se conoce, el propio host.
+const SERVICIOS = { 'api.groq.com': 'Groq', 'api.cloudflare.com': 'Cloudflare' };
+
+/** RNF-09: texto del pie sobre adónde van los mensajes del viajero (HTML escapado). */
+export function avisoPrivacidad(proveedores) {
+  if (!proveedores.length) return 'Todo se ejecuta en tu equipo';
+  const lista = proveedores.map((p) => {
+    const modelo = p.modelo.split('/').pop();
+    return escapar(`${SERVICIOS[p.servicio] ?? p.servicio} (${modelo})`);
+  });
+  return `Versión pública: tus mensajes se procesan en ${lista.join(' y ')}, modelos abiertos. No escribas datos personales`;
+}
