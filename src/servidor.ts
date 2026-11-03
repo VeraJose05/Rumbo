@@ -6,7 +6,8 @@ import express, { type RequestHandler } from 'express';
 import type { Action } from 'genkit';
 import { getCallableJSON, getHttpStatus } from 'genkit/context';
 import { fileURLToPath } from 'node:url';
-import { ajusteFlow, entrevistaFlow, planificacionFlow } from './index.js';
+import { proveedoresExternos } from './config/modelos.js';
+import { ajusteFlow, configModelos, entrevistaFlow, planificacionFlow } from './index.js';
 
 // Render indica el puerto en PORT (RNF-10).
 const PUERTO = Number(process.env.RUMBO_API_PUERTO) || Number(process.env.PORT) || 3400;
@@ -37,6 +38,10 @@ app.post('/planificacionFlow', manejador(planificacionFlow));
 app.post('/ajusteFlow', manejador(ajusteFlow));
 app.get('/salud', (_peticion, respuesta) => {
   respuesta.json({ ok: true });
+});
+// RNF-09: la web avisa de los servicios externos que reciben los mensajes (ninguno en local).
+app.get('/info', (_peticion, respuesta) => {
+  respuesta.json({ proveedores: proveedoresExternos(configModelos) });
 });
 
 app.listen(PUERTO, HOST, () => {

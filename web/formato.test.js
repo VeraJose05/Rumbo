@@ -1,6 +1,6 @@
 // RF-12, RNF-07: formato de los mensajes y del itinerario en la web.
 import { describe, expect, it } from 'vitest';
-import { itinerarioAHtml, textoAHtml } from './formato.js';
+import { avisoPrivacidad, itinerarioAHtml, textoAHtml } from './formato.js';
 
 describe('textoAHtml', () => {
   it('escapa el HTML: el texto viene del modelo y de la guía', () => {
@@ -77,5 +77,26 @@ describe('itinerarioAHtml', () => {
   it('sin información del destino, lo dice en vez de planificar', () => {
     const html = itinerarioAHtml(perfil, itinerario([], { hayInformacion: false, fuentes: [] }));
     expect(html).toContain('No tengo información de Granada');
+  });
+});
+
+// RNF-09: en local nada sale del equipo; en la versión pública se dice a qué servicios van los mensajes.
+describe('avisoPrivacidad', () => {
+  it('en local dice que todo se ejecuta en el equipo', () => {
+    expect(avisoPrivacidad([])).toBe('Todo se ejecuta en tu equipo');
+  });
+
+  it('en la versión pública nombra los servicios y pide no escribir datos personales', () => {
+    const aviso = avisoPrivacidad([
+      { uso: 'modelo de lenguaje', servicio: 'api.groq.com', modelo: 'openai/gpt-oss-120b' },
+      { uso: 'búsqueda en la guía', servicio: 'api.cloudflare.com', modelo: 'bge-m3' },
+    ]);
+    expect(aviso).toBe(
+      'Versión pública: tus mensajes se procesan en Groq (gpt-oss-120b) y Cloudflare (bge-m3), modelos abiertos. No escribas datos personales',
+    );
+  });
+
+  it('escapa lo que llega del servidor', () => {
+    expect(avisoPrivacidad([{ uso: 'x', servicio: '<b>', modelo: '<i>' }])).not.toContain('<');
   });
 });

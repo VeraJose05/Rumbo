@@ -1,6 +1,6 @@
 // RF-08: modelos de lenguaje y de embeddings intercambiables por configuración.
 import { describe, expect, it } from 'vitest';
-import { cargarConfigModelos } from './modelos.js';
+import { cargarConfigModelos, proveedoresExternos } from './modelos.js';
 
 describe('cargarConfigModelos', () => {
   it('usa los valores por defecto si no hay variables de entorno', () => {
@@ -86,5 +86,24 @@ describe('cargarConfigModelos', () => {
 
   it('no define embedder remoto si no hay URL', () => {
     expect(cargarConfigModelos({}).embedderUrl).toBeUndefined();
+  });
+});
+
+// RNF-09: la web avisa de qué servicios externos reciben los mensajes del viajero.
+describe('proveedoresExternos', () => {
+  it('está vacío en local (Ollama): nada sale del equipo', () => {
+    expect(proveedoresExternos(cargarConfigModelos({}))).toEqual([]);
+  });
+
+  it('declara el host del LLM y del embedder remotos', () => {
+    const config = cargarConfigModelos({
+      RUMBO_LLM: 'openai/gpt-oss-120b',
+      RUMBO_LLM_URL: 'https://api.groq.com/openai/v1',
+      RUMBO_EMBEDDER_URL: 'https://api.cloudflare.com/client/v4/accounts/abc/ai/run/@cf/baai/bge-m3',
+    });
+    expect(proveedoresExternos(config)).toEqual([
+      { uso: 'modelo de lenguaje', servicio: 'api.groq.com', modelo: 'openai/gpt-oss-120b' },
+      { uso: 'búsqueda en la guía', servicio: 'api.cloudflare.com', modelo: 'bge-m3' },
+    ]);
   });
 });
