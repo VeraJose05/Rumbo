@@ -1,0 +1,28 @@
+# RNF-10: despliegue a coste 0 en Render (plan gratuito: 512 MB, se duerme tras 15 min sin uso).
+# Sin Ollama ni Chroma: LLM por Groq, embeddings de las preguntas por Cloudflare Workers AI (bge-m3)
+# e índice vectorial en memoria (indice/destinos.json). Las claves se introducen en el panel de Render.
+services:
+  - type: web
+    name: rumbo
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/servidor.js
+    healthCheckPath: /salud
+    envVars:
+      - key: NODE_VERSION
+        value: '24'
+      - key: RUMBO_API_HOST
+        value: 0.0.0.0
+      - key: RUMBO_INDICE
+        value: indice/destinos.json
+      - key: RUMBO_LLM
+        value: openai/gpt-oss-120b
+      - key: RUMBO_LLM_URL
+        value: https://api.groq.com/openai/v1
+      - key: RUMBO_LLM_CLAVE
+        sync: false
+      - key: RUMBO_EMBEDDER_URL
+        sync: false
+      - key: RUMBO_EMBEDDER_CLAVE
+        sync: false

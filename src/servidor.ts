@@ -1,14 +1,15 @@
 // RF-12: API HTTP con los flows de entrevista y planificación, y la web de Rumbo (carpeta web/)
 // en la raíz (npm run api). Sin estado: el cliente guarda el estado de la
 // entrevista y lo envía en cada mensaje. En local solo escucha en 127.0.0.1: los datos del viajero
-// no salen del equipo (RNF-09). En el contenedor de despliegue (RNF-10) escucha en 0.0.0.0.
+// no salen del equipo (RNF-09). En el despliegue (RNF-10) escucha en 0.0.0.0.
 import express, { type RequestHandler } from 'express';
 import type { Action } from 'genkit';
 import { getCallableJSON, getHttpStatus } from 'genkit/context';
 import { fileURLToPath } from 'node:url';
 import { ajusteFlow, entrevistaFlow, planificacionFlow } from './index.js';
 
-const PUERTO = Number(process.env.RUMBO_API_PUERTO) || 3400;
+// Render indica el puerto en PORT (RNF-10).
+const PUERTO = Number(process.env.RUMBO_API_PUERTO) || Number(process.env.PORT) || 3400;
 const HOST = process.env.RUMBO_API_HOST || '127.0.0.1';
 
 const app = express();

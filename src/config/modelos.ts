@@ -20,6 +20,10 @@ export const ConfigModelosSchema = z.object({
   // El juez de la evaluación sigue siempre en local.
   llmUrl: z.string().url().optional(),
   llmClave: z.string().optional(),
+  // RNF-10: endpoint REST del embedder (Cloudflare Workers AI). Sin URL, los embeddings van por Ollama.
+  // Debe ser el mismo modelo con el que se hizo el índice (bge-m3).
+  embedderUrl: z.string().url().optional(),
+  embedderClave: z.string().optional(),
 });
 
 export type ConfigModelos = z.infer<typeof ConfigModelosSchema>;
@@ -53,5 +57,7 @@ export function cargarConfigModelos(env: Entorno = process.env): ConfigModelos {
     rerankerUrl: leer('RERANKER_URL') ?? POR_DEFECTO.rerankerUrl,
     llmUrl: leer('RUMBO_LLM_URL'),
     llmClave: leer('RUMBO_LLM_CLAVE'),
+    embedderUrl: leer('RUMBO_EMBEDDER_URL'),
+    embedderClave: leer('RUMBO_EMBEDDER_CLAVE'),
   });
 }

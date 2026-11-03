@@ -7,7 +7,7 @@ import { definirPlanificacionFlow } from './flows/planificacion.js';
 import { definirPreguntaFlow } from './flows/pregunta.js';
 import { definirPruebaFlow } from './flows/prueba.js';
 import { definirRecuperadorChroma, definirRecuperadorHibrido } from './flows/recuperador.js';
-import { crearAi } from './genkit.js';
+import { crearAi, nombreEmbedder } from './genkit.js';
 import { abrirColeccion } from './ingest/chroma.js';
 import { almacenChroma } from './almacen/chroma.js';
 import { abrirIndice } from './almacen/memoria.js';
@@ -22,7 +22,7 @@ export const pruebaFlow = definirPruebaFlow(ai);
 export const almacen = process.env.RUMBO_INDICE
   ? await abrirIndice(process.env.RUMBO_INDICE, configModelos.embedder)
   : almacenChroma(await abrirColeccion(cargarConfigChroma()));
-const recuperador = definirRecuperadorChroma(ai, almacen, `ollama/${configModelos.embedder}`);
+const recuperador = definirRecuperadorChroma(ai, almacen, nombreEmbedder(configModelos));
 export const preguntaFlow = definirPreguntaFlow(ai, recuperador);
 // La entrevista contesta las preguntas del viajero con la guía (RAG básico, C1).
 export const entrevistaFlow = definirEntrevistaFlow(ai, {
@@ -30,6 +30,6 @@ export const entrevistaFlow = definirEntrevistaFlow(ai, {
   leerGuia: lectorCorpus(almacen),
 });
 // C2: el reranker solo se llama al planificar en ese modo, así que C0 y C1 funcionan sin él.
-const recuperadorAvanzado = definirRecuperadorHibrido(ai, almacen, `ollama/${configModelos.embedder}`, crearReranker(configModelos.rerankerUrl));
+const recuperadorAvanzado = definirRecuperadorHibrido(ai, almacen, nombreEmbedder(configModelos), crearReranker(configModelos.rerankerUrl));
 export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado);
 export const ajusteFlow = definirAjusteFlow(ai, recuperador, recuperadorAvanzado);

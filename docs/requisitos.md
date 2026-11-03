@@ -73,7 +73,7 @@ Fijan las restricciones que hacen defendible el trabajo: stack abierto, ejecuci�
 | RNF-07 | Cumplimiento de licencias de los datos. | Atribución visible a Wikivoyage, Wikipedia (CC BY-SA) y OpenStreetMap (ODbL). | Borrador |
 | RNF-08 | Código mantenible. | Flows separados por responsabilidad, README y pruebas mínimas. | Borrador |
 | RNF-09 | Privacidad del viajero. | En modo local los datos del perfil no salen del equipo; la versión pública avisa de que usa un proveedor externo. | Borrador |
-| RNF-10 | Despliegue público a coste 0. | La app funciona en una URL pública con planes gratuitos sin tarjeta (Hugging Face Spaces y un LLM abierto por API gratuita); al agotar la cuota se avisa en lugar de fallar. | Borrador |
+| RNF-10 | Despliegue público a coste 0. | La app funciona en una URL pública con planes gratuitos sin tarjeta (Render para el servidor, Groq para el LLM y Cloudflare Workers AI para los embeddings, todos con modelos abiertos); al agotar la cuota se avisa en lugar de fallar. | Borrador |
 
 ## Datos y fuentes
 
@@ -198,3 +198,4 @@ Una fila por cambio en un requisito.
 | 2026-11-03 | RNF-10 (nuevo) | Despliegue público a coste 0 | Los requisitos del máster piden despliegue, slides y vídeo, no una memoria académica |
 | 2026-11-03 | RNF-02, RNF-09 | El modo local se mantiene; la versión pública usa un LLM abierto por API gratuita y lo avisa | Ningún hosting gratuito ofrece GPU para Ollama |
 | 2026-11-03 | F7 | De «Memoria» a «Despliegue y entrega» | Mismo motivo que RNF-10 |
+| 2026-11-03 | RNF-10 | Hosting: Render + embeddings por Cloudflare Workers AI en lugar de Hugging Face Spaces | Hugging Face exige ahora PRO para Spaces Docker; los hostings gratuitos dan 512 MB y Ollama no cabe |

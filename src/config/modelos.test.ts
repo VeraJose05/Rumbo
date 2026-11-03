@@ -73,4 +73,18 @@ describe('cargarConfigModelos', () => {
   it('rechaza una URL de LLM remoto inválida', () => {
     expect(() => cargarConfigModelos({ RUMBO_LLM_URL: 'groq' })).toThrow();
   });
+
+  // RNF-10: embeddings de la pregunta por API (Cloudflare Workers AI) para desplegar sin Ollama.
+  it('lee la URL y la clave del embedder remoto', () => {
+    const config = cargarConfigModelos({
+      RUMBO_EMBEDDER_URL: 'https://api.cloudflare.com/client/v4/accounts/abc/ai/run/@cf/baai/bge-m3',
+      RUMBO_EMBEDDER_CLAVE: 'cf_prueba',
+    });
+    expect(config.embedderUrl).toBe('https://api.cloudflare.com/client/v4/accounts/abc/ai/run/@cf/baai/bge-m3');
+    expect(config.embedderClave).toBe('cf_prueba');
+  });
+
+  it('no define embedder remoto si no hay URL', () => {
+    expect(cargarConfigModelos({}).embedderUrl).toBeUndefined();
+  });
 });
