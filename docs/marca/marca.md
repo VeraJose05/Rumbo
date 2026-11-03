@@ -55,12 +55,18 @@ Ambas de Google Fonts, licencia OFL (se pueden servir desde la propia app, sin d
 - **Fraunces** SemiBold, ejes *SOFT 100* y *opsz* alto: títulos, nombre de los destinos y el logotipo. Es una serif cálida y redondeada, con aire de guía de viajes.
 - **Inter**: texto, botones y datos. Legible en pantallas pequeñas.
 
-## Forma
+## Concepto visual: «cuaderno de viaje»
 
-- Esquinas redondeadas generosas: 16–20 px en tarjetas y 999 px en chips y botones.
-- Sombras suaves y cálidas; nada de sombras grises duras.
-- Iconos de línea con trazo de 2 px y esquinas redondeadas (estilo Lucide/Phosphor).
-- Fotos de los destinos con luz cálida, sin filtros fríos.
+Rumbo es para viajar, no una herramienta de gestión: la primera prueba con tarjetas limpias quedó genérica. La interfaz es un diario de viajero y un pasaporte:
+
+- Fotos de destino a sangre con luz cálida, papel crema con textura, sellos de tinta, billetes de tren con borde troquelado, postales y cinta washi.
+- Planificar es un juego: postales para elegir destino, cartas que se deslizan para los gustos, una tortuga y una liebre para el ritmo, un billete que se sella al confirmar, y un panel de salidas de estación mientras se genera el plan.
+- El itinerario es un camino con paradas, como los niveles de un juego.
+- **Pasaporte** con sellos por ciudad e insignias («Tapeador», «Catedralista») al hacer check-in en los lugares. **Sin login**: el pasaporte y los viajes se guardan en el móvil (privacidad, RNF-09).
+- Microinteracciones con rebote; iconos de línea de 2 px redondeados.
+- Detalles manuscritos con **Caveat** (Google Fonts, OFL), con moderación.
+
+Datos reales, nunca inventados: ni temperaturas, ni horarios de cena, ni promesas que la app no cumple.
 
 ## Archivos
 
