@@ -551,3 +551,128 @@
   background: var(--azafran);
   border: 2px solid #d99a22;
 }
+
+/* ---------- Billete ---------- */
+
+.billete-viaje {
+  --altura-talon: 88%;
+  display: grid;
+  gap: 16px;
+  overflow: visible;
+}
+.billete-etiqueta {
+  margin: 0;
+  font: 600 11px/1.2 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--piedra);
+}
+.billete-destino {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.billete-ciudad {
+  margin: 2px 0 0;
+  font: 700 40px/1 var(--titulo);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.billete-editar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--piedra);
+  border: 1.5px solid var(--borde);
+  background: var(--tarjeta);
+}
+.billete-editar .icono {
+  width: 15px;
+  height: 15px;
+}
+.icono-pequeno {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+}
+.billete-datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+}
+.billete-datos > div {
+  position: relative;
+  padding: 10px 40px 10px 12px;
+  border-radius: 12px;
+  border: 1.5px dashed var(--borde);
+}
+.billete-datos dd {
+  margin: 4px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+.billete-datos .billete-editar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+}
+.billete-gustos a {
+  color: var(--piedra);
+}
+.billete-gustos ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sello-gusto {
+  --tam: auto;
+  width: auto;
+  aspect-ratio: auto;
+  border-radius: 10px;
+  outline-offset: -5px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+/* El sello «¡En marcha!» cae sobre el billete al pulsar «Sellar». */
+.sello-marcha {
+  position: absolute;
+  right: 18px;
+  top: 34%;
+  --tam: 120px;
+  font-size: 17px;
+  color: var(--terracota);
+  mix-blend-mode: normal;
+  background: rgb(255 246 236 / 0.6);
+  opacity: 0;
+  transform: rotate(-16deg) scale(2.4);
+  pointer-events: none;
+}
+.sellado .sello-marcha {
+  animation: sellar 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) forwards;
+}
+.sellado {
+  animation: temblar 0.3s 0.3s;
+}
+@keyframes sellar {
+  to {
+    opacity: 0.92;
+    transform: rotate(-16deg) scale(1);
+  }
+}
+@keyframes temblar {
+  30% {
+    transform: translate(2px, 1px);
+  }
+  60% {
+    transform: translate(-2px, -1px);
+  }
+}

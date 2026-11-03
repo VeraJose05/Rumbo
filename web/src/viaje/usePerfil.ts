@@ -1,27 +1,27 @@
-// RF-12: el perfil del recorrido, guardado en sessionStorage para no perderlo al recargar.
+// RF-12: estado guardado en sessionStorage (perfil del recorrido e itinerario) para no perderlo al recargar.
 import { useEffect, useState } from 'react';
+import type { Itinerario } from './itinerario';
 import { perfilInicial, type Perfil } from './perfil';
 
-const CLAVE = 'rumbo-viaje';
-
-function leer(): Perfil {
-  try {
-    const guardado = JSON.parse(sessionStorage.getItem(CLAVE) ?? 'null') as Perfil | null;
-    if (guardado) return guardado;
-  } catch {
-    // Sin almacenamiento (modo privado estricto): se empieza de cero.
-  }
-  return perfilInicial();
-}
-
-export function usePerfil(): [Perfil, (perfil: Perfil) => void] {
-  const [perfil, setPerfil] = useState(leer);
+function useSesion<T>(clave: string, inicial: () => T): [T, (valor: T) => void] {
+  const [valor, setValor] = useState<T>(() => {
+    try {
+      const guardado = sessionStorage.getItem(clave);
+      if (guardado) return JSON.parse(guardado) as T;
+    } catch {
+      // Sin almacenamiento (modo privado estricto): se empieza de cero.
+    }
+    return inicial();
+  });
   useEffect(() => {
     try {
-      sessionStorage.setItem(CLAVE, JSON.stringify(perfil));
+      sessionStorage.setItem(clave, JSON.stringify(valor));
     } catch {
-      // Sin almacenamiento: el perfil vive solo en memoria.
+      // Sin almacenamiento: vive solo en memoria.
     }
-  }, [perfil]);
-  return [perfil, setPerfil];
+  }, [clave, valor]);
+  return [valor, setValor];
 }
+
+export const usePerfil = () => useSesion<Perfil>('rumbo-viaje', () => perfilInicial());
+export const useItinerario = () => useSesion<Itinerario | null>('rumbo-itinerario', () => null);

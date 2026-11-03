@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { rutaPaso } from '../ruta';
 import { NOMBRES_PASO, PASOS, pasoPendiente, puedeSeguir, type Paso } from '../viaje/pasos';
 import type { Perfil } from '../viaje/perfil';
+import { PasoBillete } from './pasos/PasoBillete';
 import { PasoDestino } from './pasos/PasoDestino';
 import { PasoEstilo } from './pasos/PasoEstilo';
 import { PasoGustos } from './pasos/PasoGustos';
@@ -15,9 +16,10 @@ interface Props {
   perfil: Perfil;
   onCambiar: (perfil: Perfil) => void;
   navegar: (hash: string, reemplazar?: boolean) => void;
+  onSellar: () => void;
 }
 
-export function Viaje({ paso, perfil, onCambiar, navegar }: Props) {
+export function Viaje({ paso, perfil, onCambiar, navegar, onSellar }: Props) {
   // Si falta algo de un paso anterior (p. ej. se entra por la URL a #/viaje/estilo sin gustos), se vuelve a él.
   const pendiente = pasoPendiente(paso, perfil);
   useEffect(() => {
@@ -56,19 +58,15 @@ export function Viaje({ paso, perfil, onCambiar, navegar }: Props) {
       {paso === 'destino' && <PasoDestino perfil={perfil} onCambiar={onCambiar} />}
       {paso === 'gustos' && <PasoGustos perfil={perfil} onCambiar={onCambiar} />}
       {paso === 'estilo' && <PasoEstilo perfil={perfil} onCambiar={onCambiar} />}
-      {paso === 'billete' && (
-        <section className="paso">
-          <h1 className="titulo">Tu billete</h1>
-          <p className="suave">Este paso llega en la siguiente iteración.</p>
-        </section>
-      )}
+      {paso === 'billete' && <PasoBillete perfil={perfil} onSellar={onSellar} />}
 
-      <footer className="barra-inferior viaje-barra">
-        <p className="viaje-resumen">
-          <span className="antetitulo">Tu elección</span>
-          <strong>{resumen.join(' · ')}</strong>
-        </p>
-        {siguiente && (
+      {/* En el billete no hace falta: el resumen es el propio billete y el botón es «Sellar». */}
+      {siguiente && (
+        <footer className="barra-inferior viaje-barra">
+          <p className="viaje-resumen">
+            <span className="antetitulo">Tu elección</span>
+            <strong>{resumen.join(' · ')}</strong>
+          </p>
           <button
             className="boton viaje-siguiente"
             type="button"
@@ -78,8 +76,8 @@ export function Viaje({ paso, perfil, onCambiar, navegar }: Props) {
           >
             {NOMBRES_PASO[siguiente]} <ArrowRight className="icono" aria-hidden="true" />
           </button>
-        )}
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }

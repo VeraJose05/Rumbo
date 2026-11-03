@@ -17,6 +17,11 @@ describe('leerRuta', () => {
     expect(leerRuta('#/viaje')).toEqual({ pantalla: 'viaje', paso: 'destino' });
   });
 
+  it('lee las pantallas de preparación e itinerario', () => {
+    expect(leerRuta('#/preparando')).toEqual({ pantalla: 'preparando' });
+    expect(leerRuta('#/itinerario')).toEqual({ pantalla: 'itinerario' });
+  });
+
   it('una ruta desconocida lleva a la portada', () => {
     expect(leerRuta('#/nada')).toEqual({ pantalla: 'portada' });
   });

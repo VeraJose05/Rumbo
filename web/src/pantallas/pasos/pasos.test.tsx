@@ -4,6 +4,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { perfilInicial } from '../../viaje/perfil';
+import { PasoBillete } from './PasoBillete';
 import { PasoDestino } from './PasoDestino';
 import { PasoEstilo } from './PasoEstilo';
 import { PasoGustos } from './PasoGustos';
@@ -64,5 +65,29 @@ describe('PasoEstilo', () => {
     expect(onCambiar).toHaveBeenLastCalledWith(expect.objectContaining({ ritmo: 'intenso' }));
     rerender(<PasoEstilo perfil={{ ...perfilInicial('Sevilla'), ritmo: 'intenso' }} onCambiar={onCambiar} />);
     expect(screen.getByText('4 planes')).toBeTruthy();
+  });
+});
+
+describe('PasoBillete', () => {
+  const perfil = { ...perfilInicial('Sevilla'), intereses: ['museos' as const], compania: 'pareja' as const };
+
+  it('resume el viaje y deja cambiar cada dato', () => {
+    render(<PasoBillete perfil={perfil} onSellar={() => {}} />);
+    expect(screen.getByText('Sevilla')).toBeTruthy();
+    expect(screen.getByText('En pareja')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Cambiar gustos' }).getAttribute('href')).toBe('#/viaje/gustos');
+  });
+
+  it('al sellar espera a la animación del sello y no deja sellar dos veces', () => {
+    vi.useFakeTimers();
+    const onSellar = vi.fn();
+    render(<PasoBillete perfil={perfil} onSellar={onSellar} />);
+    const boton = screen.getByRole('button', { name: /Sellar/ });
+    fireEvent.click(boton);
+    fireEvent.click(boton);
+    expect(onSellar).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1000);
+    expect(onSellar).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
   });
 });
