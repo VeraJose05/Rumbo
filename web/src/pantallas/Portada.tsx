@@ -102,7 +102,7 @@ export function Portada({ onEmpezar }: { onEmpezar: (destino: string) => void })
           <button className="boton boton-ancho" type="button" onClick={() => onEmpezar(destino.nombre)}>
             Empezar mi viaje <ArrowRight className="icono" aria-hidden="true" />
           </button>
-          <a className="inicio-chat" href="/chat.html">
+          <a className="inicio-chat" href="#/chat">
             o cuéntamelo por chat
           </a>
           <div className="billete-talon">

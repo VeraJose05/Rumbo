@@ -1,5 +1,6 @@
 // RF-12: web de Rumbo. Elige la pantalla según la ruta del hash y guarda el perfil del viaje.
 import { useCallback, useEffect } from 'react';
+import { Chat } from './pantallas/Chat';
 import { Itinerario } from './pantallas/Itinerario';
 import { Portada } from './pantallas/Portada';
 import { Preparando } from './pantallas/Preparando';
@@ -38,6 +39,17 @@ export function App() {
   }
   if (ruta.pantalla === 'preparando') {
     return sinPerfil ? null : <Preparando perfil={perfil} onListo={alListo} onVolver={() => navegar(rutaPaso('billete'), true)} />;
+  }
+  if (ruta.pantalla === 'chat') {
+    return (
+      <Chat
+        onPerfil={(completo) => {
+          // La entrevista ha completado el perfil: a preparar el viaje, como desde el billete.
+          setPerfil(completo);
+          navegar('#/preparando');
+        }}
+      />
+    );
   }
   if (ruta.pantalla === 'itinerario') {
     return viaje ? <Itinerario viaje={viaje} onCambiar={setViaje} /> : null;
