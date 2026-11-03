@@ -1,0 +1,468 @@
+/* RF-12: base visual «cuaderno de viaje» (docs/marca/marca.md). Colores, tipografías y piezas
+   comunes de todas las pantallas. Fuentes alojadas en la propia web: funciona sin conexión (RNF-09). */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fuentes/fraunces.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fuentes/inter.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fuentes/caveat.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  /* Paleta de marca */
+  --terracota: #c4553a;
+  --terracota-profunda: #a8432b;
+  --azul: #1e4c7a;
+  --azafran: #f2b544;
+  --olivo: #4f6b3f;
+  /* Papel y tinta */
+  --papel: #faf7f2;
+  --crema: #fff6ec;
+  --tarjeta: #ffffff;
+  --tinta: #2b2622;
+  --piedra: #766b62;
+  --borde: #e6ddd1;
+  /* Derivados */
+  --boton: var(--terracota-profunda);
+  --boton-tinta: #ffffff;
+  --sello: var(--terracota);
+  --panel: #2b2622;
+  --panel-letra: #fff6ec;
+  --sombra: 0 1px 2px rgb(74 46 30 / 0.08), 0 8px 24px rgb(74 46 30 / 0.1);
+  --sombra-alta: 0 2px 4px rgb(74 46 30 / 0.1), 0 18px 40px rgb(74 46 30 / 0.16);
+  /* Tipografía */
+  --titulo: 'Fraunces', Georgia, serif;
+  --texto: 'Inter', system-ui, sans-serif;
+  --mano: 'Caveat', 'Comic Sans MS', cursive;
+  /* Forma */
+  --radio: 18px;
+  --radio-grande: 28px;
+  --margen: 16px;
+  --ancho-movil: 480px;
+  color-scheme: light;
+}
+
+/* Modo oscuro: «cuaderno de noche». */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --terracota: #e07a5f;
+    --terracota-profunda: #e07a5f;
+    --azul: #7fa8d9;
+    --olivo: #9dbb86;
+    --papel: #171412;
+    --crema: #2b2622;
+    --tarjeta: #221e1b;
+    --tinta: #f1ebe4;
+    --piedra: #a89c91;
+    --borde: #3a332e;
+    --boton-tinta: #1b1310;
+    --panel: #0f0d0c;
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.3);
+    --sombra-alta: 0 2px 4px rgb(0 0 0 / 0.35), 0 18px 40px rgb(0 0 0 / 0.4);
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font: 400 16px/1.5 var(--texto);
+  color: var(--tinta);
+  /* Papel: una trama de grano muy suave sobre el color de fondo. */
+  background-color: var(--papel);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .2 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--azul);
+}
+
+:focus-visible {
+  outline: 3px solid var(--azafran);
+  outline-offset: 2px;
+}
+
+/* ---------- Tipografía ---------- */
+
+.titulo-xl,
+.titulo,
+.subtitulo {
+  font-family: var(--titulo);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.titulo-xl {
+  font-size: clamp(44px, 14vw, 64px);
+}
+.titulo {
+  font-size: 28px;
+}
+.subtitulo {
+  font-size: 20px;
+}
+.manuscrito {
+  font-family: var(--mano);
+  font-weight: 600;
+  font-size: 1.35em;
+  line-height: 1.1;
+}
+.antetitulo {
+  font: 600 12px/1.2 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--piedra);
+}
+.suave {
+  color: var(--piedra);
+}
+
+/* ---------- Botones ---------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  font: 600 17px/1 var(--texto);
+  color: var(--boton-tinta);
+  background: var(--boton);
+  box-shadow: 0 4px 0 rgb(0 0 0 / 0.18);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.boton:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.18);
+}
+.boton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.boton-ancho {
+  width: 100%;
+}
+.boton-papel {
+  color: var(--tinta);
+  background: var(--tarjeta);
+  border: 1.5px solid var(--borde);
+  box-shadow: 0 3px 0 var(--borde);
+}
+.boton-redondo {
+  width: 56px;
+  min-height: 56px;
+  padding: 0;
+}
+.boton svg,
+.icono {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+/* ---------- Papeles: tarjeta, billete, postal, pósit ---------- */
+
+.tarjeta {
+  background: var(--tarjeta);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+}
+
+/* Billete de tren: muescas semicirculares a los lados y talón separado por una línea de puntos. */
+.billete {
+  --muesca: 12px;
+  position: relative;
+  background: var(--crema);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-alta);
+  padding: 22px 22px 18px;
+  -webkit-mask: radial-gradient(circle var(--muesca) at 0 var(--altura-talon, 70%), transparent 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--muesca) at 100% var(--altura-talon, 70%), transparent 98%, #000) right / 51% 100% no-repeat;
+  mask: radial-gradient(circle var(--muesca) at 0 var(--altura-talon, 70%), transparent 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--muesca) at 100% var(--altura-talon, 70%), transparent 98%, #000) right / 51% 100% no-repeat;
+}
+.billete-talon {
+  border-top: 2px dashed var(--borde);
+  margin: 18px -22px 0;
+  padding: 14px 22px 0;
+  font-size: 13px;
+  color: var(--piedra);
+}
+
+/* Postal: foto con margen blanco, ligeramente girada. */
+.postal {
+  background: var(--tarjeta);
+  padding: 8px 8px 12px;
+  border-radius: 6px;
+  box-shadow: var(--sombra);
+  transform: rotate(var(--giro, -2deg));
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.postal img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 3px;
+}
+.postal-pie {
+  font: 600 18px/1.2 var(--titulo);
+  margin: 10px 4px 0;
+}
+
+/* Pósit / nota adhesiva. */
+.nota {
+  position: relative;
+  background: #fbe7a8;
+  color: #2b2622;
+  padding: 20px 18px 16px;
+  border-radius: 2px 2px 12px 2px;
+  box-shadow: var(--sombra);
+  transform: rotate(var(--giro, 1deg));
+}
+
+/* Cinta washi: tira semitransparente para «pegar» papeles. */
+.washi {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  translate: -50% 0;
+  rotate: var(--giro-cinta, -3deg);
+  background: repeating-linear-gradient(45deg, rgb(242 181 68 / 0.75) 0 6px, rgb(242 181 68 / 0.55) 6px 12px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+}
+
+/* ---------- Sellos, pegatinas y etiquetas ---------- */
+
+/* Sello de tinta: círculo doble, girado y con el color «mordido» como la tinta real. */
+.sello {
+  display: inline-grid;
+  place-items: center;
+  width: var(--tam, 96px);
+  aspect-ratio: 1;
+  padding: 10px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+  outline: 1.5px solid currentColor;
+  outline-offset: -9px;
+  color: var(--sello);
+  font: 700 13px/1.1 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  transform: rotate(var(--giro, -12deg));
+  opacity: 0.88;
+  mix-blend-mode: multiply;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .sello {
+    mix-blend-mode: normal;
+  }
+}
+.sello-pendiente {
+  color: var(--piedra);
+  border-style: dashed;
+  outline-style: dashed;
+  opacity: 0.5;
+}
+
+.pegatina {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--tarjeta);
+  border: 1.5px solid var(--borde);
+  font: 600 14px/1.2 var(--texto);
+  color: var(--tinta);
+  box-shadow: 0 2px 0 var(--borde);
+}
+.pegatina-activa {
+  background: var(--azafran);
+  border-color: #d99a22;
+  color: #2b2622;
+  box-shadow: 0 2px 0 #d99a22;
+}
+
+/* «Está en la guía»: la insignia de los lugares verificados. */
+.verificado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 600 12px/1 var(--texto);
+  color: var(--olivo);
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+/* ---------- Vía de progreso (Destino · Gustos · Estilo · Billete) ---------- */
+
+.via {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 8px 6px 4px;
+  list-style: none;
+  padding: 0;
+}
+/* Los raíles: dos líneas con traviesas. */
+.via::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  right: 14px;
+  height: 8px;
+  border-block: 2px solid var(--borde);
+  background: repeating-linear-gradient(90deg, var(--borde) 0 3px, transparent 3px 12px);
+}
+.via li {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  font: 600 12px/1 var(--texto);
+  color: var(--piedra);
+}
+.via li::before {
+  content: '';
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--tarjeta);
+  border: 3px solid var(--borde);
+}
+.via .hecha::before {
+  background: var(--olivo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 16px no-repeat;
+  border-color: var(--olivo);
+}
+.via .actual {
+  color: var(--terracota-profunda);
+}
+.via .actual::before {
+  background: var(--azafran);
+  border-color: var(--terracota-profunda);
+  box-shadow: 0 0 0 4px rgb(242 181 68 / 0.35);
+}
+
+/* ---------- Panel de salidas (tipo Solari) ---------- */
+
+.panel-salidas {
+  background: var(--panel);
+  color: var(--panel-letra);
+  border-radius: var(--radio);
+  padding: 16px;
+  box-shadow: var(--sombra-alta), inset 0 0 0 2px rgb(255 255 255 / 0.04);
+  font: 600 13px/1 var(--texto);
+}
+.panel-fila {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin: 8px 0;
+}
+.panel-letra {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 2em;
+  background: linear-gradient(#3a332e 50%, #322c28 50%);
+  border-radius: 3px;
+  font: 700 17px/1 ui-monospace, 'DejaVu Sans Mono', monospace;
+  color: var(--panel-letra);
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.4);
+}
+.panel-letra.girando {
+  animation: girar 0.12s steps(2) infinite;
+}
+.panel-estado {
+  margin-left: auto;
+  color: var(--azafran);
+  font: 700 12px/1 ui-monospace, monospace;
+  letter-spacing: 0.08em;
+}
+@keyframes girar {
+  50% {
+    transform: scaleY(0.2);
+  }
+}
+
+/* ---------- Estructura de pantalla móvil ---------- */
+
+.pantalla {
+  min-height: 100dvh;
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  padding: max(env(safe-area-inset-top), 16px) var(--margen) calc(env(safe-area-inset-bottom) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.barra-inferior {
+  position: sticky;
+  bottom: 0;
+  margin: auto calc(-1 * var(--margen)) 0;
+  padding: 16px var(--margen) calc(env(safe-area-inset-bottom) + 16px);
+  background: linear-gradient(transparent, var(--papel) 30%);
+}
+
+/* Rebote al aparecer. */
+.aparece {
+  animation: aparecer 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

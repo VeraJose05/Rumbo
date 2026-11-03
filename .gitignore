@@ -31,3 +31,4 @@ __pycache__/
 docs/marca/stitch/*.zip
 docs/marca/stitch/*/vertical_mobile_photography_*
 docs/marca/stitch/*/warm_mediterranean_food_*
+web/dist
