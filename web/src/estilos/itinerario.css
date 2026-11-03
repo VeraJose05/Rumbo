@@ -1,0 +1,461 @@
+/* RF-12: itinerario como camino (pantallas/Itinerario.tsx) y postal de cada lugar (PostalLugar.tsx). */
+
+.itinerario {
+  min-height: 100dvh;
+}
+
+/* ---------- Cabecera con la foto del destino ---------- */
+
+.itinerario-cabecera {
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  background: var(--panel) center 40% / cover no-repeat;
+  color: #fff6ec;
+  border-radius: 0 0 var(--radio-grande) var(--radio-grande);
+  overflow: hidden;
+}
+.itinerario-cabecera-velo {
+  padding: max(env(safe-area-inset-top), 14px) var(--margen) 22px;
+  background: linear-gradient(rgb(20 14 10 / 0.45), rgb(20 14 10 / 0.15) 40%, rgb(20 14 10 / 0.7));
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.itinerario-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: auto;
+}
+.itinerario-barra .inicio-marca {
+  font-size: 19px;
+}
+.itinerario-acciones {
+  display: flex;
+  gap: 8px;
+}
+.itinerario-acciones .boton {
+  width: 42px;
+  min-height: 42px;
+  background: rgb(255 246 236 / 0.92);
+  color: #2b2622;
+  border: 0;
+  box-shadow: none;
+}
+.itinerario-ante {
+  color: rgb(255 246 236 / 0.8);
+  margin: 16px 0 4px;
+}
+.itinerario-cabecera .titulo-xl {
+  font-size: clamp(44px, 14vw, 60px);
+  text-shadow: 0 2px 14px rgb(0 0 0 / 0.35);
+}
+.itinerario-resumen {
+  margin: 6px 0 0;
+  font-weight: 500;
+  color: rgb(255 246 236 / 0.92);
+}
+
+.itinerario-cuerpo {
+  min-height: auto;
+  padding-top: 18px;
+  padding-bottom: 150px; /* espacio para la barra de ajuste */
+}
+
+/* ---------- Pestañas de días: etiquetas de equipaje ---------- */
+
+.etiquetas-dias {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 2px 6px;
+}
+.etiqueta-dia {
+  position: relative;
+  flex: none;
+  padding: 8px 16px 8px 26px;
+  border: 1.5px solid var(--borde);
+  border-radius: 6px 14px 14px 6px;
+  background: var(--tarjeta);
+  font: 650 15px/1 var(--titulo);
+  color: var(--tinta);
+  cursor: pointer;
+  box-shadow: 0 2px 0 var(--borde);
+}
+/* El agujero de la etiqueta con su cordel. */
+.etiqueta-dia::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--piedra);
+  background: var(--papel);
+}
+.etiqueta-dia.activa {
+  background: var(--azafran);
+  border-color: #d99a22;
+  color: #2b2622;
+  box-shadow: 0 2px 0 #d99a22;
+  transform: rotate(-2deg);
+}
+
+/* ---------- El camino ---------- */
+
+.camino {
+  position: relative;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  transition: opacity 0.3s;
+}
+.camino.ajustando {
+  opacity: 0.45;
+  pointer-events: none;
+}
+/* El camino serpentea por el centro: una línea discontinua en zigzag por detrás de las paradas. */
+.camino::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  bottom: 40px;
+  left: 50%;
+  width: 70%;
+  translate: -50% 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200' preserveAspectRatio='none'%3E%3Cpath d='M15 0 C15 50 85 50 85 100 C85 150 15 150 15 200' fill='none' stroke='%231e4c7a' stroke-width='2.5' stroke-dasharray='6 7' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.55'/%3E%3C/svg%3E")
+    top / 100% 260px repeat-y;
+  pointer-events: none;
+}
+.camino-salida,
+.camino-meta {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.camino-salida .sello {
+  background: var(--papel);
+  mix-blend-mode: normal;
+}
+.camino-meta {
+  flex-wrap: wrap;
+  font: 650 17px/1 var(--titulo);
+  padding: 10px 0;
+}
+.camino-meta > .icono {
+  color: var(--terracota);
+}
+
+.parada {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  align-items: center;
+  animation: aparecer 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.parada.derecha {
+  grid-template-columns: 1fr 64px;
+}
+.parada.derecha .parada-hito {
+  order: 2;
+}
+.parada:nth-child(3) {
+  animation-delay: 0.06s;
+}
+.parada:nth-child(4) {
+  animation-delay: 0.12s;
+}
+.parada:nth-child(5) {
+  animation-delay: 0.18s;
+}
+/* El hito: un círculo grande como el nivel de un juego. */
+.parada-hito {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  color: #fff6ec;
+  border: 4px solid var(--papel);
+  box-shadow: 0 4px 0 rgb(0 0 0 / 0.18), 0 0 0 3px var(--borde);
+}
+.parada-hito svg {
+  width: 28px;
+  height: 28px;
+}
+.franja-manana {
+  background: var(--azafran);
+  color: #2b2622;
+}
+.franja-tarde {
+  background: var(--terracota);
+}
+.franja-noche {
+  background: var(--azul);
+}
+.parada-postal {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  padding: 16px 14px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--tarjeta);
+  box-shadow: var(--sombra);
+  color: var(--tinta);
+  font: inherit;
+  cursor: pointer;
+  transform: rotate(-1deg);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.parada.derecha .parada-postal {
+  transform: rotate(1deg);
+}
+.parada-postal:hover,
+.parada-postal:focus-visible {
+  transform: rotate(0deg) translateY(-2px);
+}
+.parada-postal .washi {
+  width: 56px;
+  height: 16px;
+  top: -8px;
+}
+.parada-franja {
+  font: 600 11px/1 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--piedra);
+}
+.parada-lugar {
+  font: 650 18px/1.15 var(--titulo);
+}
+.parada-descripcion {
+  font-size: 14px;
+  color: var(--piedra);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.parada-postal .verificado,
+.parada-postal .sin-fuente {
+  justify-self: start;
+  margin-top: 4px;
+}
+.sin-fuente {
+  display: inline-flex;
+  font: 600 12px/1 var(--texto);
+  color: var(--piedra);
+  border: 1.5px dashed currentColor;
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+/* ---------- Notas: respuesta de Rumbo y avisos ---------- */
+
+.respuesta-rumbo {
+  display: grid;
+  gap: 4px;
+  padding-right: 36px;
+}
+.respuesta-rumbo p {
+  margin: 0;
+}
+.respuesta-rumbo .manuscrito {
+  font-size: 24px;
+  color: var(--olivo);
+}
+.respuesta-rumbo.error .manuscrito {
+  color: var(--terracota-profunda);
+}
+.respuesta-cerrar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #2b2622;
+}
+.aviso-cobertura {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.aviso-cobertura p {
+  margin: 0;
+}
+
+.fuentes ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--piedra);
+}
+.fuentes h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+/* ---------- Barra de ajuste (libreta) ---------- */
+
+.barra-ajuste {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  padding: 10px var(--margen) calc(env(safe-area-inset-bottom) + 12px);
+  background: var(--crema);
+  border-top: 2px dashed var(--borde);
+  box-shadow: 0 -8px 24px rgb(74 46 30 / 0.12);
+  border-radius: 18px 18px 0 0;
+}
+.ajuste-sugerencias {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+.ajuste-sugerencias .pegatina {
+  flex: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ajuste-campo {
+  display: flex;
+  gap: 8px;
+}
+.ajuste-campo input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 16px;
+  min-height: 52px;
+  border-radius: 999px;
+  border: 1.5px solid var(--borde);
+  background: var(--tarjeta);
+  color: var(--tinta);
+  font: 400 16px var(--texto);
+}
+
+/* ---------- Postal de un lugar ---------- */
+
+.postal-lugar {
+  border: 0;
+  padding: 0;
+  margin: auto auto 0;
+  width: min(100%, var(--ancho-movil));
+  max-height: 88dvh;
+  background: transparent;
+  overflow: visible;
+}
+.postal-lugar::backdrop {
+  background: rgb(20 14 10 / 0.5);
+  backdrop-filter: blur(2px);
+}
+.postal-lugar[open] .postal-lugar-papel {
+  animation: subir 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+@keyframes subir {
+  from {
+    transform: translateY(40%);
+  }
+}
+.postal-lugar-papel {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 26px var(--margen) calc(env(safe-area-inset-bottom) + 22px);
+  background: var(--crema);
+  color: var(--tinta);
+  border-radius: 24px 24px 0 0;
+  max-height: 88dvh;
+  overflow-y: auto;
+}
+.postal-lugar .titulo {
+  padding-right: 40px;
+}
+.postal-cerrar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--borde);
+  background: var(--tarjeta);
+  color: var(--tinta);
+  cursor: pointer;
+}
+.postal-que-hacer {
+  margin: 0;
+}
+/* La cita, como escrita a máquina en el reverso de la postal. */
+.postal-cita {
+  margin: 4px 0;
+  padding: 14px 16px;
+  border-left: 4px solid var(--terracota);
+  background: var(--tarjeta);
+  border-radius: 4px 12px 12px 4px;
+  font: 400 14px/1.55 ui-monospace, 'DejaVu Sans Mono', monospace;
+}
+.postal-cita p {
+  margin: 0 0 8px;
+}
+.postal-cita footer {
+  font: 500 12px/1.3 var(--texto);
+  color: var(--piedra);
+}
+.postal-sin-cita {
+  margin: 0;
+  color: var(--piedra);
+  font-style: italic;
+}
+.postal-botones {
+  display: flex;
+  gap: 10px;
+}
+.postal-parecido {
+  font: italic 500 13px/1.3 var(--texto);
+  color: var(--piedra);
+}
+/* La respuesta de Rumbo al ajuste queda encima de la barra, siempre a la vista. */
+.barra-ajuste .respuesta-rumbo {
+  position: absolute;
+  left: var(--margen);
+  right: var(--margen);
+  bottom: calc(100% + 12px);
+  animation: aparecer 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.barra-ajuste .respuesta-rumbo {
+  background: var(--tarjeta);
+  color: var(--tinta);
+  border-left: 5px solid var(--olivo);
+  box-shadow: var(--sombra-alta);
+}
+.barra-ajuste .respuesta-rumbo.error {
+  border-left-color: var(--terracota-profunda);
+}
+.barra-ajuste .respuesta-cerrar {
+  color: var(--tinta);
+}
