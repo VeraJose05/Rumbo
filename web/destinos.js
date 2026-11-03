@@ -4,30 +4,35 @@
 export const DESTINOS_PORTADA = [
   {
     nombre: 'Sevilla',
+    pista: 'El Alcázar, Triana y el tapeo',
     region: 'Andalucía',
     foto: 'fotos/destinos/sevilla.webp',
     credito: { autor: 'Berthold Werner', licencia: 'CC BY-SA 3.0', fuente: 'https://commons.wikimedia.org/wiki/File:Spain_Andalusia_Seville_BW_2015-10-23_15-40-35.jpg' },
   },
   {
     nombre: 'Granada',
+    pista: 'La Alhambra y el Albaicín',
     region: 'Andalucía',
     foto: 'fotos/destinos/granada.webp',
     credito: { autor: 'Alan.lorenzo', licencia: 'CC BY-SA 3.0', fuente: 'https://commons.wikimedia.org/wiki/File:Alhambra_desde_Albaicin.jpg' },
   },
   {
     nombre: 'Madrid',
+    pista: 'El Prado, el Retiro y los Austrias',
     region: 'Comunidad de Madrid',
     foto: 'fotos/destinos/madrid.webp',
     credito: { autor: 'Carlos Delgado', licencia: 'CC BY-SA 4.0', fuente: 'https://commons.wikimedia.org/wiki/File:Gran_V%C3%ADa_-_01.jpg' },
   },
   {
     nombre: 'Barcelona',
+    pista: 'Gaudí, el Gótico y la playa',
     region: 'Cataluña',
     foto: 'fotos/destinos/barcelona.webp',
     credito: { autor: 'Bernard Gagnon', licencia: 'CC BY-SA 3.0', fuente: 'https://commons.wikimedia.org/wiki/File:Sagrada_Familia_03.jpg' },
   },
   {
     nombre: 'Valencia',
+    pista: 'La Ciudad de las Artes y la paella',
     region: 'Comunitat Valenciana',
     foto: 'fotos/destinos/valencia.webp',
     credito: {

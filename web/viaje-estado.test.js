@@ -1,0 +1,55 @@
+// RF-01, RF-12: perfil del viajero construido paso a paso en la web (sin chat).
+import { describe, expect, it } from 'vitest';
+import { DIAS_MAX, DIAS_MIN, cambiarDias, etiquetaDias, perfilInicial } from './viaje-estado.js';
+
+describe('perfilInicial', () => {
+  it('empieza con 3 días y los valores por defecto del planificador', () => {
+    expect(perfilInicial()).toEqual({
+      destino: null,
+      dias: 3,
+      intereses: [],
+      ritmo: 'normal',
+      presupuesto: 'medio',
+      compania: 'solo',
+    });
+  });
+
+  it('acepta el destino que venía de la portada si es uno con guía', () => {
+    expect(perfilInicial('Granada').destino).toBe('Granada');
+    expect(perfilInicial('granada').destino).toBe('Granada');
+  });
+
+  it('ignora un destino sin guía', () => {
+    expect(perfilInicial('Bilbao').destino).toBeNull();
+  });
+});
+
+describe('cambiarDias', () => {
+  it('suma y resta días', () => {
+    expect(cambiarDias(perfilInicial(), +1).dias).toBe(4);
+    expect(cambiarDias(perfilInicial(), -1).dias).toBe(2);
+  });
+
+  it('no pasa de los límites del planificador (1 a 7)', () => {
+    expect(DIAS_MIN).toBe(1);
+    expect(DIAS_MAX).toBe(7);
+    expect(cambiarDias({ ...perfilInicial(), dias: 7 }, +1).dias).toBe(7);
+    expect(cambiarDias({ ...perfilInicial(), dias: 1 }, -1).dias).toBe(1);
+  });
+
+  it('no modifica el perfil original', () => {
+    const perfil = perfilInicial();
+    cambiarDias(perfil, +1);
+    expect(perfil.dias).toBe(3);
+  });
+});
+
+describe('etiquetaDias', () => {
+  it('pone nombre al tipo de viaje según los días', () => {
+    expect(etiquetaDias(1)).toBe('Escapada de un día');
+    expect(etiquetaDias(2)).toBe('Fin de semana');
+    expect(etiquetaDias(3)).toBe('Escapada larga');
+    expect(etiquetaDias(5)).toBe('Viaje con calma');
+    expect(etiquetaDias(7)).toBe('Una semana entera');
+  });
+});

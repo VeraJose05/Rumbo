@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- RF-01, RF-12: recorrido para armar el viaje sin chat: destino y días, gustos, estilo y billete.
+     El perfil se guarda en la sesión del navegador mientras se completa. -->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf7f2" />
+    <title>Rumbo · Arma tu viaje</title>
+    <link rel="icon" href="marca/simbolo.svg" />
+    <link rel="preload" href="fuentes/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="cuaderno.css" />
+    <link rel="stylesheet" href="viaje.css" />
+  </head>
+  <body>
+    <div class="pantalla viaje">
+      <header class="viaje-cabecera">
+        <a class="boton boton-redondo boton-papel viaje-atras" href="./" aria-label="Volver">
+          <svg class="icono" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+        </a>
+        <div>
+          <p class="antetitulo">Cuaderno de ruta</p>
+          <p class="viaje-paso" aria-live="polite"></p>
+        </div>
+      </header>
+
+      <ol class="via" aria-label="Pasos">
+        <li data-paso="destino">Destino</li>
+        <li data-paso="gustos">Gustos</li>
+        <li data-paso="estilo">Estilo</li>
+        <li data-paso="billete">Billete</li>
+      </ol>
+
+      <!-- Paso 1: destino y días -->
+      <section class="paso" data-paso="destino" hidden>
+        <h1 class="titulo">¿Por dónde <span class="manuscrito acento">empezamos?</span></h1>
+        <p class="suave">Elige la ciudad que te llama hoy.</p>
+
+        <fieldset class="postales-mesa">
+          <legend class="visualmente-oculto">Destino</legend>
+        </fieldset>
+
+        <div class="tarjeta dias">
+          <div class="dias-cabecera">
+            <h2 class="subtitulo">¿Cuántos días?</h2>
+            <span class="pegatina dias-etiqueta"></span>
+          </div>
+          <div class="tren" aria-hidden="true"></div>
+          <div class="dias-control">
+            <button class="boton boton-redondo boton-papel" type="button" data-dias="-1" aria-label="Un día menos">
+              <svg class="icono" viewBox="0 0 24 24"><path d="M5 12h14" /></svg>
+            </button>
+            <p class="dias-numero" aria-live="polite"><span></span> días</p>
+            <button class="boton boton-redondo" type="button" data-dias="1" aria-label="Un día más">
+              <svg class="icono" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Paso 2: gustos (siguiente iteración) -->
+      <section class="paso" data-paso="gustos" hidden>
+        <h1 class="titulo">¿Te va esto?</h1>
+        <p class="suave">Este paso llega en la siguiente iteración.</p>
+      </section>
+
+      <footer class="barra-inferior viaje-barra">
+        <p class="viaje-resumen"><span class="antetitulo">Tu elección</span><strong></strong></p>
+        <button class="boton viaje-siguiente" type="button">
+          <span></span>
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </footer>
+    </div>
+
+    <script type="module" src="viaje.js"></script>
+  </body>
+</html>

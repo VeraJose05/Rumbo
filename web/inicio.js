@@ -45,6 +45,8 @@ function mostrar(indice) {
   void nombre.offsetWidth;
   nombre.classList.add('aparece');
   credito.textContent = creditoFoto(destino.credito);
+  // «Empezar mi viaje» lleva la ciudad que se está viendo.
+  document.querySelector('#empezar').href = `viaje.html?destino=${encodeURIComponent(destino.nombre)}`;
   credito.href = destino.credito.fuente;
 }
 
