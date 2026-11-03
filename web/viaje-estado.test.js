@@ -62,6 +62,10 @@ describe('INTERESES', () => {
     for (const i of INTERESES) {
       expect(i.nombre).toBeTruthy();
       expect(i.descripcion).toBeTruthy();
+      // Foto de Wikimedia Commons con el crédito que exige su licencia.
+      expect(i.foto).toBe(`fotos/gustos/${i.id}.webp`);
+      expect(i.credito.autor).toBeTruthy();
+      expect(i.credito.licencia).toMatch(/^CC/);
     }
   });
 });

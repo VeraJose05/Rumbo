@@ -1,7 +1,7 @@
 // RF-01, RF-12: recorrido para armar el viaje. Cada paso es una sección de viaje.html y se elige con
 // el hash (#destino, #gustos…), así el botón «atrás» del navegador funciona. El perfil se guarda en
 // sessionStorage para no perderlo al recargar.
-import { DESTINOS_PORTADA } from './destinos.js';
+import { DESTINOS_PORTADA, creditoFoto } from './destinos.js';
 import { escapar } from './formato.js';
 import { INTERESES, cambiarDias, decidirInteres, etiquetaDias, perfilInicial } from './viaje-estado.js';
 
@@ -119,9 +119,11 @@ const historial = []; // para «deshacer»: [{ carta, intereses }]
 const htmlCarta = (interes, pos) => `
   <article class="carta" data-pos="${pos}" data-id="${interes.id}" style="--color: ${interes.color}" ${pos ? 'aria-hidden="true"' : ''}>
     <div class="carta-ilustracion">
+      <img src="${interes.foto}" alt="" draggable="false" ${pos > 1 ? 'loading="lazy"' : ''} />
       <span class="carta-numero">${INTERESES.indexOf(interes) + 1}/${INTERESES.length}</span>
       ${perfil.intereses.includes(interes.id) ? '<span class="carta-elegida">✓ En tu lista</span>' : ''}
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="${interes.icono}" /></svg>
+      <span class="carta-icono"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${interes.icono}" /></svg></span>
+      <a class="carta-credito" href="${interes.credito.fuente}" target="_blank" rel="noopener">${escapar(creditoFoto(interes.credito))}</a>
     </div>
     <div class="carta-texto">
       <h2 class="subtitulo">${escapar(interes.nombre)}</h2>
