@@ -64,3 +64,15 @@ export function ubicarLugar(lugar: string, destino: string, lugares: LugarEnMapa
   const contienen = lugares.filter((c) => posicion(nombreDeLugar(c.nombre, destino), buscado) >= 0);
   return contienen.sort((a, b) => a.nombre.length - b.nombre.length)[0] ?? null;
 }
+
+export interface Punto {
+  lat: number;
+  lon: number;
+}
+
+/** Distancia en metros entre dos puntos (semiverseno). */
+export function distanciaMetros(a: Punto, b: Punto): number {
+  const rad = Math.PI / 180;
+  const h = Math.sin(((b.lat - a.lat) * rad) / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(((b.lon - a.lon) * rad) / 2) ** 2;
+  return 2 * 6_371_000 * Math.asin(Math.sqrt(h));
+}

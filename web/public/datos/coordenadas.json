@@ -1512,6 +1512,1161 @@
      "lat": 37.37001944,
      "lon": -5.98771944,
      "origen": "wikidata"
+    },
+    {
+     "nombre": "Sobretablas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3697525,
+     "lon": -5.9845261,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Vieja Pizzería",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3799777,
+     "lon": -6.0049604,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Amanecer Country Mex",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3729511,
+     "lon": -5.9975948,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Freiduría Reina Victoria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3832723,
+     "lon": -6.0022177,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Bistec",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3827798,
+     "lon": -6.000946,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mariscos Emilio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3802968,
+     "lon": -5.9988103,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Casa de la Moneda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3835233,
+     "lon": -5.9942109,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Ozama",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3721959,
+     "lon": -5.9851161,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Alimentari",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3840987,
+     "lon": -5.9846149,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Birreria La Bambina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3847395,
+     "lon": -5.9813761,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Alimentari e Diversi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3899382,
+     "lon": -6.0006573,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Burro Canaglia Bar&Resto Centro",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3897106,
+     "lon": -5.9989731,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Miss Sushi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3896664,
+     "lon": -5.9992522,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodeguita Romero",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3870689,
+     "lon": -5.9956598,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Islamorada Tapas Bar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3856347,
+     "lon": -5.9958018,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa La Viuda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3895504,
+     "lon": -5.9946459,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Señora Pan",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3878115,
+     "lon": -5.9959393,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Postigo10",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3852271,
+     "lon": -5.9945798,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "M4 Street Food",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3977442,
+     "lon": -5.9922503,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Japonés Akira",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3924107,
+     "lon": -5.9946817,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Gallina Bianca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3860947,
+     "lon": -5.9869088,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Taraceina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3856846,
+     "lon": -5.9864797,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Román",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.385141,
+     "lon": -5.989684,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rinconcillo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3933406,
+     "lon": -5.9882942,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Condendê",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.399468,
+     "lon": -5.991109,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Paella e Hijos",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3981527,
+     "lon": -5.9854906,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sakura",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3781544,
+     "lon": -5.974482,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Micazo Casa de Ramen",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3869995,
+     "lon": -5.9738473,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La gran Muralla",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.4006429,
+     "lon": -5.9756901,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Confucio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3632329,
+     "lon": -5.9858672,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Auténtica",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3717662,
+     "lon": -5.9840656,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sushi Chaki Japonés",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3746286,
+     "lon": -6.0036203,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Esquinita de Agu",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.383703,
+     "lon": -6.0112076,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Balbuena y Huertas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3812956,
+     "lon": -6.0085104,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Turruñuela",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3815503,
+     "lon": -6.0093354,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Manolo Triana",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3856056,
+     "lon": -6.0041413,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Sacristía Sebastián",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3749337,
+     "lon": -6.0027126,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Remesal",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3836837,
+     "lon": -6.0009683,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna La Plazuela",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3825681,
+     "lon": -6.000755,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Arabesca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3819504,
+     "lon": -5.9909458,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cristina and Co",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3820517,
+     "lon": -5.9912457,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rincón de Beirut",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.382018,
+     "lon": -5.9910428,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "San Fernando",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3816241,
+     "lon": -5.9927258,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Five Chicken",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3818928,
+     "lon": -5.9953759,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Leña al Lomo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3727995,
+     "lon": -5.9847159,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ricos Tacos Cantina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3776072,
+     "lon": -5.977016,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Aderezo Tapas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3729417,
+     "lon": -5.9773068,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Corral del Agua",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3844521,
+     "lon": -5.9896611,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bernarda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3843585,
+     "lon": -5.9843604,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gottan Grill Sevilla",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3892314,
+     "lon": -6.0010882,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Moneda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3852685,
+     "lon": -5.9945999,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante El Giraldillo Sevilla",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3861753,
+     "lon": -5.9917426,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Agustin & Company",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3895765,
+     "lon": -5.9931186,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Zelai",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3896541,
+     "lon": -5.9960303,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Naturalmente Real Food",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3855389,
+     "lon": -5.9907513,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodeguita Sierpes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3891857,
+     "lon": -5.9942375,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Il Ristorantino dell’Avvocato",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3942666,
+     "lon": -5.9915604,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Plazoleta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3953787,
+     "lon": -5.9908161,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Las Columnas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3974184,
+     "lon": -5.9944434,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "D'mercao",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3967707,
+     "lon": -5.9958972,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Burro",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3935727,
+     "lon": -5.9925985,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Fatouch",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3970819,
+     "lon": -5.9913058,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tienda de la Azotea",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.396598,
+     "lon": -5.9952395,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Shambala 烧饼阁",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3972285,
+     "lon": -5.9930696,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Águilas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3898131,
+     "lon": -5.9890436,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Abantal",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3879291,
+     "lon": -5.9837138,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Chupadedos Bar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3890257,
+     "lon": -5.9818136,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Maravilla Social Club",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3963843,
+     "lon": -5.9882966,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Cuelgue de Santi Temblador",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3933919,
+     "lon": -5.9846765,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "RAFAEL RUIZ",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.3919235,
+     "lon": -5.9825869,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Eslava",
+     "seccion": "Beber y salir",
+     "lat": 37.3975489,
+     "lon": -5.9969243,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar de Tapas Gota de Uva",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3873544,
+     "lon": -5.9663671,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Fernanda Bar de Abastos",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3658132,
+     "lon": -5.9822689,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Juan Carlos",
+     "seccion": "Comer › Tapas",
+     "lat": 37.38072,
+     "lon": -6.0037352,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Casa Diego",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3808132,
+     "lon": -6.0058033,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ántica Roma",
+     "seccion": "Beber y salir",
+     "lat": 37.3855829,
+     "lon": -6.0093166,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Coliseo",
+     "seccion": "Beber y salir",
+     "lat": 37.3823452,
+     "lon": -5.994147,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Cafetería Oscar Lan",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3840304,
+     "lon": -5.9778177,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Alfalfa",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3899821,
+     "lon": -5.9901613,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Estrella",
+     "seccion": "Beber y salir",
+     "lat": 37.388413,
+     "lon": -5.9914576,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pelayo Bar de Tapas",
+     "seccion": "Beber y salir",
+     "lat": 37.3870523,
+     "lon": -5.9923177,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Puerta Carmona",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3897231,
+     "lon": -5.984424,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Manducare Cocina Tradicional",
+     "seccion": "Beber y salir",
+     "lat": 37.3894862,
+     "lon": -5.9853157,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería San Benito",
+     "seccion": "Beber y salir",
+     "lat": 37.3872188,
+     "lon": -5.9789235,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Alameda Ritval",
+     "seccion": "Beber y salir",
+     "lat": 37.3992629,
+     "lon": -5.9931077,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Fidel",
+     "seccion": "Beber y salir",
+     "lat": 37.4056214,
+     "lon": -5.9824643,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Soravito",
+     "seccion": "Beber y salir",
+     "lat": 37.3703351,
+     "lon": -5.983595,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Alpargata",
+     "seccion": "Beber y salir",
+     "lat": 37.3748732,
+     "lon": -6.0035441,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tasca Triana",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3790879,
+     "lon": -6.0073464,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Blanco Cerrillo",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3817431,
+     "lon": -6.0074472,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cortaita de Triana",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3812973,
+     "lon": -6.0044768,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Patio de San Eloy Las Columnas",
+     "seccion": "Beber y salir",
+     "lat": 37.3841705,
+     "lon": -6.0042886,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Las Golondrinas",
+     "seccion": "Beber y salir",
+     "lat": 37.3841049,
+     "lon": -6.0056032,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna El Papelon",
+     "seccion": "Beber y salir",
+     "lat": 37.3846059,
+     "lon": -6.0041064,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Santa Ana",
+     "seccion": "Beber y salir",
+     "lat": 37.3831595,
+     "lon": -6.0004203,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Premier Garden Cocktail Bar",
+     "seccion": "Beber y salir",
+     "lat": 37.3794775,
+     "lon": -5.9877517,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Voulezbar",
+     "seccion": "Beber y salir",
+     "lat": 37.3793918,
+     "lon": -5.9780885,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ático",
+     "seccion": "Beber y salir",
+     "lat": 37.3876157,
+     "lon": -6.0009368,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Alameda",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3969878,
+     "lon": -5.9937675,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Er Tito",
+     "seccion": "Beber y salir",
+     "lat": 37.3935859,
+     "lon": -5.9929408,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rincón de Antonio",
+     "seccion": "Beber y salir",
+     "lat": 37.3919942,
+     "lon": -5.9961148,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Casa del Flamenco - Auditorio Alcántara",
+     "seccion": "Beber y salir",
+     "lat": 37.3863553,
+     "lon": -5.9885258,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Jota",
+     "seccion": "Beber y salir",
+     "lat": 37.3873171,
+     "lon": -5.9792657,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Bar Mutante",
+     "seccion": "Beber y salir",
+     "lat": 37.401876,
+     "lon": -5.993922,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Catalina La Cervecería",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3833391,
+     "lon": -5.9745346,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "D'Arte Cervecería y Tapería",
+     "seccion": "Beber y salir",
+     "lat": 37.3864,
+     "lon": -5.9708431,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodeguita Las Tres Piedras",
+     "seccion": "Comer › Tapas",
+     "lat": 37.3894755,
+     "lon": -5.9710297,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pirriake Abacería",
+     "seccion": "Beber y salir",
+     "lat": 37.3923398,
+     "lon": -5.988516,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Félix",
+     "seccion": "Beber y salir",
+     "lat": 37.3581025,
+     "lon": -5.9861211,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "España café & copas",
+     "seccion": "Beber y salir",
+     "lat": 37.3716917,
+     "lon": -6.0006799,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gamers Zone Sevilla",
+     "seccion": "Beber y salir",
+     "lat": 37.3623469,
+     "lon": -5.9856549,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Morada Tapas",
+     "seccion": "Beber y salir",
+     "lat": 37.3651758,
+     "lon": -5.9815205,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Gonzalez",
+     "seccion": "Beber y salir",
+     "lat": 37.3633711,
+     "lon": -5.9808682,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafetería Emily",
+     "seccion": "Beber y salir",
+     "lat": 37.3635661,
+     "lon": -5.9809845,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar el Sur",
+     "seccion": "Beber y salir",
+     "lat": 37.3710767,
+     "lon": -5.9783547,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Salado Seis",
+     "seccion": "Beber y salir",
+     "lat": 37.3792173,
+     "lon": -6.0008008,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodeguita \"La Chicotá\"",
+     "seccion": "Beber y salir",
+     "lat": 37.3879152,
+     "lon": -5.9811995,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Industrial Los Remedios",
+     "seccion": "Beber y salir",
+     "lat": 37.3767607,
+     "lon": -6.0036557,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tapería El Baluarte",
+     "seccion": "Beber y salir",
+     "lat": 37.3723529,
+     "lon": -5.9951431,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Maquila",
+     "seccion": "Beber y salir",
+     "lat": 37.396074,
+     "lon": -5.9944684,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Los Gordales",
+     "seccion": "Beber y salir",
+     "lat": 37.3716564,
+     "lon": -6.0017828,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Por la boca muere el pez - Tapas",
+     "seccion": "Beber y salir",
+     "lat": 37.3766752,
+     "lon": -6.0058726,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Arriate",
+     "seccion": "Beber y salir",
+     "lat": 37.3780267,
+     "lon": -6.0069207,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Pata Coja Sevilla",
+     "seccion": "Beber y salir",
+     "lat": 37.3744374,
+     "lon": -6.0040133,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Noniná",
+     "seccion": "Beber y salir",
+     "lat": 37.3749255,
+     "lon": -6.0044424,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Casimiro",
+     "seccion": "Beber y salir",
+     "lat": 37.3809306,
+     "lon": -6.0116173,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Las Macetas de Triana",
+     "seccion": "Beber y salir",
+     "lat": 37.3786265,
+     "lon": -6.0072885,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Abacería Farmacia",
+     "seccion": "Beber y salir",
+     "lat": 37.3795251,
+     "lon": -6.0081289,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Farolillo",
+     "seccion": "Beber y salir",
+     "lat": 37.3798275,
+     "lon": -6.0043788,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Gamba",
+     "seccion": "Beber y salir",
+     "lat": 37.3797942,
+     "lon": -6.0044327,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casablanca dreams",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3819479,
+     "lon": -6.007995,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Syra Coffee - Tetuan",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3901711,
+     "lon": -5.9945712,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Filo",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3873255,
+     "lon": -5.9933454,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Milonga Tablao",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3886446,
+     "lon": -5.9908605,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rincón Maracay",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.39239,
+     "lon": -5.9986141,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dodici Brunch & Coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3930042,
+     "lon": -5.9985054,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "ALFONSITO Brunch Cafe",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3893782,
+     "lon": -5.9845627,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Las Teresas",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3859772,
+     "lon": -5.989319,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Carmela Bar de Tapas",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3865012,
+     "lon": -5.9877232,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Salt and Sugar",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3859637,
+     "lon": -5.9894453,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Panypiù",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3898916,
+     "lon": -5.9896813,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Almazen Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3897339,
+     "lon": -5.9856028,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tabernas Tabalá",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3862717,
+     "lon": -5.9794001,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Parcería",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3996857,
+     "lon": -5.9911001,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "COFFEE&GO",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3596056,
+     "lon": -5.9860461,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café del Valle",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3774982,
+     "lon": -5.9984518,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Horno Nueva Florida",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3735204,
+     "lon": -5.9973278,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Heladeria La Fiorentina",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3886335,
+     "lon": -5.998293,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Puro & Bio Heladería",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3862779,
+     "lon": -5.999673,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Santa Gloria",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.3903693,
+     "lon": -5.9999117,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Uthopia",
+     "seccion": "Beber y salir",
+     "lat": 37.391052,
+     "lon": -6.002574,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Uthopia Sevilla",
+     "seccion": "Beber y salir",
+     "lat": 37.3910154,
+     "lon": -6.0033025,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Itaca",
+     "seccion": "Beber y salir",
+     "lat": 37.3952419,
+     "lon": -5.9946765,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "1987",
+     "seccion": "Beber y salir",
+     "lat": 37.3973221,
+     "lon": -5.9936163,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rosso",
+     "seccion": "Beber y salir",
+     "lat": 37.4049593,
+     "lon": -6.0006544,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cosmos",
+     "seccion": "Beber y salir",
+     "lat": 37.3785997,
+     "lon": -5.9738782,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Culture Club",
+     "seccion": "Beber y salir",
+     "lat": 37.3897522,
+     "lon": -5.9912938,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bicicleteria",
+     "seccion": "Beber y salir",
+     "lat": 37.397325,
+     "lon": -5.9911736,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Koko",
+     "seccion": "Beber y salir",
+     "lat": 37.3936093,
+     "lon": -5.9914621,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Malandar",
+     "seccion": "Beber y salir",
+     "lat": 37.3985597,
+     "lon": -6.0001879,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Madalar.",
+     "seccion": "Beber y salir",
+     "lat": 37.3985681,
+     "lon": -6.000188,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Alameda 47",
+     "seccion": "Beber y salir",
+     "lat": 37.401114,
+     "lon": -5.9939076,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala X",
+     "seccion": "Beber y salir",
+     "lat": 37.4086676,
+     "lon": -5.990039,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala La 2",
+     "seccion": "Beber y salir",
+     "lat": 37.4086707,
+     "lon": -5.9899168,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Even",
+     "seccion": "Beber y salir",
+     "lat": 37.4086608,
+     "lon": -5.9898073,
+     "origen": "osm-local"
     }
    ],
    "sinUbicar": [
@@ -3658,6 +4813,1161 @@
      "lat": 40.4202,
      "lon": -3.7204,
      "origen": "wikidata"
+    },
+    {
+     "nombre": "Frutas Prohibidas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4274207,
+     "lon": -3.7103858,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Jewelry Bar Acorazada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4239075,
+     "lon": -3.6851728,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "FloraFina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4269873,
+     "lon": -3.6872734,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Lucio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4120917,
+     "lon": -3.7096742,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bola",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4199972,
+     "lon": -3.7105112,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Botín",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4141745,
+     "lon": -3.707981,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Villa Rosa",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4149712,
+     "lon": -3.7014446,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Perro y la Galleta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4227035,
+     "lon": -3.7036384,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Celso y Manolo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4202518,
+     "lon": -3.6974757,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tape",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4288309,
+     "lon": -3.7058608,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Comercial",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4287093,
+     "lon": -3.701972,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Mingo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.424971,
+     "lon": -3.7252542,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Antonio Sánchez",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4111122,
+     "lon": -3.7048589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café de Oriente",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4176746,
+     "lon": -3.7115376,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Venta El Buscón",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4161059,
+     "lon": -3.7016016,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Colmada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4254569,
+     "lon": -3.7044308,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Horcher",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4186768,
+     "lon": -3.6890844,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Platea",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.426062,
+     "lon": -3.6885731,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Caleta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4108793,
+     "lon": -3.6990942,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lhardy",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4166082,
+     "lon": -3.7013775,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Gabinoteca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4389209,
+     "lon": -3.6946897,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna La Alhambra",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4159786,
+     "lon": -3.7016048,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Xamach",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.42989,
+     "lon": -3.6717954,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Hong Kong 70",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3863941,
+     "lon": -3.706387,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Latte que Late - Coffee & Bakery",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3956017,
+     "lon": -3.7200657,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Fogón de Usera",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3878456,
+     "lon": -3.7076613,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mama Rosa Restobar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.393502,
+     "lon": -3.6966468,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Capón",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4044667,
+     "lon": -3.7118264,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Burmet",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4044445,
+     "lon": -3.7105987,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cotidiana | casa de comidas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4021973,
+     "lon": -3.70961,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Piscomar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4106168,
+     "lon": -3.7134816,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Atrapallada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4043084,
+     "lon": -3.7058792,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mama Teresa Burger",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4038744,
+     "lon": -3.6964102,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Malacatín",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4103182,
+     "lon": -3.7076364,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Encomienda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4106324,
+     "lon": -3.7059609,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Matritum",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.412118,
+     "lon": -3.7091871,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa María",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4124541,
+     "lon": -3.7084514,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mad Mad Vegan",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4111151,
+     "lon": -3.7028759,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sahuaro",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4111418,
+     "lon": -3.7071195,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Toga",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4110723,
+     "lon": -3.7066866,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Minoterie",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4105047,
+     "lon": -3.7062521,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "López & López",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.409469,
+     "lon": -3.7042749,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Storyland",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4123228,
+     "lon": -3.7089438,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "KungFu Noodle Atocha 武功牛",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4115676,
+     "lon": -3.6978097,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Shapla",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4097832,
+     "lon": -3.7024206,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Oveja Negra - Taberna Vegana",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4093101,
+     "lon": -3.6998817,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Atxuri",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4081419,
+     "lon": -3.6982442,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Didedas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4071031,
+     "lon": -3.6991847,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Quilombo Pizzeria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4076046,
+     "lon": -3.7012428,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Transmontana",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3919421,
+     "lon": -3.6921812,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Divino Tinto",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3906154,
+     "lon": -3.691743,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "In-Pulso Restaurante",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3925464,
+     "lon": -3.680149,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ramen ENSI",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3923237,
+     "lon": -3.6792238,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Saona Madnum",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.3974409,
+     "lon": -3.6808162,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Atocha Tandoori",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4050712,
+     "lon": -3.6952969,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La pizza è bella",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4030198,
+     "lon": -3.6961257,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Arequepay",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.403306,
+     "lon": -3.6957045,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Albor",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4011963,
+     "lon": -3.6879215,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Brillante",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.408608,
+     "lon": -3.6928819,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nugu Burger",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4102599,
+     "lon": -3.6944918,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ramen Shifu",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4103433,
+     "lon": -3.6928276,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "HUMO",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4054749,
+     "lon": -3.6775223,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Güichi Tapeo Gaditano",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.405993,
+     "lon": -3.6795651,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Totò e Peppino",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4073205,
+     "lon": -3.6744797,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Ribera",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.413592,
+     "lon": -3.7208223,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Paella Real",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4185875,
+     "lon": -3.7097935,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Ciriaco",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.415304,
+     "lon": -3.7123092,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "麻辣拌 Let’s 拌",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4172786,
+     "lon": -3.7106349,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café de los Austrias",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4171678,
+     "lon": -3.7113353,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Yothai",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4204802,
+     "lon": -3.7169691,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodega de la Ardosa",
+     "seccion": "Beber y salir",
+     "lat": 40.4237686,
+     "lon": -3.7017746,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bodegas Rosell",
+     "seccion": "Beber y salir",
+     "lat": 40.4037318,
+     "lon": -3.6909081,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Labra",
+     "seccion": "Beber y salir",
+     "lat": 40.4171561,
+     "lon": -3.7046107,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Santa Ana",
+     "seccion": "Beber y salir",
+     "lat": 40.4143535,
+     "lon": -3.7009567,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "José Alfredo",
+     "seccion": "Beber y salir",
+     "lat": 40.4216068,
+     "lon": -3.7058565,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Macera",
+     "seccion": "Beber y salir",
+     "lat": 40.4261262,
+     "lon": -3.6981877,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Stop Madrid",
+     "seccion": "Beber y salir",
+     "lat": 40.4140743,
+     "lon": -3.6988836,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gorila",
+     "seccion": "Beber y salir",
+     "lat": 40.4232668,
+     "lon": -3.7028673,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Verbena Bar",
+     "seccion": "Beber y salir",
+     "lat": 40.426906,
+     "lon": -3.7034375,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Macareno",
+     "seccion": "Beber y salir",
+     "lat": 40.4259063,
+     "lon": -3.7048324,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Cangrejero",
+     "seccion": "Beber y salir",
+     "lat": 40.4271764,
+     "lon": -3.7095911,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lune",
+     "seccion": "Beber y salir",
+     "lat": 40.3949243,
+     "lon": -3.7000665,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vides",
+     "seccion": "Comer › Tapas",
+     "lat": 40.4209558,
+     "lon": -3.6973069,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bientirada Quevedo",
+     "seccion": "Beber y salir",
+     "lat": 40.4340391,
+     "lon": -3.7045481,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Gatos",
+     "seccion": "Beber y salir",
+     "lat": 40.4135119,
+     "lon": -3.6957073,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna La Flaca",
+     "seccion": "Beber y salir",
+     "lat": 40.4269992,
+     "lon": -3.6877525,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Unica 4U",
+     "seccion": "Comer › Tapas",
+     "lat": 40.4024487,
+     "lon": -3.7386053,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vinoteca Borboleta",
+     "seccion": "Comer › Tapas",
+     "lat": 40.3982028,
+     "lon": -3.6963459,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Gerardo",
+     "seccion": "Beber y salir",
+     "lat": 40.4092482,
+     "lon": -3.7118701,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Favorite 23",
+     "seccion": "Beber y salir",
+     "lat": 40.4062988,
+     "lon": -3.7105993,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Black Mamba",
+     "seccion": "Beber y salir",
+     "lat": 40.4126418,
+     "lon": -3.7106055,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Paloma",
+     "seccion": "Beber y salir",
+     "lat": 40.4101072,
+     "lon": -3.7092689,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vinopremier",
+     "seccion": "Beber y salir",
+     "lat": 40.4044701,
+     "lon": -3.6761001,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Juan Sin Miedo La Latina",
+     "seccion": "Beber y salir",
+     "lat": 40.413302,
+     "lon": -3.7097541,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Terraza Collin’s",
+     "seccion": "Beber y salir",
+     "lat": 40.4133815,
+     "lon": -3.7132563,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Strong",
+     "seccion": "Beber y salir",
+     "lat": 40.418605,
+     "lon": -3.7075016,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "O'Reilly's",
+     "seccion": "Beber y salir",
+     "lat": 40.4160531,
+     "lon": -3.7020627,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "LobByto Cocktail Bar",
+     "seccion": "Beber y salir",
+     "lat": 40.4159077,
+     "lon": -3.699693,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bátelo Bar Karaoke",
+     "seccion": "Beber y salir",
+     "lat": 40.4141863,
+     "lon": -3.6990398,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cheers Karaoke",
+     "seccion": "Beber y salir",
+     "lat": 40.4132145,
+     "lon": -3.6969769,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Julio",
+     "seccion": "Beber y salir",
+     "lat": 40.4243081,
+     "lon": -3.7036592,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los más canallas",
+     "seccion": "Beber y salir",
+     "lat": 40.4247569,
+     "lon": -3.7073196,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Boyberry Gay Bar",
+     "seccion": "Beber y salir",
+     "lat": 40.4206686,
+     "lon": -3.7023215,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Areia",
+     "seccion": "Beber y salir",
+     "lat": 40.4245196,
+     "lon": -3.6980205,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "ZAFYRO - Coctelería Madrid",
+     "seccion": "Beber y salir",
+     "lat": 40.4208069,
+     "lon": -3.6973215,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lambar",
+     "seccion": "Beber y salir",
+     "lat": 40.4352746,
+     "lon": -3.7168164,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Churrería La Mejor de Fuencarral",
+     "seccion": "Beber y salir",
+     "lat": 40.4272213,
+     "lon": -3.7020042,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Jerónimos",
+     "seccion": "Beber y salir",
+     "lat": 40.418611,
+     "lon": -3.6903516,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bocanegra",
+     "seccion": "Beber y salir",
+     "lat": 40.4182439,
+     "lon": -3.6961228,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Colonial de Goya",
+     "seccion": "Beber y salir",
+     "lat": 40.4236552,
+     "lon": -3.6830998,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Recreo Espartinas",
+     "seccion": "Beber y salir",
+     "lat": 40.4244195,
+     "lon": -3.6792368,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna La Aliñá",
+     "seccion": "Beber y salir",
+     "lat": 40.4336733,
+     "lon": -3.6774826,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Sylkar",
+     "seccion": "Beber y salir",
+     "lat": 40.440691,
+     "lon": -3.6973429,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Esquerdo",
+     "seccion": "Beber y salir",
+     "lat": 40.4256705,
+     "lon": -3.6688919,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cañola Parrilla Tapas & Pintxos",
+     "seccion": "Beber y salir",
+     "lat": 40.4024256,
+     "lon": -3.7387495,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar La Retasca",
+     "seccion": "Beber y salir",
+     "lat": 40.4180127,
+     "lon": -3.6740762,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Vía Láctea",
+     "seccion": "Beber y salir",
+     "lat": 40.426853,
+     "lon": -3.7029291,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Doble",
+     "seccion": "Beber y salir",
+     "lat": 40.4382682,
+     "lon": -3.6994677,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pez Tortilla",
+     "seccion": "Beber y salir",
+     "lat": 40.4118381,
+     "lon": -3.7105359,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cañas y Tapas",
+     "seccion": "Beber y salir",
+     "lat": 40.4118108,
+     "lon": -3.710828,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Oh! Mandril",
+     "seccion": "Beber y salir",
+     "lat": 40.4358498,
+     "lon": -3.7025988,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafetería Cervecería La Gamba Dorada",
+     "seccion": "Beber y salir",
+     "lat": 40.3904432,
+     "lon": -3.7238903,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Grifería",
+     "seccion": "Beber y salir",
+     "lat": 40.3969603,
+     "lon": -3.7155909,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Pequeña Graná",
+     "seccion": "Beber y salir",
+     "lat": 40.3994086,
+     "lon": -3.6985884,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "DaaraJi",
+     "seccion": "Beber y salir",
+     "lat": 40.4107413,
+     "lon": -3.7046316,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Chinaski Lavapiés",
+     "seccion": "Beber y salir",
+     "lat": 40.4089418,
+     "lon": -3.6992745,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Spoiler Bar",
+     "seccion": "Beber y salir",
+     "lat": 40.402682,
+     "lon": -3.6921484,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Mayor",
+     "seccion": "Beber y salir",
+     "lat": 40.4151603,
+     "lon": -3.7121513,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "360º Rooftop Bar",
+     "seccion": "Beber y salir",
+     "lat": 40.4240513,
+     "lon": -3.7110872,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Beer Station",
+     "seccion": "Beber y salir",
+     "lat": 40.4197052,
+     "lon": -3.7085243,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Chocolatería San Ginés",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4167707,
+     "lon": -3.706803,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gran Café Gijón",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4222066,
+     "lon": -3.6923715,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café de Barbieri",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4093171,
+     "lon": -3.7008642,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Belén",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.424265,
+     "lon": -3.6966312,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Suyana Sánguches",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.3885697,
+     "lon": -3.7010004,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Viena Capellanes",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4040544,
+     "lon": -3.7131922,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Oohlala Bistró",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.405574,
+     "lon": -3.6990178,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mamúa",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4102866,
+     "lon": -3.7071215,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafelito",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4083463,
+     "lon": -3.7027678,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Paréntesis de olvido - Magia y Té",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4076425,
+     "lon": -3.6985095,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dabov",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4101609,
+     "lon": -3.6974978,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bite Me Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.3945727,
+     "lon": -3.6941532,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Madrid 1883",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4027577,
+     "lon": -3.693924,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café P.A.T.",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4059729,
+     "lon": -3.6731641,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café de Chinitas",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4207332,
+     "lon": -3.7103814,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mistura Ice Cream & Coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4158113,
+     "lon": -3.7084866,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Teterimundo",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.416768,
+     "lon": -3.7073155,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "EL GUiRi, Brunch & Sweets",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4138866,
+     "lon": -3.6983641,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Rue",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4238583,
+     "lon": -3.701488,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Toma Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 40.4264913,
+     "lon": -3.7059638,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Riviera",
+     "seccion": "Beber y salir",
+     "lat": 40.4129871,
+     "lon": -3.7221344,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Teatro Magno",
+     "seccion": "Beber y salir",
+     "lat": 40.4173664,
+     "lon": -3.6982415,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Joy Eslava",
+     "seccion": "Beber y salir",
+     "lat": 40.4171402,
+     "lon": -3.7064769,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Cafetal",
+     "seccion": "Beber y salir",
+     "lat": 40.3930526,
+     "lon": -3.7098565,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Teatro Kapital",
+     "seccion": "Beber y salir",
+     "lat": 40.409774,
+     "lon": -3.6932244,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "DLRO Live",
+     "seccion": "Beber y salir",
+     "lat": 40.4248932,
+     "lon": -3.6969418,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Naked Bar Madrid",
+     "seccion": "Beber y salir",
+     "lat": 40.4280954,
+     "lon": -3.7051262,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Changó Club",
+     "seccion": "Beber y salir",
+     "lat": 40.4316829,
+     "lon": -3.6981854,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Encuentros VIP Madrid",
+     "seccion": "Beber y salir",
+     "lat": 40.419222,
+     "lon": -3.6684867,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Contraclub",
+     "seccion": "Beber y salir",
+     "lat": 40.4126029,
+     "lon": -3.7139466,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Juglar",
+     "seccion": "Beber y salir",
+     "lat": 40.4096946,
+     "lon": -3.7021378,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "independance Club",
+     "seccion": "Beber y salir",
+     "lat": 40.409692,
+     "lon": -3.6930041,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Fitz Club",
+     "seccion": "Beber y salir",
+     "lat": 40.4247168,
+     "lon": -3.7122142,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Pirandello",
+     "seccion": "Beber y salir",
+     "lat": 40.4248377,
+     "lon": -3.713805,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ochoymedio",
+     "seccion": "Beber y salir",
+     "lat": 40.4171084,
+     "lon": -3.7063923,
+     "origen": "osm-local"
     }
    ],
    "sinUbicar": [
@@ -6325,6 +8635,1161 @@
      "lat": 41.37134,
      "lon": 2.18167,
      "origen": "wikidata"
+    },
+    {
+     "nombre": "Can Culleretes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.381215,
+     "lon": 2.1744185,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Leopoldo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3792715,
+     "lon": 2.1695103,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Can Ramonet",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3808197,
+     "lon": 2.1889159,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Disfrutar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.387762,
+     "lon": 2.1531722,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gresca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3913245,
+     "lon": 2.1571759,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Mezza",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3909942,
+     "lon": 2.1714496,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "HOT Frankfurt",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3847242,
+     "lon": 2.1829681,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Fábrica Moritz Barcelona",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3825668,
+     "lon": 2.1633965,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "ALKIMIA",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3826569,
+     "lon": 2.1633778,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar del Pi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3824922,
+     "lon": 2.1739624,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "7 Portes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3821717,
+     "lon": 2.1832472,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cova Fumada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3792983,
+     "lon": 2.1891943,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurant Hofmann",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.397162,
+     "lon": 2.1530322,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Glaciar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.380221,
+     "lon": 2.1746504,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Thonet Grill Room",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3792408,
+     "lon": 2.1761073,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Via Veneto",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3924558,
+     "lon": 2.1390672,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Flash Flash",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3965735,
+     "lon": 2.1521975,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Moo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3961776,
+     "lon": 2.160917,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Caracoles",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3796584,
+     "lon": 2.1765082,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Resolís",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.4011691,
+     "lon": 2.1609951,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "L'Aliança del Poblenou",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3997067,
+     "lon": 2.2032276,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "PÖTSTOT",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3824236,
+     "lon": 2.1687015,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "L'Antic Bocoi del Gòtic",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3820722,
+     "lon": 2.1795271,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Crudo Bar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3908134,
+     "lon": 2.1705787,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Hexa Sushi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3821959,
+     "lon": 2.1353872,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Nova Farga",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3726906,
+     "lon": 2.1386567,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Abarka",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3740281,
+     "lon": 2.1392334,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Asador de Lugo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3797623,
+     "lon": 2.1376748,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Santa Burg",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3797396,
+     "lon": 2.1367188,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Addis Abbeba",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.379445,
+     "lon": 2.1372111,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ugarit",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3772029,
+     "lon": 2.1370644,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Hosomaki Sants",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3780149,
+     "lon": 2.1370653,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rias de Galicia",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3743416,
+     "lon": 2.1545526,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Il Golfo di Napli",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3724012,
+     "lon": 2.1553225,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Martita",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.375555,
+     "lon": 2.1557759,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "taps",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3728758,
+     "lon": 2.1556472,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Veganashi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3724648,
+     "lon": 2.1555635,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ikibana Parallel",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3752174,
+     "lon": 2.1582392,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Can Lampazas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3747776,
+     "lon": 2.1580379,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "De Paula: l'hamburgueseria del Poble Sec",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3723646,
+     "lon": 2.1612801,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pulpería A Gudiña",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3754685,
+     "lon": 2.1563636,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzeria Napoletana Core e Passiòn",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3747149,
+     "lon": 2.1593115,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Molinet Cafè Antic",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3740133,
+     "lon": 2.1599249,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cobab",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3785224,
+     "lon": 2.1522613,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Market Restaurant",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3791877,
+     "lon": 2.1606251,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Can Vilaró",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3779004,
+     "lon": 2.1617005,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Amigó",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3794054,
+     "lon": 2.1617499,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tacos Tacos",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3744433,
+     "lon": 2.165064,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kasbah",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3744509,
+     "lon": 2.1683103,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Xiloka",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3736012,
+     "lon": 2.1701738,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Can Lluís",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3781123,
+     "lon": 2.1653718,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Caravelle",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3822872,
+     "lon": 2.1688475,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "L'Antic forn",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3825799,
+     "lon": 2.1690215,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Haldi Indian Restaurant",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3806356,
+     "lon": 2.1676553,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tosca del Carme",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3819482,
+     "lon": 2.1695795,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "TapaTXI Colón",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3783617,
+     "lon": 2.1754339,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Magraner Boig",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3792938,
+     "lon": 2.1708328,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Cañete",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3791405,
+     "lon": 2.173138,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Quim De La Boqueria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3819517,
+     "lon": 2.1721675,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tropico",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3776991,
+     "lon": 2.1714405,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "My Way restaurant lounge bar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3808801,
+     "lon": 2.1754294,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "CiaoCiao Restaurant",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3799734,
+     "lon": 2.174591,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Velada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3812795,
+     "lon": 2.1752739,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Güell Tapas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3786247,
+     "lon": 2.1737031,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Maná 75°",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3687289,
+     "lon": 2.1884355,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rossini",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.379902,
+     "lon": 2.1758524,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Afrodita",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3804099,
+     "lon": 2.1779709,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Fonda",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3793598,
+     "lon": 2.1762144,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Restaurant La casa de les Lletres",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.3811462,
+     "lon": 2.1813152,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rasoterra",
+     "seccion": "Comer › Restaurantes",
+     "lat": 41.381234,
+     "lon": 2.1780994,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "4Gats",
+     "seccion": "Beber y salir",
+     "lat": 41.3857384,
+     "lon": 2.1736392,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Barcelona Pipa Club",
+     "seccion": "Beber y salir",
+     "lat": 41.3801259,
+     "lon": 2.1746721,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Confiteria",
+     "seccion": "Beber y salir",
+     "lat": 41.3754806,
+     "lon": 2.1678977,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kino",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3825992,
+     "lon": 2.1665452,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Boadas",
+     "seccion": "Beber y salir",
+     "lat": 41.3846643,
+     "lon": 2.1702706,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Terraza del Central",
+     "seccion": "Beber y salir",
+     "lat": 41.385131,
+     "lon": 2.1778655,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Quillo",
+     "seccion": "Beber y salir",
+     "lat": 41.3891366,
+     "lon": 2.1796504,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Magma Bar",
+     "seccion": "Beber y salir",
+     "lat": 41.3854153,
+     "lon": 2.1787973,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Creps al Born",
+     "seccion": "Beber y salir",
+     "lat": 41.3842949,
+     "lon": 2.1827139,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Astor",
+     "seccion": "Beber y salir",
+     "lat": 41.3780065,
+     "lon": 2.1372878,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Salts",
+     "seccion": "Beber y salir",
+     "lat": 41.3690547,
+     "lon": 2.1654635,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tinta Roja",
+     "seccion": "Beber y salir",
+     "lat": 41.3742741,
+     "lon": 2.1619869,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Raposa",
+     "seccion": "Beber y salir",
+     "lat": 41.3725137,
+     "lon": 2.1639527,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Foxy Bar",
+     "seccion": "Beber y salir",
+     "lat": 41.3803273,
+     "lon": 2.1643441,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cassette Bar",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3774595,
+     "lon": 2.1735544,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "360°",
+     "seccion": "Beber y salir",
+     "lat": 41.3790957,
+     "lon": 2.1696433,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bollocks",
+     "seccion": "Beber y salir",
+     "lat": 41.3810509,
+     "lon": 2.1805139,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cerveseria El Tap",
+     "seccion": "Beber y salir",
+     "lat": 41.3880943,
+     "lon": 2.1361855,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cal Oksana",
+     "seccion": "Beber y salir",
+     "lat": 41.3876408,
+     "lon": 2.1560748,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Boys Bar BCN",
+     "seccion": "Beber y salir",
+     "lat": 41.3842857,
+     "lon": 2.1591274,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Punto BCN",
+     "seccion": "Beber y salir",
+     "lat": 41.3866794,
+     "lon": 2.1591527,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Monaco Shisha Lounge",
+     "seccion": "Beber y salir",
+     "lat": 41.3833212,
+     "lon": 2.1616932,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dry Martini",
+     "seccion": "Beber y salir",
+     "lat": 41.3927442,
+     "lon": 2.1539985,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Torpedo",
+     "seccion": "Beber y salir",
+     "lat": 41.3922397,
+     "lon": 2.1538817,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "San Fermín",
+     "seccion": "Beber y salir",
+     "lat": 41.3906484,
+     "lon": 2.1603919,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar La Masia",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3832372,
+     "lon": 2.1683172,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sidreria el Furaco",
+     "seccion": "Beber y salir",
+     "lat": 41.3938159,
+     "lon": 2.1726665,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bonavida",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3893117,
+     "lon": 2.1708667,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Falstaff",
+     "seccion": "Beber y salir",
+     "lat": 41.3998575,
+     "lon": 2.1620158,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Sabor Cubano",
+     "seccion": "Beber y salir",
+     "lat": 41.3993625,
+     "lon": 2.1589245,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Casa Figari",
+     "seccion": "Beber y salir",
+     "lat": 41.4035201,
+     "lon": 2.1555614,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "LES COSINES",
+     "seccion": "Beber y salir",
+     "lat": 41.4033498,
+     "lon": 2.1535956,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rabipelao",
+     "seccion": "Beber y salir",
+     "lat": 41.4037055,
+     "lon": 2.1598503,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Canigó",
+     "seccion": "Beber y salir",
+     "lat": 41.4029724,
+     "lon": 2.1579186,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vila's Bar",
+     "seccion": "Beber y salir",
+     "lat": 41.4059086,
+     "lon": 2.1571314,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Viblioteca",
+     "seccion": "Beber y salir",
+     "lat": 41.403273,
+     "lon": 2.1567918,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Morryssom",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3994885,
+     "lon": 2.165101,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "New Chaps",
+     "seccion": "Beber y salir",
+     "lat": 41.3970928,
+     "lon": 2.1628073,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "JazzMan",
+     "seccion": "Beber y salir",
+     "lat": 41.4015132,
+     "lon": 2.1692885,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mescladís del Pou",
+     "seccion": "Beber y salir",
+     "lat": 41.3870865,
+     "lon": 2.1803497,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar del Pla",
+     "seccion": "Comer › Tapas",
+     "lat": 41.3856036,
+     "lon": 2.1800221,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ginger",
+     "seccion": "Beber y salir",
+     "lat": 41.382757,
+     "lon": 2.1785313,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ina",
+     "seccion": "Beber y salir",
+     "lat": 41.3872947,
+     "lon": 2.1804299,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "#Bubita",
+     "seccion": "Beber y salir",
+     "lat": 41.3857062,
+     "lon": 2.1816478,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Sauvage",
+     "seccion": "Beber y salir",
+     "lat": 41.3845406,
+     "lon": 2.1824839,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Borrell",
+     "seccion": "Beber y salir",
+     "lat": 41.3751759,
+     "lon": 2.1668331,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "BlackLab Brewhouse & Kitchen",
+     "seccion": "Beber y salir",
+     "lat": 41.3812305,
+     "lon": 2.1854573,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Garage Beer Co. Poblenou",
+     "seccion": "Beber y salir",
+     "lat": 41.3987704,
+     "lon": 2.2071931,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La perla negra",
+     "seccion": "Beber y salir",
+     "lat": 41.3758973,
+     "lon": 2.1406084,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Homo Sibaris",
+     "seccion": "Beber y salir",
+     "lat": 41.3762147,
+     "lon": 2.1388121,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cerveseria Jazz",
+     "seccion": "Beber y salir",
+     "lat": 41.372246,
+     "lon": 2.1631577,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Barna Brew",
+     "seccion": "Beber y salir",
+     "lat": 41.3773461,
+     "lon": 2.1635646,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pampa Drugstore",
+     "seccion": "Beber y salir",
+     "lat": 41.3827176,
+     "lon": 2.1712051,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Plata",
+     "seccion": "Beber y salir",
+     "lat": 41.3804049,
+     "lon": 2.1805946,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Vaso de Oro",
+     "seccion": "Beber y salir",
+     "lat": 41.3818636,
+     "lon": 2.1872472,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Brew Wild",
+     "seccion": "Beber y salir",
+     "lat": 41.3867826,
+     "lon": 2.159802,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Scobies Irish Pub",
+     "seccion": "Beber y salir",
+     "lat": 41.3863223,
+     "lon": 2.1662298,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Cugat",
+     "seccion": "Beber y salir",
+     "lat": 41.3955828,
+     "lon": 2.1676294,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Billar HDP",
+     "seccion": "Beber y salir",
+     "lat": 41.4017761,
+     "lon": 2.1550741,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cervesera Artesana",
+     "seccion": "Beber y salir",
+     "lat": 41.3981483,
+     "lon": 2.1608553,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafè de l'Òpera",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3809698,
+     "lon": 2.1737766,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Museu de la Xocolata",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3871081,
+     "lon": 2.1817252,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Japonia Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3806518,
+     "lon": 2.1387176,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Terraza Miro",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3773318,
+     "lon": 2.1460067,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bandido",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3794728,
+     "lon": 2.1732381,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Black remedy",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3824551,
+     "lon": 2.1777699,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nūn - Cultural Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.383095,
+     "lon": 2.164579,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Caelum",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3830524,
+     "lon": 2.1744369,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Caj Chai",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3828733,
+     "lon": 2.175566,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Interior de Té",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3993897,
+     "lon": 2.15344,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nabuco Tiramisú",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.4004523,
+     "lon": 2.1577244,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bicioci",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3999229,
+     "lon": 2.1619101,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Godot",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.4001692,
+     "lon": 2.1569644,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nabucco Obrador Vegetarià",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.4007356,
+     "lon": 2.1602256,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Salvatge",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.4007392,
+     "lon": 2.1578164,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Chocolatería La Nena",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.4026573,
+     "lon": 2.1588747,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Más Que Sushi",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3774227,
+     "lon": 2.1527247,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Morrow Coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3771392,
+     "lon": 2.1513283,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Quin Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3823503,
+     "lon": 2.1579746,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Matcha Gracias",
+     "seccion": "Comer › Cafeterías",
+     "lat": 41.3803038,
+     "lon": 2.156769,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Razzmatazz",
+     "seccion": "Beber y salir",
+     "lat": 41.3975851,
+     "lon": 2.191249,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Apolo",
+     "seccion": "Beber y salir",
+     "lat": 41.3743908,
+     "lon": 2.1695606,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Luz de Gas",
+     "seccion": "Beber y salir",
+     "lat": 41.3945996,
+     "lon": 2.1490385,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Bikini",
+     "seccion": "Beber y salir",
+     "lat": 41.3894576,
+     "lon": 2.1370991,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Berlin Dark",
+     "seccion": "Beber y salir",
+     "lat": 41.3743162,
+     "lon": 2.1561764,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Night Barcelona",
+     "seccion": "Beber y salir",
+     "lat": 41.3842982,
+     "lon": 2.1587144,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Maricon Ghetto LGBT+ bar",
+     "seccion": "Beber y salir",
+     "lat": 41.3884056,
+     "lon": 2.1591265,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Costa Breve",
+     "seccion": "Beber y salir",
+     "lat": 41.3952962,
+     "lon": 2.1503847,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Arena Xperience",
+     "seccion": "Beber y salir",
+     "lat": 41.3895686,
+     "lon": 2.1739427,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Almo2bar",
+     "seccion": "Beber y salir",
+     "lat": 41.4056064,
+     "lon": 2.1621059,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Safari Disco Club",
+     "seccion": "Beber y salir",
+     "lat": 41.3783395,
+     "lon": 2.1448682,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Paloma",
+     "seccion": "Beber y salir",
+     "lat": 41.382371,
+     "lon": 2.1642234,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Harlem Jazz Club",
+     "seccion": "Beber y salir",
+     "lat": 41.3811234,
+     "lon": 2.1784298,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Antilla Latin Club",
+     "seccion": "Beber y salir",
+     "lat": 41.3845653,
+     "lon": 2.1545955,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Open Mind",
+     "seccion": "Beber y salir",
+     "lat": 41.3849379,
+     "lon": 2.155696,
+     "origen": "osm-local"
     }
    ],
    "sinUbicar": [
@@ -6919,6 +10384,1140 @@
      "lat": 37.136480766,
      "lon": -3.668630713,
      "origen": "wikidata"
+    },
+    {
+     "nombre": "La Entreplanta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1494167,
+     "lon": -3.6024806,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Reca Campus",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1494173,
+     "lon": -3.6027743,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Esquinita de Pablo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1499138,
+     "lon": -3.6018531,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Il Gondoliere Nuovo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1550242,
+     "lon": -3.5945406,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Bella Ciao",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1726275,
+     "lon": -3.6050995,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "D'Platos Menorca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1739305,
+     "lon": -3.6060397,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Shifu",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.172617,
+     "lon": -3.6070965,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lalocamaria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1687904,
+     "lon": -3.6071196,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Wings & West",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.175248,
+     "lon": -3.6095589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Cuchara de Carmela",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1679198,
+     "lon": -3.5957596,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sibarius",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1751526,
+     "lon": -3.5993942,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Saiko",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1722982,
+     "lon": -3.6000867,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tinta Fina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1730603,
+     "lon": -3.5986712,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mesón Alegría",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1728895,
+     "lon": -3.5986195,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Reverso Gastrobar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1751961,
+     "lon": -3.6031953,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bardana Restaurante",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1707244,
+     "lon": -3.5989629,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Vegano Hicuri",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1741865,
+     "lon": -3.5950216,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Sifón",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1697347,
+     "lon": -3.5959067,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Las Copas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1733992,
+     "lon": -3.5978978,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La casa della pasta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1730869,
+     "lon": -3.5963329,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ranchito mexicano",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1732392,
+     "lon": -3.5932505,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Thali",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1733051,
+     "lon": -3.5937769,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Manigua",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.174425,
+     "lon": -3.5973073,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mimar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1795667,
+     "lon": -3.6128644,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vulcano Restaurante - Pizzería",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1803273,
+     "lon": -3.6124477,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "It's Vietnam",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1763713,
+     "lon": -3.6073288,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tuttoría",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1786545,
+     "lon": -3.6101922,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Maharaja",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1874748,
+     "lon": -3.6080219,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Ramírez",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1879054,
+     "lon": -3.6071194,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gastrobar Turia Granada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1850342,
+     "lon": -3.6068504,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Gallio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1755401,
+     "lon": -3.6001959,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Bar de Fede",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1787224,
+     "lon": -3.6001915,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Crepería Elvira81",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1801163,
+     "lon": -3.5990769,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lemon Rock",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1770616,
+     "lon": -3.6039305,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mi México",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1802748,
+     "lon": -3.5991744,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rollo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1760107,
+     "lon": -3.600079,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Goiko",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1761642,
+     "lon": -3.6022516,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Arrayanes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1781507,
+     "lon": -3.5968602,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Piccola Carmela",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1764018,
+     "lon": -3.5967417,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Alarique",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1762418,
+     "lon": -3.5952337,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Amazonia Fine Food",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1785113,
+     "lon": -3.5925396,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bombay Granada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.177829,
+     "lon": -3.5969095,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pedro Pepperoni",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1656503,
+     "lon": -3.5827484,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cuevas Los Tarantos",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1812104,
+     "lon": -3.588185,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sahara",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1787502,
+     "lon": -3.5907733,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Romana",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1900835,
+     "lon": -3.6306552,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mesón Las Perlas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1890078,
+     "lon": -3.6232087,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Camaura",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1698748,
+     "lon": -3.6200538,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Compañía",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1440241,
+     "lon": -3.6066812,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Despensa del Granero",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1550978,
+     "lon": -3.6124198,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Merus",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1523772,
+     "lon": -3.6056664,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Platea",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1601232,
+     "lon": -3.6079649,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Macrobocatas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1589585,
+     "lon": -3.6061017,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Boka",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.149399,
+     "lon": -3.600025,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mario's Guerra",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.151663,
+     "lon": -3.5804971,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Fralisani",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.157238,
+     "lon": -3.5875548,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Jean Carlo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.161242,
+     "lon": -3.5856591,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Arriaga",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1624786,
+     "lon": -3.6078725,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Delirio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1708601,
+     "lon": -3.6052773,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nami Sushi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1745594,
+     "lon": -3.6054645,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Puesto 43",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1726919,
+     "lon": -3.6049105,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Aisushi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1734566,
+     "lon": -3.6092394,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Muglia",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1734937,
+     "lon": -3.6049005,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ciudad Nueva",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1725766,
+     "lon": -3.6065116,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Verace",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1742317,
+     "lon": -3.6076143,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Oro Nero Caffè",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1738209,
+     "lon": -3.6063592,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Divino",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1677035,
+     "lon": -3.5981176,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Raíces",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1654326,
+     "lon": -3.5932469,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pizzería Yesterday",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.166976,
+     "lon": -3.5970062,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Centro de Granada",
+     "seccion": "Comer › Restaurantes",
+     "lat": 37.1752239,
+     "lon": -3.6002548,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Arcos",
+     "seccion": "Beber y salir",
+     "lat": 37.1782174,
+     "lon": -3.6011216,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Huerto del Loro",
+     "seccion": "Beber y salir",
+     "lat": 37.1776377,
+     "lon": -3.5935111,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Monje",
+     "seccion": "Beber y salir",
+     "lat": 37.1714224,
+     "lon": -3.6029477,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tango Bar",
+     "seccion": "Beber y salir",
+     "lat": 37.1739529,
+     "lon": -3.6040649,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ávila Tapas II",
+     "seccion": "Comer › Tapas",
+     "lat": 37.1707905,
+     "lon": -3.5990412,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Granados",
+     "seccion": "Comer › Tapas",
+     "lat": 37.169898,
+     "lon": -3.5966606,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Altramuces",
+     "seccion": "Comer › Tapas",
+     "lat": 37.1730519,
+     "lon": -3.5926329,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Antonio Pérez Copas",
+     "seccion": "Beber y salir",
+     "lat": 37.1782296,
+     "lon": -3.608041,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafe-Bar Mami",
+     "seccion": "Beber y salir",
+     "lat": 37.1779787,
+     "lon": -3.6069586,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Contteo Pub",
+     "seccion": "Beber y salir",
+     "lat": 37.1755138,
+     "lon": -3.6021055,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Palo Cortao",
+     "seccion": "Beber y salir",
+     "lat": 37.1773992,
+     "lon": -3.5995713,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Voolta",
+     "seccion": "Beber y salir",
+     "lat": 37.1741663,
+     "lon": -3.6073488,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pub Nighttrain",
+     "seccion": "Beber y salir",
+     "lat": 37.1744407,
+     "lon": -3.6056048,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Babel",
+     "seccion": "Beber y salir",
+     "lat": 37.1742216,
+     "lon": -3.6070589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Deltoya",
+     "seccion": "Beber y salir",
+     "lat": 37.1741276,
+     "lon": -3.6066297,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rincón de Cristóbal",
+     "seccion": "Beber y salir",
+     "lat": 37.1682035,
+     "lon": -3.5972533,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna J&J",
+     "seccion": "Beber y salir",
+     "lat": 37.1750819,
+     "lon": -3.6033154,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Jerez",
+     "seccion": "Comer › Tapas",
+     "lat": 37.1735345,
+     "lon": -3.5945264,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Nico",
+     "seccion": "Comer › Tapas",
+     "lat": 37.1774209,
+     "lon": -3.6086561,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rocknrolla",
+     "seccion": "Beber y salir",
+     "lat": 37.1772922,
+     "lon": -3.6054391,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sonora Desert Saloon",
+     "seccion": "Beber y salir",
+     "lat": 37.1771907,
+     "lon": -3.6086606,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "m14",
+     "seccion": "Beber y salir",
+     "lat": 37.1765051,
+     "lon": -3.6080598,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Al Sur",
+     "seccion": "Beber y salir",
+     "lat": 37.1825546,
+     "lon": -3.6039131,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Palatino tapas",
+     "seccion": "Beber y salir",
+     "lat": 37.1552944,
+     "lon": -3.6122218,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mentidero Forum",
+     "seccion": "Beber y salir",
+     "lat": 37.1604448,
+     "lon": -3.608644,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Diamantes",
+     "seccion": "Beber y salir",
+     "lat": 37.1520741,
+     "lon": -3.5809381,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "PlaymobilClub",
+     "seccion": "Beber y salir",
+     "lat": 37.1747838,
+     "lon": -3.6076524,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Pub Amsterdam",
+     "seccion": "Beber y salir",
+     "lat": 37.1741409,
+     "lon": -3.6070204,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rainbow",
+     "seccion": "Beber y salir",
+     "lat": 37.1727269,
+     "lon": -3.6068803,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Perro Andaluz",
+     "seccion": "Beber y salir",
+     "lat": 37.1744487,
+     "lon": -3.6074308,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Flaca",
+     "seccion": "Beber y salir",
+     "lat": 37.1744212,
+     "lon": -3.6074143,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rincón De La Parrillita",
+     "seccion": "Comer › Tapas",
+     "lat": 37.1738103,
+     "lon": -3.607219,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Wall Street",
+     "seccion": "Beber y salir",
+     "lat": 37.1740439,
+     "lon": -3.6069628,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Santa Mónica",
+     "seccion": "Beber y salir",
+     "lat": 37.1662292,
+     "lon": -3.5945342,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Caroca",
+     "seccion": "Beber y salir",
+     "lat": 37.1752772,
+     "lon": -3.600286,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mama Samba",
+     "seccion": "Beber y salir",
+     "lat": 37.173969,
+     "lon": -3.5967983,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Loop Bar & Records",
+     "seccion": "Beber y salir",
+     "lat": 37.173043,
+     "lon": -3.5969126,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Marisma",
+     "seccion": "Beber y salir",
+     "lat": 37.176869,
+     "lon": -3.6089113,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Zaguán Drink & Friends",
+     "seccion": "Beber y salir",
+     "lat": 37.1769833,
+     "lon": -3.6092211,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "LSD 24 horas",
+     "seccion": "Beber y salir",
+     "lat": 37.1879904,
+     "lon": -3.607486,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Eshavira Club",
+     "seccion": "Beber y salir",
+     "lat": 37.1802896,
+     "lon": -3.5993971,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Entresuelo",
+     "seccion": "Beber y salir",
+     "lat": 37.1776992,
+     "lon": -3.5999725,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tic Tac",
+     "seccion": "Beber y salir",
+     "lat": 37.1772468,
+     "lon": -3.6040693,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pub La Sal",
+     "seccion": "Beber y salir",
+     "lat": 37.1786074,
+     "lon": -3.6002709,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Enebro",
+     "seccion": "Beber y salir",
+     "lat": 37.1800824,
+     "lon": -3.5992305,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Watami Sushi",
+     "seccion": "Beber y salir",
+     "lat": 37.1744515,
+     "lon": -3.6076782,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Masquevinos",
+     "seccion": "Beber y salir",
+     "lat": 37.1751633,
+     "lon": -3.5987706,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Aliatar",
+     "seccion": "Beber y salir",
+     "lat": 37.1744075,
+     "lon": -3.5993349,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Los Pipos",
+     "seccion": "Beber y salir",
+     "lat": 37.178266,
+     "lon": -3.6118651,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Bar Jomail",
+     "seccion": "Beber y salir",
+     "lat": 37.1779551,
+     "lon": -3.6116792,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cañakí",
+     "seccion": "Beber y salir",
+     "lat": 37.1579312,
+     "lon": -3.6091326,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar La Mancha",
+     "seccion": "Beber y salir",
+     "lat": 37.1744168,
+     "lon": -3.607723,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Rhin Barril II",
+     "seccion": "Beber y salir",
+     "lat": 37.1683262,
+     "lon": -3.5977712,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Paripé Cocktail bar",
+     "seccion": "Beber y salir",
+     "lat": 37.1727687,
+     "lon": -3.598292,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rosario Varela",
+     "seccion": "Beber y salir",
+     "lat": 37.1728882,
+     "lon": -3.5963634,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Corralillo Urban Tapas",
+     "seccion": "Beber y salir",
+     "lat": 37.1797208,
+     "lon": -3.6129569,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cervecería Horizonte",
+     "seccion": "Beber y salir",
+     "lat": 37.1792173,
+     "lon": -3.612653,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Coffee Brunch Lina",
+     "seccion": "Beber y salir",
+     "lat": 37.1797807,
+     "lon": -3.6110527,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Cielo de Granada",
+     "seccion": "Beber y salir",
+     "lat": 37.1785119,
+     "lon": -3.6037577,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Minotauro",
+     "seccion": "Beber y salir",
+     "lat": 37.1773045,
+     "lon": -3.5963137,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Alameda Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1722959,
+     "lon": -3.5982398,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dulce y Salado",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1716004,
+     "lon": -3.6041461,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Qarmita Cafebreria",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.170113,
+     "lon": -3.6027823,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Fútbol",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1720077,
+     "lon": -3.5967861,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Perspectives Cafe",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.181707,
+     "lon": -3.599254,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tetería Ábaco Té",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1785578,
+     "lon": -3.5968356,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafetería Artesanos de Granada",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1738595,
+     "lon": -3.6078463,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Con mucha miga",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1664248,
+     "lon": -3.5948827,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vega's",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1737615,
+     "lon": -3.6033035,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Telefónica",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1745782,
+     "lon": -3.5999796,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kona Specialty Coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1715096,
+     "lon": -3.5974734,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Bar Paco Cordones",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1733164,
+     "lon": -3.5930978,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafetería Amelia",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1815147,
+     "lon": -3.6144397,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Finca Coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1762068,
+     "lon": -3.6001378,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Rue de la Crêpe",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1781729,
+     "lon": -3.6014901,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Artesanas de Granada",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1780712,
+     "lon": -3.6009426,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Té y Café Granada",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1778509,
+     "lon": -3.5989831,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Candy's cafe",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1753254,
+     "lon": -3.6033213,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café 4 Gatos",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1791079,
+     "lon": -3.5949658,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Minuit",
+     "seccion": "Comer › Cafeterías",
+     "lat": 37.1759664,
+     "lon": -3.5966456,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mae West Granada",
+     "seccion": "Beber y salir",
+     "lat": 37.1682479,
+     "lon": -3.6075688,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Qubik",
+     "seccion": "Beber y salir",
+     "lat": 37.1675612,
+     "lon": -3.6074515,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sarao",
+     "seccion": "Beber y salir",
+     "lat": 37.1727769,
+     "lon": -3.5983698,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nocta Granada",
+     "seccion": "Beber y salir",
+     "lat": 37.1772828,
+     "lon": -3.6094113,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Uny Club",
+     "seccion": "Beber y salir",
+     "lat": 37.1748408,
+     "lon": -3.6099981,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Backstage",
+     "seccion": "Beber y salir",
+     "lat": 37.1726266,
+     "lon": -3.5983533,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Discoteca Vogues",
+     "seccion": "Beber y salir",
+     "lat": 37.1787825,
+     "lon": -3.6032545,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sala Planta Baja",
+     "seccion": "Beber y salir",
+     "lat": 37.1763268,
+     "lon": -3.6042062,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Granada 10",
+     "seccion": "Beber y salir",
+     "lat": 37.1774842,
+     "lon": -3.5978761,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Disco Pub Corazón Latino",
+     "seccion": "Beber y salir",
+     "lat": 37.1899066,
+     "lon": -3.6089004,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taböa Club",
+     "seccion": "Beber y salir",
+     "lat": 37.1726419,
+     "lon": -3.6042176,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Colón Plaza",
+     "seccion": "Beber y salir",
+     "lat": 37.1750674,
+     "lon": -3.5976729,
+     "origen": "osm-local"
     }
    ],
    "sinUbicar": [
@@ -9024,6 +13623,1161 @@
      "lat": 39.47322778,
      "lon": -0.37243333,
      "origen": "wikidata"
+    },
+    {
+     "nombre": "La Vita e Bella",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4707482,
+     "lon": -0.3774201,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Alqueria De La Font D'En Corts",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4478667,
+     "lon": -0.3601399,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Valencia Center",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4601979,
+     "lon": -0.3494817,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Wei",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4502189,
+     "lon": -0.3911365,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Del Poble Pizzeria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4665386,
+     "lon": -0.3866992,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mamie Guellec",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4668882,
+     "lon": -0.3888495,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kento Shop",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4674268,
+     "lon": -0.380583,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Pederniz",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4625467,
+     "lon": -0.3839297,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "The Salty G.O.A.T.",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4668187,
+     "lon": -0.3848227,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kaña Makan",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4598292,
+     "lon": -0.373791,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "San Telmo - Asador Argentino",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4618296,
+     "lon": -0.3747684,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Metropolitan Irish Bar & Kitchen",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4603022,
+     "lon": -0.37611,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Varqués Restaurante",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.462104,
+     "lon": -0.3732805,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Beirut Cocina Libanesa",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4622385,
+     "lon": -0.3728928,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Amor Amargo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4621954,
+     "lon": -0.3722436,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pelayo Gastro Trinquet",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4672871,
+     "lon": -0.3784839,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kawori",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4631563,
+     "lon": -0.3723841,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Habibi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4673866,
+     "lon": -0.3696083,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Circo Burger Gran Via",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4660992,
+     "lon": -0.3717536,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "el Raco de la Paella",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4831403,
+     "lon": -0.399551,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tassa",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4931134,
+     "lon": -0.4000897,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Kiosko",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.492739,
+     "lon": -0.4003002,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Marina Alta 5",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4905381,
+     "lon": -0.4019424,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tintapea Nou Mestalla",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4932028,
+     "lon": -0.3998942,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "baool",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4935769,
+     "lon": -0.4003894,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Dehesa Cafe - Vinoteca & Lounge",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4951373,
+     "lon": -0.4003794,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Indian Star",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4899607,
+     "lon": -0.4010841,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Gordo de Cortes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4937752,
+     "lon": -0.4024909,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "il Cortile - Pasta & Pizza Gourmet",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4930713,
+     "lon": -0.402074,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "AQUA dolce",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4752454,
+     "lon": -0.387923,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Charlie Brownie",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.470775,
+     "lon": -0.3898618,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Unsushi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4753554,
+     "lon": -0.3830892,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dhaba",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4742592,
+     "lon": -0.3808255,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "marisqueria l’odisea",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4726807,
+     "lon": -0.3806169,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "BATARAZA Bodegón - Restaurante Argentino",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4710147,
+     "lon": -0.3816044,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna Montero",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4792824,
+     "lon": -0.3919784,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Thai Mongkut",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4778711,
+     "lon": -0.3813034,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Redondo en Boca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4763245,
+     "lon": -0.3807488,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Puerta del Mar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4710078,
+     "lon": -0.3751977,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ñam",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4722173,
+     "lon": -0.3750512,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pintxo i Trago",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4737482,
+     "lon": -0.3767609,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Berguna Gluten Free",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4710398,
+     "lon": -0.3757933,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "San Tommaso",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4753422,
+     "lon": -0.3771358,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Los Gomez Taberna",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4697482,
+     "lon": -0.3743142,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Le Favole",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4723208,
+     "lon": -0.3784356,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurant Secret",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.473333,
+     "lon": -0.3750298,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Espurnes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4727419,
+     "lon": -0.3755042,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Marrakech",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4725496,
+     "lon": -0.3710723,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Miqueta",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4717094,
+     "lon": -0.3734698,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Suki Ramen",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4704812,
+     "lon": -0.3719312,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bistró Gabi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4707772,
+     "lon": -0.3724278,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Almunia",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4723084,
+     "lon": -0.371632,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Refugio",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4783889,
+     "lon": -0.3799255,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tasta Olletes",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.480029,
+     "lon": -0.3798138,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Almalibre Açaí House El Carmen",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4790412,
+     "lon": -0.3774792,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kuzina",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4771698,
+     "lon": -0.3755248,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Lambrusqueria",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4765503,
+     "lon": -0.3778317,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Secreter",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4765733,
+     "lon": -0.3718106,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Rincón Azteca",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4831731,
+     "lon": -0.3802018,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Easy Pizza - Pizzeria artesanal",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4830694,
+     "lon": -0.3794564,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sushikosbi",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4555091,
+     "lon": -0.3459553,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Velarte",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4617987,
+     "lon": -0.3637464,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "ahuevo Restaurante",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4657127,
+     "lon": -0.3640277,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kamon",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4669211,
+     "lon": -0.3656221,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Fum de Llum",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4666129,
+     "lon": -0.3668265,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kathmandu Cánovas",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4665716,
+     "lon": -0.3646819,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Veganza de Malinche",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4664499,
+     "lon": -0.3638033,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cinquecento",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4680751,
+     "lon": -0.3593514,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Restaurante Flor de Valencia 22",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4681159,
+     "lon": -0.3557941,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Beirut King",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.4687152,
+     "lon": -0.3591523,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Barceló Valencia",
+     "seccion": "Beber y salir",
+     "lat": 39.4608919,
+     "lon": -0.3526776,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "The wine gallery",
+     "seccion": "Comer › Tapas",
+     "lat": 39.4617622,
+     "lon": -0.3734406,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Zazu Lounge Shisha Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4692597,
+     "lon": -0.3571894,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Casalla",
+     "seccion": "Beber y salir",
+     "lat": 39.4681691,
+     "lon": -0.3873648,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Vermudez",
+     "seccion": "Beber y salir",
+     "lat": 39.4624813,
+     "lon": -0.376127,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Nixe",
+     "seccion": "Comer › Tapas",
+     "lat": 39.4626747,
+     "lon": -0.3732761,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bā Bar & Coffee",
+     "seccion": "Beber y salir",
+     "lat": 39.4711642,
+     "lon": -0.4071867,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Pilareta",
+     "seccion": "Beber y salir",
+     "lat": 39.4759319,
+     "lon": -0.3805049,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Reinverso Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4799403,
+     "lon": -0.379977,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Solo del Mar - Pescaderia y tapas",
+     "seccion": "Comer › Tapas",
+     "lat": 39.454739,
+     "lon": -0.3579327,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "L'Umbracle Terraza",
+     "seccion": "Beber y salir",
+     "lat": 39.4552115,
+     "lon": -0.3535623,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Sunset 270°",
+     "seccion": "Beber y salir",
+     "lat": 39.460884,
+     "lon": -0.3525223,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Solera",
+     "seccion": "Beber y salir",
+     "lat": 39.4643463,
+     "lon": -0.3382995,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Gramola",
+     "seccion": "Beber y salir",
+     "lat": 39.4850456,
+     "lon": -0.3606514,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Faro",
+     "seccion": "Beber y salir",
+     "lat": 39.4578316,
+     "lon": -0.3920761,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Tahona de Celia",
+     "seccion": "Beber y salir",
+     "lat": 39.4578134,
+     "lon": -0.384082,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Oli Bar Ruzafa",
+     "seccion": "Comer › Tapas",
+     "lat": 39.4591938,
+     "lon": -0.3754291,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Backstage Ruzafa",
+     "seccion": "Beber y salir",
+     "lat": 39.4607483,
+     "lon": -0.3731518,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Salamanca Lounge",
+     "seccion": "Beber y salir",
+     "lat": 39.4924595,
+     "lon": -0.3971512,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Dioni",
+     "seccion": "Beber y salir",
+     "lat": 39.471382,
+     "lon": -0.3920537,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Radio City",
+     "seccion": "Beber y salir",
+     "lat": 39.4746839,
+     "lon": -0.3813589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar El Tostadero",
+     "seccion": "Beber y salir",
+     "lat": 39.4714808,
+     "lon": -0.3795366,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Oliví",
+     "seccion": "Beber y salir",
+     "lat": 39.4758804,
+     "lon": -0.3775327,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tulsa Café",
+     "seccion": "Beber y salir",
+     "lat": 39.4846949,
+     "lon": -0.359412,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ziryab",
+     "seccion": "Comer › Tapas",
+     "lat": 39.4859186,
+     "lon": -0.3602201,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Barraca castillo",
+     "seccion": "Comer › Tapas",
+     "lat": 39.4555359,
+     "lon": -0.3739969,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Minguet",
+     "seccion": "Beber y salir",
+     "lat": 39.4563636,
+     "lon": -0.3835913,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "No doy abasto",
+     "seccion": "Beber y salir",
+     "lat": 39.4677742,
+     "lon": -0.3892359,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafe Mercado de Jerusalem",
+     "seccion": "Beber y salir",
+     "lat": 39.4664922,
+     "lon": -0.380268,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Mercedes Jazz",
+     "seccion": "Beber y salir",
+     "lat": 39.4620779,
+     "lon": -0.3753602,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bella de Cádiz",
+     "seccion": "Beber y salir",
+     "lat": 39.4614047,
+     "lon": -0.3733927,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Vidrio Vacío de Novi Sad",
+     "seccion": "Beber y salir",
+     "lat": 39.4610265,
+     "lon": -0.3724097,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Papanato- Bar de patatas",
+     "seccion": "Beber y salir",
+     "lat": 39.4606382,
+     "lon": -0.3726427,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Placita Bar - Cafeteria",
+     "seccion": "Beber y salir",
+     "lat": 39.4573368,
+     "lon": -0.3725866,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar Alpa",
+     "seccion": "Beber y salir",
+     "lat": 39.4664258,
+     "lon": -0.379806,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bocadito's Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4783,
+     "lon": -0.394157,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cerveceria Alhambra",
+     "seccion": "Beber y salir",
+     "lat": 39.4715343,
+     "lon": -0.3886821,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bodeguilla del Rio",
+     "seccion": "Beber y salir",
+     "lat": 39.4786855,
+     "lon": -0.3923139,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Taberna de la Reina",
+     "seccion": "Beber y salir",
+     "lat": 39.4740047,
+     "lon": -0.3750782,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Terraza Valencia Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4705798,
+     "lon": -0.3787911,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Jib's",
+     "seccion": "Beber y salir",
+     "lat": 39.4725424,
+     "lon": -0.3709,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café - Pub Ghecko",
+     "seccion": "Beber y salir",
+     "lat": 39.4761981,
+     "lon": -0.3772793,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Unic Daily Goodness",
+     "seccion": "Beber y salir",
+     "lat": 39.4764247,
+     "lon": -0.3801005,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Botanista Cocktail Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4782831,
+     "lon": -0.3795142,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Luna de Valencia, Rooftop",
+     "seccion": "Beber y salir",
+     "lat": 39.4793563,
+     "lon": -0.3766315,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Murta vins i tapes",
+     "seccion": "Beber y salir",
+     "lat": 39.4860296,
+     "lon": -0.3577543,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tagueria La Llorona",
+     "seccion": "Beber y salir",
+     "lat": 39.4619975,
+     "lon": -0.3694936,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Tyris on Tap - Craft & Creative Beers",
+     "seccion": "Beber y salir",
+     "lat": 39.4749163,
+     "lon": -0.3790514,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Ostras Pedrin",
+     "seccion": "Beber y salir",
+     "lat": 39.4718628,
+     "lon": -0.3716589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Parquecito",
+     "seccion": "Beber y salir",
+     "lat": 39.471872,
+     "lon": -0.4086327,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar, cerveceria Paco.",
+     "seccion": "Beber y salir",
+     "lat": 39.4877958,
+     "lon": -0.3948672,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Esquinita del Turia",
+     "seccion": "Beber y salir",
+     "lat": 39.454072,
+     "lon": -0.3598785,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Terra Centre Social Bar",
+     "seccion": "Beber y salir",
+     "lat": 39.4850989,
+     "lon": -0.3606025,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "La Bodega Alegre",
+     "seccion": "Beber y salir",
+     "lat": 39.4870889,
+     "lon": -0.3592723,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bar E.A.",
+     "seccion": "Beber y salir",
+     "lat": 39.4662418,
+     "lon": -0.3804166,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "John Beer Irish Pub",
+     "seccion": "Beber y salir",
+     "lat": 39.4918786,
+     "lon": -0.3997068,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Pasos",
+     "seccion": "Beber y salir",
+     "lat": 39.4703793,
+     "lon": -0.3892442,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Majura Limon",
+     "seccion": "Beber y salir",
+     "lat": 39.470513,
+     "lon": -0.3893509,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "St. Patrick's Valencia",
+     "seccion": "Beber y salir",
+     "lat": 39.4682988,
+     "lon": -0.3664518,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Clandestí",
+     "seccion": "Beber y salir",
+     "lat": 39.4873358,
+     "lon": -0.3601319,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Horchateria de Santa Catalina",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4738263,
+     "lon": -0.3762568,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "ROGEL",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4660131,
+     "lon": -0.3852711,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Kohi Café de Especialidad",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4888251,
+     "lon": -0.4004589,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café La Placita",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.475283,
+     "lon": -0.3863821,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Emblematic",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4693711,
+     "lon": -0.3780166,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Contrapunto Les Arts",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4575524,
+     "lon": -0.3551813,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Dulce de Leche (Francia)",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4598655,
+     "lon": -0.3516475,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Anval café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.466986,
+     "lon": -0.3858678,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bluebell Coffee Co.",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4618929,
+     "lon": -0.3757748,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Café Madrigal",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.46064,
+     "lon": -0.3771248,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Blackbird",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4613587,
+     "lon": -0.3721494,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Elixir Café",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4618662,
+     "lon": -0.3709247,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Marabú",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4649374,
+     "lon": -0.3675139,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "docta specialty coffee",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4663335,
+     "lon": -0.3697994,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafe del Duende",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4783071,
+     "lon": -0.3853671,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Federal",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4717113,
+     "lon": -0.3753599,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Horchatería Daniel",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4740157,
+     "lon": -0.3749198,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "El Cagetín",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4765022,
+     "lon": -0.3800354,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Cafe de las Horas",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4770689,
+     "lon": -0.3755858,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Brunch Corner La Virgen",
+     "seccion": "Comer › Cafeterías",
+     "lat": 39.4769318,
+     "lon": -0.3756298,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Loco Club",
+     "seccion": "Beber y salir",
+     "lat": 39.4712044,
+     "lon": -0.3870538,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "16 Toneladas Rock Club",
+     "seccion": "Beber y salir",
+     "lat": 39.4812648,
+     "lon": -0.387557,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Mya",
+     "seccion": "Beber y salir",
+     "lat": 39.4540475,
+     "lon": -0.3514922,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Roto Club",
+     "seccion": "Beber y salir",
+     "lat": 39.4549799,
+     "lon": -0.3748692,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Razza Clubbing",
+     "seccion": "Beber y salir",
+     "lat": 39.4916965,
+     "lon": -0.3995964,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Macan Lounge Club",
+     "seccion": "Beber y salir",
+     "lat": 39.4953064,
+     "lon": -0.4000667,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Magazine Club",
+     "seccion": "Beber y salir",
+     "lat": 39.472841,
+     "lon": -0.3902464,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Imágenes Club",
+     "seccion": "Beber y salir",
+     "lat": 39.456277,
+     "lon": -0.3919137,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Comittee",
+     "seccion": "Beber y salir",
+     "lat": 39.4588216,
+     "lon": -0.3835234,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "George Best Rock Club",
+     "seccion": "Beber y salir",
+     "lat": 39.4665669,
+     "lon": -0.3846112,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Bambola Discoteca",
+     "seccion": "Beber y salir",
+     "lat": 39.4736675,
+     "lon": -0.4150687,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Deseo 54",
+     "seccion": "Beber y salir",
+     "lat": 39.4849072,
+     "lon": -0.3758699,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Carribean's",
+     "seccion": "Beber y salir",
+     "lat": 39.4737928,
+     "lon": -0.3558596,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Guarapo",
+     "seccion": "Beber y salir",
+     "lat": 39.4707917,
+     "lon": -0.3470211,
+     "origen": "osm-local"
+    },
+    {
+     "nombre": "Roto",
+     "seccion": "Beber y salir",
+     "lat": 39.4549999,
+     "lon": -0.3748734,
+     "origen": "osm-local"
     }
    ],
    "sinUbicar": [

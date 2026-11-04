@@ -71,7 +71,15 @@ export function Legal() {
           <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">
             CC BY-SA 4.0
           </a>
-          ). Cada postal enlaza a su artículo. Rumbo puede equivocarse: comprueba horarios y precios antes de ir.
+          ), los monumentos, museos y barrios de los artículos de{' '}
+          <a href="https://es.wikipedia.org" target="_blank" rel="noopener">
+            Wikipedia
+          </a>{' '}
+          (CC BY-SA 4.0) y los restaurantes, bares y locales de noche de{' '}
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
+            OpenStreetMap
+          </a>{' '}
+          (ODbL). Cada postal enlaza a su fuente. Rumbo puede equivocarse: comprueba horarios y precios antes de ir.
         </p>
         <p>
           El mapa usa datos de{' '}
