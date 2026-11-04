@@ -10,6 +10,7 @@ import { lugaresUsados, type Dia } from './itinerario.js';
 import { PerfilSchema, type INTERESES, type Perfil } from './perfil.js';
 import {
   generarDia,
+  soloConGuia,
   ItinerarioSchema,
   montarItinerario,
   recuperar,
@@ -44,6 +45,8 @@ export function definirAjusteFlow(
   recuperador: Recuperador,
   recuperadorAvanzado?: Recuperador,
   calcularSinCobertura: (destino: string, intereses: string[]) => string[] = sinCobertura,
+  /** RF-14: los días rehechos tampoco llevan lugares que no se puedan situar en el mapa. */
+  localizable?: (lugar: string, destino: string) => boolean,
 ) {
   return ai.defineFlow(
     { name: 'ajusteFlow', inputSchema: AjusteEntradaSchema, outputSchema: AjusteSalidaSchema },
@@ -101,11 +104,13 @@ export function definirAjusteFlow(
       for (const numero of rehechos) {
         const i = dias.findIndex((d) => d.dia === numero);
         const usados = [...lugaresUsados(dias.filter((d) => d.dia !== numero)), ...quitados];
-        dias[i] = await generarDia(ai, { perfil: paraModelo, numero, usados, documentos });
+        dias[i] = await generarDia(ai, { perfil: paraModelo, numero, usados, documentos, localizable: soloConGuia(documentos, nuevo.destino, localizable) });
       }
       const anteriores = dias.length;
       for (let numero = anteriores + 1; numero <= nuevo.dias; numero++) {
-        dias.push(await generarDia(ai, { perfil: paraModelo, numero, usados: [...lugaresUsados(dias), ...quitados], documentos }));
+        dias.push(
+          await generarDia(ai, { perfil: paraModelo, numero, usados: [...lugaresUsados(dias), ...quitados], documentos, localizable: soloConGuia(documentos, nuevo.destino, localizable) }),
+        );
       }
       const nuevosDias = dias.slice(anteriores).map((d) => d.dia);
 

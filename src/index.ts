@@ -1,6 +1,8 @@
 // Punto de entrada: registra los flows para la Developer UI de Genkit (npm run dev).
 import { cargarConfigChroma } from './config/chroma.js';
 import { cargarConfigModelos } from './config/modelos.js';
+import { cargarLocalizable } from './config/coordenadas.js';
+import { sinCobertura } from './config/cobertura.js';
 import { definirAjusteFlow } from './flows/ajuste.js';
 import { definirEntrevistaFlow } from './flows/entrevista.js';
 import { definirPlanificacionFlow } from './flows/planificacion.js';
@@ -31,5 +33,7 @@ export const entrevistaFlow = definirEntrevistaFlow(ai, {
 });
 // C2: el reranker solo se llama al planificar en ese modo, así que C0 y C1 funcionan sin él.
 const recuperadorAvanzado = definirRecuperadorHibrido(ai, almacen, nombreEmbedder(configModelos), crearReranker(configModelos.rerankerUrl));
-export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado);
-export const ajusteFlow = definirAjusteFlow(ai, recuperador, recuperadorAvanzado);
+// RF-14: el planificador cambia los lugares que no se pueden situar en el mapa por otros de la guía.
+const localizable = cargarLocalizable();
+export const planificacionFlow = definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura, localizable);
+export const ajusteFlow = definirAjusteFlow(ai, recuperador, recuperadorAvanzado, sinCobertura, localizable);

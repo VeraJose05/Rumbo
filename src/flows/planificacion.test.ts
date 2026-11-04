@@ -21,6 +21,7 @@ function crearEntorno(
   respuestasDias: object[],
   documentos = [doc('s:1', '* Catedral de Sevilla - Gótica.', 'Ver'), doc('s:2', 'Parque de María Luisa.', 'Ver')],
   sinCobertura: (destino: string, intereses: string[]) => string[] = () => [],
+  localizable?: (lugar: string, destino: string) => boolean,
 ) {
   const peticiones: GenerateRequest[] = [];
   const consultas: { texto: string; opciones: unknown }[] = [];
@@ -43,7 +44,7 @@ function crearEntorno(
   });
 
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura), peticiones, consultas, consultasAvanzado, textoDe };
+  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura, localizable), peticiones, consultas, consultasAvanzado, textoDe };
 }
 
 // El ritmo tranquilo pide 2 actividades por día: la indicada por la mañana y un paseo por la noche.
@@ -130,6 +131,48 @@ describe('planificacionFlow', () => {
     expect(peticiones).toHaveLength(3);
     expect(textoDe(peticiones[2]!)).toContain('Catedral de Sevilla');
     expect(salida.dias[1]?.manana[0]?.lugar).toBe('Parque de María Luisa');
+  });
+
+  it('RF-14: descarta los lugares que no se pueden situar en el mapa y pide otros', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    const enElMapa = (lugar: string) => lugar !== 'Bares de Nervión';
+    const { flow, peticiones, textoDe } = crearEntorno(
+      [
+        { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Bares de Nervión', descripcion: 'Tapas.', citas: [2] }] },
+        // El modelo repite la Catedral (se descarta por repetida) y propone un sitio que sí está en el mapa.
+        { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Parque de María Luisa', descripcion: 'Paseo.', citas: [2] }] },
+      ],
+      undefined,
+      undefined,
+      enElMapa,
+    );
+
+    const salida = await flow({ perfil: unDia, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(2);
+    expect(textoDe(peticiones[1]!)).toContain('Bares de Nervión'); // en la lista de lugares a evitar
+    expect(salida.dias[0]?.manana.map((a) => a.lugar)).toEqual(['Catedral de Sevilla']);
+    expect(salida.dias[0]?.noche.map((a) => a.lugar)).toEqual(['Parque de María Luisa']);
+  });
+
+  it('RF-14: si tras los reintentos no hay sustituto, se queda el lugar sin situar antes que dejar el día corto', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    const respuesta = { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Bares de Nervión', descripcion: 'Tapas.', citas: [2] }] };
+    const { flow, peticiones } = crearEntorno([respuesta, respuesta, respuesta], undefined, undefined, (lugar) => lugar !== 'Bares de Nervión');
+
+    const salida = await flow({ perfil: unDia, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(3);
+    expect(salida.dias[0]?.noche.map((a) => a.lugar)).toEqual(['Bares de Nervión']);
+  });
+
+  it('RF-14: en C0 no descarta nada (no usa la guía ni sus lugares)', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    const { flow, peticiones } = crearEntorno([dia('Lugar inventado', [])], undefined, undefined, () => false);
+
+    await flow({ perfil: unDia, modo: 'C0' });
+
+    expect(peticiones).toHaveLength(1);
   });
 
   it('no reintenta más de dos veces', async () => {
