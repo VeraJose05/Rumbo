@@ -1,5 +1,5 @@
 // RF-12: web de Rumbo. Elige la pantalla según la ruta del hash y guarda el perfil del viaje.
-import { Bookmark, BookmarkCheck } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Compass, Stamp } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
 import { useGuardados, usePasaporte } from './cuaderno/almacen';
 import { estaGuardado, guardarViaje, quitarViaje, type ViajeConId } from './cuaderno/guardados';
@@ -70,6 +70,8 @@ export function App() {
       setViaje(conId);
       if (guardado) cambiarGuardados((lista) => guardarViaje(lista, conId, ahora()));
     };
+    const alternarGuardado = () =>
+      cambiarGuardados((lista) => (guardado ? quitarViaje(lista, viaje.id) : guardarViaje(lista, viaje, ahora())));
     return (
       <Itinerario
         viaje={viaje}
@@ -77,15 +79,29 @@ export function App() {
         visitas={visitas}
         onCheckIn={(visita) => cambiarVisitas((lista) => hacerCheckIn(lista, visita))}
         acciones={
-          <button
-            type="button"
-            className="boton boton-redondo boton-papel"
-            aria-pressed={guardado}
-            aria-label={guardado ? 'Quitar de Mis viajes' : 'Guardar en Mis viajes'}
-            onClick={() => cambiarGuardados((lista) => (guardado ? quitarViaje(lista, viaje.id) : guardarViaje(lista, viaje, ahora())))}
-          >
-            {guardado ? <BookmarkCheck className="icono" /> : <Bookmark className="icono" />}
+          <button type="button" className="boton boton-papel boton-guardar" aria-pressed={guardado} onClick={alternarGuardado}>
+            {guardado ? <BookmarkCheck className="icono" aria-hidden="true" /> : <Bookmark className="icono" aria-hidden="true" />}
+            {guardado ? 'Guardado' : 'Guardar'}
           </button>
+        }
+        final={
+          <>
+            {guardado ? (
+              <a className="boton boton-ancho" href="#/viajes">
+                <BookmarkCheck className="icono" aria-hidden="true" /> Ver Mis viajes
+              </a>
+            ) : (
+              <button type="button" className="boton boton-ancho" onClick={alternarGuardado}>
+                <Bookmark className="icono" aria-hidden="true" /> Guardar este viaje
+              </button>
+            )}
+            <a className="boton boton-papel boton-ancho" href="#/pasaporte">
+              <Stamp className="icono" aria-hidden="true" /> Mi pasaporte
+            </a>
+            <a className="boton boton-papel boton-ancho" href="#/">
+              <Compass className="icono" aria-hidden="true" /> Planear otro viaje
+            </a>
+          </>
         }
       />
     );

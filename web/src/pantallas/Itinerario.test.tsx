@@ -32,6 +32,24 @@ const viaje: Viaje = {
 };
 
 describe('Itinerario', () => {
+  it('explica qué hacer la primera vez y no lo repite tras cerrarlo', () => {
+    localStorage.clear();
+    render(<Itinerario viaje={viaje} onCambiar={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: /cerrar la ayuda/ }));
+    expect(screen.queryByText(/Toca una parada/)).toBeNull();
+    cleanup();
+    render(<Itinerario viaje={viaje} onCambiar={() => {}} />);
+    expect(screen.queryByText(/Toca una parada/)).toBeNull();
+  });
+
+  it('al llegar al último día propone qué hacer después', () => {
+    render(<Itinerario viaje={viaje} onCambiar={() => {}} final={<a href="#/pasaporte">Mi pasaporte</a>} />);
+    expect(screen.queryByText('¡Ruta completa!')).toBeNull();
+    fireEvent.click(within(screen.getByRole('navigation', { name: 'Días' })).getByRole('button', { name: 'Día 2' }));
+    expect(screen.getByText('¡Ruta completa!')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Mi pasaporte' })).toBeTruthy();
+  });
+
   it('enseña un día cada vez y avisa de los gustos que la guía no cubre', () => {
     render(<Itinerario viaje={viaje} onCambiar={() => {}} />);
     expect(screen.getByText('Catedral de Sevilla')).toBeTruthy();

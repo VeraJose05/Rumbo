@@ -1,7 +1,7 @@
 // RF-05, RF-06, RF-11, RF-12: el itinerario como un camino por días, con una parada por actividad
 // (mañana, tarde y noche) al estilo de los niveles de un juego. Cada parada abre su postal con la
 // cita de la guía, y la barra de abajo ajusta el plan por mensaje.
-import { ArrowRight, BookOpen, Flag, Moon, Send, Sun, Sunrise, TriangleAlert, type LucideIcon } from 'lucide-react';
+import { ArrowRight, BookOpen, Flag, Hand, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { DESTINOS_PORTADA } from '../datos/destinos';
 import { ajustar, type Viaje } from '../viaje/ajustar';
@@ -27,18 +27,42 @@ interface Props {
   onCambiar: (viaje: Viaje) => void;
   /** Botones extra de la cabecera (guardar, exportar…). */
   acciones?: React.ReactNode;
+  /** Qué hacer al acabar el último día (guardar, pasaporte, otro viaje). */
+  final?: React.ReactNode;
   /** Check-ins del pasaporte, para marcar los lugares visitados. */
   visitas?: Visita[];
   onCheckIn?: (visita: Visita) => void;
 }
 
-export function Itinerario({ viaje, onCambiar, acciones, visitas = [], onCheckIn }: Props) {
+const CLAVE_AYUDA = 'rumbo-ayuda-itinerario';
+
+function useAyuda(): [boolean, () => void] {
+  const [visible, setVisible] = useState(() => {
+    try {
+      return localStorage.getItem(CLAVE_AYUDA) !== 'vista';
+    } catch {
+      return true;
+    }
+  });
+  const cerrar = () => {
+    setVisible(false);
+    try {
+      localStorage.setItem(CLAVE_AYUDA, 'vista');
+    } catch {
+      // Sin almacenamiento: volverá a salir la próxima vez.
+    }
+  };
+  return [visible, cerrar];
+}
+
+export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], onCheckIn }: Props) {
   const { perfil, itinerario } = viaje;
   const [dia, setDia] = useState(1);
   const [abierta, setAbierta] = useState<Parada | null>(null);
   const [mensaje, setMensaje] = useState('');
   const [ajustando, setAjustando] = useState(false);
   const [respuesta, setRespuesta] = useState<{ texto: string; error?: boolean } | null>(null);
+  const [ayuda, cerrarAyuda] = useAyuda();
   const foto = DESTINOS_PORTADA.find((d) => d.nombre === perfil.destino)?.foto;
   const diaActual = itinerario.dias.find((d) => d.dia === dia) ?? itinerario.dias[0];
   const paradas: Parada[] = diaActual
@@ -98,6 +122,19 @@ export function Itinerario({ viaje, onCambiar, acciones, visitas = [], onCheckIn
               ))}
             </nav>
 
+            {ayuda && (
+              <div className="nota ayuda-itinerario" role="note" style={{ ['--giro' as string]: '-0.5deg' }}>
+                <Hand className="icono" aria-hidden="true" />
+                <p>
+                  <strong>Toca una parada</strong> para ver qué dice la guía y marcarla con «¡Estuve aquí!». Abajo puedes pedirme
+                  cambios, y con <strong>Guardar</strong> lo tendrás en Mis viajes.
+                </p>
+                <button type="button" className="respuesta-cerrar" aria-label="Entendido, cerrar la ayuda" onClick={cerrarAyuda}>
+                  <X className="icono icono-pequeno" />
+                </button>
+              </div>
+            )}
+
             <ol className={`camino${ajustando ? ' ajustando' : ''}`} aria-label={`Día ${dia}`} aria-busy={ajustando}>
               <li className="camino-salida">
                 <span className="sello" style={{ ['--tam' as string]: '74px', ['--giro' as string]: '-8deg' }}>
@@ -123,6 +160,19 @@ export function Itinerario({ viaje, onCambiar, acciones, visitas = [], onCheckIn
                 )}
               </li>
             </ol>
+
+            {final && !itinerario.dias.some((d) => d.dia === dia + 1) && (
+              <section className="tarjeta fin-viaje aparece" aria-labelledby="fin-viaje-titulo">
+                <PartyPopper className="icono fin-viaje-icono" aria-hidden="true" />
+                <h2 id="fin-viaje-titulo" className="subtitulo">
+                  ¡Ruta completa!
+                </h2>
+                <p className="suave">
+                  {itinerario.dias.length} {itinerario.dias.length === 1 ? 'día' : 'días'} por {perfil.destino}. ¿Y ahora?
+                </p>
+                <div className="fin-viaje-acciones">{final}</div>
+              </section>
+            )}
 
             {sinCobertura.length > 0 && (
               <div className="nota aviso-cobertura" style={{ ['--giro' as string]: '-0.6deg' }}>

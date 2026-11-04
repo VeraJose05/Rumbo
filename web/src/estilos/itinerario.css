@@ -490,3 +490,51 @@
   font-size: 9px;
   color: var(--olivo);
 }
+
+/* Ayuda la primera vez: qué se puede hacer en esta pantalla. */
+.ayuda-itinerario {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding-right: 40px;
+}
+.ayuda-itinerario p {
+  margin: 0;
+}
+.ayuda-itinerario > .icono {
+  flex: none;
+  color: var(--terracota-profunda);
+}
+
+/* Botón «Guardar» con texto en la cabecera. */
+.itinerario-acciones .boton-guardar {
+  width: auto;
+  padding: 0 14px;
+  gap: 6px;
+  font-size: 15px;
+}
+
+/* Al acabar el último día: qué hacer después. */
+.fin-viaje {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.fin-viaje h2,
+.fin-viaje p {
+  margin: 0;
+}
+.fin-viaje-icono {
+  width: 36px;
+  height: 36px;
+  color: var(--azafran);
+}
+.fin-viaje-acciones {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
