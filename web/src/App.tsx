@@ -90,7 +90,7 @@ export function App() {
             <>
               {guardado ? (
                 <a className="boton boton-ancho" href="#/viajes">
-                  <BookmarkCheck className="icono" aria-hidden="true" /> Ver Mis viajes
+                  <BookmarkCheck className="icono" aria-hidden="true" /> Ver mis viajes
                 </a>
               ) : (
                 <button type="button" className="boton boton-ancho" onClick={alternarGuardado}>
@@ -115,6 +115,8 @@ export function App() {
       return (
         <MisViajes
           guardados={guardados}
+          actual={viaje}
+          onGuardar={(abierto) => cambiarGuardados((lista) => guardarViaje(lista, abierto, ahora()))}
           onAbrir={(guardadoAbierto: ViajeConId) => {
             setViaje(guardadoAbierto);
             navegar('#/itinerario');
@@ -139,7 +141,7 @@ export function App() {
   return (
     <div className="con-pestanas">
       {pantalla}
-      <Pestanas activa={ruta.pantalla} hayViaje={Boolean(viaje)} guardados={guardados.length} />
+      <Pestanas activa={ruta.pantalla} guardados={guardados.length} />
     </div>
   );
 }

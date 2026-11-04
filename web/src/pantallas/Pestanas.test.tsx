@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-// RF-12: barra de pestañas.
+// RF-12: barra de navegación (Viajes · Nuevo viaje · Pasaporte).
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import { Pestanas } from './Pestanas';
@@ -7,15 +7,16 @@ import { Pestanas } from './Pestanas';
 afterEach(cleanup);
 
 describe('Pestanas', () => {
-  it('marca la pantalla actual y cuenta los viajes guardados', () => {
-    render(<Pestanas activa="pasaporte" hayViaje guardados={2} />);
+  it('tiene tres destinos y marca el actual', () => {
+    render(<Pestanas activa="pasaporte" guardados={0} />);
+    expect(screen.getAllByRole('link').map((a) => a.textContent)).toEqual(['Viajes', 'Nuevo viaje', 'Pasaporte']);
     expect(screen.getByRole('link', { name: 'Pasaporte' }).getAttribute('aria-current')).toBe('page');
-    expect(screen.getByRole('link', { name: 'Inicio' }).getAttribute('aria-current')).toBeNull();
-    expect(screen.getByRole('link', { name: /Mis viajes/ }).textContent).toContain('2');
   });
 
-  it('sin viaje planificado no enseña «Mi viaje»', () => {
-    render(<Pestanas activa="portada" hayViaje={false} guardados={0} />);
-    expect(screen.queryByRole('link', { name: 'Mi viaje' })).toBeNull();
+  it('el itinerario abierto cuenta como «Viajes», con el número de guardados', () => {
+    render(<Pestanas activa="itinerario" guardados={2} />);
+    const viajes = screen.getByRole('link', { name: /Viajes/ });
+    expect(viajes.getAttribute('aria-current')).toBe('page');
+    expect(viajes.textContent).toContain('2');
   });
 });

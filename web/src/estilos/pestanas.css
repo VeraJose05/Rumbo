@@ -1,85 +1,156 @@
-/* RF-12: barra de pestañas (pantallas/Pestanas.tsx). Su alto (--pestanas) lo usan las pantallas
-   para dejar sitio debajo y la barra de ajuste del itinerario para colocarse encima. */
+/* RF-12: barra de navegación flotante (pantallas/Pestanas.tsx). Cápsula oscura con el botón de
+   «Nuevo viaje» elevado en el centro. --pestanas es el hueco que dejan las pantallas debajo. */
 :root {
-  --pestanas: calc(62px + env(safe-area-inset-bottom));
+  --pestanas: calc(78px + env(safe-area-inset-bottom));
 }
 
 .pestanas {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 12px;
+  right: 12px;
+  bottom: calc(env(safe-area-inset-bottom) + 10px);
   z-index: 20;
-  max-width: var(--ancho-movil);
+  max-width: calc(var(--ancho-movil) - 24px);
   margin: 0 auto;
-  height: var(--pestanas);
-  padding: 6px 8px env(safe-area-inset-bottom);
-  display: flex;
-  background: var(--crema);
-  border-top: 1px solid var(--borde);
-  box-shadow: 0 -4px 16px rgb(0 0 0 / 0.08);
+  height: 62px;
+  display: grid;
+  grid-template-columns: 1fr 96px 1fr;
+  align-items: center;
+  border-radius: 24px;
+  background: #2b2622;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .pestanas {
+    background: #0f0d0c;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+}
+
 .pestana {
-  flex: 1;
+  position: relative;
   display: grid;
   justify-items: center;
   align-content: center;
-  gap: 2px;
-  min-height: 48px;
-  border-radius: 12px;
-  color: var(--piedra);
+  gap: 3px;
+  height: 100%;
+  color: rgb(255 246 236 / 0.62);
   font: 600 11px/1.1 var(--texto);
+  letter-spacing: 0.02em;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .pestana-icono {
   position: relative;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 28px;
-  border-radius: 999px;
-  transition: background 0.2s;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.pestana:active .pestana-icono {
+  transform: scale(0.88);
+}
+/* Activa: azafrán y un punto de tinta debajo, como una marca en el mapa. */
 .pestana[aria-current='page'] {
-  color: var(--terracota-profunda);
+  color: var(--azafran);
 }
-.pestana[aria-current='page'] .pestana-icono {
-  background: color-mix(in srgb, var(--terracota-profunda) 16%, transparent);
+.pestana[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
 }
 .pestana:focus-visible {
-  outline: 2px solid var(--terracota-profunda);
-  outline-offset: 2px;
+  outline: 2px solid var(--azafran);
+  outline-offset: -4px;
+  border-radius: 18px;
 }
 .pestana-cuenta {
   position: absolute;
-  top: -4px;
-  right: 6px;
-  min-width: 17px;
-  height: 17px;
-  padding: 0 4px;
+  top: -6px;
+  right: -12px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
   border-radius: 999px;
-  background: var(--terracota-profunda);
-  color: var(--boton-tinta, #fff);
+  border: 2px solid #2b2622;
+  background: var(--terracota);
+  color: #fff;
   font-size: 10px;
-  line-height: 17px;
+  line-height: 14px;
   text-align: center;
+}
+
+/* Botón central elevado: la brújula de Rumbo saliendo de la barra. */
+.pestana-nuevo {
+  align-content: end;
+  padding-bottom: 9px;
+}
+.pestana-nuevo[aria-current='page']::after {
+  display: none;
+}
+.pestana-boton {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  translate: -50% 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
+  border: 4px solid #2b2622;
+  background: var(--terracota);
+  box-shadow: 0 8px 20px rgb(196 85 58 / 0.45);
+  overflow: hidden;
+  transform: rotate(-8deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .pestana-boton,
+  :root:not([data-tema='claro']) .pestana-cuenta {
+    border-color: #0f0d0c;
+  }
+}
+.pestana-boton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pestana-nuevo:hover .pestana-boton,
+.pestana-nuevo[aria-current='page'] .pestana-boton {
+  transform: rotate(0deg) scale(1.05);
+}
+.pestana-nuevo:active .pestana-boton {
+  transform: rotate(0deg) scale(0.92);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pestana-boton,
+  .pestana-icono {
+    transition: none;
+  }
 }
 
 /* Hueco para la barra en cada pantalla con pestañas. */
 .con-pestanas .inicio {
-  padding-bottom: calc(var(--pestanas) + 16px);
+  padding-bottom: calc(var(--pestanas) + 28px);
 }
 .con-pestanas .historia-credito {
-  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 26px);
+  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 38px);
 }
 .con-pestanas .pantalla {
-  padding-bottom: calc(var(--pestanas) + 24px);
+  padding-bottom: calc(var(--pestanas) + 32px);
 }
 .con-pestanas .barra-ajuste {
-  bottom: var(--pestanas);
-  padding-bottom: 10px;
-  border-radius: 18px 18px 0 0;
+  /* Por encima del botón central, que sobresale 30 px de la barra. */
+  bottom: calc(var(--pestanas) + 30px);
+  padding-bottom: 12px;
+  border-bottom: 2px dashed var(--borde);
+  border-radius: 18px;
+  left: 8px;
+  right: 8px;
+  max-width: calc(var(--ancho-movil) - 16px);
 }
 .con-pestanas .itinerario-cuerpo {
-  padding-bottom: calc(var(--pestanas) + 130px);
+  padding-bottom: calc(var(--pestanas) + 170px);
 }

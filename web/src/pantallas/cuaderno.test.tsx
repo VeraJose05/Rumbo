@@ -61,18 +61,33 @@ describe('MisViajes', () => {
   };
 
   it('sin viajes, invita a planear uno', () => {
-    render(<MisViajes guardados={[]} onAbrir={() => {}} onQuitar={() => {}} />);
-    expect(screen.getByText(/Aún no has guardado ningún viaje/)).toBeTruthy();
+    render(<MisViajes guardados={[]} actual={null} onAbrir={() => {}} onGuardar={() => {}} onQuitar={() => {}} />);
+    expect(screen.getByText(/Aún no tienes viajes/)).toBeTruthy();
   });
 
   it('abre un viaje guardado y lo borra tras confirmar', async () => {
     const onAbrir = vi.fn();
     const onQuitar = vi.fn();
     vi.stubGlobal('confirm', () => true);
-    render(<MisViajes guardados={[guardado]} onAbrir={onAbrir} onQuitar={onQuitar} />);
+    render(<MisViajes guardados={[guardado]} actual={null} onAbrir={onAbrir} onGuardar={() => {}} onQuitar={onQuitar} />);
     fireEvent.click(screen.getByRole('button', { name: /^Granada/ }));
     expect(onAbrir).toHaveBeenCalledWith(guardado.viaje);
     fireEvent.click(screen.getByRole('button', { name: 'Borrar el viaje a Granada' }));
     await waitFor(() => expect(onQuitar).toHaveBeenCalledWith('v1'));
+  });
+
+  it('enseña arriba el viaje abierto sin guardar y permite guardarlo', () => {
+    const onGuardar = vi.fn();
+    const abierto = { ...guardado.viaje, id: 'v2', perfil: { ...guardado.viaje.perfil, destino: 'Sevilla' } };
+    render(<MisViajes guardados={[guardado]} actual={abierto} onAbrir={() => {}} onGuardar={onGuardar} onQuitar={() => {}} />);
+    expect(screen.getByText(/Abierto ahora · sin guardar/)).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Guardar el viaje a Sevilla' }));
+    expect(onGuardar).toHaveBeenCalledWith(abierto);
+  });
+
+  it('si el viaje abierto ya está guardado, no lo repite: lo marca en la lista', () => {
+    render(<MisViajes guardados={[guardado]} actual={guardado.viaje} onAbrir={() => {}} onGuardar={() => {}} onQuitar={() => {}} />);
+    expect(screen.queryByText(/sin guardar/)).toBeNull();
+    expect(screen.getByText('Abierto ahora')).toBeTruthy();
   });
 });

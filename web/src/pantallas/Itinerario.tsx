@@ -130,7 +130,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
                 <Hand className="icono" aria-hidden="true" />
                 <p>
                   <strong>Toca una parada</strong> para ver qué dice la guía y marcarla con «¡Estuve aquí!». Abajo puedes pedirme
-                  cambios, y con <strong>Guardar</strong> lo tendrás en Mis viajes.
+                  cambios, y con <strong>Guardar</strong> lo tendrás en Viajes.
                 </p>
                 <button type="button" className="respuesta-cerrar" aria-label="Entendido, cerrar la ayuda" onClick={cerrarAyuda}>
                   <X className="icono icono-pequeno" />
