@@ -171,10 +171,12 @@
   text-decoration: none;
 }
 .inicio-billete .billete-talon {
-  display: grid;
-  gap: 4px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
   font-size: 12px;
 }
-.inicio-privacidad:empty {
-  display: none;
+.inicio-billete .billete-talon a {
+  color: inherit;
+  font-weight: 600;
 }

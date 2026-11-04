@@ -150,3 +150,37 @@
   min-height: 44px;
   flex: none;
 }
+
+/* Privacidad y créditos. */
+.legal p {
+  margin: 0;
+  line-height: 1.55;
+}
+.legal a {
+  color: var(--azul);
+}
+.legal-lista {
+  display: grid;
+  gap: 12px;
+  line-height: 1.55;
+}
+.legal-lista > li {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--tarjeta);
+  box-shadow: var(--sombra);
+}
+.cuaderno-pantalla .legal-lista ul {
+  margin: 6px 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+.legal code {
+  font-size: 0.9em;
+}
+.cuaderno-pantalla .legal-creditos {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--piedra);
+}

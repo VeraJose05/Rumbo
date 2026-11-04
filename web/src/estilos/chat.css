@@ -170,3 +170,7 @@
   color: var(--piedra);
   text-align: center;
 }
+.chat-privacidad a {
+  color: inherit;
+  font-weight: 600;
+}
