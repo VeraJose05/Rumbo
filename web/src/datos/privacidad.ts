@@ -11,10 +11,12 @@ export interface ProveedorExterno {
 // Nombre legible de cada servicio a partir de su host; si no se conoce, el propio host.
 const SERVICIOS: Record<string, string> = { 'api.groq.com': 'Groq', 'api.cloudflare.com': 'Cloudflare' };
 
-export function avisoPrivacidad(proveedores: ProveedorExterno[]): string {
+export const nombreServicio = (p: ProveedorExterno) => SERVICIOS[p.servicio] ?? p.servicio;
+
+/** Versión de una línea (chat, portada); el detalle está en la página de privacidad (#/legal). */
+export function avisoCorto(proveedores: ProveedorExterno[]): string {
   if (!proveedores.length) return 'Todo se ejecuta en tu equipo';
-  const lista = proveedores.map((p) => `${SERVICIOS[p.servicio] ?? p.servicio} (${p.modelo.split('/').pop()})`);
-  return `Versión pública: tus mensajes se procesan en ${lista.join(' y ')}, modelos abiertos. No escribas datos personales`;
+  return `Tus mensajes se procesan en ${proveedores.map(nombreServicio).join(' y ')}`;
 }
 
 /** Proveedores externos que declara el servidor; null mientras no ha respondido (o si falla). */

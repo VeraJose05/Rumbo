@@ -4,7 +4,7 @@
 import { ArrowLeft, PencilLine, RotateCcw } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { hablar, trozosDeTexto, type EstadoEntrevista } from '../chat/chat';
-import { avisoPrivacidad, useProveedores } from '../datos/privacidad';
+import { avisoCorto, useProveedores } from '../datos/privacidad';
 import type { Perfil } from '../viaje/perfil';
 import { PlanificarError } from '../viaje/planificar';
 import '../estilos/chat.css';
@@ -164,7 +164,11 @@ export function Chat({ onPerfil }: { onPerfil: (perfil: Perfil) => void }) {
             <PencilLine className="icono" />
           </button>
         </div>
-        {proveedores && <p className="chat-privacidad">{avisoPrivacidad(proveedores)}</p>}
+        {proveedores && (
+          <p className="chat-privacidad">
+            {avisoCorto(proveedores)} · <a href="#/legal">Más info</a>
+          </p>
+        )}
       </form>
     </div>
   );

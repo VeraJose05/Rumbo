@@ -3,7 +3,6 @@
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { DESTINOS_PORTADA, creditoFoto, otraHistoria } from '../datos/destinos';
-import { avisoPrivacidad, useProveedores } from '../datos/privacidad';
 import '../estilos/portada.css';
 
 export function Portada({ onEmpezar }: { onEmpezar: (destino: string) => void }) {
@@ -11,7 +10,6 @@ export function Portada({ onEmpezar }: { onEmpezar: (destino: string) => void })
   const [pausa, setPausa] = useState(false);
   const inicioX = useRef<number | null>(null);
   const billete = useRef<HTMLDivElement>(null);
-  const proveedores = useProveedores();
   const destino = DESTINOS_PORTADA[actual]!;
 
   const pasar = (sentido: 1 | -1) => setActual((a) => otraHistoria(a, DESTINOS_PORTADA.length, sentido));
@@ -107,7 +105,7 @@ export function Portada({ onEmpezar }: { onEmpezar: (destino: string) => void })
           </a>
           <div className="billete-talon">
             <span>Sin registro ni cuentas</span>
-            {proveedores?.length ? <span className="inicio-privacidad">{avisoPrivacidad(proveedores)}</span> : null}
+            <a href="#/legal">Privacidad y créditos</a>
           </div>
         </div>
       </main>

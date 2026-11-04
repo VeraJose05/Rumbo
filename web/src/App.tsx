@@ -6,6 +6,7 @@ import { estaGuardado, guardarViaje, quitarViaje, type ViajeConId } from './cuad
 import { hacerCheckIn } from './cuaderno/pasaporte';
 import { Chat } from './pantallas/Chat';
 import { Itinerario } from './pantallas/Itinerario';
+import { Legal } from './pantallas/Legal';
 import { MisViajes } from './pantallas/MisViajes';
 import { Pasaporte } from './pantallas/Pasaporte';
 import { PANTALLAS_CON_PESTANAS, Pestanas } from './pantallas/Pestanas';
@@ -108,6 +109,7 @@ export function App() {
         />
       );
     }
+    if (ruta.pantalla === 'legal') return <Legal />;
     if (ruta.pantalla === 'pasaporte') {
       return <Pasaporte visitas={visitas} onCambiar={cambiarVisitas} />;
     }
