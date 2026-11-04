@@ -1,11 +1,12 @@
 // RF-14: geolocaliza una vez los lugares de la guía con Nominatim (OpenStreetMap) y los guarda en
 // web/public/datos/coordenadas.json para el mapa (npm run coordenadas). Respeta su política de uso:
 // se identifica, como mucho 1 consulta por segundo, y reutiliza lo ya buscado en ejecuciones previas.
-// Los datos son © colaboradores de OpenStreetMap (ODbL): la web lo cita en el mapa.
+// Si OSM no lo tiene (o lo llama distinto), se prueba con los artículos de Wikipedia en español.
+// Los datos son © colaboradores de OpenStreetMap (ODbL) y de Wikipedia: la web lo cita.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { leerIndice } from '../almacen/memoria.js';
-import { RADIO_CIUDAD_KM, aceptarResultado, dentroDeAlcance, distanciaKm, lugaresDeFragmento, nombreCoincide, seccionConLugares, sinGenerico, type LugarGuia } from './coordenadas.js';
+import { RADIO_CIUDAD_KM, aceptarResultado, dentroDeAlcance, distanciaKm, elegirArticulo, lugaresDeFragmento, nombreCoincide, seccionConLugares, sinGenerico, type LugarGuia, type PaginaWikipedia } from './coordenadas.js';
 
 const SALIDA = process.argv.slice(2).find((a) => !a.startsWith('--')) ?? 'web/public/datos/coordenadas.json';
 // --reintentar: vuelve a buscar los que no se encontraron (p. ej. tras cambiar el filtro).
@@ -13,6 +14,7 @@ const REINTENTAR = process.argv.includes('--reintentar');
 // Margen alrededor de la ciudad (~15 km): excursiones cercanas como la Albufera o el Garraf.
 const MARGEN = 0.15;
 const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
+const WIKIPEDIA = 'https://es.wikipedia.org/w/api.php';
 const AGENTE = 'Rumbo-TFM/0.1 (https://github.com/VeraJose05/Rumbo)';
 const ESPERA_MS = 1100;
 
@@ -21,6 +23,8 @@ interface LugarConCoordenadas {
   seccion: string;
   lat: number;
   lon: number;
+  /** De dónde salen las coordenadas: OpenStreetMap (Nominatim) o Wikipedia. */
+  origen?: 'osm' | 'wikipedia';
 }
 interface Destino {
   centro: [number, number];
@@ -76,6 +80,29 @@ async function ubicar(lugar: LugarGuia, destino: string, caja: string, centro: [
   return elMejor(await buscar(`${lugar.direccion}, ${destino}`, caja), (r) => r.class !== 'boundary');
 }
 
+/** Segunda fuente: artículos de Wikipedia con coordenadas (sus redirecciones resuelven otros nombres). */
+async function buscarEnWikipedia(lugar: LugarGuia, destino: string, centro: [number, number]) {
+  await esperar(ESPERA_MS);
+  const url = new URL(WIKIPEDIA);
+  url.search = new URLSearchParams({
+    action: 'query',
+    format: 'json',
+    formatversion: '2',
+    generator: 'search',
+    gsrsearch: `${lugar.nombre} ${destino}`,
+    gsrlimit: '5',
+    prop: 'coordinates|redirects',
+    coprimary: 'primary',
+    colimit: 'max',
+    rdlimit: 'max',
+  }).toString();
+  const respuesta = await fetch(url, { headers: { 'User-Agent': AGENTE } });
+  if (!respuesta.ok) throw new Error(`Wikipedia respondió ${respuesta.status} a «${lugar.nombre}»`);
+  const datos = (await respuesta.json()) as { query?: { pages?: (PaginaWikipedia & { index: number })[] } };
+  const paginas = (datos.query?.pages ?? []).sort((a, b) => a.index - b.index);
+  return elegirArticulo(paginas, lugar.nombre, destino, centro);
+}
+
 async function leerAnterior(): Promise<Coordenadas | null> {
   try {
     return JSON.parse(await readFile(SALIDA, 'utf8')) as Coordenadas;
@@ -98,7 +125,7 @@ for (const { texto, metadata } of indice.registros) {
 
 const anterior = await leerAnterior();
 const salida: Coordenadas = {
-  fuente: '© colaboradores de OpenStreetMap (ODbL), vía Nominatim',
+  fuente: '© colaboradores de OpenStreetMap (ODbL), vía Nominatim, y de Wikipedia',
   generado: new Date().toISOString().slice(0, 10),
   destinos: {},
 };
@@ -130,12 +157,15 @@ for (const [destino, lugares] of porDestino) {
       continue;
     }
     const resultado = await ubicar(lugar, destino, caja, centro!);
+    const articulo = resultado ? null : await buscarEnWikipedia(lugar, destino, centro!);
     if (resultado) {
-      destinoSalida.lugares.push({ nombre: lugar.nombre, seccion: lugar.seccion, lat: Number(resultado.lat), lon: Number(resultado.lon) });
+      destinoSalida.lugares.push({ nombre: lugar.nombre, seccion: lugar.seccion, lat: Number(resultado.lat), lon: Number(resultado.lon), origen: 'osm' });
+    } else if (articulo) {
+      destinoSalida.lugares.push({ nombre: lugar.nombre, seccion: lugar.seccion, lat: articulo.lat, lon: articulo.lon, origen: 'wikipedia' });
     } else {
       destinoSalida.sinUbicar.push(lugar.nombre);
     }
-    process.stdout.write(resultado ? '·' : 'x');
+    process.stdout.write(resultado ? '·' : articulo ? 'w' : 'x');
   }
   salida.destinos[destino] = destinoSalida;
   console.log(`\n${destino}: ${destinoSalida.lugares.length} de ${lugares.size} lugares ubicados`);

@@ -8,6 +8,15 @@ export interface LugarGuia {
   direccion?: string;
 }
 
+/**
+ * Encabezado genérico en plural y sin nombre propio («Centros comerciales», «Bares de tapas»): no
+ * es un sitio, y Wikipedia le encontraba un artículo cualquiera. «Jardines de Sabatini» sí lo es.
+ */
+function esGenerico(nombre: string): boolean {
+  const [primera = '', ...resto] = nombre.split(/\s+/);
+  return /s$/i.test(primera) && resto.every((p) => p === p.toLowerCase());
+}
+
 // Una viñeta «* Nombre (dirección): descripción», con «-», «–», «.» o «,» en lugar de «:».
 const VINETA = /^\*+\s*(.+)$/;
 const MAX_PALABRAS = 7;
@@ -21,7 +30,7 @@ export function lugaresDeFragmento(texto: string): LugarGuia[] {
     // El nombre acaba en el primer separador; el paréntesis justo detrás es la dirección.
     const corte = /\s+[-–]\s|\s*[:,(]|\.(\s|$)/.exec(resto);
     const nombre = (corte ? resto.slice(0, corte.index) : resto).trim();
-    if (!nombre || /^[-–]/.test(nombre) || nombre.split(/\s+/).length > MAX_PALABRAS) continue;
+    if (!nombre || /^[-–]/.test(nombre) || nombre.split(/\s+/).length > MAX_PALABRAS || esGenerico(nombre)) continue;
     const parentesis = corte?.[0].includes('(') ? /^\(([^)]+)\)/.exec(resto.slice(corte.index).trimStart()) : null;
     lugares.push(parentesis ? { nombre, direccion: parentesis[1]!.trim() } : { nombre });
   }
@@ -128,4 +137,29 @@ export function nombreCoincide(buscado: string, nombreResultado: string, destino
 export function sinGenerico(nombre: string): string | null {
   const resto = nombre.replace(/^\s*(el|la|los|las)?\s*(barrio|barri|zona)\s+(de\s+la|de\s+los|del|de)?\s*/i, '').trim();
   return resto && resto !== nombre.trim() ? resto : null;
+}
+
+// ---------- Segunda fuente: Wikipedia ----------
+// Los monumentos tienen artículo con coordenadas, y Wikipedia ya resuelve los nombres alternativos
+// con sus redirecciones («Reales Alcázares» → «Real Alcázar de Sevilla»).
+
+export interface PaginaWikipedia {
+  title: string;
+  coordinates?: { lat: number; lon: number }[];
+  redirects?: { title: string }[];
+}
+
+/**
+ * El artículo que corresponde al lugar de la guía: con coordenadas, dentro de la ciudad (sin
+ * excepciones: Wikipedia no dice qué tipo de sitio es) y con el título o una redirección que se
+ * llame como lo buscado.
+ */
+export function elegirArticulo(paginas: PaginaWikipedia[], nombre: string, destino: string, centro: [number, number]) {
+  for (const pagina of paginas) {
+    const punto = pagina.coordinates?.[0];
+    if (!punto || distanciaKm([punto.lat, punto.lon], centro) > RADIO_CIUDAD_KM) continue;
+    const titulos = [pagina.title, ...(pagina.redirects ?? []).map((r) => r.title)].map((t) => t.replace(/\s*\([^)]*\)$/, ''));
+    if (titulos.some((t) => nombreCoincide(nombre, t, destino))) return { titulo: pagina.title, lat: punto.lat, lon: punto.lon };
+  }
+  return null;
 }

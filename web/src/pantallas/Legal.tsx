@@ -78,7 +78,11 @@ export function Legal() {
           <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
             © colaboradores de OpenStreetMap
           </a>{' '}
-          (ODbL): las ubicaciones se buscaron una vez con Nominatim y el fondo es de{' '}
+          (ODbL): las ubicaciones se buscaron una vez con Nominatim (y, si no estaban, en los artículos de{' '}
+          <a href="https://es.wikipedia.org" target="_blank" rel="noopener">
+            Wikipedia
+          </a>
+          ) y el fondo es de{' '}
           <a href="https://openfreemap.org" target="_blank" rel="noopener">
             OpenFreeMap
           </a>{' '}

@@ -1,6 +1,6 @@
 // RF-14: lugares de la guía que se pueden poner en el mapa y filtro de lo que devuelve Nominatim.
 import { describe, expect, it } from 'vitest';
-import { aceptarResultado, dentroDeAlcance, distanciaKm, lugaresDeFragmento, nombreCoincide, seccionConLugares, sinGenerico } from './coordenadas.js';
+import { aceptarResultado, dentroDeAlcance, distanciaKm, elegirArticulo, lugaresDeFragmento, nombreCoincide, seccionConLugares, sinGenerico } from './coordenadas.js';
 
 describe('lugaresDeFragmento', () => {
   it('saca el nombre de cada viñeta, cortando en la descripción', () => {
@@ -25,6 +25,11 @@ describe('lugaresDeFragmento', () => {
     expect(lugaresDeFragmento("* Can Culleretes (Carrer d'en Quintana 5): Fundado en 1786.")).toEqual([
       { nombre: 'Can Culleretes', direccion: "Carrer d'en Quintana 5" },
     ]);
+  });
+
+  it('descarta encabezados genéricos en plural, sin nombre propio («Centros comerciales»)', () => {
+    const texto = '* Centros comerciales: hay muchos.\n* Grandes almacenes: El Corte Inglés.\n* Bares de tapas\n* Plaza de toros - La Maestranza.\n* Jardines de Sabatini: junto al Palacio.';
+    expect(lugaresDeFragmento(texto).map((l) => l.nombre)).toEqual(['Plaza de toros', 'Jardines de Sabatini']);
   });
 
   it('descarta viñetas que no son un nombre (frases largas o vacías)', () => {
@@ -120,5 +125,33 @@ describe('sinGenerico', () => {
     expect(sinGenerico('Barrio de Santa Cruz')).toBe('Santa Cruz');
     expect(sinGenerico('El barrio del Carmen')).toBe('Carmen');
     expect(sinGenerico('Torre del Oro')).toBeNull();
+  });
+});
+
+describe('elegirArticulo', () => {
+  const SEVILLA: [number, number] = [37.3886, -5.9823];
+  const pagina = (title: string, lat: number, lon: number, redirects: string[] = []) => ({
+    title,
+    coordinates: [{ lat, lon }],
+    redirects: redirects.map((r) => ({ title: r })),
+  });
+
+  it('encuentra el artículo aunque se llame distinto que en la guía (Reales Alcázares → Real Alcázar)', () => {
+    const paginas = [pagina('Sevilla', 37.38, -5.98), pagina('Real Alcázar de Sevilla', 37.3831, -5.9902)];
+    expect(elegirArticulo(paginas, 'Reales Alcázares', 'Sevilla', SEVILLA)).toEqual({ titulo: 'Real Alcázar de Sevilla', lat: 37.3831, lon: -5.9902 });
+  });
+
+  it('acepta el nombre de la guía si es una redirección del artículo', () => {
+    const paginas = [pagina('Congreso de los Diputados', 37.39, -5.99, ['Palacio de las Cortes'])];
+    expect(elegirArticulo(paginas, 'Palacio de las Cortes', 'Sevilla', SEVILLA)?.titulo).toBe('Congreso de los Diputados');
+  });
+
+  it('descarta artículos sin coordenadas, lejos del centro o que no se llaman como lo buscado', () => {
+    const paginas = [
+      { title: 'Café Charlotte', redirects: [] },
+      pagina('Café Charlotte (Málaga)', 36.72, -4.42),
+      pagina('Charlotte Brontë', 37.39, -5.99),
+    ];
+    expect(elegirArticulo(paginas, 'Café Charlotte', 'Sevilla', SEVILLA)).toBeNull();
   });
 });
