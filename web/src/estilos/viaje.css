@@ -1,0 +1,678 @@
+/* RF-12: pasos para armar el viaje (pantallas/Viaje.tsx): destino y días, gustos, estilo, billete. */
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.viaje {
+  gap: 16px;
+  /* La fila de postales sobresale por los lados a propósito; la página no debe desplazarse de lado. */
+  overflow-x: clip;
+}
+
+.viaje-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.viaje-atras {
+  width: 44px;
+  min-height: 44px;
+}
+.viaje-paso {
+  margin: 2px 0 0;
+  font-weight: 600;
+  color: var(--terracota-profunda);
+  font-size: 14px;
+}
+
+.paso[hidden] {
+  display: none;
+}
+.paso {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.paso > .suave {
+  margin: -6px 0 0;
+}
+.acento {
+  color: var(--terracota);
+  font-size: 1.15em;
+}
+
+/* ---------- Postales sobre la mesa ---------- */
+
+.postales-mesa {
+  position: relative; /* referencia de offsetLeft para centrar la postal */
+  min-inline-size: 0; /* un fieldset se ensancha hasta su contenido; así se ajusta a la pantalla */
+  border: 0;
+  margin: 0 calc(-1 * var(--margen));
+  padding: 18px var(--margen) 26px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.postales-mesa::-webkit-scrollbar {
+  display: none;
+}
+.postal-opcion {
+  position: relative;
+  flex: 0 0 62%;
+  scroll-snap-align: center;
+  cursor: pointer;
+}
+.postal-opcion input {
+  position: absolute;
+  opacity: 0;
+}
+.postal-opcion .postal {
+  transform: rotate(var(--giro)) scale(0.94);
+}
+.postal-opcion img {
+  aspect-ratio: 4 / 3.4;
+}
+.postal-pista {
+  margin: 2px 4px 0;
+  font-size: 13px;
+  color: var(--piedra);
+}
+/* La elegida se levanta, se endereza y lleva el sello. */
+.postal-opcion input:checked + .postal {
+  transform: rotate(0deg) scale(1) translateY(-6px);
+  box-shadow: var(--sombra-alta);
+}
+.postal-opcion input:focus-visible + .postal {
+  outline: 3px solid var(--azafran);
+  outline-offset: 3px;
+}
+.postal-opcion .sello {
+  position: absolute;
+  top: 46%;
+  right: -6px;
+  --tam: 76px;
+  z-index: 2;
+  font-size: 15px;
+  /* Sobre una foto, la mezcla «multiply» de los sellos lo volvía transparente. */
+  mix-blend-mode: normal;
+  background: rgb(255 246 236 / 0.94);
+  opacity: 0;
+  transform: rotate(-14deg) scale(1.6);
+  transition: opacity 0.2s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.postal-opcion input:checked ~ .sello {
+  opacity: 0.92;
+  transform: rotate(-14deg) scale(1);
+}
+
+/* ---------- Días: el tren ---------- */
+
+.dias {
+  display: grid;
+  gap: 14px;
+}
+.dias-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.dias-etiqueta {
+  font-size: 12px;
+}
+.tren {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  min-height: 46px;
+  padding-bottom: 6px;
+  border-bottom: 4px double var(--borde);
+  overflow: hidden;
+}
+.tren svg {
+  flex: none;
+  height: 40px;
+  width: auto;
+}
+.tren .vagon {
+  animation: enganchar 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes enganchar {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+.dias-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dias-numero {
+  margin: 0;
+  font: 650 22px/1 var(--titulo);
+}
+.dias-numero span {
+  font-size: 44px;
+  color: var(--terracota-profunda);
+  vertical-align: -4px;
+}
+
+/* ---------- Barra inferior ---------- */
+
+.viaje-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.viaje-resumen {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+  font-size: 15px;
+  min-width: 0;
+}
+.viaje-resumen strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.viaje-siguiente {
+  flex: none;
+}
+
+/* ---------- Gustos: el mazo ---------- */
+
+.gustos-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.gustos-contador {
+  font-size: 12px;
+  flex: none;
+}
+
+.mazo {
+  position: relative;
+  height: 340px;
+  margin-top: 4px;
+  touch-action: pan-y;
+}
+.mazo[hidden] {
+  display: none;
+}
+.carta {
+  position: absolute;
+  inset: 0 6% 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--tarjeta);
+  border-radius: 22px;
+  padding: 10px;
+  box-shadow: var(--sombra-alta);
+  user-select: none;
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s;
+  will-change: transform;
+}
+/* Las de debajo asoman un poco, como un mazo de verdad. */
+.carta[data-pos='1'] {
+  transform: translateY(12px) scale(0.95) rotate(2deg);
+}
+.carta[data-pos='2'] {
+  transform: translateY(24px) scale(0.9) rotate(-2deg);
+}
+.carta[data-pos='0'] {
+  cursor: grab;
+  z-index: 3;
+}
+.carta.arrastrando {
+  transition: none;
+  cursor: grabbing;
+}
+.carta-ilustracion {
+  flex: 1;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color);
+  color: #fff6ec;
+}
+.carta-ilustracion img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+/* Velo arriba y abajo para que se lean el número y el crédito sobre cualquier foto. */
+.carta-ilustracion::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgb(20 14 10 / 0.35), transparent 30%, transparent 75%, rgb(20 14 10 / 0.45));
+  pointer-events: none;
+}
+.carta-icono {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color);
+  border: 3px solid #fff6ec;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
+}
+.carta-icono svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.carta-numero {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 1;
+  font: 700 13px/1 var(--texto);
+}
+.carta-credito {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  right: 70px;
+  z-index: 1;
+  font-size: 10px;
+  color: rgb(255 246 236 / 0.85);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.carta-texto {
+  padding: 14px 8px 6px;
+}
+.carta-texto h2 {
+  margin: 0;
+}
+.carta-texto p {
+  margin: 4px 0 0;
+  color: var(--piedra);
+  font-size: 15px;
+}
+/* Marcas que aparecen al arrastrar: «¡Me va!» y «Paso». */
+.carta-marca {
+  position: absolute;
+  top: 26px;
+  --tam: 92px;
+  opacity: 0;
+  mix-blend-mode: normal;
+  background: rgb(255 246 236 / 0.94);
+  z-index: 2;
+}
+.carta-marca.meva {
+  left: 22px;
+  color: var(--olivo);
+  --giro: -14deg;
+}
+.carta-marca.paso {
+  right: 22px;
+  color: var(--piedra);
+  --giro: 12deg;
+}
+.carta-elegida {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 12px;
+  background: rgb(255 246 236 / 0.95);
+  color: var(--olivo);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font: 600 12px/1 var(--texto);
+}
+
+.mazo-fin {
+  text-align: center;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.mazo-fin[hidden] {
+  display: none;
+}
+.mazo-fin p {
+  margin: 0;
+}
+
+.mazo-botones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 10px;
+}
+.mazo-botones .boton-redondo:not(.mazo-deshacer) {
+  width: 64px;
+  min-height: 64px;
+}
+.mazo-deshacer {
+  width: 44px;
+  min-height: 44px;
+}
+
+.pegatinas-elegidas .antetitulo {
+  margin: 0 0 8px;
+}
+.pegatinas-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-height: 34px;
+}
+.pegatinas-lista button {
+  cursor: pointer;
+  animation: aparecer 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.pegatinas-lista .vacio {
+  color: var(--piedra);
+  font-size: 14px;
+}
+
+/* ---------- Estilo: fichas ---------- */
+
+.ficha {
+  display: grid;
+  gap: 12px;
+  border: 0;
+  margin: 0;
+  min-inline-size: 0;
+}
+.ficha-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.ficha legend {
+  padding: 0;
+  float: left; /* así la legend se comporta como un título más dentro de la ficha */
+}
+
+.ritmo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ritmo-animal {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  fill: none;
+  stroke: var(--olivo);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ritmo-control {
+  flex: 1;
+  appearance: none;
+  height: 12px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(90deg, var(--borde) 0 3px, transparent 3px 12px), var(--crema);
+  border: 2px solid var(--borde);
+  cursor: pointer;
+}
+.ritmo-control::-webkit-slider-thumb {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--azafran);
+  border: 3px solid var(--terracota-profunda);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.15);
+}
+.ritmo-control::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--azafran);
+  border: 3px solid var(--terracota-profunda);
+}
+.ritmo-etiquetas {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 34px;
+}
+.ritmo-etiquetas button {
+  background: none;
+  border: 0;
+  padding: 4px;
+  font: 600 14px/1 var(--texto);
+  color: var(--piedra);
+  cursor: pointer;
+}
+.ritmo-etiquetas button[aria-pressed='true'] {
+  color: var(--terracota-profunda);
+}
+.ritmo-planes {
+  margin: 0;
+  text-align: center;
+}
+.ritmo-planes .manuscrito {
+  font-size: 30px;
+}
+
+.opciones {
+  display: grid;
+  gap: 10px;
+}
+.opciones-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.opciones-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.opcion {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 8px 12px;
+  border-radius: 16px;
+  border: 2px solid var(--borde);
+  background: var(--tarjeta);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s, background 0.2s;
+}
+.opcion input {
+  position: absolute;
+  opacity: 0;
+}
+.opcion:has(input:checked) {
+  border-color: var(--terracota-profunda);
+  background: var(--crema);
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 0 4px 0 var(--terracota-profunda);
+}
+.opcion:has(input:focus-visible) {
+  outline: 3px solid var(--azafran);
+  outline-offset: 2px;
+}
+.opcion svg {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.opcion:has(input:checked) svg {
+  stroke: var(--terracota-profunda);
+}
+.opcion strong {
+  font: 650 16px/1.1 var(--titulo);
+}
+.opcion small {
+  color: var(--piedra);
+  font-size: 12px;
+  line-height: 1.25;
+}
+.monedas {
+  display: flex;
+  gap: 2px;
+  height: 14px;
+}
+.monedas i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--azafran);
+  border: 2px solid #d99a22;
+}
+
+/* ---------- Billete ---------- */
+
+.billete-viaje {
+  --altura-talon: 88%;
+  display: grid;
+  gap: 16px;
+  overflow: visible;
+}
+.billete-etiqueta {
+  margin: 0;
+  font: 600 11px/1.2 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--piedra);
+}
+.billete-destino {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.billete-ciudad {
+  margin: 2px 0 0;
+  font: 700 40px/1 var(--titulo);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.billete-editar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--piedra);
+  border: 1.5px solid var(--borde);
+  background: var(--tarjeta);
+}
+.billete-editar .icono {
+  width: 15px;
+  height: 15px;
+}
+.icono-pequeno {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+}
+.billete-datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+}
+.billete-datos > div {
+  position: relative;
+  padding: 10px 40px 10px 12px;
+  border-radius: 12px;
+  border: 1.5px dashed var(--borde);
+}
+.billete-datos dd {
+  margin: 4px 0 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+.billete-datos .billete-editar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+}
+.billete-gustos a {
+  color: var(--piedra);
+}
+.billete-gustos ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.sello-gusto {
+  --tam: auto;
+  width: auto;
+  aspect-ratio: auto;
+  border-radius: 10px;
+  outline-offset: -5px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+/* El sello «¡En marcha!» cae sobre el billete al pulsar «Sellar». */
+.sello-marcha {
+  position: absolute;
+  right: 18px;
+  top: 34%;
+  --tam: 120px;
+  font-size: 17px;
+  color: var(--terracota);
+  mix-blend-mode: normal;
+  background: rgb(255 246 236 / 0.6);
+  opacity: 0;
+  transform: rotate(-16deg) scale(2.4);
+  pointer-events: none;
+}
+.sellado .sello-marcha {
+  animation: sellar 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) forwards;
+}
+.sellado {
+  animation: temblar 0.3s 0.3s;
+}
+@keyframes sellar {
+  to {
+    opacity: 0.92;
+    transform: rotate(-16deg) scale(1);
+  }
+}
+@keyframes temblar {
+  30% {
+    transform: translate(2px, 1px);
+  }
+  60% {
+    transform: translate(-2px, -1px);
+  }
+}

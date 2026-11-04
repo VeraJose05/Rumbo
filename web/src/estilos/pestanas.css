@@ -1,0 +1,143 @@
+/* RF-12: barra de navegación (pantallas/Pestanas.tsx). Pegada abajo, con un hueco recortado en el
+   centro donde encaja el botón redondo de «Nuevo viaje». --pestanas es el hueco que dejan las
+   pantallas debajo. */
+:root {
+  --pestanas: calc(64px + env(safe-area-inset-bottom));
+  --barra-fondo: #2b2622;
+  --hueco: 38px; /* radio del recorte: botón de 60 px + 8 px de aire */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --barra-fondo: #0f0d0c;
+  }
+}
+
+.pestanas {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  height: var(--pestanas);
+  padding-bottom: env(safe-area-inset-bottom);
+  display: grid;
+  grid-template-columns: 1fr 96px 1fr;
+}
+/* El fondo va en una capa aparte para poder recortarle el hueco sin recortar el botón. */
+.pestanas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 22px 22px 0 0;
+  background: var(--barra-fondo);
+  -webkit-mask: radial-gradient(circle var(--hueco) at 50% 0, transparent calc(var(--hueco) - 0.5px), #000 var(--hueco));
+  mask: radial-gradient(circle var(--hueco) at 50% 0, transparent calc(var(--hueco) - 0.5px), #000 var(--hueco));
+  /* Filo claro arriba: en modo oscuro separa la barra del fondo. */
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.09);
+}
+
+.pestana {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 4px;
+  color: rgb(255 246 236 / 0.6);
+  font: 600 11px/1 var(--texto);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pestana-icono {
+  position: relative;
+  display: grid;
+  place-items: center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pestana:active .pestana-icono {
+  transform: scale(0.88);
+}
+.pestana[aria-current='page'] {
+  color: var(--azafran);
+}
+.pestana:focus-visible,
+.pestana-nuevo:focus-visible {
+  outline: 2px solid var(--azafran);
+  outline-offset: 2px;
+  border-radius: 14px;
+}
+.pestana-cuenta {
+  position: absolute;
+  top: -6px;
+  right: -11px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  border: 2px solid var(--barra-fondo);
+  background: var(--terracota);
+  color: #fff;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+}
+
+/* Botón central: círculo terracota encajado en el hueco, medio fuera de la barra. */
+.pestana-nuevo {
+  position: relative;
+  justify-self: center;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d8664a, var(--terracota-profunda, #a8432b));
+  color: #fff;
+  box-shadow: 0 8px 18px rgb(168 67 43 / 0.45);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+.pestana-nuevo .icono {
+  width: 28px;
+  height: 28px;
+}
+.pestana-nuevo:hover {
+  transform: rotate(90deg);
+}
+.pestana-nuevo:active {
+  transform: scale(0.9);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pestana-nuevo,
+  .pestana-icono {
+    transition: none;
+  }
+}
+
+/* Hueco para la barra en cada pantalla con pestañas. */
+.con-pestanas .inicio {
+  padding-bottom: calc(var(--pestanas) + 40px);
+}
+.con-pestanas .historia-credito {
+  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 50px);
+}
+.con-pestanas .pantalla {
+  padding-bottom: calc(var(--pestanas) + 40px);
+}
+.con-pestanas .barra-ajuste {
+  /* Por encima del botón central, que sobresale 30 px de la barra. */
+  bottom: calc(var(--pestanas) + 36px);
+  left: 8px;
+  right: 8px;
+  max-width: calc(var(--ancho-movil) - 16px);
+  padding-bottom: 12px;
+  border-radius: 18px;
+  border-bottom: 2px dashed var(--borde);
+}
+.con-pestanas .itinerario-cuerpo {
+  padding-bottom: calc(var(--pestanas) + 180px);
+}

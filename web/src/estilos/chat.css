@@ -1,0 +1,172 @@
+/* RF-12: charla con Rumbo como libreta de espiral (pantallas/Chat.tsx). */
+
+.chat {
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: max(env(safe-area-inset-top), 12px) var(--margen) 18px;
+  background: var(--papel);
+}
+.chat-cabecera .subtitulo {
+  font-size: 22px;
+}
+.chat-reiniciar {
+  margin-left: auto;
+  width: 44px;
+  min-height: 44px;
+}
+
+/* La libreta: espiral arriba y papel pautado. */
+.libreta {
+  position: relative;
+  flex: 1;
+  margin: 0 var(--margen);
+  padding: 34px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px 8px 0 0;
+  background:
+    repeating-linear-gradient(transparent 0 31px, rgb(30 76 122 / 0.12) 31px 32px),
+    var(--tarjeta);
+  box-shadow: var(--sombra);
+}
+.libreta::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  right: 14px;
+  height: 22px;
+  background: radial-gradient(circle at 50% 70%, var(--papel) 0 5px, transparent 5.5px) 0 0 / 22px 22px repeat-x,
+    repeating-linear-gradient(90deg, transparent 0 7px, var(--piedra) 7px 9px, transparent 9px 22px);
+  -webkit-mask: linear-gradient(#000 60%, transparent);
+  mask: linear-gradient(#000 60%, transparent);
+}
+/* Margen rojo de cuaderno. */
+.libreta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 44px;
+  width: 1.5px;
+  background: rgb(196 85 58 / 0.25);
+  pointer-events: none;
+}
+
+.apunte {
+  position: relative;
+  max-width: 88%;
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  animation: aparecer 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.apunte p {
+  margin: 0;
+  white-space: pre-line;
+}
+/* Notas de Rumbo: papel crema junto a su símbolo. */
+.apunte.rumbo {
+  align-self: flex-start;
+  grid-template-columns: 30px 1fr;
+  align-items: start;
+}
+.apunte.rumbo p {
+  padding: 12px 14px;
+  background: var(--crema);
+  border-radius: 4px 16px 16px 16px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  position: relative;
+  z-index: 1;
+}
+.apunte.rumbo .boton {
+  grid-column: 2;
+}
+.apunte-avatar {
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+.apunte.error p {
+  border-left: 4px solid var(--terracota-profunda);
+}
+/* Mensajes del viajero: pósits terracota. */
+.apunte.viajero {
+  align-self: flex-end;
+}
+.apunte.viajero p {
+  padding: 12px 14px;
+  background: var(--terracota-profunda);
+  color: #fff;
+  border-radius: 16px 4px 16px 16px;
+  transform: rotate(0.8deg);
+  box-shadow: 0 3px 0 rgb(0 0 0 / 0.12);
+}
+.apunte a {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* «Escribiendo…»: tres puntos de tinta. */
+.escribiendo p {
+  display: flex;
+  gap: 5px;
+}
+.escribiendo span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--piedra);
+  animation: punto 1s infinite ease-in-out;
+}
+.escribiendo span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.escribiendo span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes punto {
+  40% {
+    transform: translateY(-5px);
+    opacity: 0.5;
+  }
+}
+
+.chat-sugerencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 38px;
+}
+.chat-sugerencias .pegatina {
+  cursor: pointer;
+}
+
+.chat-compositor {
+  position: sticky;
+  bottom: 0;
+  padding: 12px var(--margen) calc(env(safe-area-inset-bottom) + 12px);
+  background: var(--crema);
+  border-top: 2px dashed var(--borde);
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 -8px 24px rgb(74 46 30 / 0.1);
+}
+.chat-privacidad {
+  margin: 8px 4px 0;
+  font-size: 12px;
+  color: var(--piedra);
+  text-align: center;
+}

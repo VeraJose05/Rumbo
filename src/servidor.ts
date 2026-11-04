@@ -15,8 +15,8 @@ const HOST = process.env.RUMBO_API_HOST || '127.0.0.1';
 
 const app = express();
 app.use(express.json());
-// La web: HTML, CSS y JS sin compilar. Desde dist/, la carpeta web/ está un nivel más arriba.
-app.use(express.static(fileURLToPath(new URL('../web', import.meta.url))));
+// La web (React, RF-12) compilada por Vite en web/dist. Desde dist/, web/ está un nivel más arriba.
+app.use(express.static(fileURLToPath(new URL('../web/dist', import.meta.url))));
 // Cada flow en POST /<nombre>, con el cuerpo {"data": entrada}; responde {"result": salida} o, si
 // falla, {status, message} con su código HTTP (429 si se agota la cuota del LLM, RNF-10).
 // Sustituye a expressHandler de @genkit-ai/express: su package.json carga la versión CommonJS de

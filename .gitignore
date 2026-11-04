@@ -26,3 +26,9 @@ resultados/
 # Entorno de Python de la demo
 __pycache__/
 .pytest_cache/
+
+# Exportación de Stitch: el ZIP y las fotos generadas por IA no se versionan (licencia poco clara)
+docs/marca/stitch/*.zip
+docs/marca/stitch/*/vertical_mobile_photography_*
+docs/marca/stitch/*/warm_mediterranean_food_*
+web/dist

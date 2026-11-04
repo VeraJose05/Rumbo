@@ -1,0 +1,65 @@
+/* RF-12: pantalla «Preparando» (pantallas/Preparando.tsx): panel de salidas mientras se planifica. */
+
+.preparando {
+  gap: 18px;
+}
+.panel-cabecera {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 16px;
+  font: 600 11px/1 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgb(255 246 236 / 0.6);
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgb(255 246 236 / 0.12);
+}
+.panel-fila {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+}
+.panel-letras {
+  display: flex;
+  gap: 3px;
+  min-width: 0;
+  overflow: hidden;
+}
+.panel-letra {
+  width: 1.45em;
+  height: 1.9em;
+  font-size: 15px;
+}
+.panel-dia {
+  font: 700 17px/1 ui-monospace, 'DejaVu Sans Mono', monospace;
+  color: var(--azafran);
+}
+.panel-estado {
+  margin-left: 0;
+  min-width: 82px;
+  text-align: right;
+}
+.panel-estado.listo {
+  color: #9dbb86;
+}
+.panel-pie {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 10px 0 0;
+  color: rgb(255 246 236 / 0.6);
+  font-size: 12px;
+}
+.preparando .nota p {
+  margin: 0;
+}
+.aviso-preparando {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.aviso-preparando .manuscrito {
+  font-size: 26px;
+  color: var(--terracota-profunda);
+}
