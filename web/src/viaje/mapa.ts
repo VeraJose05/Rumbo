@@ -93,3 +93,30 @@ export function useCoordenadas(destino: string | null | undefined, activo: boole
   }, [destino, activo]);
   return coordenadas;
 }
+
+// ---------- Ir hasta allí: Google Maps ----------
+// Navegar (calles, a pie, transporte) lo hace Google Maps mejor que un mapa propio, gratis y sin
+// clave con sus «Maps URLs». Se busca por nombre y ciudad, así que también encuentra los lugares
+// que no tienen coordenadas en Rumbo.
+
+const MAPS = 'https://www.google.com/maps/dir/';
+
+/** «Nombre, Ciudad» (sin repetir la ciudad si el nombre ya la lleva). */
+function consulta(lugar: string, destino: string): string {
+  const nombre = lugar.trim();
+  return palabras(nombre).join(' ').includes(palabras(destino).join(' ')) ? nombre : `${nombre}, ${destino}`;
+}
+
+function urlMaps(parametros: Record<string, string>): string {
+  return `${MAPS}?${new URLSearchParams({ api: '1', ...parametros, travelmode: 'walking' })}`;
+}
+
+export const urlComoLlegar = (lugar: string, destino: string) => urlMaps({ destination: consulta(lugar, destino) });
+
+/** Ruta a pie por todas las paradas del día, en orden. */
+export function urlRutaDelDia(lugares: string[], destino: string): string {
+  if (lugares.length < 2) return urlComoLlegar(lugares[0] ?? destino, destino);
+  const [primero, ...resto] = lugares.map((l) => consulta(l, destino));
+  const ultimo = resto.pop()!;
+  return urlMaps({ origin: primero!, destination: ultimo, ...(resto.length ? { waypoints: resto.join('|') } : {}) });
+}

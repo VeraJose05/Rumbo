@@ -306,6 +306,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
         <PostalLugar
           parada={abierta}
           itinerario={itinerario}
+          destino={perfil.destino ?? ''}
           onCerrar={() => setAbierta(null)}
           onQuitar={() => void pedirAjuste(`quita ${abierta.actividad.lugar}`)}
           visitado={visitado(abierta.actividad.lugar)}

@@ -600,3 +600,12 @@
 .ajuste-sugerencias[hidden] {
   display: none;
 }
+
+/* «Cómo llegar» en la postal: abre Google Maps. */
+.postal-como-llegar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 14px/1 var(--texto);
+  color: var(--azul);
+}

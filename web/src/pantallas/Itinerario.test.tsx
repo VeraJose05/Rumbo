@@ -110,11 +110,12 @@ describe('Itinerario', () => {
     render(<Itinerario viaje={conDosParadas} onCambiar={() => {}} />);
     fireEvent.click(screen.getByRole('button', { name: 'Mapa' }));
     expect(await screen.findByText('1. Catedral de Sevilla')).toBeTruthy();
-    expect(screen.getByText('1 de 2 lugares en el mapa')).toBeTruthy();
-    // En el carrusel salen las dos paradas; la que no está en el mapa, marcada.
+    // En el carrusel salen las dos paradas; la que no tiene coordenadas, con su enlace a Google Maps.
     const carrusel = screen.getByRole('list', { name: 'Paradas del día 1' });
     expect(within(carrusel).getAllByRole('listitem')).toHaveLength(2);
-    expect(within(carrusel).getByText('Sin ubicar en el mapa')).toBeTruthy();
+    expect(within(carrusel).getByText(/No está en este mapa/)).toBeTruthy();
+    expect(within(carrusel).getAllByRole('link', { name: /Cómo llegar/ })).toHaveLength(2);
+    expect(screen.getByRole('link', { name: /Ruta del día en Google Maps/ }).getAttribute('href')).toContain('origin=Catedral+de+Sevilla&destination=Bar+Inventado');
     // «Volver al camino» cierra el mapa.
     fireEvent.click(screen.getByRole('button', { name: 'Volver al camino' }));
     expect(screen.queryByRole('dialog', { name: /Mapa de Sevilla/ })).toBeNull();

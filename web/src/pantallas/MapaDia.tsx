@@ -1,7 +1,8 @@
 // RF-14: las paradas del día en un mapa (MapLibre con los mapas vectoriales de OpenFreeMap, datos
-// de OpenStreetMap; gratis y sin clave), numeradas en el orden del día y unidas por la ruta. Tocar
+// de OpenStreetMap; gratis y sin clave), numeradas en el orden del día (sin línea entre ellas: en línea recta no se va a ningún sitio; para
+// ir, Google Maps). Tocar
 // una parada abre su postal. Se carga aparte (React.lazy) para que MapLibre no pese en el resto.
-import { AttributionControl, LngLatBounds, Map as MapaGL, Marker, NavigationControl, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
+import { AttributionControl, LngLatBounds, Map as MapaGL, Marker, NavigationControl, setWorkerUrl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 // MapLibre dibuja en un worker aparte: Vite lo empaqueta y aquí se le dice dónde está.
 import urlWorker from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
@@ -27,34 +28,8 @@ interface Props {
 setWorkerUrl(urlWorker);
 
 const estilo = (oscuro: boolean) => `https://tiles.openfreemap.org/styles/${oscuro ? 'dark' : 'positron'}`;
-const RUTA = 'ruta-del-dia';
 // Margen para que las chinchetas no queden bajo los días (arriba) ni bajo el carrusel (abajo).
 const ENCUADRE = { top: 100, bottom: 220, left: 64, right: 64 };
-
-function lineaDeRuta(ubicadas: ParadaUbicada[]) {
-  return {
-    type: 'Feature' as const,
-    properties: {},
-    geometry: { type: 'LineString' as const, coordinates: ubicadas.map((u) => [u.lugar.lon, u.lugar.lat]) },
-  };
-}
-
-/** La ruta va en una capa del estilo: hay que volver a ponerla cada vez que cambia el estilo. */
-function pintarRuta(mapa: MapaGL, ubicadas: ParadaUbicada[]) {
-  const fuente = mapa.getSource(RUTA) as GeoJSONSource | undefined;
-  if (fuente) {
-    fuente.setData(lineaDeRuta(ubicadas));
-    return;
-  }
-  mapa.addSource(RUTA, { type: 'geojson', data: lineaDeRuta(ubicadas) });
-  mapa.addLayer({
-    id: RUTA,
-    type: 'line',
-    source: RUTA,
-    layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': '#c4553a', 'line-width': 4, 'line-opacity': 0.85, 'line-dasharray': [0.2, 2] },
-  });
-}
 
 /** Rótulos en español cuando OpenStreetMap tiene el nombre (si no, el local): «Sevilla», no «Seville». */
 function rotulosEnEspanol(mapa: MapaGL) {
@@ -79,8 +54,6 @@ export default function MapaDia({ ubicadas, centro, activa, onSeleccionar }: Pro
   const contenedor = useRef<HTMLDivElement>(null);
   const mapa = useRef<MapaGL | null>(null);
   const chinchetas = useRef<Marker[]>([]);
-  const actuales = useRef(ubicadas);
-  actuales.current = ubicadas;
   const seleccionar = useRef(onSeleccionar);
   seleccionar.current = onSeleccionar;
 
@@ -104,7 +77,6 @@ export default function MapaDia({ ubicadas, centro, activa, onSeleccionar }: Pro
     nuevo.once('load', () => contenedor.current?.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
     nuevo.on('style.load', () => {
       rotulosEnEspanol(nuevo);
-      pintarRuta(nuevo, actuales.current);
     });
     const alCambiarTema = () => nuevo.setStyle(estilo(oscuro.matches));
     oscuro.addEventListener('change', alCambiarTema);
@@ -126,7 +98,6 @@ export default function MapaDia({ ubicadas, centro, activa, onSeleccionar }: Pro
         .setLngLat([u.lugar.lon, u.lugar.lat])
         .addTo(m),
     );
-    if (m.isStyleLoaded()) pintarRuta(m, ubicadas);
     if (ubicadas.length > 1) {
       const caja = new LngLatBounds();
       for (const u of ubicadas) caja.extend([u.lugar.lon, u.lugar.lat]);

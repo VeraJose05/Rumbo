@@ -1,9 +1,9 @@
 // RF-14: el día en un mapa a pantalla completa. Arriba, los días y la vuelta al camino; abajo, un
 // carrusel con las paradas. Tocar una tarjeta lleva el mapa a su chincheta y tocar una chincheta
 // trae su tarjeta. Las paradas sin ubicar también salen en el carrusel, marcadas como tales.
-import { ArrowLeft, MapPinOff } from 'lucide-react';
+import { ArrowLeft, Navigation, Route } from 'lucide-react';
 import { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import type { CoordenadasDestino } from '../viaje/mapa';
+import { urlComoLlegar, urlRutaDelDia, type CoordenadasDestino } from '../viaje/mapa';
 import type { Parada } from './Itinerario';
 import type { ParadaUbicada } from './MapaDia';
 import '../estilos/mapa.css';
@@ -78,10 +78,10 @@ export function MapaPantalla({ destino, dias, dia, onDia, paradas, ubicadas, coo
       </header>
 
       <div className="mapa-abajo">
-        {coordenadas && (
-          <p className="mapa-cuenta">
-            {ubicadas.length} de {paradas.length} lugares en el mapa
-          </p>
+        {paradas.length > 0 && (
+          <a className="mapa-ruta" href={urlRutaDelDia(paradas.map((p) => p.actividad.lugar), destino)} target="_blank" rel="noopener">
+            <Route className="icono" aria-hidden="true" /> Ruta del día en Google Maps
+          </a>
         )}
         <ol ref={carrusel} className="mapa-carrusel" aria-label={`Paradas del día ${dia}`}>
           {paradas.map((parada, i) => {
@@ -98,15 +98,18 @@ export function MapaPantalla({ destino, dias, dia, onDia, paradas, ubicadas, coo
                       {ubicada ? (
                         <span className="mapa-descripcion">{parada.actividad.descripcion}</span>
                       ) : (
-                        <span className="mapa-sin-ubicar">
-                          <MapPinOff className="icono icono-pequeno" aria-hidden="true" /> Sin ubicar en el mapa
-                        </span>
+                        <span className="mapa-sin-ubicar">No está en este mapa: ábrelo en Google Maps</span>
                       )}
                     </span>
                   </button>
-                  <button type="button" className="mapa-ver-postal" onClick={() => onAbrirPostal(parada)}>
-                    Ver postal
-                  </button>
+                  <div className="mapa-acciones">
+                    <button type="button" className="mapa-ver-postal" onClick={() => onAbrirPostal(parada)}>
+                      Ver postal
+                    </button>
+                    <a className="mapa-como-llegar" href={urlComoLlegar(parada.actividad.lugar, destino)} target="_blank" rel="noopener">
+                      <Navigation className="icono icono-pequeno" aria-hidden="true" /> Cómo llegar
+                    </a>
+                  </div>
                 </article>
               </li>
             );

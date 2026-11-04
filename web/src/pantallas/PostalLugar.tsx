@@ -1,14 +1,17 @@
 // RF-06, RF-12: postal de un lugar del itinerario: qué hacer, la línea literal de la guía de donde
 // sale (con su fuente y licencia) y la opción de quitarlo del plan.
-import { Check, Stamp, Trash, X } from 'lucide-react';
+import { Check, Navigation, Stamp, Trash, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { Itinerario as TipoItinerario } from '../viaje/itinerario';
+import { urlComoLlegar } from '../viaje/mapa';
 import { citaDeLugar, etiquetaVerificacion, recortarCita } from '../viaje/postal';
 import type { Parada } from './Itinerario';
 
 interface Props {
   parada: Parada;
   itinerario: TipoItinerario;
+  /** Ciudad del viaje, para buscar el lugar en Google Maps. */
+  destino: string;
   onCerrar: () => void;
   onQuitar: () => void;
   /** Ya tiene check-in en el pasaporte. */
@@ -17,7 +20,7 @@ interface Props {
   onCheckIn: (seccion: string) => void;
 }
 
-export function PostalLugar({ parada, itinerario, onCerrar, onQuitar, visitado, onCheckIn }: Props) {
+export function PostalLugar({ parada, itinerario, destino, onCerrar, onQuitar, visitado, onCheckIn }: Props) {
   const dialogo = useRef<HTMLDialogElement>(null);
   const { actividad } = parada;
   const cita = citaDeLugar(actividad, itinerario.recuperados ?? [], itinerario.fuentes);
@@ -79,6 +82,10 @@ export function PostalLugar({ parada, itinerario, onCerrar, onQuitar, visitado, 
               : 'No he encontrado la línea exacta de la guía para este lugar.'}
           </p>
         )}
+
+        <a className="postal-como-llegar" href={urlComoLlegar(actividad.lugar, destino)} target="_blank" rel="noopener">
+          <Navigation className="icono icono-pequeno" aria-hidden="true" /> Cómo llegar (Google Maps)
+        </a>
 
         <div className="postal-botones">
           <button type="button" className="boton" onClick={() => onCheckIn(cita?.seccion ?? 'Otro')} disabled={visitado}>

@@ -154,16 +154,23 @@
 .mapa-abajo > * {
   pointer-events: auto;
 }
-.mapa-cuenta {
-  justify-self: start;
+.mapa-ruta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   width: fit-content;
   margin: 0 var(--margen) 8px;
-  padding: 5px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: var(--tarjeta);
-  box-shadow: var(--sombra);
-  font: 600 12px/1.2 var(--texto);
-  color: var(--piedra);
+  background: var(--terracota-profunda);
+  color: var(--boton-tinta);
+  box-shadow: var(--sombra-alta);
+  font: 600 13px/1 var(--texto);
+  text-decoration: none;
+}
+.mapa-ruta .icono {
+  width: 16px;
+  height: 16px;
 }
 .mapa-carrusel {
   display: flex;
@@ -255,14 +262,26 @@
   overflow: hidden;
 }
 .mapa-sin-ubicar {
-  display: inline-flex;
-  gap: 4px;
-  align-items: center;
   font-size: 13px;
   color: var(--piedra);
 }
+.mapa-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.mapa-como-llegar {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--terracota-profunda);
+  color: var(--boton-tinta);
+  font: 600 13px/1 var(--texto);
+  text-decoration: none;
+}
 .mapa-ver-postal {
-  justify-self: end;
   padding: 6px 12px;
   border: 0;
   border-radius: 999px;
