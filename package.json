@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json && vite build web",
     "web": "vite web",
-    "typecheck": "tsc --noEmit && tsc -p web/tsconfig.json",
+    "typecheck": "tsc --noEmit && tsc -p web/tsconfig.json && tsc -p web/tsconfig.node.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "dev": "npm run build && genkit start -- node --env-file-if-exists=.env dist/index.js",
