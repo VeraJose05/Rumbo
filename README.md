@@ -174,5 +174,5 @@ de Render. Si se agota la cuota gratuita de Groq, la web lo avisa en lugar de fa
 
 ## Licencia
 
-Código bajo licencia MIT. Contenidos de Wikivoyage y fotos de Wikimedia Commons: CC BY-SA, con sus
+Código bajo licencia MIT (`LICENSE`), © 2026 Jose Vera Castillo. Contenidos de Wikivoyage y fotos de Wikimedia Commons: CC BY-SA, con sus
 autores citados en la web. Fuentes Fraunces, Inter y Caveat: SIL Open Font License.
