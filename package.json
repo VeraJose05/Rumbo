@@ -19,6 +19,7 @@
     "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js",
     "experimento:cobertura": "npm run build && node --env-file-if-exists=.env dist/experimentos/cobertura.js",
     "ingesta": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar.js",
+    "ingesta:wikipedia": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar-wikipedia.js",
     "coordenadas": "npm run build && node dist/ingest/geocodificar.js",
     "exportar-indice": "npm run build && node --env-file-if-exists=.env dist/ingest/exportar-indice.js",
     "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js",

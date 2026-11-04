@@ -224,6 +224,1294 @@
      "lat": 37.385718,
      "lon": -6.0031675,
      "origen": "osm"
+    },
+    {
+     "nombre": "Catedral de Santa María de la Sede de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.385742159,
+     "lon": -5.993095562,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Ramón Sánchez-Pizjuán",
+     "seccion": "Hacer",
+     "lat": 37.383878,
+     "lon": -5.970467,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Giralda",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38614,
+     "lon": -5.99238,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Olímpico de La Cartuja",
+     "seccion": "Hacer",
+     "lat": 37.417236,
+     "lon": -6.004564,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Benito Villamarín",
+     "seccion": "Hacer",
+     "lat": 37.356403,
+     "lon": -5.981611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Itálica",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.44119,
+     "lon": -6.0445003,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre del Oro",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.382455145,
+     "lon": -5.996296078,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.377080398,
+     "lon": -5.98690073,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Alamillo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.413333333,
+     "lon": -5.990277777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de toros de la Real Maestranza",
+     "seccion": "Hacer",
+     "lat": 37.385958507,
+     "lon": -5.998406636,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de San Telmo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.380277777,
+     "lon": -5.993611111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de Pilatos",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.390269146,
+     "lon": -5.986988762,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Bellas Artes de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.39265415,
+     "lon": -6.000126118,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Metropol Parasol",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39325278,
+     "lon": -5.99188056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de María Luisa",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.375740598,
+     "lon": -5.988889474,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Deportes de Sevilla",
+     "seccion": "Hacer",
+     "lat": 37.396542,
+     "lon": -5.964486,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39194444,
+     "lon": -6.00972222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Fábrica de Tabacos de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.380689772,
+     "lon": -5.990832804,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de la Plata",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38320327,
+     "lon": -5.995428289,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Isla Mágica",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.40833,
+     "lon": -6.00028,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Isabel II",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386329617,
+     "lon": -6.002374237,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro de la Maestranza",
+     "seccion": "Hacer",
+     "lat": 37.3838,
+     "lon": -5.99713,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Alfonso XIII y Jardines",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38153164,
+     "lon": -5.992757619,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Las Dueñas",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.394722222,
+     "lon": -5.989166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Anfiteatro de Itálica",
+     "seccion": "Hacer",
+     "lat": 37.44388889,
+     "lon": -6.04666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antiguo Monasterio de la Cartuja de Santa María de las Cuevas",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.397810357,
+     "lon": -6.00764744,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Lope de Vega",
+     "seccion": "Hacer",
+     "lat": 37.37856048,
+     "lon": -5.990896374,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de América",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3716,
+     "lon": -5.98739,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Arqueológico de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.370938888,
+     "lon": -5.987088888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa consistorial de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.388611111,
+     "lon": -5.994444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Luis de los Franceses",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39838,
+     "lon": -5.98831,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio de Santa Cruz",
+     "seccion": "Ver › Barrios",
+     "lat": 37.385,
+     "lon": -5.99027778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Nuestra Señora de la Esperanza de la Macarena",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.4025,
+     "lon": -5.98944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Arzobispal de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386898298,
+     "lon": -5.991872345,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estatua en Parque de San Jeronim de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.42749,
+     "lon": -5.992761,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Nueva",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.388469,
+     "lon": -5.995581,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia del Divino Salvador",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.389978729,
+     "lon": -5.99259598,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Condesa de Lebrija",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.392133443,
+     "lon": -5.993823756,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Costurero de la Reina",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37604,
+     "lon": -5.991518,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Academia de Bellas Artes de Santa Isabel de Hungría",
+     "seccion": "Ver › Museos",
+     "lat": 37.3877,
+     "lon": -5.99106,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Alamillo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.4173,
+     "lon": -5.99723,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de Murillo",
+     "seccion": "Ver › Museos",
+     "lat": 37.38571294,
+     "lon": -5.989193284,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de la Barqueta",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.404367,
+     "lon": -5.997386,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Centenario",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.349178038,
+     "lon": -5.993157101,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Murallas de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3904,
+     "lon": -5.99083,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio de Nervión",
+     "seccion": "Ver › Barrios",
+     "lat": 37.3856,
+     "lon": -5.97258,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de San Telmo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.380739,
+     "lon": -5.996367,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardines de las Delicias",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.37091398,
+     "lon": -5.989924679,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa Catalina, Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.393124837,
+     "lon": -5.988186334,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Catalina de Ribera y Jardines de Murillo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.383458013,
+     "lon": -5.987912941,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Atarazanas Reales de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.384663296,
+     "lon": -5.995461498,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida de la Constitución",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.3858,
+     "lon": -5.99417,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Naval Torre del Oro",
+     "seccion": "Ver › Museos",
+     "lat": 37.382416666,
+     "lon": -5.996333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Triana",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39372409,
+     "lon": -6.011648207,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Encarnación",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.392930555,
+     "lon": -5.991894444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Los Remedios",
+     "seccion": "Ver › Barrios",
+     "lat": 37.3753,
+     "lon": -5.99944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Casa de la Ciencia de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.377694444,
+     "lon": -5.991197222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de las Sirenas",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.399147934,
+     "lon": -5.994435715,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castillo de San Jorge de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3856105,
+     "lon": -6.003561196,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Casa de la Moneda",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38297038,
+     "lon": -5.994662467,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Isidoro del Campo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.433762569,
+     "lon": -6.036610395,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de San Francisco",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38853333,
+     "lon": -5.99399167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento a Cristóbal Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38343,
+     "lon": -5.98784,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Tablada",
+     "seccion": "Ver › Barrios",
+     "lat": 37.36398333,
+     "lon": -6.00754722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Santa María Auxiliadora (Sevilla)",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.397466666,
+     "lon": -5.980027777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Nuestro Padre Jesús del Gran Poder",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.397161111,
+     "lon": -5.996063888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Los Remedios",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37524031,
+     "lon": -5.99288229,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Cristo de la Expiración",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.390319,
+     "lon": -6.006528,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Triunfo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38503333,
+     "lon": -5.99236667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Blanca (Sevilla)",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.402762,
+     "lon": -5.987916,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio de Nervión",
+     "seccion": "Hacer",
+     "lat": 37.383608333,
+     "lon": -5.971941666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Congresos y Exposiciones de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.40444444,
+     "lon": -5.9325,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Artes y Costumbres Populares",
+     "seccion": "Ver › Museos",
+     "lat": 37.372183333,
+     "lon": -5.987861111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón Real para la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37194435,
+     "lon": -5.986347101,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Centro Andaluz de Arte Contemporáneo de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.39804,
+     "lon": -6.00772,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Giraldillo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386111111,
+     "lon": -5.992388888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Clemente",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.402761844,
+     "lon": -5.995676291,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pasarela de La Cartuja",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39651477,
+     "lon": -6.004872375,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Marqués de la Algaba",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39950601,
+     "lon": -5.990701551,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de San Juan",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3681,
+     "lon": -6.0225,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de las Delicias",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.367799809,
+     "lon": -5.992486834,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia del Convento de San Buenaventura",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38904675,
+     "lon": -5.997377467,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa María la Blanca",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386479339,
+     "lon": -5.987231068,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Perú",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.377694444,
+     "lon": -5.991197222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Mateos Gago",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.386222222,
+     "lon": -5.990386111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque Amate",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.38247,
+     "lon": -5.94682,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Schindler",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3933,
+     "lon": -6.00714,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque científico y tecnológico Cartuja",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.407819498,
+     "lon": -6.004716871,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica del Santísimo Cristo de la Expiración",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.389575,
+     "lon": -6.010941666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Baile Flamenco",
+     "seccion": "Ver › Museos",
+     "lat": 37.389046,
+     "lon": -5.9912314,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente Reina Sofía",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3723,
+     "lon": -6.02261,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sevilla",
+     "seccion": "Ver › Barrios",
+     "lat": 37.385,
+     "lon": -5.99733,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alfalfa",
+     "seccion": "Ver › Barrios",
+     "lat": 37.392,
+     "lon": -5.99289,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de barcas de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386243609,
+     "lon": -6.002092867,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla de San José",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.390039795,
+     "lon": -5.994775178,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de Abdelazis",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.384019507,
+     "lon": -5.993564153,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Ildefonso",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39037242,
+     "lon": -5.988441136,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Lorenzo (Sevilla)",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.397388888,
+     "lon": -5.996805555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Pedro",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39272972,
+     "lon": -5.990002927,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa Cruz",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3866884,
+     "lon": -5.989457892,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Audiencia de los Grados de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38900731,
+     "lon": -5.993716574,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Jerónimo de Buenavista",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.423675,
+     "lon": -5.98653889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Salvador",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.389958333,
+     "lon": -5.993263888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Alfalfa",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.390405555,
+     "lon": -5.990763888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón Domecq en la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37372687,
+     "lon": -5.985695205,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de México para la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.36970749,
+     "lon": -5.987150296,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Postigo del Aceite",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.385238342,
+     "lon": -5.99496096,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento a La Raza",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.378711111,
+     "lon": -5.988930555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antiguo Matadero de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.375166666,
+     "lon": -5.963722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Acuario de Sevilla",
+     "seccion": "Hacer",
+     "lat": 37.3705,
+     "lon": -5.99108,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Altamira de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386924761,
+     "lon": -5.987574315,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Alfonso XIII",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3692,
+     "lon": -5.99256,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente Rey Juan Carlos I",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3714,
+     "lon": -6.0225,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de la Corta",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.4137,
+     "lon": -6.01139,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Patrocinio",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3893,
+     "lon": -6.01819,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Jacinto",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.383262171,
+     "lon": -6.005399689,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Omnium Sanctorum",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.399196171,
+     "lon": -5.991272881,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Bartolomé",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.387622622,
+     "lon": -5.98645634,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Postigo de la Torre del Agua",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.384013,
+     "lon": -5.990375,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de la Señora Santa Ana",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.382830521,
+     "lon": -6.000484918,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de los Príncipes",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.3733,
+     "lon": -6.00526,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Triana Casco Antiguo",
+     "seccion": "Ver › Barrios",
+     "lat": 37.384940998,
+     "lon": -6.003702212,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla de los Marineros",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.384,
+     "lon": -6.00102,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Miraflores",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.411638888,
+     "lon": -5.963780555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Alfaro",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.384878874,
+     "lon": -5.98877303,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Glorieta de Covadonga",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.374213888,
+     "lon": -5.986127777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Convento de Santa Isabel",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3966,
+     "lon": -5.98706,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Leandro de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3906,
+     "lon": -5.98827,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Laboratorio municipal",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39551787,
+     "lon": -5.982376867,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente Alfonso XII",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.391378,
+     "lon": -6.006537,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Histórico Militar de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.378306944,
+     "lon": -5.987091111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Asunción",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.375680555,
+     "lon": -5.997538888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Tetuán",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.38966667,
+     "lon": -5.99503889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fundación Fondo de Cultura de Sevilla",
+     "seccion": "Ver › Museos",
+     "lat": 37.3851,
+     "lon": -5.990038888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Gil Abad",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.402116831,
+     "lon": -5.989344504,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Cristóbal Colón",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.383813888,
+     "lon": -5.997094444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Auditorio Rocío Jurado",
+     "seccion": "Hacer",
+     "lat": 37.400386944,
+     "lon": -6.003497777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Polígono Sur",
+     "seccion": "Ver › Barrios",
+     "lat": 37.361095803,
+     "lon": -5.968046869,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antiguo Monasterio de Santa Clara",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.399786539,
+     "lon": -5.995725843,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Camas",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3924,
+     "lon": -6.01705,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.382486111,
+     "lon": -5.993411111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente de las Ranas",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37415,
+     "lon": -5.988097222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio central de Correos de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38487275,
+     "lon": -5.994244845,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Humilladero de la Cruz del Campo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38765886,
+     "lon": -5.966685516,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de los Perdigones",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.40375501,
+     "lon": -5.992994019,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Mañara",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38808209,
+     "lon": -5.986562242,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Yanduri",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38285365,
+     "lon": -5.992840256,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Marqués de la Motilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39259545,
+     "lon": -5.993454764,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Esteban",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.389864547,
+     "lon": -5.986159288,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Juan de la Palma",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.3954149,
+     "lon": -5.991069648,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia Parroquial del Sagrario",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.386309126,
+     "lon": -5.993857489,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla Real de la Catedral de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.385833,
+     "lon": -5.992417,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de la Vega de Triana",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.37319444,
+     "lon": -6.01692222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro romano de Itálica",
+     "seccion": "Hacer",
+     "lat": 37.4401,
+     "lon": -6.03878,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Estados Unidos",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37640556,
+     "lon": -5.99158333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Isidoro",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.389436916,
+     "lon": -5.990808823,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardines del Real Alcázar de Sevilla",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.383386111,
+     "lon": -5.990397222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Bartolomé",
+     "seccion": "Ver › Barrios",
+     "lat": 37.3877,
+     "lon": -5.98801,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Valdezorras",
+     "seccion": "Ver › Barrios",
+     "lat": 37.42972222,
+     "lon": -5.9275,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Cabildo",
+     "seccion": "Comprar › Mercados",
+     "lat": 37.385611111,
+     "lon": -5.994702777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de San Lorenzo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.397083333,
+     "lon": -5.996711111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Glorieta Hermanos Álvarez Quintero",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37345,
+     "lon": -5.986736111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Argentina en la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37276696,
+     "lon": -5.990610251,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Uruguay para la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37727516,
+     "lon": -5.992181335,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Portugal en la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37954065,
+     "lon": -5.988391316,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Colombia para la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.36974602,
+     "lon": -5.988687244,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Cuba para la Exposición Iberoamericana de 1929",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.36523213,
+     "lon": -5.985968103,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sierpes",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 37.390738888,
+     "lon": -5.994444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antiquarium",
+     "seccion": "Ver › Museos",
+     "lat": 37.39325,
+     "lon": -5.991880555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla del Antiguo Seminario Santa María de Jesús",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.382872,
+     "lon": -5.993351,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Prado San Sebastián",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.379694132,
+     "lon": -5.986894726,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio de viviendas y mercado municipal (Sevilla)",
+     "seccion": "Comprar › Mercados",
+     "lat": 37.38744984,
+     "lon": -5.99992577,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento al Cid Campeador (Sevilla)",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37970278,
+     "lon": -5.98910833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Geología (Universidad de Sevilla)",
+     "seccion": "Ver › Museos",
+     "lat": 37.360830555,
+     "lon": -5.986938888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Román",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.39496239,
+     "lon": -5.986161514,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Bernardo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.382461723,
+     "lon": -5.981817187,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de San Jerónimo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.426389,
+     "lon": -5.990833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Tamarguillo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.413182528,
+     "lon": -5.917235432,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Coliseo",
+     "seccion": "Hacer",
+     "lat": 37.38335831,
+     "lon": -5.993932646,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de San Bernardo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38476917,
+     "lon": -5.984089259,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio La Adriática",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.38763416,
+     "lon": -5.994433736,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pino Montano",
+     "seccion": "Ver › Barrios",
+     "lat": 37.422927981,
+     "lon": -5.968145394,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Chile de la exposición Iberoamericana de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37785556,
+     "lon": -5.99222778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de Brasil en la Exposición de 1929 de Sevilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.37001944,
+     "lon": -5.98771944,
+     "origen": "wikidata"
     }
    ],
    "sinUbicar": [
@@ -627,6 +1915,1749 @@
      "lat": 40.4263241,
      "lon": -3.6814144,
      "origen": "osm"
+    },
+    {
+     "nombre": "Estadio Santiago Bernabéu",
+     "seccion": "Hacer",
+     "lat": 40.45306,
+     "lon": -3.68835,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Academia Española",
+     "seccion": "Ver › Museos",
+     "lat": 40.41502,
+     "lon": -3.69091,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Real de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.417955,
+     "lon": -3.714312,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Catedral de la Almudena",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.415556,
+     "lon": -3.714444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Mayor de Madrid",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.415455555,
+     "lon": -3.707380555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional Thyssen-Bornemisza",
+     "seccion": "Ver › Museos",
+     "lat": 40.416041,
+     "lon": -3.694925,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Retiro",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.415,
+     "lon": -3.683888888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta del Sol",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41694,
+     "lon": -3.70361,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Arqueológico Nacional",
+     "seccion": "Ver › Museos",
+     "lat": 40.423645,
+     "lon": -3.689422,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cuatro Torres Business Area",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.47777778,
+     "lon": -3.68777778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Moncloa",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.44361111,
+     "lon": -3.73694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Templo de Debod",
+     "seccion": "Ver › Museos",
+     "lat": 40.424052777,
+     "lon": -3.717777777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Campo de Fútbol de Vallecas",
+     "seccion": "Hacer",
+     "lat": 40.391944,
+     "lon": -3.658961,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Real",
+     "seccion": "Hacer",
+     "lat": 40.41824,
+     "lon": -3.71037,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Las Ventas",
+     "seccion": "Hacer",
+     "lat": 40.432083,
+     "lon": -3.663278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Academia de Bellas Artes de San Fernando",
+     "seccion": "Ver › Museos",
+     "lat": 40.4178,
+     "lon": -3.7007,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gran Vía",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.42,
+     "lon": -3.70361,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.423391666,
+     "lon": -3.712233333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta de Europa",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.466388888,
+     "lon": -3.687777777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Cibeles",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41917,
+     "lon": -3.69306,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Bosque del Recuerdo",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.411944,
+     "lon": -3.686944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo del Prado",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.41417,
+     "lon": -3.69361,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio de Chamartín",
+     "seccion": "Hacer",
+     "lat": 40.4527,
+     "lon": -3.6868,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Deportes de la Comunidad de Madrid",
+     "seccion": "Hacer",
+     "lat": 40.423889,
+     "lon": -3.671814,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Sorolla",
+     "seccion": "Ver › Museos",
+     "lat": 40.435404,
+     "lon": -3.692539,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de Campo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.42291,
+     "lon": -3.75595,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Chueca",
+     "seccion": "Ver › Barrios",
+     "lat": 40.421666666,
+     "lon": -3.698055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.424925,
+     "lon": -3.689438888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Madrid Arena",
+     "seccion": "Beber y salir",
+     "lat": 40.413047,
+     "lon": -3.738256,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de América",
+     "seccion": "Ver › Museos",
+     "lat": 40.438131,
+     "lon": -3.722069,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Zoo Aquarium de Madrid",
+     "seccion": "Hacer",
+     "lat": 40.408611,
+     "lon": -3.7625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sobrino de Botín",
+     "seccion": "Comer",
+     "lat": 40.41421111,
+     "lon": -3.70808611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de la Castellana",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.44388889,
+     "lon": -3.69138889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Vistalegre",
+     "seccion": "Hacer",
+     "lat": 40.386111,
+     "lon": -3.738889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de las Descalzas Reales",
+     "seccion": "Ver › Museos",
+     "lat": 40.418267,
+     "lon": -3.706192,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente de Cibeles",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.419331,
+     "lon": -3.693093,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Metropolitano de Madrid",
+     "seccion": "Hacer",
+     "lat": 40.447527,
+     "lon": -3.716147,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fábrica Nacional de Moneda y Timbre - Real Casa de la Moneda",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.42,
+     "lon": -3.67,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Linares",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4199,
+     "lon": -3.6921,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle de Alcalá",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4283,
+     "lon": -3.66778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Historia de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.425833,
+     "lon": -3.700833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro de la Zarzuela",
+     "seccion": "Hacer",
+     "lat": 40.417186111,
+     "lon": -3.696780555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de las Cortes",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4164,
+     "lon": -3.696542,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional de Antropología",
+     "seccion": "Ver › Museos",
+     "lat": 40.407694,
+     "lon": -3.688975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Cibeles",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.418611,
+     "lon": -3.691667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Academia de Ciencias Exactas, Físicas y Naturales",
+     "seccion": "Ver › Museos",
+     "lat": 40.421944,
+     "lon": -3.712778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Oriente",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41806,
+     "lon": -3.71222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Cristal del Retiro",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.413556,
+     "lon": -3.682056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de San Francisco el Grande",
+     "seccion": "Ver › Museos",
+     "lat": 40.410478,
+     "lon": -3.714391,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Arco de Moncloa",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.435913,
+     "lon": -3.720193,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Liria",
+     "seccion": "Ver › Museos",
+     "lat": 40.4277,
+     "lon": -3.7124,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Recoletos",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.421952777,
+     "lon": -3.691836111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional de Ciencias Naturales",
+     "seccion": "Ver › Museos",
+     "lat": 40.441030555,
+     "lon": -3.690280555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Lázaro Galdiano",
+     "seccion": "Ver › Museos",
+     "lat": 40.436911,
+     "lon": -3.685848,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mezquita Central de Madrid",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.45680556,
+     "lon": -3.70083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio de O'Donnell",
+     "seccion": "Hacer",
+     "lat": 40.4219,
+     "lon": -3.6751,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Santa Cruz",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4147,
+     "lon": -3.706030555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Oeste",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.42833,
+     "lon": -3.72417,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Villa",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41527778,
+     "lon": -3.71055556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Naval de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.41752,
+     "lon": -3.692802,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Callao",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.419953,
+     "lon": -3.705799,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Atracciones de Madrid",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.41277778,
+     "lon": -3.75083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Cerralbo",
+     "seccion": "Ver › Museos",
+     "lat": 40.423684,
+     "lon": -3.714577,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de San Antonio de la Florida",
+     "seccion": "Ver › Museos",
+     "lat": 40.425363,
+     "lon": -3.725597,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sinagoga de Madrid",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.435353,
+     "lon": -3.699906,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Segovia",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.414169997,
+     "lon": -3.722889961,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Oso y Madroño",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.416977,
+     "lon": -3.702464,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torrespaña",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.420512222,
+     "lon": -3.664196111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Monasterio de la Encarnación",
+     "seccion": "Ver › Museos",
+     "lat": 40.419925,
+     "lon": -3.711493,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Neptuno",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.415252,
+     "lon": -3.69416,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica pontificia de San Miguel",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.414413888,
+     "lon": -3.709688888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Residencia de Estudiantes",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.44077778,
+     "lon": -3.68805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Colegiata de San Isidro",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41277778,
+     "lon": -3.70694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Senado",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.421183333,
+     "lon": -3.711816666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Universidad",
+     "seccion": "Ver › Barrios",
+     "lat": 40.425277777,
+     "lon": -3.708333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Traje",
+     "seccion": "Ver › Museos",
+     "lat": 40.44,
+     "lon": -3.72861,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia Catedral de la Fuerzas Armadas de España",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.414769,
+     "lon": -3.712306,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Toledo",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.399678,
+     "lon": -3.714941,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Basílica de Nuestra Señora de Atocha",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4055,
+     "lon": -3.6837,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casón del Buen Retiro",
+     "seccion": "Ver › Museos",
+     "lat": 40.41525,
+     "lon": -3.689569,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Atocha",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40081944,
+     "lon": -3.68368056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Nuevos Ministerios",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.443963888,
+     "lon": -3.693463888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "M-30",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.44192,
+     "lon": -3.73897,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Ángel Caído",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.42189,
+     "lon": -3.682189,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Velódromo de Ciudad Lineal",
+     "seccion": "Hacer",
+     "lat": 40.4501,
+     "lon": -3.6532,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Costillares",
+     "seccion": "Ver › Barrios",
+     "lat": 40.47444444,
+     "lon": -3.66972222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Santa Ana",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41471389,
+     "lon": -3.70089722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Castilla",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.46583333,
+     "lon": -3.68916667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Romanticismo",
+     "seccion": "Ver › Museos",
+     "lat": 40.425869,
+     "lon": -3.698839,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Buenavista",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4209,
+     "lon": -3.6946,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Campo del Moro",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.4182,
+     "lon": -3.71905,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Café Gijón",
+     "seccion": "Comer",
+     "lat": 40.422242,
+     "lon": -3.692364,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "CaixaForum Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.410905,
+     "lon": -3.692897,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Observatorio de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.40841111,
+     "lon": -3.687625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Independencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.42,
+     "lon": -3.68888889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardines de Sabatini",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.42021,
+     "lon": -3.71394,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Salón de Reinos",
+     "seccion": "Ver › Museos",
+     "lat": 40.415833,
+     "lon": -3.690556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hispanoamérica",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45555556,
+     "lon": -3.67666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Aravaca",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45,
+     "lon": -3.78333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Lavapiés",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4085,
+     "lon": -3.701,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Metrópolis",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.418777777,
+     "lon": -3.697466666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Viso",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44436667,
+     "lon": -3.68883056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Aluche",
+     "seccion": "Ver › Barrios",
+     "lat": 40.3875,
+     "lon": -3.75416667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Argüelles",
+     "seccion": "Ver › Barrios",
+     "lat": 40.429161111,
+     "lon": -3.718847222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Madrid Río",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.418,
+     "lon": -3.721,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Español",
+     "seccion": "Hacer",
+     "lat": 40.414852,
+     "lon": -3.699982,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mandarin Oriental Ritz, Madrid",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4156,
+     "lon": -3.69281,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de la Panadería",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4158,
+     "lon": -3.7074,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Mayor",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4161,
+     "lon": -3.7079,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Almenara",
+     "seccion": "Ver › Barrios",
+     "lat": 40.47129,
+     "lon": -3.695505,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Embajadores",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40888889,
+     "lon": -3.69972222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sol",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41666667,
+     "lon": -3.70388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Jerónimo el Real",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.414514,
+     "lon": -3.691138,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente del Berro",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42472222,
+     "lon": -3.66388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Acacias",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40142222,
+     "lon": -3.70493611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ciudad Universitaria",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44388889,
+     "lon": -3.72619722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estrella",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41361111,
+     "lon": -3.66416667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Niño Jesús",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41166667,
+     "lon": -3.67388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ciudad Jardín",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44694444,
+     "lon": -3.67166667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Chopera",
+     "seccion": "Ver › Barrios",
+     "lat": 40.395,
+     "lon": -3.69944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pacífico",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40472222,
+     "lon": -3.67583333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Legazpi",
+     "seccion": "Ver › Barrios",
+     "lat": 40.3886,
+     "lon": -3.6879,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jerónimos",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41388889,
+     "lon": -3.69083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cortes",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41416667,
+     "lon": -3.69805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Justicia",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42388889,
+     "lon": -3.69638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Entrevías",
+     "seccion": "Ver › Barrios",
+     "lat": 40.375544444,
+     "lon": -3.671708333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ventas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42833333,
+     "lon": -3.6575,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Quintana",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4375,
+     "lon": -3.64222222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Juan Bautista",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45,
+     "lon": -3.65666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional de Artes Decorativas",
+     "seccion": "Ver › Museos",
+     "lat": 40.417911944,
+     "lon": -3.689816944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio",
+     "seccion": "Ver › Barrios",
+     "lat": 40.415,
+     "lon": -3.71333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palos de la Frontera",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40388889,
+     "lon": -3.69388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Longoria",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.425399,
+     "lon": -3.696594,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Dehesa de la Villa",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.4575,
+     "lon": -3.71964,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Velázquez",
+     "seccion": "Ver › Museos",
+     "lat": 40.415189,
+     "lon": -3.681989,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Nuestro Padre Jesús de Medinaceli",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4142772,
+     "lon": -3.6958389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa-Museo de Lope de Vega",
+     "seccion": "Ver › Museos",
+     "lat": 40.414366,
+     "lon": -3.697593,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Nuestra Señora de Montserrat",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.427619,
+     "lon": -3.706494,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cristóbal Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.425239,
+     "lon": -3.690443,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Muralla islámica",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.414930102,
+     "lon": -3.714570258,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Buenavista",
+     "seccion": "Ver › Barrios",
+     "lat": 40.36666667,
+     "lon": -3.755,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Comillas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39277778,
+     "lon": -3.71388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Nacional Complutense",
+     "seccion": "Hacer",
+     "lat": 40.437826,
+     "lon": -3.728517,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Palace",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.415097,
+     "lon": -3.695106,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Adelfas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40027778,
+     "lon": -3.67083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castilla",
+     "seccion": "Ver › Barrios",
+     "lat": 40.475,
+     "lon": -3.67888889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Isidro",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39888889,
+     "lon": -3.72638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vista Alegre",
+     "seccion": "Ver › Barrios",
+     "lat": 40.38611111,
+     "lon": -3.73888889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Opañel",
+     "seccion": "Ver › Barrios",
+     "lat": 40.38888889,
+     "lon": -3.72805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta Bonita",
+     "seccion": "Ver › Barrios",
+     "lat": 40.38194444,
+     "lon": -3.73638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Recoletos",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42416667,
+     "lon": -3.68638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Guindalera",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43616944,
+     "lon": -3.67312778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Goya",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42472222,
+     "lon": -3.67722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Peñagrande",
+     "seccion": "Ver › Barrios",
+     "lat": 40.47805556,
+     "lon": -3.72555556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Delicias",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39583333,
+     "lon": -3.68944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Imperial",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40666667,
+     "lon": -3.71694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Orcasitas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.36861111,
+     "lon": -3.71194444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Abrantes",
+     "seccion": "Ver › Barrios",
+     "lat": 40.38055556,
+     "lon": -3.72388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Pilar",
+     "seccion": "Ver › Barrios",
+     "lat": 40.47822778,
+     "lon": -3.71154167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Canillas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45972222,
+     "lon": -3.64555556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuentelarreina",
+     "seccion": "Ver › Barrios",
+     "lat": 40.48194444,
+     "lon": -3.7425,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Nueva España",
+     "seccion": "Ver › Barrios",
+     "lat": 40.46305556,
+     "lon": -3.6775,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Trafalgar",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43305556,
+     "lon": -3.70055556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Almagro",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43166667,
+     "lon": -3.69416667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castillejos",
+     "seccion": "Ver › Barrios",
+     "lat": 40.46138889,
+     "lon": -3.6925,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Zofío",
+     "seccion": "Ver › Barrios",
+     "lat": 40.37916667,
+     "lon": -3.71527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pueblo Nuevo",
+     "seccion": "Ver › Barrios",
+     "lat": 40.42527778,
+     "lon": -3.63527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Fermín",
+     "seccion": "Ver › Barrios",
+     "lat": 40.368896,
+     "lon": -3.684154,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pavones",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39472222,
+     "lon": -3.63305556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Pascual",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4425,
+     "lon": -3.6525,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Villaverde Alto, Casco Histórico de Villaverde",
+     "seccion": "Ver › Barrios",
+     "lat": 40.34777778,
+     "lon": -3.71166667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Los Ángeles",
+     "seccion": "Ver › Barrios",
+     "lat": 40.35666667,
+     "lon": -3.69916667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Caleido",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.477777777,
+     "lon": -3.688888888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Villahermosa",
+     "seccion": "Ver › Museos",
+     "lat": 40.415695,
+     "lon": -3.695162,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Ginés de Arlés",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41713,
+     "lon": -3.70691,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Manuel y San Benito",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.420794,
+     "lon": -3.6861,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San José",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.419068,
+     "lon": -3.696654,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Lista",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43277778,
+     "lon": -3.67444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Prosperidad",
+     "seccion": "Ver › Barrios",
+     "lat": 40.445,
+     "lon": -3.67,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castellana",
+     "seccion": "Ver › Barrios",
+     "lat": 40.432805555,
+     "lon": -3.683527777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta del Ángel",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41194444,
+     "lon": -3.72972222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Lucero",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41055556,
+     "lon": -3.73583333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Campamento",
+     "seccion": "Ver › Barrios",
+     "lat": 40.3875,
+     "lon": -3.78194444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Telefónica",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.420388888,
+     "lon": -3.701902777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Galería de las Colecciones Reales",
+     "seccion": "Ver › Museos",
+     "lat": 40.415695515,
+     "lon": -3.715446678,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Ferrocarril de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.398333333,
+     "lon": -3.694166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado de San Miguel",
+     "seccion": "Comprar › Mercados",
+     "lat": 40.415438,
+     "lon": -3.708869,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de los Franceses",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.433672222,
+     "lon": -3.735944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alfonso XII",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.417333,
+     "lon": -3.683028,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Felipe IV",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.418537815,
+     "lon": -3.712240146,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Gallardo",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.423205,
+     "lon": -3.714225,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sede central del Banco de España",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.418267,
+     "lon": -3.694872,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Cera de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.42444444,
+     "lon": -3.69138889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de San Isidro",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 40.39833056,
+     "lon": -3.72543056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Numancia",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40083333,
+     "lon": -3.66305556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Apóstol Santiago",
+     "seccion": "Ver › Barrios",
+     "lat": 40.47638889,
+     "lon": -3.65805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Nicolás",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.41580556,
+     "lon": -3.71191667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Geominero",
+     "seccion": "Ver › Museos",
+     "lat": 40.4427,
+     "lon": -3.6996,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Arcos",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4206,
+     "lon": -3.6171,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fontarrón",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40138889,
+     "lon": -3.64527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gaztambide",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43472222,
+     "lon": -3.71472222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Horcajo",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41138889,
+     "lon": -3.62694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hellín",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43027778,
+     "lon": -3.61888889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Los Cármenes",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40694444,
+     "lon": -3.72638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Los Rosales",
+     "seccion": "Ver › Barrios",
+     "lat": 40.360280555,
+     "lon": -3.685561111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Orcasur",
+     "seccion": "Ver › Barrios",
+     "lat": 40.36722222,
+     "lon": -3.69916667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palomeras Bajas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.387222222,
+     "lon": -3.657222222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palomeras Sureste",
+     "seccion": "Ver › Barrios",
+     "lat": 40.387777777,
+     "lon": -3.639444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pinar del Rey",
+     "seccion": "Ver › Barrios",
+     "lat": 40.46472222,
+     "lon": -3.65555556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pradolongo",
+     "seccion": "Ver › Barrios",
+     "lat": 40.378333333,
+     "lon": -3.706111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ríos Rosas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44222222,
+     "lon": -3.69722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Salvador",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44444444,
+     "lon": -3.63305556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Simancas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4346,
+     "lon": -3.625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Valdeacederas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.46861111,
+     "lon": -3.70555556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Valdezarza",
+     "seccion": "Ver › Barrios",
+     "lat": 40.465,
+     "lon": -3.71833333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vinateros",
+     "seccion": "Ver › Barrios",
+     "lat": 40.40305556,
+     "lon": -3.64027778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Arapiles",
+     "seccion": "Ver › Barrios",
+     "lat": 40.43416667,
+     "lon": -3.70777778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Amposta",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4263,
+     "lon": -3.6215,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Bellas Vistas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.452458,
+     "lon": -3.70719,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Berruguete",
+     "seccion": "Ver › Barrios",
+     "lat": 40.4575,
+     "lon": -3.70555556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Concepción",
+     "seccion": "Ver › Barrios",
+     "lat": 40.44027778,
+     "lon": -3.64805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Marroquina",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41111111,
+     "lon": -3.64111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Moscardó",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39,
+     "lon": -3.70777778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Diego",
+     "seccion": "Ver › Barrios",
+     "lat": 40.39638889,
+     "lon": -3.66722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Atalaya",
+     "seccion": "Ver › Barrios",
+     "lat": 40.46611111,
+     "lon": -3.66694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Media Legua",
+     "seccion": "Ver › Barrios",
+     "lat": 40.414166666,
+     "lon": -3.654722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente de Apolo",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.417227,
+     "lon": -3.693921,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de San Vicente de Paul (Milagrosa)",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.436836111,
+     "lon": -3.694902777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de la Concepción de Nuestra Señora",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.424711111,
+     "lon": -3.682447222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Colina",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45666667,
+     "lon": -3.66194444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Madrid de los Austrias",
+     "seccion": "Ver › Barrios",
+     "lat": 40.41555556,
+     "lon": -3.70722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de Campo",
+     "seccion": "Ver › Barrios",
+     "lat": 40.422691666,
+     "lon": -3.7494,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casco Histórico de Vicálvaro",
+     "seccion": "Ver › Barrios",
+     "lat": 40.396944,
+     "lon": -3.615,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Portazgo",
+     "seccion": "Ver › Barrios",
+     "lat": 40.3925,
+     "lon": -3.64972,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro María Guerrero",
+     "seccion": "Hacer",
+     "lat": 40.422916642,
+     "lon": -3.692983708,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Francisco de Sales",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.454517,
+     "lon": -3.703783,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Fermín de los Navarros",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.432725,
+     "lon": -3.692592,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de las Calatravas",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.418236,
+     "lon": -3.69908,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Antonio de los Alemanes",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.422365,
+     "lon": -3.703828,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Marcos",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.42483,
+     "lon": -3.711185,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cuatro Vientos",
+     "seccion": "Ver › Barrios",
+     "lat": 40.37777778,
+     "lon": -3.77444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Álvaro de Bazán",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.415109,
+     "lon": -3.710412,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Paz",
+     "seccion": "Ver › Barrios",
+     "lat": 40.48138889,
+     "lon": -3.69694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Piovera",
+     "seccion": "Ver › Barrios",
+     "lat": 40.45361111,
+     "lon": -3.64027778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Las Águilas",
+     "seccion": "Ver › Barrios",
+     "lat": 40.3775,
+     "lon": -3.76416667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Lope de Vega (Madrid)",
+     "seccion": "Hacer",
+     "lat": 40.421865,
+     "lon": -3.708806,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Arte Contemporáneo",
+     "seccion": "Ver › Museos",
+     "lat": 40.427852777,
+     "lon": -3.710680555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Centro Cultural Islámico y Mezquita de Madrid",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4385,
+     "lon": -3.65804,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta de San Vicente",
+     "seccion": "Ver › Monumentos",
+     "lat": 40.4202,
+     "lon": -3.7204,
+     "origen": "wikidata"
     }
    ],
    "sinUbicar": [
@@ -1544,6 +4575,1756 @@
      "lat": 41.3940648,
      "lon": 2.186896,
      "origen": "osm"
+    },
+    {
+     "nombre": "Templo Expiatorio de la Sagrada Familia",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.40369,
+     "lon": 2.17433,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Camp Nou",
+     "seccion": "Hacer",
+     "lat": 41.380833333,
+     "lon": 2.122777777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Park Güell",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.413611111,
+     "lon": 2.152777777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Catedral de Santa Eulalia de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383888888,
+     "lon": 2.176388888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Olímpico Lluís Companys",
+     "seccion": "Hacer",
+     "lat": 41.364722,
+     "lon": 2.155556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Rambla",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.381389,
+     "lon": 2.173056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Cataluña",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.387031,
+     "lon": 2.170079,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Güell",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37882,
+     "lon": 2.17439,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Vicens",
+     "seccion": "Ver › Museos",
+     "lat": 41.403486545,
+     "lon": 2.150643258,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Miniestadi",
+     "seccion": "Hacer",
+     "lat": 41.379722,
+     "lon": 2.118056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional de Arte de Cataluña",
+     "seccion": "Ver › Museos",
+     "lat": 41.368333333,
+     "lon": 2.153305555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palau Sant Jordi",
+     "seccion": "Hacer",
+     "lat": 41.363389,
+     "lon": 2.152556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fundación Joan Miró",
+     "seccion": "Ver › Museos",
+     "lat": 41.368611111,
+     "lon": 2.16,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Santa María del Mar",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383611,
+     "lon": 2.181944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón alemán, Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.370555555,
+     "lon": 2.15,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Camp de Les Corts",
+     "seccion": "Hacer",
+     "lat": 41.385833,
+     "lon": 2.135556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Montjuic",
+     "seccion": "Ver › Barrios",
+     "lat": 41.364166666,
+     "lon": 2.158055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Picasso de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.385216,
+     "lon": 2.180893,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio Gótico",
+     "seccion": "Ver › Barrios",
+     "lat": 41.382777777,
+     "lon": 2.176944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Arco de Triunfo de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.391111,
+     "lon": 2.180556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "MACBA Museo de Arte Contemporáneo de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.38311,
+     "lon": 2.16679,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Fútbol Club Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.38039,
+     "lon": 2.1206365,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Boquería",
+     "seccion": "Comprar › Mercados",
+     "lat": 41.381796,
+     "lon": 2.171549,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palau Blaugrana",
+     "seccion": "Hacer",
+     "lat": 41.380081,
+     "lon": 2.12005,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gran Teatro del Liceo",
+     "seccion": "Hacer",
+     "lat": 41.380277777,
+     "lon": 2.173611111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de la Ciudadela",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.388111,
+     "lon": 2.187517,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Barceloneta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.37944,
+     "lon": 2.18917,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Raval",
+     "seccion": "Ver › Barrios",
+     "lat": 41.38,
+     "lon": 2.16861,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Font màgica de Montjuïc",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.371139,
+     "lon": 2.151727,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento a Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37580278,
+     "lon": 2.17776111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Zoo de Barcelona",
+     "seccion": "Hacer",
+     "lat": 41.387883,
+     "lon": 2.191194,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de Collserola",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.417222222,
+     "lon": 2.114166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.375038,
+     "lon": 2.149108,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Els Quatre Gats",
+     "seccion": "Comer",
+     "lat": 41.385777777,
+     "lon": 2.173666666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Arts",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.386666666,
+     "lon": 2.196111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Amatller",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.391449,
+     "lon": 2.165009,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mujer y Pájaro",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37781,
+     "lon": 2.14697,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Aquarium de Barcelona",
+     "seccion": "Hacer",
+     "lat": 41.376667,
+     "lon": 2.184167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida Diagonal",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.396389,
+     "lon": 2.158056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de telecomunicaciones de Montjuïc",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.36417,
+     "lon": 2.15056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Historia de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.383903888,
+     "lon": 2.177691194,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Gracia",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.393044444,
+     "lon": 2.163786111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Santa María del Pino",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.382222222,
+     "lon": 2.173888888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Templo Expiatorio del Sagrado Corazón",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.422075,
+     "lon": 2.11886111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castillo de Montjuic",
+     "seccion": "Ver › Museos",
+     "lat": 41.36342,
+     "lon": 2.16617,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Poblenou",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39916667,
+     "lon": 2.20388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Real",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38,
+     "lon": 2.175,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Chocolate",
+     "seccion": "Ver › Museos",
+     "lat": 41.387056,
+     "lon": 2.181818,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Mapfre",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.387777777,
+     "lon": 2.1975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gran Vía de las Cortes Catalanas",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.380638888,
+     "lon": 2.156583333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Laberinto de Horta",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.440277777,
+     "lon": 2.145555555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de toros Monumental de Barcelona",
+     "seccion": "Hacer",
+     "lat": 41.4,
+     "lon": 2.18111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de Pedralbes",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.39555556,
+     "lon": 2.11222222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Marítimo de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.37502778,
+     "lon": 2.17636944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castillo de los Tres Dragones",
+     "seccion": "Ver › Museos",
+     "lat": 41.38806944,
+     "lon": 2.18338611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Rey",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38413,
+     "lon": 2.17744,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "CosmoCaixa Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.413055555,
+     "lon": 2.131111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palau Nacional",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.368333333,
+     "lon": 2.153305555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de San Jaime",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3825,
+     "lon": 2.176944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa-Museo Gaudí",
+     "seccion": "Ver › Museos",
+     "lat": 41.414455,
+     "lon": 2.153567,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente de Canaletas",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38527778,
+     "lon": 2.17013889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de las Glorias Catalanas",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.40333333,
+     "lon": 2.18694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Pedro, Santa Catalina y La Ribera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.3847,
+     "lon": 2.1826,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palau de la Generalitat",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38277778,
+     "lon": 2.17666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de la Merced",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37952,
+     "lon": 2.17958,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Las cuatro columnas",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.370634,
+     "lon": 2.152102,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sants",
+     "seccion": "Ver › Barrios",
+     "lat": 41.375278,
+     "lon": 2.136111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pedralbes",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39472222,
+     "lon": 2.11305556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Virreina",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38236,
+     "lon": 2.17159,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fossar de les Moreres",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383684,
+     "lon": 2.182433,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Villa de Gracia",
+     "seccion": "Ver › Barrios",
+     "lat": 41.40404722,
+     "lon": 2.15589444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sarriá",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39943056,
+     "lon": 2.12186667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Antiga Esquerra de l'Eixample",
+     "seccion": "Ver › Barrios",
+     "lat": 41.390061111,
+     "lon": 2.155061111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de Sant Sebastià",
+     "seccion": "Ver › Playas",
+     "lat": 41.37345833,
+     "lon": 2.18962778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellones Güell",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38932216,
+     "lon": 2.11927101,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio de La Ribera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.38444,
+     "lon": 2.18389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatre Nacional de Catalunya",
+     "seccion": "Hacer",
+     "lat": 41.39972,
+     "lon": 2.18611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Andrés de Palomar",
+     "seccion": "Ver › Barrios",
+     "lat": 41.436111111,
+     "lon": 2.191666666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Sky",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.40617778,
+     "lon": 2.20079444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Derecha del Ensanche",
+     "seccion": "Ver › Barrios",
+     "lat": 41.395278,
+     "lon": 2.166667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio de Sant Antoni",
+     "seccion": "Ver › Barrios",
+     "lat": 41.37801,
+     "lon": 2.15949,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardín botánico de Barcelona",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.3618,
+     "lon": 2.1587,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "W Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3686286,
+     "lon": 2.1900022,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Universidad",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.385644,
+     "lon": 2.164048,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Tetuán",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.394921,
+     "lon": 2.175507,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Barrio de Les Corts",
+     "seccion": "Ver › Barrios",
+     "lat": 41.38416667,
+     "lon": 2.13277778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Fort Pienc",
+     "seccion": "Ver › Barrios",
+     "lat": 41.395675,
+     "lon": 2.183703,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "CaixaForum Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.37133056,
+     "lon": 2.14975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Joan Miró",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.3779,
+     "lon": 2.14837,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa Mar Bella",
+     "seccion": "Ver › Playas",
+     "lat": 41.39852778,
+     "lon": 2.21188889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida Meridiana",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.421942,
+     "lon": 2.186847,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hash Marihuana & Hemp Museum",
+     "seccion": "Ver › Museos",
+     "lat": 41.380801346,
+     "lon": 2.180133656,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Real Mayor de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38416389,
+     "lon": 2.17756667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Porta Fira",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.35489,
+     "lon": 2.12554,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Poble-sec",
+     "seccion": "Ver › Barrios",
+     "lat": 41.37278,
+     "lon": 2.1625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Atracciones Tibidabo",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.421751,
+     "lon": 2.120044,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de la Barceloneta",
+     "seccion": "Ver › Playas",
+     "lat": 41.37841944,
+     "lon": 2.19241667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Nueva Izquierda del Ensanche",
+     "seccion": "Ver › Barrios",
+     "lat": 41.383389,
+     "lon": 2.149,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Sagrera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.422358333,
+     "lon": 2.186319444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Real de Pedralbes",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38841667,
+     "lon": 2.11702778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sinagoga Shlomo ben Adret",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38256,
+     "lon": 2.17579,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Diagonal Mar y el Frente Marítimo del Pueblo Nuevo",
+     "seccion": "Ver › Barrios",
+     "lat": 41.4096,
+     "lon": 2.21630556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Guineueta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.441342,
+     "lon": 2.171986,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Clot",
+     "seccion": "Ver › Barrios",
+     "lat": 41.407848,
+     "lon": 2.188822,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Camp d'en Grassot i Gràcia Nova",
+     "seccion": "Ver › Barrios",
+     "lat": 41.40611,
+     "lon": 2.16722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Maternitat i Sant Ramon",
+     "seccion": "Ver › Barrios",
+     "lat": 41.38434167,
+     "lon": 2.12220556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Besós y el Maresme",
+     "seccion": "Ver › Barrios",
+     "lat": 41.417177777,
+     "lon": 2.213572222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sagrada Familia",
+     "seccion": "Ver › Barrios",
+     "lat": 41.403561,
+     "lon": 2.174347,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Tàpies",
+     "seccion": "Ver › Museos",
+     "lat": 41.39167,
+     "lon": 2.16361,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Rambla de Cataluña",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.39166667,
+     "lon": 2.16277778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa del Bogatell",
+     "seccion": "Ver › Playas",
+     "lat": 41.39388889,
+     "lon": 2.20625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Carmelo",
+     "seccion": "Ver › Barrios",
+     "lat": 41.418336111,
+     "lon": 2.154436111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de la Ciudad de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3822,
+     "lon": 2.1775,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de San Felipe Neri",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383358,
+     "lon": 2.174939,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Colegio Teresiano de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.399765,
+     "lon": 2.133198,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de toros de las Arenas",
+     "seccion": "Hacer",
+     "lat": 41.376288,
+     "lon": 2.149284,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Vila Olímpica del Poblenou",
+     "seccion": "Ver › Barrios",
+     "lat": 41.3898,
+     "lon": 2.19659,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hostafrancs",
+     "seccion": "Ver › Barrios",
+     "lat": 41.375555555,
+     "lon": 2.143055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Pablo del Camp",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37636,
+     "lon": 2.169577,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Cara de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38093,
+     "lon": 2.18247,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Parlamento de Cataluña",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.388,
+     "lon": 2.18898,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Barón de Quadras",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.396752777,
+     "lon": 2.161380555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vía Layetana",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.385277777,
+     "lon": 2.176944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida del Paralelo",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.374966666,
+     "lon": 2.163052777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre Jaume I",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3720826,
+     "lon": 2.1801209,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Portal del Ángel",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.38646,
+     "lon": 2.17196,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Urquinaona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38944,
+     "lon": 2.17333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Guinardó",
+     "seccion": "Ver › Barrios",
+     "lat": 41.418378,
+     "lon": 2.175561,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Les Roquetes",
+     "seccion": "Ver › Barrios",
+     "lat": 41.448644444,
+     "lon": 2.172030555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Bon Pastor",
+     "seccion": "Ver › Barrios",
+     "lat": 41.436347222,
+     "lon": 2.201327777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La caricia de un pájaro",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.36855556,
+     "lon": 2.15951389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Forum",
+     "seccion": "Ver › Museos",
+     "lat": 41.411013,
+     "lon": 2.220916,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Verneda i la Pau",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42195,
+     "lon": 2.205311111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque natural de Collserola",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.424444,
+     "lon": 2.108889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Bac de Roda",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.4162,
+     "lon": 2.1924,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de l'Ardiaca",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.384041666,
+     "lon": 2.175575,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Bordeta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.37049444,
+     "lon": 2.13709722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Horta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42950278,
+     "lon": 2.1601,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de Santa Ana",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38591,
+     "lon": 2.171409,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Arqueología de Cataluña (Barcelona)",
+     "seccion": "Ver › Museos",
+     "lat": 41.369719444,
+     "lon": 2.157780555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Lonja de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3822,
+     "lon": 2.1825,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla de Santa Ágata",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.384281,
+     "lon": 2.177498,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torres venecianas",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.374228811,
+     "lon": 2.149971166,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hyatt Regency Barcelona Tower",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.34611111,
+     "lon": 2.10833333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Cera de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.377381,
+     "lon": 2.177259,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Parc i la Llacuna del Poblenou",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39916667,
+     "lon": 2.19083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Camp de l'Arpa del Clot",
+     "seccion": "Ver › Barrios",
+     "lat": 41.41143333,
+     "lon": 2.1825,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Frederic Marès",
+     "seccion": "Ver › Museos",
+     "lat": 41.3844,
+     "lon": 2.17667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Baró de Viver",
+     "seccion": "Ver › Barrios",
+     "lat": 41.447905555,
+     "lon": 2.200741666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Centro de Cultura Contemporánea de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.38361111,
+     "lon": 2.16666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Font d'en Fargues",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42491667,
+     "lon": 2.16552778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Las Tres Torres",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39861111,
+     "lon": 2.13111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Montbau",
+     "seccion": "Ver › Barrios",
+     "lat": 41.430925,
+     "lon": 2.14296667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sant Genís dels Agudells",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42850556,
+     "lon": 2.13254722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Historia de Cataluña",
+     "seccion": "Ver › Museos",
+     "lat": 41.380688888,
+     "lon": 2.185569444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Valle de Hebrón",
+     "seccion": "Ver › Barrios",
+     "lat": 41.431624,
+     "lon": 2.148853,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vilapicina i La Torre Llobeta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.428761111,
+     "lon": 2.170872222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Turó de la Peira",
+     "seccion": "Ver › Barrios",
+     "lat": 41.433008333,
+     "lon": 2.165808333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sants-Badal",
+     "seccion": "Ver › Barrios",
+     "lat": 41.37527778,
+     "lon": 2.12666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Porta",
+     "seccion": "Ver › Barrios",
+     "lat": 41.43465,
+     "lon": 2.17494722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Font de la Guatlla",
+     "seccion": "Ver › Barrios",
+     "lat": 41.36968056,
+     "lon": 2.14481111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Prosperitat",
+     "seccion": "Ver › Barrios",
+     "lat": 41.442661111,
+     "lon": 2.181686111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Navas",
+     "seccion": "Ver › Barrios",
+     "lat": 41.415744444,
+     "lon": 2.1869,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gaixample",
+     "seccion": "Ver › Barrios",
+     "lat": 41.385913,
+     "lon": 2.160563,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Bellvitge",
+     "seccion": "Ver › Barrios",
+     "lat": 41.35083,
+     "lon": 2.11083,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Marina del Prat Vermell",
+     "seccion": "Ver › Barrios",
+     "lat": 41.35210278,
+     "lon": 2.13943611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Martín de Provensals",
+     "seccion": "Ver › Barrios",
+     "lat": 41.41722222,
+     "lon": 2.19805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Congrés i els Indians",
+     "seccion": "Ver › Barrios",
+     "lat": 41.425880555,
+     "lon": 2.180677777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vallcarca y los Penitentes",
+     "seccion": "Ver › Barrios",
+     "lat": 41.412778,
+     "lon": 2.143056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Templo de Augusto",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383416666,
+     "lon": 2.177194444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de la España Industrial",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.3775,
+     "lon": 2.14083333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Escuelas de la Sagrada Familia",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.403,
+     "lon": 2.17421,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Diseño de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.40222222,
+     "lon": 2.1875,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Lluís Companys",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.39,
+     "lon": 2.18204,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Trinitat Vella",
+     "seccion": "Ver › Barrios",
+     "lat": 41.45018,
+     "lon": 2.19136,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Beso de la Muerte",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.396224,
+     "lon": 2.204204,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Provençals del Poblenou",
+     "seccion": "Ver › Barrios",
+     "lat": 41.4094,
+     "lon": 2.20056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Lesseps",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.406983361,
+     "lon": 2.150246111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatre Grec",
+     "seccion": "Hacer",
+     "lat": 41.3694,
+     "lon": 2.15972,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de San Juan",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.400555555,
+     "lon": 2.168055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vallvidrera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.415,
+     "lon": 2.108611111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parc de les Aigües",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.41305556,
+     "lon": 2.16527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Salud",
+     "seccion": "Ver › Barrios",
+     "lat": 41.41247778,
+     "lon": 2.15143056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Teixonera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42313056,
+     "lon": 2.14585278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Can Peguera",
+     "seccion": "Ver › Barrios",
+     "lat": 41.4349,
+     "lon": 2.166188,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sant Gervasi-La Bonanova",
+     "seccion": "Ver › Barrios",
+     "lat": 41.40638889,
+     "lon": 2.13361111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Can Baró",
+     "seccion": "Ver › Barrios",
+     "lat": 41.416384,
+     "lon": 2.162356,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sant Gervasi-Galvany",
+     "seccion": "Ver › Barrios",
+     "lat": 41.39666667,
+     "lon": 2.14388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Baix Guinardó",
+     "seccion": "Ver › Barrios",
+     "lat": 41.40922778,
+     "lon": 2.16692222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vallvidrera, el Tibidabo i les Planes",
+     "seccion": "Ver › Barrios",
+     "lat": 41.416666666,
+     "lon": 2.1,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Putxet i el Farró",
+     "seccion": "Ver › Barrios",
+     "lat": 41.40555556,
+     "lon": 2.14527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parc del Fòrum",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.4114,
+     "lon": 2.225,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de Jonqueres",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38773,
+     "lon": 2.1742,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Pubilla Casas",
+     "seccion": "Ver › Barrios",
+     "lat": 41.374103,
+     "lon": 2.102582,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Robert",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.396185,
+     "lon": 2.15937,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Verdún",
+     "seccion": "Ver › Barrios",
+     "lat": 41.443333333,
+     "lon": 2.175,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Trinitat Nova",
+     "seccion": "Ver › Barrios",
+     "lat": 41.448580555,
+     "lon": 2.185247222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Cervantes",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.384392,
+     "lon": 2.105749,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Desconsuelo",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.387653,
+     "lon": 2.188077,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Marina de Port",
+     "seccion": "Ver › Barrios",
+     "lat": 41.35958333,
+     "lon": 2.14097222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Coll",
+     "seccion": "Ver › Barrios",
+     "lat": 41.41805556,
+     "lon": 2.14583333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Europeo de Arte Moderno",
+     "seccion": "Ver › Museos",
+     "lat": 41.38499167,
+     "lon": 2.18045833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museu Can Framis",
+     "seccion": "Ver › Museos",
+     "lat": 41.4031,
+     "lon": 2.195,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Gornal",
+     "seccion": "Ver › Barrios",
+     "lat": 41.355,
+     "lon": 2.11638889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capuchinos de Sarriá",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.393722,
+     "lon": 2.120173,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Belén (Barcelona)",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383092,
+     "lon": 2.171248,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Topos V",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.384,
+     "lon": 2.1774,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Paseo de Colón",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.376666666,
+     "lon": 2.178611111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Olímpico y del Deporte Juan Antonio Samaranch",
+     "seccion": "Ver › Museos",
+     "lat": 41.366331,
+     "lon": 2.157064,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de la Purísima Concepción",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.394831095,
+     "lon": 2.167384719,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Principal",
+     "seccion": "Hacer",
+     "lat": 41.3786,
+     "lon": 2.17528,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de San José Oriol",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383632,
+     "lon": 2.157872,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sinagoga de la Comunidad Israelita de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.396666666,
+     "lon": 2.148055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Municipal de Fútbol de L'Hospitalet",
+     "seccion": "Hacer",
+     "lat": 41.3469,
+     "lon": 2.10167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Diagonal Mar",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.407413,
+     "lon": 2.213856,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de los santos Justo y Pastor",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.38277778,
+     "lon": 2.17805556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Majestic (Barcelona)",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.393520355,
+     "lon": 2.163976907,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Llucmajor",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.438347,
+     "lon": 2.174616,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle de Balmes",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.39924,
+     "lon": 2.15044,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de la Creueta del Coll",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.4189,
+     "lon": 2.14667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Borne",
+     "seccion": "Ver › Barrios",
+     "lat": 41.385555555,
+     "lon": 2.184166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado del Born",
+     "seccion": "Comprar › Mercados",
+     "lat": 41.38539722,
+     "lon": 2.1841,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Clota",
+     "seccion": "Ver › Barrios",
+     "lat": 41.42944444,
+     "lon": 2.15361111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Villa de Gracia",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.40011,
+     "lon": 2.15765,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo erótico de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.38216,
+     "lon": 2.17264,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Internacional",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37907,
+     "lon": 2.18093,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sala de las cien columnas",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.41375,
+     "lon": 2.152778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque del Guinardó",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.419536,
+     "lon": 2.169669,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Francesc Macià",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.392722222,
+     "lon": 2.144522222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Bellas Artes de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.388735,
+     "lon": 2.182588,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Egipcio de Barcelona",
+     "seccion": "Ver › Museos",
+     "lat": 41.39365,
+     "lon": 2.164761111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Hotel Catalonia",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.356372833,
+     "lon": 2.123102903,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fundación Suñol",
+     "seccion": "Ver › Museos",
+     "lat": 41.382555555,
+     "lon": 2.126416666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Macaya",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.3998,
+     "lon": 2.16943,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Albéniz",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.367457,
+     "lon": 2.155957,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Can Serra",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.395511,
+     "lon": 2.157672,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle de Ferran",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 41.381536,
+     "lon": 2.175686,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Canyelles",
+     "seccion": "Ver › Barrios",
+     "lat": 41.442684,
+     "lon": 2.166015,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Padellás",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.383997,
+     "lon": 2.177635,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de los Países Catalanes",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37996,
+     "lon": 2.14186,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pabellón de la Vall d'Hebron",
+     "seccion": "Hacer",
+     "lat": 41.4279,
+     "lon": 2.1451,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado de San Antonio",
+     "seccion": "Comprar › Mercados",
+     "lat": 41.37861111,
+     "lon": 2.16208333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de la Estación del Norte",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 41.39359,
+     "lon": 2.18414,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vapor Vell de Sants",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.376944,
+     "lon": 2.134722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Episcopal de Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.384036,
+     "lon": 2.175097,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Trinxet",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.39416667,
+     "lon": 2.15666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Textil y de la Indumentaria",
+     "seccion": "Ver › Museos",
+     "lat": 41.385058333,
+     "lon": 2.180886111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Metalurgia",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.372598,
+     "lon": 2.149855,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Europa",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.357049,
+     "lon": 2.124813,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "World Trade Center Barcelona",
+     "seccion": "Ver › Monumentos",
+     "lat": 41.37134,
+     "lon": 2.18167,
+     "origen": "wikidata"
     }
    ],
    "sinUbicar": [
@@ -1655,6 +6436,489 @@
      "lat": 37.1848238,
      "lon": -3.5927467,
      "origen": "osm"
+    },
+    {
+     "nombre": "Alhambra",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.17634,
+     "lon": -3.58821,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Generalife",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.176944444,
+     "lon": -3.585277777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Albaicín",
+     "seccion": "Ver › Barrios",
+     "lat": 37.1817,
+     "lon": -3.5983,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "S.A.I. Catedral Metropolitana de la Encarnación",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.17599,
+     "lon": -3.59904,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Nuevo Estadio de Los Cármenes",
+     "seccion": "Hacer",
+     "lat": 37.152967,
+     "lon": -3.595736,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Capilla Real de Granada",
+     "seccion": "Ver › Museos",
+     "lat": 37.175986111,
+     "lon": -3.599036111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Carlos V",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176944,
+     "lon": -3.589444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Madraza de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176058906,
+     "lon": -3.598270103,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de la Cartuja",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.191923009,
+     "lon": -3.599527981,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Deportes de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.15349054,
+     "lon": -3.594049228,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Partal",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.177391,
+     "lon": -3.588502,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Corral del Carbón",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.17492722,
+     "lon": -3.59797634,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de San Juan de Dios",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.18025171,
+     "lon": -3.603350093,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sacromonte",
+     "seccion": "Ver › Barrios",
+     "lat": 37.18083333,
+     "lon": -3.59277778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mezquita Mayor de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.181416666,
+     "lon": -3.592,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Jerónimo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.179112964,
+     "lon": -3.6043793,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Huerta de San Vicente",
+     "seccion": "Ver › Museos",
+     "lat": 37.170475177,
+     "lon": -3.609327946,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Dar-Al-Horra",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.181654018,
+     "lon": -3.596358398,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque Federico García Lorca",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.1706,
+     "lon": -3.60944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alcázar Genil",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.164716465,
+     "lon": -3.600602266,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Arqueológico y Etnológico de Granada",
+     "seccion": "Ver › Museos",
+     "lat": 37.17865,
+     "lon": -3.5915833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de Castril",
+     "seccion": "Ver › Museos",
+     "lat": 37.178951939,
+     "lon": -3.5914838,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Provincial de Bellas Artes",
+     "seccion": "Ver › Museos",
+     "lat": 37.177008627,
+     "lon": -3.589683087,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Olvidados",
+     "seccion": "Ver › Museos",
+     "lat": 37.1785,
+     "lon": -3.5938,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Abadía del Sacromonte",
+     "seccion": "Ver › Museos",
+     "lat": 37.182822698,
+     "lon": -3.577197023,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Pedro y San Pablo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.17855,
+     "lon": -3.59168,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia del Sagrario",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176,
+     "lon": -3.599,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alcaicería de Granada",
+     "seccion": "Comprar › Mercados",
+     "lat": 37.175888888,
+     "lon": -3.598388888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mexuar de la Alhambra",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.177388,
+     "lon": -3.590015,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alcazaba de la Alhambra",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176949048,
+     "lon": -3.591781247,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta de Bibarrambla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.175358008,
+     "lon": -3.589459437,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cuarto Real de Santo Domingo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.171523334,
+     "lon": -3.594990263,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Francisco",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.175823039,
+     "lon": -3.587259305,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Sefardí de Granada",
+     "seccion": "Ver › Museos",
+     "lat": 37.175251289,
+     "lon": -3.594834025,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Nicolás",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1813339,
+     "lon": -3.59253244,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Chancillería de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.177441867,
+     "lon": -3.595723844,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacios nazaríes de la Alhambra",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1769,
+     "lon": -3.58988,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa del Chapiz",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.181038745,
+     "lon": -3.588451995,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Abrantes",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.175240367,
+     "lon": -3.597925707,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de la Alhambra",
+     "seccion": "Ver › Museos",
+     "lat": 37.1767562,
+     "lon": -3.5899137,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de la Cautiva",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176198,
+     "lon": -3.586278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardín Botánico de la Universidad de Granada",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 37.17777778,
+     "lon": -3.6025,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Convento de Santa Isabel la Real",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.181080328,
+     "lon": -3.596360758,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de la Alcazaba Cadima",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.18166667,
+     "lon": -3.59444444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de las Ciencias",
+     "seccion": "Ver › Museos",
+     "lat": 37.162576,
+     "lon": -3.606149,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de toros de Granada",
+     "seccion": "Hacer",
+     "lat": 37.189072389,
+     "lon": -3.607667835,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta de Fajalauza",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.18622222,
+     "lon": -3.59152778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento a Isabel la Católica y Cristóbal Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.175636111,
+     "lon": -3.597427777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de Nuestra Señora de las Angustias",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.169877,
+     "lon": -3.597112,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta Real",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.17372222,
+     "lon": -3.59966667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Cadí",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.178247311,
+     "lon": -3.592678905,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Cristóbal",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.18336,
+     "lon": -3.59642,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Café Alameda (Granada)",
+     "seccion": "Comer",
+     "lat": 37.1723,
+     "lon": -3.59817,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa Ana",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.177466061,
+     "lon": -3.594496144,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de los Tiros",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.174819559,
+     "lon": -3.595381005,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santo Domingo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1730264,
+     "lon": -3.5945504,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Colegiata del Salvador",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.182220182,
+     "lon": -3.591210308,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Miguel Bajo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.181656,
+     "lon": -3.595314,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Congresos de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1655993,
+     "lon": -3.59829765,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Silla del Moro",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.17833333,
+     "lon": -3.58388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Maestranza de Caballería de Granada",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1767599,
+     "lon": -3.602184401,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Bernardo",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.178852822,
+     "lon": -3.591172496,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Condes de la Jarosa",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.1748,
+     "lon": -3.6032,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puerta Monaita",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.18201179,
+     "lon": -3.597550982,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Bib-Rambla",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.175277777,
+     "lon": -3.599722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Nueva",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.176836111,
+     "lon": -3.596055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cortijo de los Cipreses",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.206966666,
+     "lon": -3.622458333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Carmen de la Fundación Rodríguez Acosta",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.174821264,
+     "lon": -3.592010015,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de Gabia la Grande",
+     "seccion": "Ver › Monumentos",
+     "lat": 37.136480766,
+     "lon": -3.668630713,
+     "origen": "wikidata"
     }
    ],
    "sinUbicar": [
@@ -2010,6 +7274,1756 @@
      "lat": 39.4962831,
      "lon": -0.3534073,
      "origen": "osm"
+    },
+    {
+     "nombre": "Campo de Mestalla",
+     "seccion": "Hacer",
+     "lat": 39.474722,
+     "lon": -0.358333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ciudad de las Artes y las Ciencias",
+     "seccion": "Ver › Museos",
+     "lat": 39.454527777,
+     "lon": -0.350363888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Catedral de Santa María de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.475611111,
+     "lon": -0.375138888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio Ciudad de Valencia",
+     "seccion": "Hacer",
+     "lat": 39.494722,
+     "lon": -0.364167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de las Artes Reina Sofía",
+     "seccion": "Hacer",
+     "lat": 39.45778,
+     "lon": -0.35556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Nou Mestalla",
+     "seccion": "Hacer",
+     "lat": 39.489444,
+     "lon": -0.396389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Oceanográfico",
+     "seccion": "Hacer",
+     "lat": 39.452866666,
+     "lon": -0.348047222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torres de Serranos",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4793,
+     "lon": -0.375933,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Bellas Artes de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.479166666,
+     "lon": -0.370833333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de las Ciencias Príncipe Felipe",
+     "seccion": "Ver › Museos",
+     "lat": 39.455798,
+     "lon": -0.35155,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de toros de Valencia",
+     "seccion": "Hacer",
+     "lat": 39.466667,
+     "lon": -0.37625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado Central de Valencia",
+     "seccion": "Comprar › Mercados",
+     "lat": 39.473503,
+     "lon": -0.378942,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torres de Quart",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47568611,
+     "lon": -0.383975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de l'Assut de l'Or",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.454805555,
+     "lon": -0.349638888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre del Miguelete",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.474969,
+     "lon": -0.375497,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardín del Turia",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.4801,
+     "lon": -0.386109,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Generalidad Valenciana",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4767,
+     "lon": -0.376689,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'ETNO, Museu Valencià d'Etnologia",
+     "seccion": "Ver › Museos",
+     "lat": 39.478422222,
+     "lon": -0.383127777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Roig Arena",
+     "seccion": "Hacer",
+     "lat": 39.449211111,
+     "lon": -0.364261111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Nicolás de Bari y San Pedro Mártir",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47613333,
+     "lon": -0.37883611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa Catalina, Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47407778,
+     "lon": -0.37655,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Basílica de la Virgen de los Desamparados",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476211,
+     "lon": -0.374817,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado de Colón",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46885,
+     "lon": -0.368364,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Instituto Valenciano de Arte Moderno",
+     "seccion": "Ver › Museos",
+     "lat": 39.48,
+     "lon": -0.38277778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Umbracle",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.45547222,
+     "lon": -0.35400833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Velódromo Luis Puig",
+     "seccion": "Hacer",
+     "lat": 39.500639,
+     "lon": -0.427333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de los Santos Juanes",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47421667,
+     "lon": -0.37915833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de la Música de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.46611111,
+     "lon": -0.36027778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque Gulliver",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.4625,
+     "lon": -0.35966667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de la Malvarrosa",
+     "seccion": "Ver › Playas",
+     "lat": 39.479166666,
+     "lon": -0.323055555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Esteban",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47613056,
+     "lon": -0.37315833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Marqués de Dos Aguas",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.472638888,
+     "lon": -0.374722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Prehistoria de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.478419444,
+     "lon": -0.383130555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza del Ayuntamiento",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.470378221,
+     "lon": -0.376351723,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Bioparc València",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.478019444,
+     "lon": -0.407502777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Nacional de Cerámica y de las Artes Suntuarias González Martí",
+     "seccion": "Ver › Museos",
+     "lat": 39.472694444,
+     "lon": -0.374722222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Real Colegio Seminario del Corpus Christi",
+     "seccion": "Ver › Museos",
+     "lat": 39.4725,
+     "lon": -0.37333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Benicarló",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47784722,
+     "lon": -0.37463889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de las Flores - Alcaldesa Rita Barberá",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.471175,
+     "lon": -0.364155555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Benimàmet",
+     "seccion": "Ver › Barrios",
+     "lat": 39.5,
+     "lon": -0.41666667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa consistorial de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.469836,
+     "lon": -0.376989,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Reina",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.474444,
+     "lon": -0.375478,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de las Arenas",
+     "seccion": "Ver › Playas",
+     "lat": 39.46916389,
+     "lon": -0.32250833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Port Saplaya",
+     "seccion": "Ver › Barrios",
+     "lat": 39.511666666,
+     "lon": -0.321388888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Justicia de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47197222,
+     "lon": -0.36975833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Virgen",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476364,
+     "lon": -0.375292,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de Paterna",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.5029,
+     "lon": -0.439997,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio - Castillo de Alacuás",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.457825,
+     "lon": -0.45680278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Convento de Santo Domingo",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.474166666,
+     "lon": -0.368888888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardín Botánico de la Universidad de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.475482577,
+     "lon": -0.386326025,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Ciencias Naturales de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.47933056,
+     "lon": -0.36893889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Historia de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.4726,
+     "lon": -0.408222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo del Patriarca",
+     "seccion": "Ver › Museos",
+     "lat": 39.472361,
+     "lon": -0.373083,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Portal de la Valldigna",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47753611,
+     "lon": -0.37872778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Principal",
+     "seccion": "Hacer",
+     "lat": 39.4705,
+     "lon": -0.374458,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ruzafa",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4625,
+     "lon": -0.37194444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torrefiel",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4969,
+     "lon": -0.380833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de la Exposición",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4731,
+     "lon": -0.365981,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Nau",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47194444,
+     "lon": -0.37277778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Miguel de los Reyes",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.498975,
+     "lon": -0.3692,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Castellar-Oliveral",
+     "seccion": "Ver › Barrios",
+     "lat": 39.426388888,
+     "lon": -0.364166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fuente Pública",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.457583333,
+     "lon": -0.37625,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Guerrero de Mogente",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.478422222,
+     "lon": -0.383127777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de la Almoina",
+     "seccion": "Ver › Museos",
+     "lat": 39.476258,
+     "lon": -0.374156,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cabañal-Cañamelar",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4689,
+     "lon": -0.332778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque de Marchalenes",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.48680278,
+     "lon": -0.38227778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Horno de Alcedo",
+     "seccion": "Ver › Barrios",
+     "lat": 39.431919444,
+     "lon": -0.376422222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Beniferri",
+     "seccion": "Ver › Barrios",
+     "lat": 39.495833333,
+     "lon": -0.405277777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Real de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.478027777,
+     "lon": -0.367,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Ripalda",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47713056,
+     "lon": -0.36651944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Juan del Hospital (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47429167,
+     "lon": -0.37291389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Monasterio del Temple",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476464,
+     "lon": -0.371239,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Princesa",
+     "seccion": "Hacer",
+     "lat": 39.475325,
+     "lon": -0.38116944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Real",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47649167,
+     "lon": -0.36869444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de los Dragones",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.470212,
+     "lon": -0.36974,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio del Banco de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47052222,
+     "lon": -0.37361667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Feria Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.503914,
+     "lon": -0.425825,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Iber, Museo de los soldaditos de plomo",
+     "seccion": "Ver › Museos",
+     "lat": 39.47676667,
+     "lon": -0.3781,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardín de Monforte",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.477467,
+     "lon": -0.364856,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de Pinedo",
+     "seccion": "Ver › Playas",
+     "lat": 39.420047222,
+     "lon": -0.333622222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parotet",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.460133,
+     "lon": -0.35345,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Torre",
+     "seccion": "Ver › Barrios",
+     "lat": 39.433888888,
+     "lon": -0.391388888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pinedo",
+     "seccion": "Ver › Barrios",
+     "lat": 39.421944444,
+     "lon": -0.339166666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sant Pau",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4876,
+     "lon": -0.404219,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Zoo de Valencia",
+     "seccion": "Hacer",
+     "lat": 39.481212329,
+     "lon": -0.367929147,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de Manises",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47686667,
+     "lon": -0.37646667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Grao",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4602,
+     "lon": -0.331897,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Carmen",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47781111,
+     "lon": -0.38034167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Campanar",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4847,
+     "lon": -0.395,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Almoina",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.475666666,
+     "lon": -0.374472222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Colegio Guadalaviar",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4751,
+     "lon": -0.3556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Almudín de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476536,
+     "lon": -0.373708,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Aragón",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46889722,
+     "lon": -0.36276111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Pont de Fusta",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47994722,
+     "lon": -0.37418333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente de Serranos",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.48062222,
+     "lon": -0.37537222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Mar",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.470263888,
+     "lon": -0.363675,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Nuestra Señora del Olivar",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4568,
+     "lon": -0.461272,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Playa de La Patacona",
+     "seccion": "Ver › Playas",
+     "lat": 39.4895,
+     "lon": -0.3241,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de las Rocas",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47904444,
+     "lon": -0.37678889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza Redonda",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4736,
+     "lon": -0.3766,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre adosada al lienzo de muralla árabe entre las calles Angel y Beneito Coll",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.478161,
+     "lon": -0.3777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida de Blasco Ibáñez",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.4773,
+     "lon": -0.359056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia parroquial de la Asunción",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4575,
+     "lon": -0.456731,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque Científico de la Universidad de Valencia",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.5161,
+     "lon": -0.42233,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Beteró",
+     "seccion": "Ver › Barrios",
+     "lat": 39.468781,
+     "lon": -0.3328,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ciutat Jardí",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4704,
+     "lon": -0.344953,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Chapa",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.468625,
+     "lon": -0.36624722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Fallero de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.459072251,
+     "lon": -0.358959246,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Fosas de Paterna",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.5095971,
+     "lon": -0.4405806,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Pineda",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47893,
+     "lon": -0.37867,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monumento a Jaime I",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.471886,
+     "lon": -0.370585,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Termas romanas de Valentia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.466666666,
+     "lon": -0.375,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de la Serena",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.5307,
+     "lon": -0.385053,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa de la Ciudad (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476582,
+     "lon": -0.375872,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Marqués de Campo",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476025,
+     "lon": -0.37384167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacete de Ayora",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46836111,
+     "lon": -0.34400278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Cervellón",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.474233,
+     "lon": -0.370328,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Vicente de la Roqueta",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46436667,
+     "lon": -0.38208611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Juan de la Cruz",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47209444,
+     "lon": -0.37463611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Nuestra Señora de la Misericordia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.48192222,
+     "lon": -0.39745,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Nuestra Señora del Don",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.42231667,
+     "lon": -0.38979444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Nuestra Señora del Pilar y San Lorenzo",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47151944,
+     "lon": -0.38323333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Martín y San Antonio",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47315278,
+     "lon": -0.37565833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santa Catalina y San Agustín",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.468625,
+     "lon": -0.38013333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia del Santísimo Cristo del Salvador",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47722222,
+     "lon": -0.37388889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de la Casa Palacio de los Boíl",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.519444444,
+     "lon": -0.410555555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Catalá de Valeriola",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47759722,
+     "lon": -0.3753,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Escrivà",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476525,
+     "lon": -0.37371667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Condes de Peñalba",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47079722,
+     "lon": -0.37321389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Marqués de la Scala",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47705,
+     "lon": -0.376275,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio del Almirante (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47514722,
+     "lon": -0.37329722,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de Fuentehermosa",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47643889,
+     "lon": -0.37653333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio y Teatro Olympia",
+     "seccion": "Hacer",
+     "lat": 39.47091389,
+     "lon": -0.37801389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Carrasca",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4788,
+     "lon": -0.342164,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Creu del Grau",
+     "seccion": "Ver › Barrios",
+     "lat": 39.46190833,
+     "lon": -0.34466389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mestalla",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4721,
+     "lon": -0.359136,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de San Honorato",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.536869444,
+     "lon": -0.370313888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Aqua Multiespacio",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.45653,
+     "lon": -0.34619,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de Santo Tomás y San Felipe Neri",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47405556,
+     "lon": -0.37243611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Cortina Pérez",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47042222,
+     "lon": -0.366975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Suay",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46997222,
+     "lon": -0.37563333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio del Ateneo Mercantil",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47094722,
+     "lon": -0.37603056,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Finca Roja",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46337778,
+     "lon": -0.38481667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sindicato Arrocero de Alfafar",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.42188611,
+     "lon": -0.38967222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Vestuario",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476,
+     "lon": -0.375419,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Ferrer",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.467194,
+     "lon": -0.372203,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antigua fábrica de seda de Vinalesa",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.539678,
+     "lon": -0.370139,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Na Jordana",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.47991111,
+     "lon": -0.38125833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Albors",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4686,
+     "lon": -0.352892,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Punta",
+     "seccion": "Ver › Barrios",
+     "lat": 39.446,
+     "lon": -0.339642,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Safranar",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4585,
+     "lon": -0.396839,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Calvari",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4867,
+     "lon": -0.389736,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Mercat",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47339722,
+     "lon": -0.37904444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Pilar (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47276389,
+     "lon": -0.38206944,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Favara (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4548,
+     "lon": -0.393383,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gran Vía",
+     "seccion": "Ver › Barrios",
+     "lat": 39.464325,
+     "lon": -0.36992778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jaume Roig (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4807,
+     "lon": -0.363322,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Hort de Senabre",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4524,
+     "lon": -0.390861,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Bega Baixa",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47653611,
+     "lon": -0.34986667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Luz (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.467342,
+     "lon": -0.415353,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Petxina",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4735,
+     "lon": -0.391303,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Seu",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47627778,
+     "lon": -0.37529167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Xerea",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47449722,
+     "lon": -0.37235278,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Les Tendetes",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4831,
+     "lon": -0.385497,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Malilla",
+     "seccion": "Ver › Barrios",
+     "lat": 39.448206,
+     "lon": -0.375389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Na Rovella",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4523,
+     "lon": -0.368169,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Penya-Roja",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4586,
+     "lon": -0.349225,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Isidro (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4519,
+     "lon": -0.402908,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Francisco",
+     "seccion": "Ver › Barrios",
+     "lat": 39.47078611,
+     "lon": -0.37399444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Lorenzo (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.491,
+     "lon": -0.365681,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Tormos",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4891,
+     "lon": -0.379028,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Botánico",
+     "seccion": "Ver › Barrios",
+     "lat": 39.475148,
+     "lon": -0.385946,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle de la Paz",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.47330556,
+     "lon": -0.37319444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Prisión Modelo de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47166667,
+     "lon": -0.40405,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "El Pla del Remei",
+     "seccion": "Ver › Barrios",
+     "lat": 39.46869444,
+     "lon": -0.36901667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Raiosa",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4574,
+     "lon": -0.386978,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Camí de Vera",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4868,
+     "lon": -0.351219,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Illa Perduda",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4698,
+     "lon": -0.340878,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Estadio de Vallejo",
+     "seccion": "Hacer",
+     "lat": 39.482542,
+     "lon": -0.371152,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Santa María Micaela",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.472072,
+     "lon": -0.392869,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Historia de Benetússer",
+     "seccion": "Ver › Museos",
+     "lat": 39.423116,
+     "lon": -0.40261,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Baylía",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.477222222,
+     "lon": -0.376666666,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardines del Real",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.48055833,
+     "lon": -0.36821111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de la Asunción de Nuestra Señora",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.500206,
+     "lon": -0.349887,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de la Asunción de Nuestra Señora",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.537916666,
+     "lon": -0.356805555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de la Zaidía",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.483323,
+     "lon": -0.38092,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Taurino de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.466194444,
+     "lon": -0.375694444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Antiguo Convento del Carmen (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47968889,
+     "lon": -0.37900556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Torre de San Bartolomé",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47720278,
+     "lon": -0.37689444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Lladró",
+     "seccion": "Ver › Museos",
+     "lat": 39.503908055,
+     "lon": -0.362206111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de Cerámica de Paterna",
+     "seccion": "Ver › Museos",
+     "lat": 39.501118888,
+     "lon": -0.441181111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de la Semana Santa Marinera",
+     "seccion": "Ver › Museos",
+     "lat": 39.463166666,
+     "lon": -0.331944444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Valenciano de la Ilustración y la Modernidad",
+     "seccion": "Ver › Museos",
+     "lat": 39.469722222,
+     "lon": -0.381111111,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Vivanco",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4031,
+     "lon": -0.403628,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Mercado de Abastos de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46785556,
+     "lon": -0.38813611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Atarazanas del Grao",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.461344,
+     "lon": -0.333552,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita dels Peixets",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.50159167,
+     "lon": -0.325,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de San Bernardo de Rascanya",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.49944444,
+     "lon": -0.36916667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Benimaclet (barrio)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.486667,
+     "lon": -0.36,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Vara de Quart",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4602,
+     "lon": -0.405336,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Morvedre (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4849,
+     "lon": -0.374683,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "San Antonio (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4889,
+     "lon": -0.373192,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Terramelar",
+     "seccion": "Ver › Barrios",
+     "lat": 39.507980555,
+     "lon": -0.428708333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de Santa Bárbara",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.540808333,
+     "lon": -0.370777777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Alameda de Valencia",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.47419444,
+     "lon": -0.36463889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Puente del Reino de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.461763,
+     "lon": -0.359075,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo Histórico Municipal de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.469583333,
+     "lon": -0.377472222,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida Pío XII",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.48251389,
+     "lon": -0.39375833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Boil de Arenós",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47260278,
+     "lon": -0.373975,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio de los Condes de Villapaterna",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.500761,
+     "lon": -0.439397,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Patio del Embajador Vich",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.479261,
+     "lon": -0.370714,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Martí Cortina",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47076389,
+     "lon": -0.37944167,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia del Santísimo Sacramento",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.51194444,
+     "lon": -0.35583333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia Parroquial de San Miguel y San Sebastián, o Iglesia de San Miguel o Antiguo Convento de San Francisco de Paula",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4751,
+     "lon": -0.386956,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia Nuestra Señora de la Misericordia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.530615,
+     "lon": -0.352287,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Santuario de San Onofre",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4831,
+     "lon": -0.451136,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Valencia Parque Central",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.458138888,
+     "lon": -0.380358333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Parque Municipal de Orriols",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.49305556,
+     "lon": -0.36527778,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Museo de la Ciudad de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.476,
+     "lon": -0.373842,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa-Museo de Blasco Ibáñez",
+     "seccion": "Ver › Museos",
+     "lat": 39.48268056,
+     "lon": -0.32593889,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Edificio Roig Vives",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46795278,
+     "lon": -0.37945556,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Finca de Hierro",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46879722,
+     "lon": -0.37959444,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Salón de Racionistas",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4804,
+     "lon": -0.378106,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Teatro Talía",
+     "seccion": "Hacer",
+     "lat": 39.47652778,
+     "lon": -0.37806389,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monasterio de la Trinidad (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.480161111,
+     "lon": -0.372102777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "En Corts",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4556,
+     "lon": -0.371158,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "L'Amistat",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4725,
+     "lon": -0.351564,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Cruz Cubierta",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4479,
+     "lon": -0.3857,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "La Fuensanta (Valencia)",
+     "seccion": "Ver › Barrios",
+     "lat": 39.465277777,
+     "lon": -0.408333333,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Monteolivete",
+     "seccion": "Ver › Barrios",
+     "lat": 39.458661,
+     "lon": -0.361603,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Plaza de la Puerta del Mar",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.472184797,
+     "lon": -0.368410564,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Serranos",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.477775,
+     "lon": -0.37670833,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle Caballeros",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.4766,
+     "lon": -0.378642,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Gran Via del Marqués del Túria",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.46691667,
+     "lon": -0.36916667,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Calle de Quart",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.475806,
+     "lon": -0.383611,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Sala Parpalló",
+     "seccion": "Ver › Museos",
+     "lat": 39.478308055,
+     "lon": -0.383253055,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Jardines de la Glorieta",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.47279722,
+     "lon": -0.369425,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Instituto Lluís Vives",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.468231,
+     "lon": -0.377175,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Iglesia de las Escuelas Pías (Valencia)",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.473805555,
+     "lon": -0.381805555,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa natalicia de San Luis Bertrán",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.476401,
+     "lon": -0.37347,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida del Oeste",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.4722,
+     "lon": -0.379806,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Avenida de Baleares",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 39.4613,
+     "lon": -0.349544,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de San Cristóbal",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.50202,
+     "lon": -0.339075,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de Santa Bárbara",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.508811,
+     "lon": -0.333702,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de San Miguel",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.466272222,
+     "lon": -0.462102777,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Ermita de la Virgen de la Saleta",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.463647222,
+     "lon": -0.466738888,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Palacio Arzobispal de Valencia",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.4752,
+     "lon": -0.374197,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Cine Rialto",
+     "seccion": "Hacer",
+     "lat": 39.470978,
+     "lon": -0.376303,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Ribes",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.46630556,
+     "lon": -0.325425,
+     "origen": "wikidata"
+    },
+    {
+     "nombre": "Casa Sancho",
+     "seccion": "Ver › Monumentos",
+     "lat": 39.47322778,
+     "lon": -0.37243333,
+     "origen": "wikidata"
     }
    ],
    "sinUbicar": [

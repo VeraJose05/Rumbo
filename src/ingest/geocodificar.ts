@@ -24,7 +24,7 @@ interface LugarConCoordenadas {
   lat: number;
   lon: number;
   /** De dónde salen las coordenadas: OpenStreetMap (Nominatim) o Wikipedia. */
-  origen?: 'osm' | 'wikipedia';
+  origen?: 'osm' | 'wikipedia' | 'wikidata';
 }
 interface Destino {
   centro: [number, number];
@@ -167,6 +167,8 @@ for (const [destino, lugares] of porDestino) {
     }
     process.stdout.write(resultado ? '·' : articulo ? 'w' : 'x');
   }
+  // Los lugares que vienen de Wikidata (npm run ingesta:wikipedia) ya traen sus coordenadas.
+  destinoSalida.lugares.push(...(previo?.lugares.filter((l) => l.origen === 'wikidata') ?? []));
   salida.destinos[destino] = destinoSalida;
   console.log(`\n${destino}: ${destinoSalida.lugares.length} de ${lugares.size} lugares ubicados`);
   // Se guarda tras cada ciudad: si algo falla a mitad, lo hecho no se pierde.
