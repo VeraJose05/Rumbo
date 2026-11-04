@@ -1,7 +1,7 @@
 // RF-05, RF-06, RF-11, RF-12: el itinerario como un camino por días, con una parada por actividad
 // (mañana, tarde y noche) al estilo de los niveles de un juego. Cada parada abre su postal con la
 // cita de la guía, y la barra de abajo ajusta el plan por mensaje.
-import { ArrowRight, BookOpen, Flag, Hand, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
+import { ArrowRight, BookOpen, Check, Flag, Hand, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { DESTINOS_PORTADA } from '../datos/destinos';
 import { ajustar, type Viaje } from '../viaje/ajustar';
@@ -274,7 +274,7 @@ function ParadaCamino({ parada, lado, visitado, onAbrir }: PropsParada) {
       <span className={`parada-hito franja-${parada.franja.id}`} aria-hidden="true">
         <Icono />
       </span>
-      <button type="button" className="parada-postal" onClick={onAbrir}>
+      <button type="button" className={`parada-postal${visitado ? ' visitada' : ''}`} onClick={onAbrir}>
         <span className="washi" />
         <span className="parada-franja">{parada.franja.nombre}</span>
         <span className="parada-lugar">{parada.actividad.lugar}</span>
@@ -282,7 +282,8 @@ function ParadaCamino({ parada, lado, visitado, onAbrir }: PropsParada) {
         {etiqueta && <span className={etiqueta.tipo === 'guia' ? 'verificado' : 'sin-fuente'}>{etiqueta.tipo === 'guia' ? `✓ ${etiqueta.texto}` : etiqueta.texto}</span>}
         {visitado && (
           <span className="sello parada-visitada" aria-label="Visitado">
-            ¡Visitado!
+            <Check className="icono" aria-hidden="true" />
+            visto
           </span>
         )}
       </button>

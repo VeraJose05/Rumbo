@@ -462,33 +462,62 @@
 
 /* ---------- Check-in: sello «¡Visitado!» ---------- */
 
+.postal-lugar-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.postal-lugar-cabecera .titulo {
+  flex: 1;
+  min-width: 0;
+}
 .postal-lugar-papel .sello-visitado {
-  position: absolute;
-  top: 70px;
-  right: 22px;
-  --tam: 96px;
-  --giro: 14deg;
+  flex: none;
+  --tam: 74px;
+  --giro: 12deg;
+  gap: 0;
+  align-content: center;
+  padding: 6px;
   color: var(--olivo);
-  font-size: 14px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  outline-offset: -7px;
   mix-blend-mode: normal;
-  background: rgb(255 246 236 / 0.7);
   animation: sellar-visita 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+.sello-visitado .icono {
+  width: 22px;
+  height: 22px;
 }
 @keyframes sellar-visita {
   from {
     opacity: 0;
-    transform: rotate(14deg) scale(2.2);
+    transform: rotate(12deg) scale(2.2);
   }
+}
+/* En el camino: sello pequeño con ✓ en la esquina, con hueco reservado para no pisar el texto. */
+.parada-postal.visitada {
+  padding-right: 64px;
 }
 .parada-postal .parada-visitada {
   position: absolute;
+  top: 10px;
   right: 8px;
-  bottom: 8px;
-  --tam: 58px;
+  --tam: 50px;
   --giro: -12deg;
-  padding: 6px;
-  font-size: 9px;
+  padding: 4px;
+  gap: 0;
+  align-content: center;
+  font-size: 8px;
+  letter-spacing: 0.04em;
   color: var(--olivo);
+  outline-offset: -6px;
+  mix-blend-mode: normal;
+}
+.parada-visitada .icono {
+  width: 18px;
+  height: 18px;
 }
 
 /* Ayuda la primera vez: qué se puede hacer en esta pantalla. */

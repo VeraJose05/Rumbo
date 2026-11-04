@@ -1,6 +1,6 @@
 // RF-06, RF-12: postal de un lugar del itinerario: qué hacer, la línea literal de la guía de donde
 // sale (con su fuente y licencia) y la opción de quitarlo del plan.
-import { Stamp, Trash, X } from 'lucide-react';
+import { Check, Stamp, Trash, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { Itinerario as TipoItinerario } from '../viaje/itinerario';
 import { citaDeLugar, etiquetaVerificacion, recortarCita } from '../viaje/postal';
@@ -45,9 +45,18 @@ export function PostalLugar({ parada, itinerario, onCerrar, onQuitar, visitado, 
         <p className="antetitulo">
           Día {parada.dia} · {parada.franja.nombre}
         </p>
-        <h2 id="postal-titulo" className="titulo">
-          {actividad.lugar}
-        </h2>
+        <div className="postal-lugar-cabecera">
+          <h2 id="postal-titulo" className="titulo">
+            {actividad.lugar}
+          </h2>
+          {/* Al lado del título, no encima: el sello no tapa nada. */}
+          {visitado && (
+            <span className="sello sello-visitado" aria-hidden="true">
+              <Check className="icono" />
+              visitado
+            </span>
+          )}
+        </div>
         {etiqueta && <span className={etiqueta.tipo === 'guia' ? 'verificado' : 'sin-fuente'}>{etiqueta.tipo === 'guia' ? `✓ ${etiqueta.texto}` : etiqueta.texto}</span>}
         <p className="postal-que-hacer">{actividad.descripcion}</p>
 
@@ -73,17 +82,12 @@ export function PostalLugar({ parada, itinerario, onCerrar, onQuitar, visitado, 
 
         <div className="postal-botones">
           <button type="button" className="boton" onClick={() => onCheckIn(cita?.seccion ?? 'Otro')} disabled={visitado}>
-            <Stamp className="icono" aria-hidden="true" /> {visitado ? 'En tu pasaporte' : '¡Estuve aquí!'}
+            <Stamp className="icono" aria-hidden="true" /> {visitado ? 'Sellado' : '¡Estuve aquí!'}
           </button>
           <button type="button" className="boton boton-papel" onClick={onQuitar}>
             <Trash className="icono" aria-hidden="true" /> Quitar
           </button>
         </div>
-        {visitado && (
-          <span className="sello sello-visitado" aria-hidden="true">
-            ¡Visitado!
-          </span>
-        )}
       </div>
     </dialog>
   );
