@@ -21,6 +21,8 @@ describe('leerRuta', () => {
     expect(leerRuta('#/preparando')).toEqual({ pantalla: 'preparando' });
     expect(leerRuta('#/itinerario')).toEqual({ pantalla: 'itinerario' });
     expect(leerRuta('#/chat')).toEqual({ pantalla: 'chat' });
+    expect(leerRuta('#/pasaporte')).toEqual({ pantalla: 'pasaporte' });
+    expect(leerRuta('#/viajes')).toEqual({ pantalla: 'viajes' });
   });
 
   it('una ruta desconocida lleva a la portada', () => {

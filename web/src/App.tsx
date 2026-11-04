@@ -1,11 +1,18 @@
 // RF-12: web de Rumbo. Elige la pantalla según la ruta del hash y guarda el perfil del viaje.
+import { Bookmark, BookmarkCheck } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
+import { useGuardados, usePasaporte } from './cuaderno/almacen';
+import { estaGuardado, guardarViaje, quitarViaje, type ViajeConId } from './cuaderno/guardados';
+import { hacerCheckIn } from './cuaderno/pasaporte';
 import { Chat } from './pantallas/Chat';
 import { Itinerario } from './pantallas/Itinerario';
+import { MisViajes } from './pantallas/MisViajes';
+import { Pasaporte } from './pantallas/Pasaporte';
 import { Portada } from './pantallas/Portada';
 import { Preparando } from './pantallas/Preparando';
 import { Viaje } from './pantallas/Viaje';
 import { rutaPaso, useRuta } from './ruta';
+import type { Viaje as TipoViaje } from './viaje/ajustar';
 import type { Itinerario as TipoItinerario } from './viaje/itinerario';
 import { pasoPendiente } from './viaje/pasos';
 import { perfilInicial } from './viaje/perfil';
@@ -15,6 +22,9 @@ export function App() {
   const [ruta, navegar] = useRuta();
   const [perfil, setPerfil] = usePerfil();
   const [viaje, setViaje] = useViaje();
+  const [guardados, cambiarGuardados] = useGuardados();
+  const [visitas, cambiarVisitas] = usePasaporte();
+  const ahora = () => new Date().toISOString();
 
   // Sin un perfil completo no se puede preparar el viaje, y sin itinerario no hay nada que enseñar.
   const sinPerfil = ruta.pantalla === 'preparando' && pasoPendiente('billete', perfil);
@@ -26,7 +36,7 @@ export function App() {
 
   const alListo = useCallback(
     (itinerario: TipoItinerario) => {
-      setViaje({ perfil, itinerario, quitados: [] });
+      setViaje({ id: crypto.randomUUID(), perfil, itinerario, quitados: [] });
       navegar('#/itinerario', true); // sin volver a «preparando» con el botón atrás
     },
     [perfil, setViaje, navegar],
@@ -52,7 +62,48 @@ export function App() {
     );
   }
   if (ruta.pantalla === 'itinerario') {
-    return viaje ? <Itinerario viaje={viaje} onCambiar={setViaje} /> : null;
+    if (!viaje) return null;
+    const guardado = estaGuardado(guardados, viaje.id);
+    // Un ajuste conserva el id del viaje; si estaba guardado, la copia guardada se actualiza.
+    const alCambiar = (cambiado: TipoViaje) => {
+      const conId = { ...cambiado, id: viaje.id };
+      setViaje(conId);
+      if (guardado) cambiarGuardados((lista) => guardarViaje(lista, conId, ahora()));
+    };
+    return (
+      <Itinerario
+        viaje={viaje}
+        onCambiar={alCambiar}
+        visitas={visitas}
+        onCheckIn={(visita) => cambiarVisitas((lista) => hacerCheckIn(lista, visita))}
+        acciones={
+          <button
+            type="button"
+            className="boton boton-redondo boton-papel"
+            aria-pressed={guardado}
+            aria-label={guardado ? 'Quitar de Mis viajes' : 'Guardar en Mis viajes'}
+            onClick={() => cambiarGuardados((lista) => (guardado ? quitarViaje(lista, viaje.id) : guardarViaje(lista, viaje, ahora())))}
+          >
+            {guardado ? <BookmarkCheck className="icono" /> : <Bookmark className="icono" />}
+          </button>
+        }
+      />
+    );
+  }
+  if (ruta.pantalla === 'pasaporte') {
+    return <Pasaporte visitas={visitas} onCambiar={cambiarVisitas} />;
+  }
+  if (ruta.pantalla === 'viajes') {
+    return (
+      <MisViajes
+        guardados={guardados}
+        onAbrir={(guardadoAbierto: ViajeConId) => {
+          setViaje(guardadoAbierto);
+          navegar('#/itinerario');
+        }}
+        onQuitar={(id) => cambiarGuardados((lista) => quitarViaje(lista, id))}
+      />
+    );
   }
   return (
     <Portada

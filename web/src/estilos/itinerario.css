@@ -459,3 +459,34 @@
 .barra-ajuste .respuesta-cerrar {
   color: var(--tinta);
 }
+
+/* ---------- Check-in: sello «¡Visitado!» ---------- */
+
+.postal-lugar-papel .sello-visitado {
+  position: absolute;
+  top: 70px;
+  right: 22px;
+  --tam: 96px;
+  --giro: 14deg;
+  color: var(--olivo);
+  font-size: 14px;
+  mix-blend-mode: normal;
+  background: rgb(255 246 236 / 0.7);
+  animation: sellar-visita 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+@keyframes sellar-visita {
+  from {
+    opacity: 0;
+    transform: rotate(14deg) scale(2.2);
+  }
+}
+.parada-postal .parada-visitada {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  --tam: 58px;
+  --giro: -12deg;
+  padding: 6px;
+  font-size: 9px;
+  color: var(--olivo);
+}

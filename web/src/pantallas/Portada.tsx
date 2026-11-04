@@ -1,6 +1,6 @@
 // RF-12: portada. Los destinos pasan solos como historias (o tocando a los lados / deslizando);
 // mantener el dedo pulsado las pausa. Con «reducir movimiento» no avanzan solas (no hay animación).
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookMarked, Stamp } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { DESTINOS_PORTADA, creditoFoto, otraHistoria } from '../datos/destinos';
 import { avisoPrivacidad, useProveedores } from '../datos/privacidad';
@@ -78,6 +78,14 @@ export function Portada({ onEmpezar }: { onEmpezar: (destino: string) => void })
               <img src="/marca/simbolo.svg" alt="" width={34} height={34} />
               <span>rumbo</span>
             </a>
+            <nav className="inicio-cuaderno" aria-label="Tu cuaderno">
+              <a className="boton boton-redondo" href="#/viajes" aria-label="Mis viajes">
+                <BookMarked className="icono" />
+              </a>
+              <a className="boton boton-redondo" href="#/pasaporte" aria-label="Mi pasaporte">
+                <Stamp className="icono" />
+              </a>
+            </nav>
           </header>
 
           <div className="historia-texto" aria-live="polite">

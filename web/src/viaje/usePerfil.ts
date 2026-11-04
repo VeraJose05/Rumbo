@@ -1,6 +1,6 @@
 // RF-12: estado guardado en sessionStorage (perfil del recorrido e itinerario) para no perderlo al recargar.
 import { useEffect, useState } from 'react';
-import type { Viaje } from './ajustar';
+import type { ViajeConId } from '../cuaderno/guardados';
 import { perfilInicial, type Perfil } from './perfil';
 
 function useSesion<T>(clave: string, inicial: () => T): [T, (valor: T) => void] {
@@ -25,4 +25,4 @@ function useSesion<T>(clave: string, inicial: () => T): [T, (valor: T) => void] 
 
 export const usePerfil = () => useSesion<Perfil>('rumbo-viaje', () => perfilInicial());
 /** El viaje ya planificado (perfil, itinerario y lugares quitados); null hasta planificar. */
-export const useViaje = () => useSesion<Viaje | null>('rumbo-viaje-actual', () => null);
+export const useViaje = () => useSesion<ViajeConId | null>('rumbo-viaje-actual', () => null);

@@ -3,14 +3,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { PASOS, type Paso } from './viaje/pasos';
 
-export type Ruta = { pantalla: 'portada' } | { pantalla: 'viaje'; paso: Paso } | { pantalla: 'preparando' } | { pantalla: 'itinerario' } | { pantalla: 'chat' };
+export type Ruta = { pantalla: 'portada' } | { pantalla: 'viaje'; paso: Paso } | { pantalla: 'preparando' } | { pantalla: 'itinerario' } | { pantalla: 'chat' } | { pantalla: 'pasaporte' } | { pantalla: 'viajes' };
 
 export function leerRuta(hash: string): Ruta {
   const [pantalla, paso] = hash.replace(/^#\/?/, '').split('/');
   if (pantalla === 'viaje') {
     return { pantalla: 'viaje', paso: PASOS.includes(paso as Paso) ? (paso as Paso) : 'destino' };
   }
-  if (pantalla === 'preparando' || pantalla === 'itinerario' || pantalla === 'chat') return { pantalla };
+  if (['preparando', 'itinerario', 'chat', 'pasaporte', 'viajes'].includes(pantalla!)) return { pantalla } as Ruta;
   return { pantalla: 'portada' };
 }
 

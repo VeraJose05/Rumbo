@@ -1,6 +1,6 @@
 // RF-06, RF-12: postal de un lugar del itinerario: qué hacer, la línea literal de la guía de donde
 // sale (con su fuente y licencia) y la opción de quitarlo del plan.
-import { Trash, X } from 'lucide-react';
+import { Stamp, Trash, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { Itinerario as TipoItinerario } from '../viaje/itinerario';
 import { citaDeLugar, etiquetaVerificacion, recortarCita } from '../viaje/postal';
@@ -11,9 +11,13 @@ interface Props {
   itinerario: TipoItinerario;
   onCerrar: () => void;
   onQuitar: () => void;
+  /** Ya tiene check-in en el pasaporte. */
+  visitado: boolean;
+  /** «¡Estuve aquí!»: se guarda con la sección de la guía (para las insignias). */
+  onCheckIn: (seccion: string) => void;
 }
 
-export function PostalLugar({ parada, itinerario, onCerrar, onQuitar }: Props) {
+export function PostalLugar({ parada, itinerario, onCerrar, onQuitar, visitado, onCheckIn }: Props) {
   const dialogo = useRef<HTMLDialogElement>(null);
   const { actividad } = parada;
   const cita = citaDeLugar(actividad, itinerario.recuperados ?? [], itinerario.fuentes);
@@ -68,10 +72,18 @@ export function PostalLugar({ parada, itinerario, onCerrar, onQuitar }: Props) {
         )}
 
         <div className="postal-botones">
+          <button type="button" className="boton" onClick={() => onCheckIn(cita?.seccion ?? 'Otro')} disabled={visitado}>
+            <Stamp className="icono" aria-hidden="true" /> {visitado ? 'En tu pasaporte' : '¡Estuve aquí!'}
+          </button>
           <button type="button" className="boton boton-papel" onClick={onQuitar}>
-            <Trash className="icono" aria-hidden="true" /> Quitar del plan
+            <Trash className="icono" aria-hidden="true" /> Quitar
           </button>
         </div>
+        {visitado && (
+          <span className="sello sello-visitado" aria-hidden="true">
+            ¡Visitado!
+          </span>
+        )}
       </div>
     </dialog>
   );

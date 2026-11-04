@@ -9,6 +9,7 @@ import { FRANJAS, type Actividad } from '../viaje/itinerario';
 import { INTERESES } from '../viaje/perfil';
 import { PlanificarError } from '../viaje/planificar';
 import { etiquetaVerificacion, resumenViaje } from '../viaje/postal';
+import type { Visita } from '../cuaderno/pasaporte';
 import { PostalLugar } from './PostalLugar';
 import '../estilos/itinerario.css';
 
@@ -26,9 +27,12 @@ interface Props {
   onCambiar: (viaje: Viaje) => void;
   /** Botones extra de la cabecera (guardar, exportar…). */
   acciones?: React.ReactNode;
+  /** Check-ins del pasaporte, para marcar los lugares visitados. */
+  visitas?: Visita[];
+  onCheckIn?: (visita: Visita) => void;
 }
 
-export function Itinerario({ viaje, onCambiar, acciones }: Props) {
+export function Itinerario({ viaje, onCambiar, acciones, visitas = [], onCheckIn }: Props) {
   const { perfil, itinerario } = viaje;
   const [dia, setDia] = useState(1);
   const [abierta, setAbierta] = useState<Parada | null>(null);
@@ -40,6 +44,7 @@ export function Itinerario({ viaje, onCambiar, acciones }: Props) {
   const paradas: Parada[] = diaActual
     ? FRANJAS.flatMap((franja) => diaActual[franja.id].map((actividad) => ({ actividad, franja, dia: diaActual.dia })))
     : [];
+  const visitado = (lugar: string) => visitas.some((v) => v.destino === perfil.destino && v.lugar === lugar);
   const sinCobertura = (itinerario.interesesSinCobertura ?? []).map((id) => INTERESES.find((i) => i.id === id)?.nombre ?? id);
 
   const pedirAjuste = async (texto: string) => {
@@ -100,7 +105,13 @@ export function Itinerario({ viaje, onCambiar, acciones }: Props) {
                 </span>
               </li>
               {paradas.map((p, i) => (
-                <ParadaCamino key={`${p.franja.id}-${p.actividad.lugar}`} parada={p} lado={i % 2 ? 'derecha' : 'izquierda'} onAbrir={() => setAbierta(p)} />
+                <ParadaCamino
+                  key={`${p.franja.id}-${p.actividad.lugar}`}
+                  parada={p}
+                  lado={i % 2 ? 'derecha' : 'izquierda'}
+                  visitado={visitado(p.actividad.lugar)}
+                  onAbrir={() => setAbierta(p)}
+                />
               ))}
               <li className="camino-meta">
                 <Flag className="icono" aria-hidden="true" />
@@ -188,13 +199,24 @@ export function Itinerario({ viaje, onCambiar, acciones }: Props) {
           itinerario={itinerario}
           onCerrar={() => setAbierta(null)}
           onQuitar={() => void pedirAjuste(`quita ${abierta.actividad.lugar}`)}
+          visitado={visitado(abierta.actividad.lugar)}
+          onCheckIn={(seccion) =>
+            onCheckIn?.({ destino: perfil.destino!, lugar: abierta.actividad.lugar, seccion, fecha: new Date().toISOString().slice(0, 10) })
+          }
         />
       )}
     </div>
   );
 }
 
-function ParadaCamino({ parada, lado, onAbrir }: { parada: Parada; lado: 'izquierda' | 'derecha'; onAbrir: () => void }) {
+interface PropsParada {
+  parada: Parada;
+  lado: 'izquierda' | 'derecha';
+  visitado: boolean;
+  onAbrir: () => void;
+}
+
+function ParadaCamino({ parada, lado, visitado, onAbrir }: PropsParada) {
   const Icono = ICONO_FRANJA[parada.franja.id];
   const etiqueta = etiquetaVerificacion(parada.actividad.verificacion);
   return (
@@ -208,6 +230,11 @@ function ParadaCamino({ parada, lado, onAbrir }: { parada: Parada; lado: 'izquie
         <span className="parada-lugar">{parada.actividad.lugar}</span>
         <span className="parada-descripcion">{parada.actividad.descripcion}</span>
         {etiqueta && <span className={etiqueta.tipo === 'guia' ? 'verificado' : 'sin-fuente'}>{etiqueta.tipo === 'guia' ? `✓ ${etiqueta.texto}` : etiqueta.texto}</span>}
+        {visitado && (
+          <span className="sello parada-visitada" aria-label="Visitado">
+            ¡Visitado!
+          </span>
+        )}
       </button>
     </li>
   );
