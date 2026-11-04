@@ -1,7 +1,7 @@
 // RF-14: las paradas del día en un mapa (MapLibre con los mapas vectoriales de OpenFreeMap, datos
 // de OpenStreetMap; gratis y sin clave), numeradas en el orden del día y unidas por la ruta. Tocar
 // una parada abre su postal. Se carga aparte (React.lazy) para que MapLibre no pese en el resto.
-import { LngLatBounds, Map as MapaGL, Marker, NavigationControl, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
+import { AttributionControl, LngLatBounds, Map as MapaGL, Marker, NavigationControl, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 // MapLibre dibuja en un worker aparte: Vite lo empaqueta y aquí se le dice dónde está.
 import urlWorker from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
@@ -19,13 +19,17 @@ export interface ParadaUbicada {
 interface Props {
   ubicadas: ParadaUbicada[];
   centro: [number, number];
-  onAbrir: (parada: Parada) => void;
+  /** Número de la parada elegida en el carrusel: el mapa vuela a ella y la resalta. */
+  activa: number | null;
+  onSeleccionar: (numero: number) => void;
 }
 
 setWorkerUrl(urlWorker);
 
 const estilo = (oscuro: boolean) => `https://tiles.openfreemap.org/styles/${oscuro ? 'dark' : 'positron'}`;
 const RUTA = 'ruta-del-dia';
+// Margen para que las chinchetas no queden bajo los días (arriba) ni bajo el carrusel (abajo).
+const ENCUADRE = { top: 100, bottom: 220, left: 64, right: 64 };
 
 function lineaDeRuta(ubicadas: ParadaUbicada[]) {
   return {
@@ -71,14 +75,14 @@ function chincheta(numero: number, franja: string, lugar: string, alPulsar: () =
   return boton;
 }
 
-export default function MapaDia({ ubicadas, centro, onAbrir }: Props) {
+export default function MapaDia({ ubicadas, centro, activa, onSeleccionar }: Props) {
   const contenedor = useRef<HTMLDivElement>(null);
   const mapa = useRef<MapaGL | null>(null);
   const chinchetas = useRef<Marker[]>([]);
   const actuales = useRef(ubicadas);
   actuales.current = ubicadas;
-  const abrir = useRef(onAbrir);
-  abrir.current = onAbrir;
+  const seleccionar = useRef(onSeleccionar);
+  seleccionar.current = onSeleccionar;
 
   // El mapa se crea una vez; el estilo sigue al tema claro u oscuro del sistema.
   useEffect(() => {
@@ -88,12 +92,16 @@ export default function MapaDia({ ubicadas, centro, onAbrir }: Props) {
       style: estilo(oscuro.matches),
       center: [centro[1], centro[0]],
       zoom: 13,
-      attributionControl: { compact: true },
+      attributionControl: false,
       dragRotate: false,
       pitchWithRotate: false,
     });
     nuevo.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+    // Los créditos de OpenStreetMap arriba: abajo los taparía el carrusel.
+    nuevo.addControl(new AttributionControl({ compact: true }), 'top-right');
     nuevo.touchZoomRotate.disableRotation();
+    // Créditos plegados en la «i» (se despliegan al tocarla): abiertos tapaban el mapa.
+    nuevo.once('load', () => contenedor.current?.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show'));
     nuevo.on('style.load', () => {
       rotulosEnEspanol(nuevo);
       pintarRuta(nuevo, actuales.current);
@@ -114,7 +122,7 @@ export default function MapaDia({ ubicadas, centro, onAbrir }: Props) {
     if (!m) return;
     for (const c of chinchetas.current) c.remove();
     chinchetas.current = ubicadas.map((u) =>
-      new Marker({ element: chincheta(u.numero, u.parada.franja.id, u.parada.actividad.lugar, () => abrir.current(u.parada)), anchor: 'bottom' })
+      new Marker({ element: chincheta(u.numero, u.parada.franja.id, u.parada.actividad.lugar, () => seleccionar.current(u.numero)), anchor: 'bottom' })
         .setLngLat([u.lugar.lon, u.lugar.lat])
         .addTo(m),
     );
@@ -122,13 +130,22 @@ export default function MapaDia({ ubicadas, centro, onAbrir }: Props) {
     if (ubicadas.length > 1) {
       const caja = new LngLatBounds();
       for (const u of ubicadas) caja.extend([u.lugar.lon, u.lugar.lat]);
-      m.fitBounds(caja, { padding: { top: 60, bottom: 60, left: 50, right: 50 }, maxZoom: 16, duration: 600 });
+      m.fitBounds(caja, { padding: ENCUADRE, maxZoom: 16, duration: 600 });
     } else if (ubicadas.length === 1) {
       m.easeTo({ center: [ubicadas[0]!.lugar.lon, ubicadas[0]!.lugar.lat], zoom: 15 });
     } else {
       m.easeTo({ center: [centro[1], centro[0]], zoom: 13 });
     }
   }, [ubicadas, centro]);
+
+  // La parada elegida: el mapa vuela a ella y su chincheta se resalta.
+  useEffect(() => {
+    chinchetas.current.forEach((c, i) => c.getElement().classList.toggle('activa', ubicadas[i]?.numero === activa));
+    const elegida = ubicadas.find((u) => u.numero === activa);
+    if (elegida && mapa.current) {
+      mapa.current.flyTo({ center: [elegida.lugar.lon, elegida.lugar.lat], zoom: Math.max(mapa.current.getZoom(), 15), padding: ENCUADRE, duration: 700 });
+    }
+  }, [activa, ubicadas]);
 
   return <div ref={contenedor} className="mapa-dia" role="region" aria-label="Mapa del día" />;
 }

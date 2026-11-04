@@ -1,15 +1,9 @@
 /* RF-14: mapa del día (pantallas/MapaDia.tsx). */
 
 .mapa-dia {
-  /* Que quepa entre la cabecera y las barras de abajo sin quedar tapado. */
-  height: clamp(280px, calc(100dvh - 520px), 520px);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--sombra);
-  background: var(--crema);
-  /* Que los controles del mapa no tapen la barra de ajuste ni las pestañas. */
-  isolation: isolate;
-  z-index: 0;
+  /* Tamaño explícito: el CSS de MapLibre le pone position: relative y anularía un inset: 0. */
+  width: 100%;
+  height: 100%;
 }
 .mapa-dia .maplibregl-ctrl-attrib {
   font-size: 10px;
@@ -88,23 +82,201 @@
   height: 16px;
 }
 
-.mapa-leyenda {
+
+/* ---------- Pantalla completa ---------- */
+
+.mapa-pantalla {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  background: var(--papel);
+  animation: aparecer 0.3s ease-out both;
+}
+.mapa-lienzo {
+  position: absolute;
+  inset: 0;
+}
+.mapa-aviso {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--piedra);
+}
+.mapa-dia .maplibregl-ctrl-top-right {
+  top: calc(max(env(safe-area-inset-top), 12px) + 56px);
+}
+
+/* Arriba: volver y los días, flotando sobre el mapa. */
+.mapa-arriba {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: max(env(safe-area-inset-top), 12px) var(--margen) 24px;
+  background: linear-gradient(var(--papel) 35%, transparent);
+  pointer-events: none;
+}
+.mapa-arriba > * {
+  pointer-events: auto;
+}
+.mapa-volver {
+  flex: none;
+  width: 44px;
+  min-height: 44px;
+}
+.mapa-dias {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 2px 8px;
+}
+.mapa-dias .etiqueta-dia {
+  flex: none;
+}
+
+/* Abajo: carrusel de paradas con desplazamiento por tarjetas. */
+.mapa-abajo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 14px);
+  pointer-events: none;
+}
+.mapa-abajo > * {
+  pointer-events: auto;
+}
+.mapa-cuenta {
+  justify-self: start;
+  width: fit-content;
+  margin: 0 var(--margen) 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--tarjeta);
+  box-shadow: var(--sombra);
+  font: 600 12px/1.2 var(--texto);
+  color: var(--piedra);
+}
+.mapa-carrusel {
+  display: flex;
+  gap: 10px;
   margin: 0;
+  padding: 4px var(--margen) 6px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 var(--margen);
+  scrollbar-width: none;
+}
+.mapa-carrusel > li {
+  flex: 0 0 82%;
+  scroll-snap-align: start;
+}
+.mapa-tarjeta {
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: var(--tarjeta);
+  box-shadow: var(--sombra-alta);
+  border: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.mapa-tarjeta.activa {
+  border-color: var(--terracota-profunda);
+  transform: translateY(-3px);
+}
+.mapa-tarjeta-centrar {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mapa-tarjeta-centrar:disabled {
+  cursor: default;
+}
+.mapa-numero {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  font: 700 14px/1 var(--texto);
+}
+.mapa-numero.franja-manana {
+  background: #d9902a;
+}
+.mapa-numero.franja-tarde {
+  background: #c4553a;
+}
+.mapa-numero.franja-noche {
+  background: #1e4c7a;
+}
+.sin-ubicar .mapa-numero {
+  background: var(--piedra);
+}
+.mapa-tarjeta-texto {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.mapa-franja {
+  font: 600 11px/1 var(--texto);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--piedra);
+}
+.mapa-lugar {
+  font: 650 17px/1.2 var(--titulo);
+}
+.mapa-descripcion {
+  font-size: 13px;
+  color: var(--piedra);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.mapa-sin-ubicar {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
   font-size: 13px;
   color: var(--piedra);
 }
-.mapa-cargando {
-  display: grid;
-  place-items: center;
-  height: clamp(280px, calc(100dvh - 520px), 520px);
-  border-radius: 18px;
-  background: var(--tarjeta);
-  color: var(--piedra);
+.mapa-ver-postal {
+  justify-self: end;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--terracota-profunda) 14%, transparent);
+  color: var(--terracota-profunda);
+  font: 600 13px/1 var(--texto);
+  cursor: pointer;
 }
-.camino[hidden] {
-  display: none;
+
+/* La chincheta elegida, más grande y por encima. */
+.pin.activa {
+  z-index: 3;
 }
-.mapa-seccion {
-  display: grid;
-  gap: 10px;
+.pin.activa .pin-gota {
+  transform: rotate(-45deg) scale(1.25);
+  box-shadow: 0 0 0 4px rgb(242 181 68 / 0.6), 0 6px 14px rgb(0 0 0 / 0.4);
 }

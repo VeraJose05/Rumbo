@@ -2,7 +2,7 @@
 // (mañana, tarde y noche) al estilo de los niveles de un juego. Cada parada abre su postal con la
 // cita de la guía, y la barra de abajo ajusta el plan por mensaje.
 import { ArrowRight, BookOpen, Check, Flag, Footprints, Hand, MapPinned, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
-import { Suspense, lazy, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { DESTINOS_PORTADA } from '../datos/destinos';
 import { ajustar, textoAjustando, type Viaje } from '../viaje/ajustar';
 import { FRANJAS, type Actividad } from '../viaje/itinerario';
@@ -12,10 +12,8 @@ import { ubicarLugar, useCoordenadas } from '../viaje/mapa';
 import { etiquetaVerificacion, resumenViaje } from '../viaje/postal';
 import type { Visita } from '../cuaderno/pasaporte';
 import type { ParadaUbicada } from './MapaDia';
+import { MapaPantalla } from './MapaPantalla';
 import { PostalLugar } from './PostalLugar';
-
-// MapLibre solo se descarga al abrir el mapa.
-const MapaDia = lazy(() => import('./MapaDia'));
 import '../estilos/itinerario.css';
 
 const ICONO_FRANJA: Record<(typeof FRANJAS)[number]['id'], LucideIcon> = { manana: Sunrise, tarde: Sun, noche: Moon };
@@ -90,7 +88,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
     // paradas se recalcula en cada render; lo que cambia de verdad es el día o el itinerario.
     [coordenadas, dia, itinerario, perfil.destino],
   );
-  const sinUbicar = paradas.filter((p) => !ubicadas.some((u) => u.parada === p));
+  const cerrarMapa = useCallback(() => setVista('camino'), []);
   const visitado = (lugar: string) => visitas.some((v) => v.destino === perfil.destino && v.lugar === lugar);
   const sinCobertura = (itinerario.interesesSinCobertura ?? []).map((id) => INTERESES.find((i) => i.id === id)?.nombre ?? id);
 
@@ -167,29 +165,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
               </button>
             </div>
 
-            {vista === 'mapa' && (
-              <section className="mapa-seccion" aria-label={`Mapa del día ${dia}`}>
-                {coordenadas === undefined ? (
-                  <div className="mapa-cargando">Cargando el mapa…</div>
-                ) : coordenadas === null ? (
-                  <div className="nota">
-                    <p>No tengo el mapa de {perfil.destino}.</p>
-                  </div>
-                ) : (
-                  <Suspense fallback={<div className="mapa-cargando">Cargando el mapa…</div>}>
-                    <MapaDia ubicadas={ubicadas} centro={coordenadas.centro} onAbrir={setAbierta} />
-                  </Suspense>
-                )}
-                {coordenadas && (
-                  <p className="mapa-leyenda">
-                    {ubicadas.length} de {paradas.length} lugares en el mapa
-                    {sinUbicar.length > 0 && <> · sin ubicar: {sinUbicar.map((p) => p.actividad.lugar).join(', ')}</>}
-                  </p>
-                )}
-              </section>
-            )}
-
-            <ol hidden={vista === 'mapa'} className={`camino${ajustando ? ' ajustando' : ''}`} aria-label={`Día ${dia}`} aria-busy={ajustando}>
+            <ol className={`camino${ajustando ? ' ajustando' : ''}`} aria-label={`Día ${dia}`} aria-busy={ajustando}>
               <li className="camino-salida">
                 <span className="sello" style={{ ['--tam' as string]: '74px', ['--giro' as string]: '-8deg' }}>
                   Día {dia}
@@ -310,6 +286,20 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
             </button>
           </div>
         </form>
+      )}
+
+      {vista === 'mapa' && itinerario.hayInformacion && (
+        <MapaPantalla
+          destino={perfil.destino ?? ''}
+          dias={itinerario.dias.map((d) => d.dia)}
+          dia={dia}
+          onDia={setDia}
+          paradas={paradas}
+          ubicadas={ubicadas}
+          coordenadas={coordenadas}
+          onCerrar={cerrarMapa}
+          onAbrirPostal={setAbierta}
+        />
       )}
 
       {abierta && (
