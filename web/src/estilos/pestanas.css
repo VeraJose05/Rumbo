@@ -1,0 +1,85 @@
+/* RF-12: barra de pestañas (pantallas/Pestanas.tsx). Su alto (--pestanas) lo usan las pantallas
+   para dejar sitio debajo y la barra de ajuste del itinerario para colocarse encima. */
+:root {
+  --pestanas: calc(62px + env(safe-area-inset-bottom));
+}
+
+.pestanas {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  max-width: var(--ancho-movil);
+  margin: 0 auto;
+  height: var(--pestanas);
+  padding: 6px 8px env(safe-area-inset-bottom);
+  display: flex;
+  background: var(--crema);
+  border-top: 1px solid var(--borde);
+  box-shadow: 0 -4px 16px rgb(0 0 0 / 0.08);
+}
+.pestana {
+  flex: 1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+  min-height: 48px;
+  border-radius: 12px;
+  color: var(--piedra);
+  font: 600 11px/1.1 var(--texto);
+  text-decoration: none;
+}
+.pestana-icono {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 28px;
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.pestana[aria-current='page'] {
+  color: var(--terracota-profunda);
+}
+.pestana[aria-current='page'] .pestana-icono {
+  background: color-mix(in srgb, var(--terracota-profunda) 16%, transparent);
+}
+.pestana:focus-visible {
+  outline: 2px solid var(--terracota-profunda);
+  outline-offset: 2px;
+}
+.pestana-cuenta {
+  position: absolute;
+  top: -4px;
+  right: 6px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--terracota-profunda);
+  color: var(--boton-tinta, #fff);
+  font-size: 10px;
+  line-height: 17px;
+  text-align: center;
+}
+
+/* Hueco para la barra en cada pantalla con pestañas. */
+.con-pestanas .inicio {
+  padding-bottom: calc(var(--pestanas) + 16px);
+}
+.con-pestanas .historia-credito {
+  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 26px);
+}
+.con-pestanas .pantalla {
+  padding-bottom: calc(var(--pestanas) + 24px);
+}
+.con-pestanas .barra-ajuste {
+  bottom: var(--pestanas);
+  padding-bottom: 10px;
+  border-radius: 18px 18px 0 0;
+}
+.con-pestanas .itinerario-cuerpo {
+  padding-bottom: calc(var(--pestanas) + 130px);
+}

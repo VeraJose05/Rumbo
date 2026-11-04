@@ -8,6 +8,7 @@ import { Chat } from './pantallas/Chat';
 import { Itinerario } from './pantallas/Itinerario';
 import { MisViajes } from './pantallas/MisViajes';
 import { Pasaporte } from './pantallas/Pasaporte';
+import { PANTALLAS_CON_PESTANAS, Pestanas } from './pantallas/Pestanas';
 import { Portada } from './pantallas/Portada';
 import { Preparando } from './pantallas/Preparando';
 import { Viaje } from './pantallas/Viaje';
@@ -42,92 +43,103 @@ export function App() {
     [perfil, setViaje, navegar],
   );
 
-  if (ruta.pantalla === 'viaje') {
-    return (
-      <Viaje paso={ruta.paso} perfil={perfil} onCambiar={setPerfil} navegar={navegar} onSellar={() => navegar('#/preparando')} />
-    );
-  }
-  if (ruta.pantalla === 'preparando') {
-    return sinPerfil ? null : <Preparando perfil={perfil} onListo={alListo} onVolver={() => navegar(rutaPaso('billete'), true)} />;
-  }
-  if (ruta.pantalla === 'chat') {
-    return (
-      <Chat
-        onPerfil={(completo) => {
-          // La entrevista ha completado el perfil: a preparar el viaje, como desde el billete.
-          setPerfil(completo);
-          navegar('#/preparando');
-        }}
-      />
-    );
-  }
-  if (ruta.pantalla === 'itinerario') {
-    if (!viaje) return null;
-    const guardado = estaGuardado(guardados, viaje.id);
-    // Un ajuste conserva el id del viaje; si estaba guardado, la copia guardada se actualiza.
-    const alCambiar = (cambiado: TipoViaje) => {
-      const conId = { ...cambiado, id: viaje.id };
-      setViaje(conId);
-      if (guardado) cambiarGuardados((lista) => guardarViaje(lista, conId, ahora()));
-    };
-    const alternarGuardado = () =>
-      cambiarGuardados((lista) => (guardado ? quitarViaje(lista, viaje.id) : guardarViaje(lista, viaje, ahora())));
-    return (
-      <Itinerario
-        viaje={viaje}
-        onCambiar={alCambiar}
-        visitas={visitas}
-        onCheckIn={(visita) => cambiarVisitas((lista) => hacerCheckIn(lista, visita))}
-        acciones={
-          <button type="button" className="boton boton-papel boton-guardar" aria-pressed={guardado} onClick={alternarGuardado}>
-            {guardado ? <BookmarkCheck className="icono" aria-hidden="true" /> : <Bookmark className="icono" aria-hidden="true" />}
-            {guardado ? 'Guardado' : 'Guardar'}
-          </button>
-        }
-        final={
-          <>
-            {guardado ? (
-              <a className="boton boton-ancho" href="#/viajes">
-                <BookmarkCheck className="icono" aria-hidden="true" /> Ver Mis viajes
+  const pantalla = (() => {
+    if (ruta.pantalla === 'viaje') {
+      return (
+        <Viaje paso={ruta.paso} perfil={perfil} onCambiar={setPerfil} navegar={navegar} onSellar={() => navegar('#/preparando')} />
+      );
+    }
+    if (ruta.pantalla === 'preparando') {
+      return sinPerfil ? null : <Preparando perfil={perfil} onListo={alListo} onVolver={() => navegar(rutaPaso('billete'), true)} />;
+    }
+    if (ruta.pantalla === 'chat') {
+      return (
+        <Chat
+          onPerfil={(completo) => {
+            // La entrevista ha completado el perfil: a preparar el viaje, como desde el billete.
+            setPerfil(completo);
+            navegar('#/preparando');
+          }}
+        />
+      );
+    }
+    if (ruta.pantalla === 'itinerario') {
+      if (!viaje) return null;
+      const guardado = estaGuardado(guardados, viaje.id);
+      // Un ajuste conserva el id del viaje; si estaba guardado, la copia guardada se actualiza.
+      const alCambiar = (cambiado: TipoViaje) => {
+        const conId = { ...cambiado, id: viaje.id };
+        setViaje(conId);
+        if (guardado) cambiarGuardados((lista) => guardarViaje(lista, conId, ahora()));
+      };
+      const alternarGuardado = () =>
+        cambiarGuardados((lista) => (guardado ? quitarViaje(lista, viaje.id) : guardarViaje(lista, viaje, ahora())));
+      return (
+        <Itinerario
+          viaje={viaje}
+          onCambiar={alCambiar}
+          visitas={visitas}
+          onCheckIn={(visita) => cambiarVisitas((lista) => hacerCheckIn(lista, visita))}
+          acciones={
+            <button type="button" className="boton boton-papel boton-guardar" aria-pressed={guardado} onClick={alternarGuardado}>
+              {guardado ? <BookmarkCheck className="icono" aria-hidden="true" /> : <Bookmark className="icono" aria-hidden="true" />}
+              {guardado ? 'Guardado' : 'Guardar'}
+            </button>
+          }
+          final={
+            <>
+              {guardado ? (
+                <a className="boton boton-ancho" href="#/viajes">
+                  <BookmarkCheck className="icono" aria-hidden="true" /> Ver Mis viajes
+                </a>
+              ) : (
+                <button type="button" className="boton boton-ancho" onClick={alternarGuardado}>
+                  <Bookmark className="icono" aria-hidden="true" /> Guardar este viaje
+                </button>
+              )}
+              <a className="boton boton-papel boton-ancho" href="#/pasaporte">
+                <Stamp className="icono" aria-hidden="true" /> Mi pasaporte
               </a>
-            ) : (
-              <button type="button" className="boton boton-ancho" onClick={alternarGuardado}>
-                <Bookmark className="icono" aria-hidden="true" /> Guardar este viaje
-              </button>
-            )}
-            <a className="boton boton-papel boton-ancho" href="#/pasaporte">
-              <Stamp className="icono" aria-hidden="true" /> Mi pasaporte
-            </a>
-            <a className="boton boton-papel boton-ancho" href="#/">
-              <Compass className="icono" aria-hidden="true" /> Planear otro viaje
-            </a>
-          </>
-        }
-      />
-    );
-  }
-  if (ruta.pantalla === 'pasaporte') {
-    return <Pasaporte visitas={visitas} onCambiar={cambiarVisitas} />;
-  }
-  if (ruta.pantalla === 'viajes') {
+              <a className="boton boton-papel boton-ancho" href="#/">
+                <Compass className="icono" aria-hidden="true" /> Planear otro viaje
+              </a>
+            </>
+          }
+        />
+      );
+    }
+    if (ruta.pantalla === 'pasaporte') {
+      return <Pasaporte visitas={visitas} onCambiar={cambiarVisitas} />;
+    }
+    if (ruta.pantalla === 'viajes') {
+      return (
+        <MisViajes
+          guardados={guardados}
+          onAbrir={(guardadoAbierto: ViajeConId) => {
+            setViaje(guardadoAbierto);
+            navegar('#/itinerario');
+          }}
+          onQuitar={(id) => cambiarGuardados((lista) => quitarViaje(lista, id))}
+        />
+      );
+    }
     return (
-      <MisViajes
-        guardados={guardados}
-        onAbrir={(guardadoAbierto: ViajeConId) => {
-          setViaje(guardadoAbierto);
-          navegar('#/itinerario');
+      <Portada
+        onEmpezar={(destino) => {
+          // Empezar desde la portada es un viaje nuevo, con la ciudad que se estaba viendo.
+          setPerfil(perfilInicial(destino));
+          navegar(rutaPaso('destino'));
         }}
-        onQuitar={(id) => cambiarGuardados((lista) => quitarViaje(lista, id))}
       />
     );
-  }
+  })();
+
+  // En las pantallas principales, barra de pestañas abajo para moverse sin adivinar.
+  if (!PANTALLAS_CON_PESTANAS.includes(ruta.pantalla)) return pantalla;
   return (
-    <Portada
-      onEmpezar={(destino) => {
-        // Empezar desde la portada es un viaje nuevo, con la ciudad que se estaba viendo.
-        setPerfil(perfilInicial(destino));
-        navegar(rutaPaso('destino'));
-      }}
-    />
+    <div className="con-pestanas">
+      {pantalla}
+      <Pestanas activa={ruta.pantalla} hayViaje={Boolean(viaje)} guardados={guardados.length} />
+    </div>
   );
 }

@@ -4,7 +4,7 @@
 import { ArrowRight, BookOpen, Check, Flag, Hand, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { DESTINOS_PORTADA } from '../datos/destinos';
-import { ajustar, type Viaje } from '../viaje/ajustar';
+import { ajustar, textoAjustando, type Viaje } from '../viaje/ajustar';
 import { FRANJAS, type Actividad } from '../viaje/itinerario';
 import { INTERESES } from '../viaje/perfil';
 import { PlanificarError } from '../viaje/planificar';
@@ -60,7 +60,10 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
   const [dia, setDia] = useState(1);
   const [abierta, setAbierta] = useState<Parada | null>(null);
   const [mensaje, setMensaje] = useState('');
-  const [ajustando, setAjustando] = useState(false);
+  /** Mensaje del ajuste en curso (null si no se está ajustando). */
+  const [enCurso, setEnCurso] = useState<string | null>(null);
+  const ajustando = enCurso !== null;
+  const [campoActivo, setCampoActivo] = useState(false);
   const [respuesta, setRespuesta] = useState<{ texto: string; error?: boolean } | null>(null);
   const [ayuda, cerrarAyuda] = useAyuda();
   const foto = DESTINOS_PORTADA.find((d) => d.nombre === perfil.destino)?.foto;
@@ -73,7 +76,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
 
   const pedirAjuste = async (texto: string) => {
     if (!texto.trim() || ajustando) return;
-    setAjustando(true);
+    setEnCurso(texto);
     setRespuesta(null);
     setAbierta(null);
     try {
@@ -86,7 +89,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
     } catch (e) {
       setRespuesta({ texto: e instanceof PlanificarError ? e.message : 'No he podido ajustar el plan.', error: true });
     } finally {
-      setAjustando(false);
+      setEnCurso(null);
     }
   };
 
@@ -210,7 +213,22 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
             e.preventDefault();
             void pedirAjuste(mensaje);
           }}
+          onFocus={() => setCampoActivo(true)}
+          onBlur={(e) => {
+            // Sigue activo si el foco pasa a una sugerencia de la propia barra.
+            if (!e.currentTarget.contains(e.relatedTarget)) setCampoActivo(false);
+          }}
         >
+          {enCurso !== null && (
+            <div className="nota respuesta-rumbo ajustando-aviso" role="status">
+              <span className="girando" aria-hidden="true" />
+              <p>
+                <strong>{textoAjustando(enCurso)}…</strong>
+                <br />
+                Rehago el plan con la guía. Tarda unos segundos.
+              </p>
+            </div>
+          )}
           {respuesta && (
             <div className={`nota respuesta-rumbo${respuesta.error ? ' error' : ''}`} role="status">
               <span className="washi" />
@@ -221,7 +239,7 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
               </button>
             </div>
           )}
-          <div className="ajuste-sugerencias">
+          <div className="ajuste-sugerencias" hidden={!campoActivo || ajustando}>
             {SUGERENCIAS.map((s) => (
               <button key={s} type="button" className="pegatina" disabled={ajustando} onClick={() => void pedirAjuste(s)}>
                 {s}

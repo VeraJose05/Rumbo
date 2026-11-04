@@ -1,6 +1,6 @@
 // RF-12: «Mis viajes». Los itinerarios guardados en el móvil (localStorage), sin cuentas: se abren
 // para seguir ajustándolos o se borran.
-import { ArrowLeft, ArrowRight, Trash } from 'lucide-react';
+import { ArrowRight, Trash } from 'lucide-react';
 import type { Guardado, ViajeConId } from '../cuaderno/guardados';
 import { DESTINOS_PORTADA } from '../datos/destinos';
 import { resumenViaje } from '../viaje/postal';
@@ -18,9 +18,6 @@ export function MisViajes({ guardados, onAbrir, onQuitar }: Props) {
   return (
     <div className="pantalla cuaderno-pantalla">
       <header className="cuaderno-cabecera">
-        <a className="boton boton-redondo boton-papel viaje-atras" href="#/" aria-label="Volver a la portada">
-          <ArrowLeft className="icono" />
-        </a>
         <div>
           <p className="antetitulo">Guardados en tu móvil</p>
           <h1 className="subtitulo">Mis viajes</h1>

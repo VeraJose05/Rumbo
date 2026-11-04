@@ -1,6 +1,6 @@
 // RF-11, RF-12: ajuste del itinerario desde la web.
 import { describe, expect, it } from 'vitest';
-import { peticionAjuste, type Viaje } from './ajustar';
+import { peticionAjuste, textoAjustando, type Viaje } from './ajustar';
 import { perfilInicial } from './perfil';
 
 const viaje: Viaje = {
@@ -18,5 +18,20 @@ describe('peticionAjuste', () => {
 
   it('no manda un mensaje vacío', () => {
     expect(() => peticionAjuste(viaje, '   ')).toThrow();
+  });
+});
+
+describe('textoAjustando', () => {
+  it('al quitar un lugar dice cuál', () => {
+    expect(textoAjustando('quita Catedral de Granada')).toBe('Quitando Catedral de Granada');
+    expect(textoAjustando('  Quita la Alhambra ')).toBe('Quitando la Alhambra');
+  });
+
+  it('con cualquier otro mensaje, lo repite entre comillas', () => {
+    expect(textoAjustando('Más tranquilo')).toBe('«Más tranquilo»');
+  });
+
+  it('recorta los mensajes largos', () => {
+    expect(textoAjustando('a'.repeat(80))).toBe(`«${'a'.repeat(40)}…»`);
   });
 });

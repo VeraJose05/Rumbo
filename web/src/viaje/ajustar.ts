@@ -34,3 +34,11 @@ export async function ajustar(viaje: Viaje, mensaje: string): Promise<{ viaje: V
   const { perfil, itinerario, quitados, respuesta: texto } = cuerpo.result;
   return { viaje: { perfil, itinerario, quitados }, respuesta: texto };
 }
+
+/** Qué se está haciendo mientras se ajusta: «Quitando la Catedral» o el mensaje entre comillas. */
+export function textoAjustando(mensaje: string): string {
+  const texto = mensaje.trim();
+  const quitar = /^quita\s+(.+)$/i.exec(texto);
+  if (quitar) return `Quitando ${quitar[1]}`;
+  return `«${texto.length > 40 ? `${texto.slice(0, 40)}…` : texto}»`;
+}

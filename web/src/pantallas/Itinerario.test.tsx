@@ -76,9 +76,23 @@ describe('Itinerario', () => {
     expect(JSON.parse(fetchSimulado.mock.calls[0]![1].body).data.mensaje).toBe('quita la Catedral');
   });
 
+  it('mientras ajusta, dice qué está haciendo', async () => {
+    let responder: (valor: unknown) => void = () => {};
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise((r) => (responder = r))));
+    render(<Itinerario viaje={viaje} onCambiar={() => {}} />);
+    fireEvent.change(screen.getByRole('textbox', { name: 'Ajusta tu plan' }), { target: { value: 'quita Catedral de Sevilla' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Ajustar' }));
+    expect(await screen.findByText('Quitando Catedral de Sevilla…')).toBeTruthy();
+    responder({ ok: true, json: async () => ({ result: { ...viaje, respuesta: 'Hecho.' } }) });
+    await waitFor(() => expect(screen.queryByText('Quitando Catedral de Sevilla…')).toBeNull());
+  });
+
   it('si se agota la cuota, lo dice en vez de romperse', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 429, json: async () => ({ message: 'Rumbo ha agotado la cuota.' }) }));
     render(<Itinerario viaje={viaje} onCambiar={() => {}} />);
+    // Las sugerencias salen al tocar el campo de ajuste.
+    expect(screen.queryByRole('button', { name: 'Más tranquilo' })).toBeNull();
+    fireEvent.focus(screen.getByRole('textbox', { name: 'Ajusta tu plan' }));
     fireEvent.click(screen.getByRole('button', { name: 'Más tranquilo' }));
     await waitFor(() => expect(screen.getByText('Rumbo ha agotado la cuota.')).toBeTruthy());
   });

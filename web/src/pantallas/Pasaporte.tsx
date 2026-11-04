@@ -1,6 +1,6 @@
 // RF-12: pasaporte de Rumbo. Sellos por ciudad e insignias según los check-in («¡Estuve aquí!»)
 // guardados en el móvil, sin cuentas. Se puede exportar a un archivo e importarlo en otro móvil.
-import { ArrowLeft, Award, Download, Upload } from 'lucide-react';
+import { Award, Download, Upload } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { copiaPasaporte, hacerCheckIn, insignias, leerCopiaPasaporte, sellosDeCiudad, type Visita } from '../cuaderno/pasaporte';
 import '../estilos/cuaderno-pantallas.css';
@@ -39,9 +39,6 @@ export function Pasaporte({ visitas, onCambiar }: Props) {
   return (
     <div className="pantalla cuaderno-pantalla">
       <header className="cuaderno-cabecera">
-        <a className="boton boton-redondo boton-papel viaje-atras" href="#/" aria-label="Volver a la portada">
-          <ArrowLeft className="icono" />
-        </a>
         <div>
           <p className="antetitulo">Sin registro, en tu móvil</p>
           <h1 className="subtitulo">Mi pasaporte</h1>

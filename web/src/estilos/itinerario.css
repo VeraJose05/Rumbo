@@ -567,3 +567,36 @@
   width: 100%;
   margin-top: 8px;
 }
+
+/* Mientras se ajusta: aviso con lo que se está haciendo (el camino se atenúa detrás). */
+.barra-ajuste .ajustando-aviso {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-left-color: var(--azafran);
+}
+.barra-ajuste .ajustando-aviso p {
+  margin: 0;
+}
+.girando {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid var(--borde);
+  border-top-color: var(--terracota-profunda);
+  animation: girar 0.9s linear infinite;
+}
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .girando {
+    animation-duration: 2.5s;
+  }
+}
+.ajuste-sugerencias[hidden] {
+  display: none;
+}
