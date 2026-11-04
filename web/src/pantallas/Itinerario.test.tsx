@@ -7,6 +7,19 @@ import type { Dia } from '../viaje/itinerario';
 import { perfilInicial } from '../viaje/perfil';
 import { Itinerario } from './Itinerario';
 
+// MapLibre (WebGL) no funciona en jsdom: el mapa se sustituye por una lista de lo que pintaría.
+vi.mock('./MapaDia', () => ({
+  default: ({ ubicadas }: { ubicadas: { numero: number; parada: { actividad: { lugar: string } } }[] }) => (
+    <ol aria-label="Mapa simulado">
+      {ubicadas.map((u) => (
+        <li key={u.numero}>
+          {u.numero}. {u.parada.actividad.lugar}
+        </li>
+      ))}
+    </ol>
+  ),
+}));
+
 afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
@@ -85,6 +98,19 @@ describe('Itinerario', () => {
     expect(await screen.findByText('Quitando Catedral de Sevilla…')).toBeTruthy();
     responder({ ok: true, json: async () => ({ result: { ...viaje, respuesta: 'Hecho.' } }) });
     await waitFor(() => expect(screen.queryByText('Quitando Catedral de Sevilla…')).toBeNull());
+  });
+
+  it('enseña el día en el mapa y dice qué lugares no ha podido ubicar', async () => {
+    const coordenadas = { destinos: { Sevilla: { centro: [37.38, -5.99], lugares: [{ nombre: 'Catedral de Sevilla', seccion: 'Ver', lat: 37.38, lon: -5.99 }] } } };
+    const conDosParadas: Viaje = {
+      ...viaje,
+      itinerario: { ...viaje.itinerario, dias: [{ ...dia(1, 'Catedral de Sevilla'), tarde: [{ lugar: 'Bar Inventado', descripcion: '', citas: [], verificacion: 'sin-fuente' }] }] },
+    };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => coordenadas }));
+    render(<Itinerario viaje={conDosParadas} onCambiar={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Mapa' }));
+    expect(await screen.findByText('1. Catedral de Sevilla')).toBeTruthy();
+    expect(screen.getByText(/1 de 2 lugares en el mapa · sin ubicar: Bar Inventado/)).toBeTruthy();
   });
 
   it('si se agota la cuota, lo dice en vez de romperse', async () => {

@@ -1,0 +1,110 @@
+/* RF-14: mapa del día (pantallas/MapaDia.tsx). */
+
+.mapa-dia {
+  /* Que quepa entre la cabecera y las barras de abajo sin quedar tapado. */
+  height: clamp(280px, calc(100dvh - 520px), 520px);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  background: var(--crema);
+  /* Que los controles del mapa no tapen la barra de ajuste ni las pestañas. */
+  isolation: isolate;
+  z-index: 0;
+}
+.mapa-dia .maplibregl-ctrl-attrib {
+  font-size: 10px;
+}
+
+/* Chinchetas numeradas con el color de la franja (mañana, tarde, noche). */
+.pin {
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.pin:focus-visible {
+  outline: 3px solid var(--azafran);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+.pin-gota {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50% 50% 50% 4px;
+  transform: rotate(-45deg);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.35);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pin-gota > span {
+  transform: rotate(45deg);
+  font: 700 15px/1 var(--texto);
+  color: #fff;
+}
+.pin-gota:hover {
+  transform: rotate(-45deg) scale(1.12);
+}
+.pin-gota.franja-manana {
+  background: #d9902a;
+}
+.pin-gota.franja-tarde {
+  background: #c4553a;
+}
+.pin-gota.franja-noche {
+  background: #1e4c7a;
+}
+
+/* Interruptor «Camino | Mapa». */
+.vista-dia {
+  display: inline-flex;
+  align-self: flex-end;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 999px;
+  background: var(--tarjeta);
+  box-shadow: var(--sombra);
+}
+.vista-dia button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--piedra);
+  font: 600 13px/1 var(--texto);
+  cursor: pointer;
+}
+.vista-dia button[aria-pressed='true'] {
+  background: var(--terracota-profunda);
+  color: var(--boton-tinta);
+}
+.vista-dia .icono {
+  width: 16px;
+  height: 16px;
+}
+
+.mapa-leyenda {
+  margin: 0;
+  font-size: 13px;
+  color: var(--piedra);
+}
+.mapa-cargando {
+  display: grid;
+  place-items: center;
+  height: clamp(280px, calc(100dvh - 520px), 520px);
+  border-radius: 18px;
+  background: var(--tarjeta);
+  color: var(--piedra);
+}
+.camino[hidden] {
+  display: none;
+}
+.mapa-seccion {
+  display: grid;
+  gap: 10px;
+}

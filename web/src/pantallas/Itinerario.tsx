@@ -1,16 +1,21 @@
 // RF-05, RF-06, RF-11, RF-12: el itinerario como un camino por días, con una parada por actividad
 // (mañana, tarde y noche) al estilo de los niveles de un juego. Cada parada abre su postal con la
 // cita de la guía, y la barra de abajo ajusta el plan por mensaje.
-import { ArrowRight, BookOpen, Check, Flag, Hand, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, BookOpen, Check, Flag, Footprints, Hand, MapPinned, Moon, PartyPopper, Send, Sun, Sunrise, TriangleAlert, X, type LucideIcon } from 'lucide-react';
+import { Suspense, lazy, useMemo, useState } from 'react';
 import { DESTINOS_PORTADA } from '../datos/destinos';
 import { ajustar, textoAjustando, type Viaje } from '../viaje/ajustar';
 import { FRANJAS, type Actividad } from '../viaje/itinerario';
 import { INTERESES } from '../viaje/perfil';
 import { PlanificarError } from '../viaje/planificar';
+import { ubicarLugar, useCoordenadas } from '../viaje/mapa';
 import { etiquetaVerificacion, resumenViaje } from '../viaje/postal';
 import type { Visita } from '../cuaderno/pasaporte';
+import type { ParadaUbicada } from './MapaDia';
 import { PostalLugar } from './PostalLugar';
+
+// MapLibre solo se descarga al abrir el mapa.
+const MapaDia = lazy(() => import('./MapaDia'));
 import '../estilos/itinerario.css';
 
 const ICONO_FRANJA: Record<(typeof FRANJAS)[number]['id'], LucideIcon> = { manana: Sunrise, tarde: Sun, noche: Moon };
@@ -66,11 +71,26 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
   const [campoActivo, setCampoActivo] = useState(false);
   const [respuesta, setRespuesta] = useState<{ texto: string; error?: boolean } | null>(null);
   const [ayuda, cerrarAyuda] = useAyuda();
+  const [vista, setVista] = useState<'camino' | 'mapa'>('camino');
+  const coordenadas = useCoordenadas(perfil.destino, vista === 'mapa');
   const foto = DESTINOS_PORTADA.find((d) => d.nombre === perfil.destino)?.foto;
   const diaActual = itinerario.dias.find((d) => d.dia === dia) ?? itinerario.dias[0];
   const paradas: Parada[] = diaActual
     ? FRANJAS.flatMap((franja) => diaActual[franja.id].map((actividad) => ({ actividad, franja, dia: diaActual.dia })))
     : [];
+  // Paradas del día con su sitio en el mapa (numeradas en el orden del día); las demás, aparte.
+  const ubicadas = useMemo<ParadaUbicada[]>(
+    () =>
+      coordenadas
+        ? paradas.flatMap((parada, i) => {
+            const lugar = ubicarLugar(parada.actividad.lugar, perfil.destino ?? '', coordenadas.lugares);
+            return lugar ? [{ parada, numero: i + 1, lugar }] : [];
+          })
+        : [],
+    // paradas se recalcula en cada render; lo que cambia de verdad es el día o el itinerario.
+    [coordenadas, dia, itinerario, perfil.destino],
+  );
+  const sinUbicar = paradas.filter((p) => !ubicadas.some((u) => u.parada === p));
   const visitado = (lugar: string) => visitas.some((v) => v.destino === perfil.destino && v.lugar === lugar);
   const sinCobertura = (itinerario.interesesSinCobertura ?? []).map((id) => INTERESES.find((i) => i.id === id)?.nombre ?? id);
 
@@ -138,7 +158,38 @@ export function Itinerario({ viaje, onCambiar, acciones, final, visitas = [], on
               </div>
             )}
 
-            <ol className={`camino${ajustando ? ' ajustando' : ''}`} aria-label={`Día ${dia}`} aria-busy={ajustando}>
+            <div className="vista-dia" role="group" aria-label="Ver el día como">
+              <button type="button" aria-pressed={vista === 'camino'} onClick={() => setVista('camino')}>
+                <Footprints className="icono" aria-hidden="true" /> Camino
+              </button>
+              <button type="button" aria-pressed={vista === 'mapa'} onClick={() => setVista('mapa')}>
+                <MapPinned className="icono" aria-hidden="true" /> Mapa
+              </button>
+            </div>
+
+            {vista === 'mapa' && (
+              <section className="mapa-seccion" aria-label={`Mapa del día ${dia}`}>
+                {coordenadas === undefined ? (
+                  <div className="mapa-cargando">Cargando el mapa…</div>
+                ) : coordenadas === null ? (
+                  <div className="nota">
+                    <p>No tengo el mapa de {perfil.destino}.</p>
+                  </div>
+                ) : (
+                  <Suspense fallback={<div className="mapa-cargando">Cargando el mapa…</div>}>
+                    <MapaDia ubicadas={ubicadas} centro={coordenadas.centro} onAbrir={setAbierta} />
+                  </Suspense>
+                )}
+                {coordenadas && (
+                  <p className="mapa-leyenda">
+                    {ubicadas.length} de {paradas.length} lugares en el mapa
+                    {sinUbicar.length > 0 && <> · sin ubicar: {sinUbicar.map((p) => p.actividad.lugar).join(', ')}</>}
+                  </p>
+                )}
+              </section>
+            )}
+
+            <ol hidden={vista === 'mapa'} className={`camino${ajustando ? ' ajustando' : ''}`} aria-label={`Día ${dia}`} aria-busy={ajustando}>
               <li className="camino-salida">
                 <span className="sello" style={{ ['--tam' as string]: '74px', ['--giro' as string]: '-8deg' }}>
                   Día {dia}

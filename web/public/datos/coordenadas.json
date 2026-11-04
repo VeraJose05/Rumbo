@@ -1,0 +1,1725 @@
+{
+ "fuente": "© colaboradores de OpenStreetMap (ODbL), vía Nominatim",
+ "generado": "2026-11-04",
+ "destinos": {
+  "Sevilla": {
+   "centro": [
+    37.3886303,
+    -5.9953403
+   ],
+   "lugares": [
+    {
+     "nombre": "Triana",
+     "seccion": "Distritos",
+     "lat": 37.3834516,
+     "lon": -6.0040669
+    },
+    {
+     "nombre": "La Macarena",
+     "seccion": "Distritos",
+     "lat": 37.4021722,
+     "lon": -5.9862174
+    },
+    {
+     "nombre": "Los Remedios",
+     "seccion": "Distritos",
+     "lat": 37.3747385,
+     "lon": -5.9993033
+    },
+    {
+     "nombre": "Nervión",
+     "seccion": "Distritos",
+     "lat": 37.3823379,
+     "lon": -5.9748839
+    },
+    {
+     "nombre": "Sevilla Este",
+     "seccion": "Distritos",
+     "lat": 37.400697,
+     "lon": -5.9260271
+    },
+    {
+     "nombre": "Pino Montano",
+     "seccion": "Distritos",
+     "lat": 37.4234233,
+     "lon": -5.965486
+    },
+    {
+     "nombre": "San Jerónimo",
+     "seccion": "Distritos",
+     "lat": 37.4258919,
+     "lon": -5.9844904
+    },
+    {
+     "nombre": "Bellavista",
+     "seccion": "Distritos",
+     "lat": 37.3248719,
+     "lon": -5.9687548
+    },
+    {
+     "nombre": "San Pablo",
+     "seccion": "Distritos",
+     "lat": 37.396597,
+     "lon": -5.9645059
+    },
+    {
+     "nombre": "Distrito Sur",
+     "seccion": "Distritos",
+     "lat": 37.3709926,
+     "lon": -5.9796148
+    },
+    {
+     "nombre": "Catedral de Sevilla",
+     "seccion": "Ver",
+     "lat": 37.385915,
+     "lon": -5.9931406
+    },
+    {
+     "nombre": "La Giralda",
+     "seccion": "Ver",
+     "lat": 37.386207,
+     "lon": -5.9925557
+    },
+    {
+     "nombre": "Barrio de Santa Cruz",
+     "seccion": "Ver",
+     "lat": 37.3853641,
+     "lon": -5.991047
+    },
+    {
+     "nombre": "Torre del Oro",
+     "seccion": "Ver",
+     "lat": 37.3824026,
+     "lon": -5.9963156
+    },
+    {
+     "nombre": "Parque de María Luisa",
+     "seccion": "Ver",
+     "lat": 37.374771,
+     "lon": -5.9887943
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver",
+     "lat": 37.3769743,
+     "lon": -5.9869398
+    },
+    {
+     "nombre": "Puente de Triana",
+     "seccion": "Ver",
+     "lat": 37.3862778,
+     "lon": -6.0024309
+    },
+    {
+     "nombre": "Arco de la Macarena",
+     "seccion": "Ver",
+     "lat": 37.4027669,
+     "lon": -5.9892349
+    },
+    {
+     "nombre": "Parlamento de Andalucía",
+     "seccion": "Ver",
+     "lat": 37.4051662,
+     "lon": -5.9885034
+    },
+    {
+     "nombre": "Parque del Alamillo",
+     "seccion": "Ver",
+     "lat": 37.4183029,
+     "lon": -5.9956268
+    },
+    {
+     "nombre": "Universidad Pablo de Olavide",
+     "seccion": "Ver",
+     "lat": 37.3560809,
+     "lon": -5.9381678
+    },
+    {
+     "nombre": "Hotel Alfonso XIII",
+     "seccion": "Ver",
+     "lat": 37.3815169,
+     "lon": -5.9927192
+    },
+    {
+     "nombre": "Museo Arqueológico de Sevilla",
+     "seccion": "Ver",
+     "lat": 37.3708931,
+     "lon": -5.9870608
+    },
+    {
+     "nombre": "Museo de Artes y Costumbres Populares",
+     "seccion": "Ver",
+     "lat": 37.3721722,
+     "lon": -5.9878714
+    },
+    {
+     "nombre": "Museo del Baile Flamenco",
+     "seccion": "Ver",
+     "lat": 37.3889491,
+     "lon": -5.9911333
+    },
+    {
+     "nombre": "Palacio de San Telmo",
+     "seccion": "Ver",
+     "lat": 37.3801828,
+     "lon": -5.9934058
+    },
+    {
+     "nombre": "Castillo de San Jorge",
+     "seccion": "Ver",
+     "lat": 37.385718,
+     "lon": -6.0031675
+    }
+   ],
+   "sinUbicar": [
+    "Centro",
+    "Reales Alcázares",
+    "Plaza de toros",
+    "Rectorado de la Universidad de Sevilla",
+    "El Palacio de la Condesa de Lebrija"
+   ]
+  },
+  "Madrid": {
+   "centro": [
+    40.416782,
+    -3.703507
+   ],
+   "lugares": [
+    {
+     "nombre": "Museo del Prado",
+     "seccion": "Ver › Museos",
+     "lat": 40.4137925,
+     "lon": -3.6920407
+    },
+    {
+     "nombre": "Museo Reina Sofía",
+     "seccion": "Ver › Museos",
+     "lat": 40.4080495,
+     "lon": -3.6944216
+    },
+    {
+     "nombre": "Museo Thyssen-Bornemisza",
+     "seccion": "Ver › Museos",
+     "lat": 40.4162159,
+     "lon": -3.6949317
+    },
+    {
+     "nombre": "Museo Arqueológico Nacional",
+     "seccion": "Ver › Museos",
+     "lat": 40.4234289,
+     "lon": -3.6888894
+    },
+    {
+     "nombre": "Museo Sorolla",
+     "seccion": "Ver › Museos",
+     "lat": 40.4353934,
+     "lon": -3.692512
+    },
+    {
+     "nombre": "Museo de San Isidro",
+     "seccion": "Ver › Museos",
+     "lat": 40.4123321,
+     "lon": -3.7109479
+    },
+    {
+     "nombre": "Museo de Historia de Madrid",
+     "seccion": "Ver › Museos",
+     "lat": 40.42579,
+     "lon": -3.7007602
+    },
+    {
+     "nombre": "Real Jardín Botánico",
+     "seccion": "Ver › Museos",
+     "lat": 40.4123656,
+     "lon": -3.6921452
+    },
+    {
+     "nombre": "Tours Culturales al Prado",
+     "seccion": "Ver › Museos",
+     "lat": 40.415034,
+     "lon": -3.7064705
+    },
+    {
+     "nombre": "Museo de América",
+     "seccion": "Ver › Museos",
+     "lat": 40.4357787,
+     "lon": -3.7190717
+    },
+    {
+     "nombre": "Museo Lázaro Galdiano",
+     "seccion": "Ver › Museos",
+     "lat": 40.4369637,
+     "lon": -3.6857645
+    },
+    {
+     "nombre": "Parque del Retiro",
+     "seccion": "Ver › Parques",
+     "lat": 40.414946,
+     "lon": -3.6832845
+    },
+    {
+     "nombre": "Casa de Campo",
+     "seccion": "Ver › Parques",
+     "lat": 40.4256828,
+     "lon": -3.7524319
+    },
+    {
+     "nombre": "Pradera de San Isidro",
+     "seccion": "Ver › Parques",
+     "lat": 40.3995665,
+     "lon": -3.7277088
+    },
+    {
+     "nombre": "Parque del Oeste",
+     "seccion": "Ver › Parques",
+     "lat": 40.4296961,
+     "lon": -3.7251884
+    },
+    {
+     "nombre": "Jardines del Campo del Moro",
+     "seccion": "Ver › Parques",
+     "lat": 40.4180757,
+     "lon": -3.717772
+    },
+    {
+     "nombre": "Gran Vía",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4201932,
+     "lon": -3.7041598
+    },
+    {
+     "nombre": "Plaza de Cibeles",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4194198,
+     "lon": -3.692538
+    },
+    {
+     "nombre": "Plaza Mayor",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4153949,
+     "lon": -3.7069974
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.423449,
+     "lon": -3.7108809
+    },
+    {
+     "nombre": "Plaza de la Villa",
+     "seccion": "Ver › Calles y plazas",
+     "lat": 40.4152218,
+     "lon": -3.7103999
+    },
+    {
+     "nombre": "Palacio Real",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4178245,
+     "lon": -3.7151134
+    },
+    {
+     "nombre": "Puerta de Alcalá",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4200319,
+     "lon": -3.6898798
+    },
+    {
+     "nombre": "Templo de Debod",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4241612,
+     "lon": -3.7170977
+    },
+    {
+     "nombre": "Teatro Real",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4182199,
+     "lon": -3.710579
+    },
+    {
+     "nombre": "Estadio Santiago Bernabéu",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4530437,
+     "lon": -3.688197
+    },
+    {
+     "nombre": "Círculo de Bellas Artes",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4182071,
+     "lon": -3.6965142
+    },
+    {
+     "nombre": "Palacio de Comunicaciones",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4188454,
+     "lon": -3.691812
+    },
+    {
+     "nombre": "Catedral de la Almudena",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4157107,
+     "lon": -3.7145886
+    },
+    {
+     "nombre": "Real Basílica de San Francisco el Grande",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4104355,
+     "lon": -3.7144793
+    },
+    {
+     "nombre": "Palacio de las Cortes",
+     "seccion": "Ver › Edificios y monumentos",
+     "lat": 40.4164017,
+     "lon": -3.6965831
+    },
+    {
+     "nombre": "Parque de la Casa de Campo",
+     "seccion": "Hacer",
+     "lat": 40.4204367,
+     "lon": -3.7323317
+    },
+    {
+     "nombre": "Calle Preciados",
+     "seccion": "Comprar",
+     "lat": 40.4183177,
+     "lon": -3.704855
+    },
+    {
+     "nombre": "Barrio de Salamanca",
+     "seccion": "Comprar",
+     "lat": 40.4364379,
+     "lon": -3.6857028
+    },
+    {
+     "nombre": "Mercado de Fuencarral",
+     "seccion": "Comprar",
+     "lat": 40.4233907,
+     "lon": -3.7009955
+    },
+    {
+     "nombre": "Libros",
+     "seccion": "Comprar",
+     "lat": 40.4154,
+     "lon": -3.7116086
+    },
+    {
+     "nombre": "Salamar",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4395979,
+     "lon": -3.6738317
+    },
+    {
+     "nombre": "La Buena Vida",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4176501,
+     "lon": -3.7106483
+    },
+    {
+     "nombre": "La Kitchen",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4219721,
+     "lon": -3.6942724
+    },
+    {
+     "nombre": "Najera",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4349308,
+     "lon": -3.7133349
+    },
+    {
+     "nombre": "Xanacuk",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4228838,
+     "lon": -3.6997242
+    },
+    {
+     "nombre": "Casa Mingo",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4249707,
+     "lon": -3.7252545
+    },
+    {
+     "nombre": "El Inti De Oro",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.415621,
+     "lon": -3.6989812
+    },
+    {
+     "nombre": "Zara",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4184676,
+     "lon": -3.7045976
+    },
+    {
+     "nombre": "La Montería",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4202627,
+     "lon": -3.6775529
+    },
+    {
+     "nombre": "La Panza es Primero",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4223475,
+     "lon": -3.6971571
+    },
+    {
+     "nombre": "The Sherry Corner",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4152668,
+     "lon": -3.7090554
+    },
+    {
+     "nombre": "Teatriz",
+     "seccion": "Comer › Restaurantes",
+     "lat": 40.4265529,
+     "lon": -3.6865218
+    },
+    {
+     "nombre": "La Gloria de Montera",
+     "seccion": "Comer › Medio",
+     "lat": 40.4194589,
+     "lon": -3.700891
+    },
+    {
+     "nombre": "Jota Cinco",
+     "seccion": "Comer › Medio",
+     "lat": 40.4382334,
+     "lon": -3.6373154
+    },
+    {
+     "nombre": "Calle Cipriano Sancho",
+     "seccion": "Comer › Medio",
+     "lat": 40.4316347,
+     "lon": -3.6548867
+    },
+    {
+     "nombre": "Calle Castelló",
+     "seccion": "Comer › Medio",
+     "lat": 40.4263241,
+     "lon": -3.6814144
+    }
+   ],
+   "sinUbicar": [
+    "Arte urbano",
+    "Parque del Capricho",
+    "Parque Madrid Río",
+    "Puerta del Sol",
+    "Plaza de Colón y Jardines del Descubrimiento",
+    "Antigua estación de Chamberí",
+    "Estadio Wanda Metropolitano",
+    "Los domingos por la mañana",
+    "Una vuelta por Madrid Río",
+    "Grandes almacenes",
+    "Centros comerciales",
+    "Zonas comerciales",
+    "Gran Vía y anexas",
+    "Pasee por el centro de la ciudad",
+    "La llevas Cruda",
+    "Freiduría de Gallinejas Embajadores",
+    "La Lola",
+    "El Almendro 13",
+    "El Corral de la Morería",
+    "Zoe Café",
+    "La Casa del ceviche\"",
+    "Restaurantes Cazorla",
+    "Calle Alcalá 261",
+    "La Taberna de Juan",
+    "VP Hotels VP Hoteles",
+    "Restaurante Rubaiyat",
+    "Restaurante Terraza Los Recios"
+   ]
+  },
+  "Barcelona": {
+   "centro": [
+    41.3825802,
+    2.177073
+   ],
+   "lugares": [
+    {
+     "nombre": "Ciutat Vella",
+     "seccion": "Distritos",
+     "lat": 41.3819793,
+     "lon": 2.1804154
+    },
+    {
+     "nombre": "Eixample",
+     "seccion": "Distritos",
+     "lat": 41.3936885,
+     "lon": 2.1636552
+    },
+    {
+     "nombre": "Gràcia",
+     "seccion": "Distritos",
+     "lat": 41.398106,
+     "lon": 2.1527071
+    },
+    {
+     "nombre": "Sants-Montjuïc",
+     "seccion": "Distritos",
+     "lat": 41.3672708,
+     "lon": 2.1437553
+    },
+    {
+     "nombre": "Sant Martí",
+     "seccion": "Distritos",
+     "lat": 41.4084102,
+     "lon": 2.2031889
+    },
+    {
+     "nombre": "Basílica de la Sagrada Familia",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.4035046,
+     "lon": 2.1744283
+    },
+    {
+     "nombre": "Casa Batlló",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3915446,
+     "lon": 2.1646961
+    },
+    {
+     "nombre": "Casa Milà",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3953996,
+     "lon": 2.1617621
+    },
+    {
+     "nombre": "Catedral de Barcelona",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3839296,
+     "lon": 2.1765539
+    },
+    {
+     "nombre": "Casa Atmatller",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3915093,
+     "lon": 2.1651777
+    },
+    {
+     "nombre": "Casa Lleó Morera",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3911154,
+     "lon": 2.1652435
+    },
+    {
+     "nombre": "Basílica de Santa María del Mar",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3837802,
+     "lon": 2.1820062
+    },
+    {
+     "nombre": "Palacio Güell",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3788246,
+     "lon": 2.1742345
+    },
+    {
+     "nombre": "Monumento a Colón",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3758015,
+     "lon": 2.1777736
+    },
+    {
+     "nombre": "Fuente Mágica de Montjuic",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3711565,
+     "lon": 2.1517393
+    },
+    {
+     "nombre": "Pabellón Mies van der Rohe",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.370557,
+     "lon": 2.1499593
+    },
+    {
+     "nombre": "Arco del Triunfo",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3901229,
+     "lon": 2.1815663
+    },
+    {
+     "nombre": "El Pez",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3815588,
+     "lon": 2.1721595
+    },
+    {
+     "nombre": "Iglesia de Santa María del Pino",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3823083,
+     "lon": 2.1737703
+    },
+    {
+     "nombre": "Monasterio de Sant Pau del Camp",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3764677,
+     "lon": 2.169299
+    },
+    {
+     "nombre": "Monasterio de Pedralbes",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3954525,
+     "lon": 2.1131926
+    },
+    {
+     "nombre": "Palacio Real de Pedralbes",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3865043,
+     "lon": 2.1183962
+    },
+    {
+     "nombre": "Palacio de la Virreina",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3825014,
+     "lon": 2.1717144
+    },
+    {
+     "nombre": "Sinagoga Mayor de Barcelona",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3825341,
+     "lon": 2.1757908
+    },
+    {
+     "nombre": "Casa Vicens",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.4035057,
+     "lon": 2.1506255
+    },
+    {
+     "nombre": "Gran Teatro del Liceo",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.380242,
+     "lon": 2.1733951
+    },
+    {
+     "nombre": "Pabellones Güell",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3940733,
+     "lon": 2.113799
+    },
+    {
+     "nombre": "Antiguo Hospital de la Santa Cruz",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3809166,
+     "lon": 2.1705232
+    },
+    {
+     "nombre": "Torre Glòries",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.4035197,
+     "lon": 2.1895204
+    },
+    {
+     "nombre": "Castillo de Montjuic",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3633756,
+     "lon": 2.1661443
+    },
+    {
+     "nombre": "Torre de Comunicaciones de Montjuïc",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.3640187,
+     "lon": 2.1506266
+    },
+    {
+     "nombre": "Torre de Collserola",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.4172598,
+     "lon": 2.1142642
+    },
+    {
+     "nombre": "Edificio Fórum",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.4118011,
+     "lon": 2.2192894
+    },
+    {
+     "nombre": "Templo Expiatorio del Sagrado Corazón",
+     "seccion": "Ver › Edificios y Monumentos",
+     "lat": 41.421976,
+     "lon": 2.118381
+    },
+    {
+     "nombre": "Parque Güell",
+     "seccion": "Ver › Parques",
+     "lat": 41.4139288,
+     "lon": 2.1525588
+    },
+    {
+     "nombre": "Parque de la Ciudadela",
+     "seccion": "Ver › Parques",
+     "lat": 41.390139,
+     "lon": 2.1865304
+    },
+    {
+     "nombre": "Parque de la España Industrial",
+     "seccion": "Ver › Parques",
+     "lat": 41.3766233,
+     "lon": 2.1421612
+    },
+    {
+     "nombre": "Parque de Joan Miró",
+     "seccion": "Ver › Parques",
+     "lat": 41.3947015,
+     "lon": 2.1685329
+    },
+    {
+     "nombre": "Parque del Laberinto de Horta",
+     "seccion": "Ver › Parques",
+     "lat": 41.4399791,
+     "lon": 2.1453938
+    },
+    {
+     "nombre": "Plaza de Cataluña",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3868744,
+     "lon": 2.1700762
+    },
+    {
+     "nombre": "Plaza de España",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3754864,
+     "lon": 2.1490306
+    },
+    {
+     "nombre": "Plaza del Rey",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3841563,
+     "lon": 2.1773945
+    },
+    {
+     "nombre": "Plaza Real",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3800985,
+     "lon": 2.1752608
+    },
+    {
+     "nombre": "Plaza de San Jaime",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3825014,
+     "lon": 2.1771591
+    },
+    {
+     "nombre": "Plaza de San Felipe Neri",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3833846,
+     "lon": 2.1750998
+    },
+    {
+     "nombre": "Plaza de San José Oriol",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3822704,
+     "lon": 2.1742499
+    },
+    {
+     "nombre": "Paseo de Gracia",
+     "seccion": "Ver › Plazas y Calles",
+     "lat": 41.3933715,
+     "lon": 2.1617658
+    },
+    {
+     "nombre": "Museo Nacional de Arte de Cataluña",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3686024,
+     "lon": 2.1534616
+    },
+    {
+     "nombre": "Museo Picasso",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3851039,
+     "lon": 2.1812015
+    },
+    {
+     "nombre": "Fundación Joan Miró",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3686445,
+     "lon": 2.1600839
+    },
+    {
+     "nombre": "Museo de Historia de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.383921,
+     "lon": 2.1776778
+    },
+    {
+     "nombre": "Museo Frederic Marès",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3843648,
+     "lon": 2.1767311
+    },
+    {
+     "nombre": "Museo de Arqueología de Cataluña",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3697669,
+     "lon": 2.1576723
+    },
+    {
+     "nombre": "Museo Marítimo de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.375854,
+     "lon": 2.1761013
+    },
+    {
+     "nombre": "CaixaForum Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3714823,
+     "lon": 2.1497204
+    },
+    {
+     "nombre": "Museo de Historia de Cataluña",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3808167,
+     "lon": 2.1858688
+    },
+    {
+     "nombre": "Mercado del Borne",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3856486,
+     "lon": 2.183572
+    },
+    {
+     "nombre": "Museo de Ciencias Naturales de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.388119,
+     "lon": 2.183445
+    },
+    {
+     "nombre": "Museo de Arte Contemporáneo de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3831012,
+     "lon": 2.1667659
+    },
+    {
+     "nombre": "Museo de la Ciencia CosmoCaixa",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.4146663,
+     "lon": 2.1350174
+    },
+    {
+     "nombre": "Museo del Diseño de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.4024866,
+     "lon": 2.1882024
+    },
+    {
+     "nombre": "Museo Egipcio de Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3936228,
+     "lon": 2.1647396
+    },
+    {
+     "nombre": "Fundación Antoni Tàpies",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3915202,
+     "lon": 2.1637523
+    },
+    {
+     "nombre": "KBr Fundación MAPFRE",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3872052,
+     "lon": 2.1960244
+    },
+    {
+     "nombre": "Museo de la Música",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3988917,
+     "lon": 2.1855755
+    },
+    {
+     "nombre": "Museo de Cera Barcelona",
+     "seccion": "Ver › Museos y Galerías",
+     "lat": 41.3774051,
+     "lon": 2.1772696
+    },
+    {
+     "nombre": "La Boquería",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.381736,
+     "lon": 2.1715515
+    },
+    {
+     "nombre": "Pueblo Español",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3683044,
+     "lon": 2.1471107
+    },
+    {
+     "nombre": "Jardín Botánico de Barcelona",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3622804,
+     "lon": 2.1595033
+    },
+    {
+     "nombre": "Parque Zoológico de Barcelona",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.38808,
+     "lon": 2.1903468
+    },
+    {
+     "nombre": "L'Aquàrium de Barcelona",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3768486,
+     "lon": 2.1844128
+    },
+    {
+     "nombre": "Camp Nou",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3808806,
+     "lon": 2.1228182
+    },
+    {
+     "nombre": "Mercado de Santa Caterina",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3861363,
+     "lon": 2.1785048
+    },
+    {
+     "nombre": "Parque de Atracciones Tibidabo",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.4214122,
+     "lon": 2.1187979
+    },
+    {
+     "nombre": "Puerto Olímpico de Barcelona",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.3891832,
+     "lon": 2.1985018
+    },
+    {
+     "nombre": "Cementerio de Pueblo Nuevo",
+     "seccion": "Ver › Otras Atracciones",
+     "lat": 41.394566,
+     "lon": 2.2011382
+    },
+    {
+     "nombre": "Barrio gótico",
+     "seccion": "Hacer",
+     "lat": 41.38384,
+     "lon": 2.1745119
+    },
+    {
+     "nombre": "Raval",
+     "seccion": "Comprar",
+     "lat": 41.3798479,
+     "lon": 2.1686823
+    },
+    {
+     "nombre": "Maremágnum",
+     "seccion": "Comprar",
+     "lat": 41.3751837,
+     "lon": 2.1828216
+    },
+    {
+     "nombre": "La Maquinista",
+     "seccion": "Comprar",
+     "lat": 41.3811825,
+     "lon": 2.1906489
+    },
+    {
+     "nombre": "Connect Club Discount Card",
+     "seccion": "Comprar",
+     "lat": 41.3884832,
+     "lon": 2.1731191
+    },
+    {
+     "nombre": "Bo de B",
+     "seccion": "Comer",
+     "lat": 41.3811969,
+     "lon": 2.1811013
+    },
+    {
+     "nombre": "La Caravana",
+     "seccion": "Comer",
+     "lat": 41.3993287,
+     "lon": 2.1581992
+    },
+    {
+     "nombre": "Delicias",
+     "seccion": "Comer",
+     "lat": 41.3689138,
+     "lon": 2.1466649
+    },
+    {
+     "nombre": "Quimet & Quimet",
+     "seccion": "Comer",
+     "lat": 41.374222,
+     "lon": 2.1657389
+    },
+    {
+     "nombre": "La Tasqueta de Blai",
+     "seccion": "Comer",
+     "lat": 41.3733347,
+     "lon": 2.1652358
+    },
+    {
+     "nombre": "La Esquinica",
+     "seccion": "Comer",
+     "lat": 41.4304816,
+     "lon": 2.1712169
+    },
+    {
+     "nombre": "Cervecería Catalana",
+     "seccion": "Comer",
+     "lat": 41.3924032,
+     "lon": 2.1609008
+    },
+    {
+     "nombre": "Vinitus",
+     "seccion": "Comer",
+     "lat": 41.3900241,
+     "lon": 2.1640969
+    },
+    {
+     "nombre": "Casa Lolea",
+     "seccion": "Comer",
+     "lat": 41.3888056,
+     "lon": 2.1771897
+    },
+    {
+     "nombre": "Ciutat Comtal",
+     "seccion": "Comer",
+     "lat": 41.3888272,
+     "lon": 2.1668833
+    },
+    {
+     "nombre": "La Bombeta",
+     "seccion": "Comer",
+     "lat": 41.3805658,
+     "lon": 2.1877114
+    },
+    {
+     "nombre": "Restaurante Agua",
+     "seccion": "Comer",
+     "lat": 41.3789393,
+     "lon": 2.1921639
+    },
+    {
+     "nombre": "Cal Pep",
+     "seccion": "Comer",
+     "lat": 41.3839345,
+     "lon": 2.1833856
+    },
+    {
+     "nombre": "Los Caracoles",
+     "seccion": "Comer",
+     "lat": 41.3796584,
+     "lon": 2.1765082
+    },
+    {
+     "nombre": "Viana Restaurant",
+     "seccion": "Comer",
+     "lat": 41.3805398,
+     "lon": 2.1751634
+    },
+    {
+     "nombre": "Güell Tapas",
+     "seccion": "Comer",
+     "lat": 41.3786247,
+     "lon": 2.1737031
+    },
+    {
+     "nombre": "Can Culleretes",
+     "seccion": "Comer",
+     "lat": 41.381215,
+     "lon": 2.1744185
+    },
+    {
+     "nombre": "La Dolça Herminia",
+     "seccion": "Comer",
+     "lat": 41.3867346,
+     "lon": 2.1744184
+    },
+    {
+     "nombre": "Els 4Gats",
+     "seccion": "Comer",
+     "lat": 41.3857384,
+     "lon": 2.1736392
+    },
+    {
+     "nombre": "La Flauta Aribau",
+     "seccion": "Comer",
+     "lat": 41.3869096,
+     "lon": 2.1611161
+    },
+    {
+     "nombre": "Braseria El Glop",
+     "seccion": "Comer",
+     "lat": 41.3899878,
+     "lon": 2.1713762
+    },
+    {
+     "nombre": "3 Focs",
+     "seccion": "Comer",
+     "lat": 41.3902658,
+     "lon": 2.15992
+    },
+    {
+     "nombre": "Restaurante Bodega Joan",
+     "seccion": "Comer",
+     "lat": 41.3917146,
+     "lon": 2.1555005
+    },
+    {
+     "nombre": "Luigi Ristorante",
+     "seccion": "Comer",
+     "lat": 41.3928293,
+     "lon": 2.1695114
+    },
+    {
+     "nombre": "Restaurante O'Retorno",
+     "seccion": "Comer",
+     "lat": 41.386641,
+     "lon": 2.1527975
+    },
+    {
+     "nombre": "Out of China",
+     "seccion": "Comer",
+     "lat": 41.3905618,
+     "lon": 2.1566877
+    },
+    {
+     "nombre": "Taberna del Cura",
+     "seccion": "Comer",
+     "lat": 41.4004815,
+     "lon": 2.154579
+    },
+    {
+     "nombre": "Restaurant Arcano",
+     "seccion": "Comer",
+     "lat": 41.3850046,
+     "lon": 2.1786227
+    },
+    {
+     "nombre": "Taverna El Glop",
+     "seccion": "Comer",
+     "lat": 41.4049058,
+     "lon": 2.159524
+    },
+    {
+     "nombre": "B-ONE Palau de Mar",
+     "seccion": "Comer",
+     "lat": 41.3812305,
+     "lon": 2.1854573
+    },
+    {
+     "nombre": "Mirablau",
+     "seccion": "Comer",
+     "lat": 41.4160365,
+     "lon": 2.1319237
+    },
+    {
+     "nombre": "El Nacional",
+     "seccion": "Comer",
+     "lat": 41.3906926,
+     "lon": 2.1684789
+    },
+    {
+     "nombre": "7 Portes",
+     "seccion": "Comer",
+     "lat": 41.3821717,
+     "lon": 2.1832472
+    },
+    {
+     "nombre": "Arume Restaurante",
+     "seccion": "Comer",
+     "lat": 41.3789565,
+     "lon": 2.1659098
+    },
+    {
+     "nombre": "9 Reinas",
+     "seccion": "Comer",
+     "lat": 41.3940204,
+     "lon": 2.164905
+    },
+    {
+     "nombre": "Buenos Aires Grill Restaurant",
+     "seccion": "Comer",
+     "lat": 41.3893514,
+     "lon": 2.1586869
+    },
+    {
+     "nombre": "Yakumanka by Gastón Acurio",
+     "seccion": "Comer",
+     "lat": 41.3902658,
+     "lon": 2.15992
+    },
+    {
+     "nombre": "Robata Barcelona",
+     "seccion": "Comer",
+     "lat": 41.3904886,
+     "lon": 2.1585836
+    },
+    {
+     "nombre": "Botafumeiro",
+     "seccion": "Comer",
+     "lat": 41.4004038,
+     "lon": 2.1546391
+    },
+    {
+     "nombre": "Restaurante Italiano Rossini",
+     "seccion": "Comer",
+     "lat": 41.3800985,
+     "lon": 2.1752608
+    },
+    {
+     "nombre": "My Way Lounge Restaurant",
+     "seccion": "Comer",
+     "lat": 41.3808801,
+     "lon": 2.1754294
+    },
+    {
+     "nombre": "Marina",
+     "seccion": "Beber y salir",
+     "lat": 41.3940648,
+     "lon": 2.186896
+    }
+   ],
+   "sinUbicar": [
+    "Suburbios",
+    "Palacio de la Música Catalana",
+    "Colonia Güell",
+    "La Rambla",
+    "Avenida Diagonal",
+    "Avenida de la Puerta del Ángel",
+    "Calle Puertaferrisa",
+    "Centro de Cultura Contemporánea de Barcelona",
+    "Ravalear",
+    "Calle de Sants",
+    "BarnaCentro",
+    "Kelkom",
+    "Núria",
+    "Zona Hermética de Sabadell",
+    "VISIT UP",
+    "Connect Club",
+    "DISFRUTE DEL MAR"
+   ]
+  },
+  "Granada": {
+   "centro": [
+    37.1734995,
+    -3.5995337
+   ],
+   "lugares": [
+    {
+     "nombre": "Alhambra",
+     "seccion": "Lugares de interés",
+     "lat": 37.1760548,
+     "lon": -3.5881101
+    },
+    {
+     "nombre": "Catedral",
+     "seccion": "Lugares de interés",
+     "lat": 37.1757379,
+     "lon": -3.6001757
+    },
+    {
+     "nombre": "Capilla Real",
+     "seccion": "Lugares de interés",
+     "lat": 37.1762964,
+     "lon": -3.5985655
+    },
+    {
+     "nombre": "Madraza",
+     "seccion": "Lugares de interés",
+     "lat": 37.1760755,
+     "lon": -3.5981495
+    },
+    {
+     "nombre": "Albaicín",
+     "seccion": "Lugares de interés",
+     "lat": 37.1815692,
+     "lon": -3.5946668
+    },
+    {
+     "nombre": "Palacio de Dar al-Horra",
+     "seccion": "Lugares de interés",
+     "lat": 37.1815821,
+     "lon": -3.5964277
+    },
+    {
+     "nombre": "Bañuelo",
+     "seccion": "Lugares de interés",
+     "lat": 37.1784507,
+     "lon": -3.5929851
+    },
+    {
+     "nombre": "Muralla zirí",
+     "seccion": "Lugares de interés",
+     "lat": 37.1821925,
+     "lon": -3.5948705
+    },
+    {
+     "nombre": "Puerta de Elvira",
+     "seccion": "Lugares de interés",
+     "lat": 37.1821461,
+     "lon": -3.5995899
+    },
+    {
+     "nombre": "Casa de Zafra",
+     "seccion": "Lugares de interés",
+     "lat": 37.1788386,
+     "lon": -3.5925376
+    },
+    {
+     "nombre": "Mirador de San Nicolás",
+     "seccion": "Lugares de interés",
+     "lat": 37.1810405,
+     "lon": -3.5926619
+    },
+    {
+     "nombre": "Iglesia de San Gregorio",
+     "seccion": "Lugares de interés",
+     "lat": 37.1848238,
+     "lon": -3.5927467
+    }
+   ],
+   "sinUbicar": [
+    "Casa de Castril",
+    "Caldelería",
+    "Aljibe de Trillo",
+    "Otros"
+   ]
+  },
+  "Valencia": {
+   "centro": [
+    39.4697065,
+    -0.3763353
+   ],
+   "lugares": [
+    {
+     "nombre": "El Carme",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4782212,
+     "lon": -0.3810013
+    },
+    {
+     "nombre": "El Cabanyal",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4719889,
+     "lon": -0.3286803
+    },
+    {
+     "nombre": "Ruzafa",
+     "seccion": "Ver › Barrios",
+     "lat": 39.462278,
+     "lon": -0.3720713
+    },
+    {
+     "nombre": "Benimaclet",
+     "seccion": "Ver › Barrios",
+     "lat": 39.4848096,
+     "lon": -0.362352
+    },
+    {
+     "nombre": "Ciudad de las Artes y las Ciencias",
+     "seccion": "Ver › Arquitectura y monumentos",
+     "lat": 39.45343,
+     "lon": -0.3590404
+    },
+    {
+     "nombre": "Catedral de Santa María de Valencia",
+     "seccion": "Ver › Arquitectura y monumentos",
+     "lat": 39.4739937,
+     "lon": -0.3753135
+    },
+    {
+     "nombre": "Cripta arqueológica de San Vicente Mártir",
+     "seccion": "Ver › Arquitectura y monumentos",
+     "lat": 39.4760432,
+     "lon": -0.3737384
+    },
+    {
+     "nombre": "Lonja de la Seda",
+     "seccion": "Ver › Arquitectura y monumentos",
+     "lat": 39.4744325,
+     "lon": -0.3782604
+    },
+    {
+     "nombre": "Museo Nacional de Cerámica",
+     "seccion": "Ver › Museos",
+     "lat": 39.4725239,
+     "lon": -0.3746678
+    },
+    {
+     "nombre": "Museo de historia de Valencia",
+     "seccion": "Ver › Museos",
+     "lat": 39.4724822,
+     "lon": -0.4082414
+    },
+    {
+     "nombre": "Museo de Bellas Artes de Valencia",
+     "seccion": "Ver › Museos de arte y galerías",
+     "lat": 39.479289,
+     "lon": -0.3710264
+    },
+    {
+     "nombre": "Instituto Valenciano de Arte Moderno",
+     "seccion": "Ver › Museos de arte y galerías",
+     "lat": 39.4796141,
+     "lon": -0.3828694
+    },
+    {
+     "nombre": "Museo del Patriarca",
+     "seccion": "Ver › Museos de arte y galerías",
+     "lat": 39.4723672,
+     "lon": -0.3730379
+    },
+    {
+     "nombre": "Bioparc Valencia",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.478332,
+     "lon": -0.4112193
+    },
+    {
+     "nombre": "Jardín botánico de la Universidad de Valencia",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.4768614,
+     "lon": -0.3867241
+    },
+    {
+     "nombre": "Jardín de Monforte",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.477647,
+     "lon": -0.3648339
+    },
+    {
+     "nombre": "Jardín del Turia",
+     "seccion": "Ver › Parques y jardines",
+     "lat": 39.4661488,
+     "lon": -0.3618985
+    },
+    {
+     "nombre": "Cementerio General de Valencia",
+     "seccion": "Ver › Otros",
+     "lat": 39.4479083,
+     "lon": -0.3993144
+    },
+    {
+     "nombre": "La Dama Ibérica",
+     "seccion": "Ver › Otros",
+     "lat": 39.4902654,
+     "lon": -0.3993201
+    },
+    {
+     "nombre": "Mirador Valencia",
+     "seccion": "Ver › Otros",
+     "lat": 39.5166651,
+     "lon": -0.4171698
+    },
+    {
+     "nombre": "Estadio de Mestalla",
+     "seccion": "Ver › Otros",
+     "lat": 39.4762902,
+     "lon": -0.3584783
+    },
+    {
+     "nombre": "Palau de la Música",
+     "seccion": "Hacer › Artes escénicas",
+     "lat": 39.4661802,
+     "lon": -0.3604539
+    },
+    {
+     "nombre": "Palau de les Arts Reina Sofía",
+     "seccion": "Hacer › Artes escénicas",
+     "lat": 39.458032,
+     "lon": -0.3559094
+    },
+    {
+     "nombre": "Teatro Principal",
+     "seccion": "Hacer › Artes escénicas",
+     "lat": 39.4707454,
+     "lon": -0.3744734
+    },
+    {
+     "nombre": "L'Hemisfèric",
+     "seccion": "Hacer › Planetario y cines",
+     "lat": 39.4566825,
+     "lon": -0.353881
+    },
+    {
+     "nombre": "Mercado Central",
+     "seccion": "Comprar › Mercados y calles comerciales",
+     "lat": 39.4734917,
+     "lon": -0.3789053
+    },
+    {
+     "nombre": "Mercado de Abastos",
+     "seccion": "Comprar › Mercados y calles comerciales",
+     "lat": 39.4680073,
+     "lon": -0.3882399
+    },
+    {
+     "nombre": "Mercado de Colón",
+     "seccion": "Comprar › Mercados y calles comerciales",
+     "lat": 39.4689513,
+     "lon": -0.3683554
+    },
+    {
+     "nombre": "Calle de la Paz",
+     "seccion": "Comprar › Mercados y calles comerciales",
+     "lat": 39.473621,
+     "lon": -0.3747383
+    },
+    {
+     "nombre": "El barrio del Carmen",
+     "seccion": "Comprar › Mercados y calles comerciales",
+     "lat": 39.4872744,
+     "lon": -0.450074
+    },
+    {
+     "nombre": "Paella",
+     "seccion": "Comer",
+     "lat": 39.4752487,
+     "lon": -0.3775676
+    },
+    {
+     "nombre": "Café Madrid",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.472988,
+     "lon": -0.375503
+    },
+    {
+     "nombre": "Café París",
+     "seccion": "Comer › Restaurantes",
+     "lat": 39.5006339,
+     "lon": -0.3504951
+    },
+    {
+     "nombre": "Bolsería",
+     "seccion": "Beber y salir",
+     "lat": 39.4753243,
+     "lon": -0.38025
+    },
+    {
+     "nombre": "Café del Mar",
+     "seccion": "Beber y salir",
+     "lat": 39.4739398,
+     "lon": -0.3770676
+    },
+    {
+     "nombre": "Deseo 54",
+     "seccion": "Beber y salir",
+     "lat": 39.4849072,
+     "lon": -0.3758699
+    },
+    {
+     "nombre": "Dockas",
+     "seccion": "Beber y salir",
+     "lat": 39.4099961,
+     "lon": -0.4011662
+    },
+    {
+     "nombre": "Fox Congo",
+     "seccion": "Beber y salir",
+     "lat": 39.4765257,
+     "lon": -0.3787393
+    },
+    {
+     "nombre": "Kultural",
+     "seccion": "Beber y salir",
+     "lat": 39.486524,
+     "lon": -0.3601614
+    },
+    {
+     "nombre": "L'Umbracle",
+     "seccion": "Beber y salir",
+     "lat": 39.4556032,
+     "lon": -0.35417
+    },
+    {
+     "nombre": "Mirror",
+     "seccion": "Beber y salir",
+     "lat": 39.465438,
+     "lon": -0.4581173
+    },
+    {
+     "nombre": "New York",
+     "seccion": "Beber y salir",
+     "lat": 39.4726838,
+     "lon": -0.3800447
+    },
+    {
+     "nombre": "Opera",
+     "seccion": "Beber y salir",
+     "lat": 39.4629685,
+     "lon": -0.3572547
+    },
+    {
+     "nombre": "Barraca",
+     "seccion": "Beber y salir",
+     "lat": 39.4451892,
+     "lon": -0.3718444
+    },
+    {
+     "nombre": "Spook",
+     "seccion": "Beber y salir",
+     "lat": 39.4106302,
+     "lon": -0.3352927
+    },
+    {
+     "nombre": "Agua de Valencia",
+     "seccion": "Beber y salir › Bebidas típicas",
+     "lat": 39.4618023,
+     "lon": -0.3297609
+    },
+    {
+     "nombre": "La horchata",
+     "seccion": "Beber y salir › Bebidas típicas",
+     "lat": 39.4962831,
+     "lon": -0.3534073
+    }
+   ],
+   "sinUbicar": [
+    "Jardín de Viveros",
+    "Tribunal de las Aguas",
+    "Mercado de Mossén Sorell",
+    "Milla de Oro",
+    "Manzana de c/Jorge Juan con c/Sorní",
+    "Arroz a banda",
+    "Arròs negre",
+    "Arroz al horno",
+    "Olla Xunta",
+    "All i Pebre",
+    "Restaurante-Vinoteca La Cepa Vieja",
+    "Restaurante Las 3 Rosas",
+    "Restaurante La Querencia",
+    "Restaurante La Carmela",
+    "Hotel-Restaurante El Coso del Mar",
+    "Bar-Restaurante Tropical",
+    "Racó de l'Olla",
+    "Restaurante Bergamonte",
+    "Restaurante Alhacena",
+    "Restaurante-Casino Monte Picayo",
+    "La bodeguita de Nerea",
+    "Bodega La Aldeana 1927",
+    "Akuarela Pub y Akuarela Playa",
+    "Boss",
+    "Cafe Cosmopolitan Música house",
+    "Café Cantante",
+    "Cool Sessions",
+    "Gandhara",
+    "El Puerto y la Playa",
+    "Kypros",
+    "La Havanna",
+    "La Indiana",
+    "Luna Rossa",
+    "Pacha Valencia",
+    "Rompeolas",
+    "Salamandra",
+    "Woody",
+    "Apache",
+    "Banana's",
+    "Budhha del Sol",
+    "Caballito de Mar",
+    "Chocolate",
+    "Evento Dance Club",
+    "Friend's Club",
+    "Giorgio et Enrico",
+    "Guru",
+    "Jardines de Tabarca",
+    "Momo Night Ideology",
+    "Penelope",
+    "Puzzle"
+   ]
+  }
+ }
+}

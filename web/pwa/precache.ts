@@ -2,7 +2,9 @@
 // Rumbo abra sin conexión (portada, pasaporte, viajes guardados). Planificar sí necesita red.
 import { createHash } from 'node:crypto';
 
-const FUERA = [/^sw\.js$/, /\.map$/];
+// Fuera: el propio service worker, los mapas de código y el mapa (MapLibre, ~1 MB; sin red no
+// sirve porque las teselas vienen de OpenFreeMap; se guarda en caché la primera vez que se abre).
+const FUERA = [/^sw\.js$/, /\.map$/, /^assets\/(MapaDia|maplibre-gl-worker)-/];
 
 /** Rutas (relativas a dist) → URLs absolutas, ordenadas; index.html se pide como «/». */
 export function listaPrecache(archivos: string[]): string[] {
