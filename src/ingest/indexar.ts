@@ -48,7 +48,8 @@ for (const destino of destinos) {
 
   console.log(`  4. Guardando en la colección «${coleccion.name}» de Chroma…`);
   // Si el artículo tiene ahora menos fragmentos que antes, los sobrantes no deben quedarse.
-  await coleccion.delete({ where: { destino: destino.nombre } });
+  // Solo los de Wikivoyage: los de Wikipedia los gestiona indexar-wikipedia.ts.
+  await coleccion.delete({ where: { $and: [{ destino: destino.nombre }, { fuente: 'Wikivoyage' }] } });
   await coleccion.upsert({
     ids: registros.map((r) => r.id),
     documents: registros.map((r) => r.documento),

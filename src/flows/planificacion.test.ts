@@ -21,6 +21,7 @@ function crearEntorno(
   respuestasDias: object[],
   documentos = [doc('s:1', '* Catedral de Sevilla - Gótica.', 'Ver'), doc('s:2', 'Parque de María Luisa.', 'Ver')],
   sinCobertura: (destino: string, intereses: string[]) => string[] = () => [],
+  situar?: (lugar: string, destino: string) => { lat: number; lon: number } | null,
 ) {
   const peticiones: GenerateRequest[] = [];
   const consultas: { texto: string; opciones: unknown }[] = [];
@@ -43,7 +44,7 @@ function crearEntorno(
   });
 
   const textoDe = (p: GenerateRequest) => p.messages.flatMap((m) => m.content.map((c) => c.text ?? '')).join('\n');
-  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura), peticiones, consultas, consultasAvanzado, textoDe };
+  return { flow: definirPlanificacionFlow(ai, recuperador, recuperadorAvanzado, sinCobertura, situar), peticiones, consultas, consultasAvanzado, textoDe };
 }
 
 // El ritmo tranquilo pide 2 actividades por día: la indicada por la mañana y un paseo por la noche.
@@ -130,6 +131,76 @@ describe('planificacionFlow', () => {
     expect(peticiones).toHaveLength(3);
     expect(textoDe(peticiones[2]!)).toContain('Catedral de Sevilla');
     expect(salida.dias[1]?.manana[0]?.lugar).toBe('Parque de María Luisa');
+  });
+
+  it('RF-14: descarta los lugares que no se pueden situar en el mapa y pide otros', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    // Cada lugar en un punto distinto, salvo «Bares de Nervión», que no está en el mapa.
+    const enElMapa = (lugar: string) => (lugar === 'Bares de Nervión' ? null : { lat: lugar.length, lon: 0 });
+    const { flow, peticiones, textoDe } = crearEntorno(
+      [
+        { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Bares de Nervión', descripcion: 'Tapas.', citas: [2] }] },
+        // El modelo repite la Catedral (se descarta por repetida) y propone un sitio que sí está en el mapa.
+        { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Parque de María Luisa', descripcion: 'Paseo.', citas: [2] }] },
+      ],
+      undefined,
+      undefined,
+      enElMapa,
+    );
+
+    const salida = await flow({ perfil: unDia, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(2);
+    expect(textoDe(peticiones[1]!)).toContain('Bares de Nervión'); // en la lista de lugares a evitar
+    expect(salida.dias[0]?.manana.map((a) => a.lugar)).toEqual(['Catedral de Sevilla']);
+    expect(salida.dias[0]?.noche.map((a) => a.lugar)).toEqual(['Parque de María Luisa']);
+  });
+
+  it('RF-14: si tras los reintentos no hay sustituto, se queda el lugar sin situar antes que dejar el día corto', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    const respuesta = { actividades: [{ franja: 'manana', lugar: 'Catedral de Sevilla', descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: 'Bares de Nervión', descripcion: 'Tapas.', citas: [2] }] };
+    const { flow, peticiones } = crearEntorno([respuesta, respuesta, respuesta], undefined, undefined, (lugar) => (lugar === 'Bares de Nervión' ? null : { lat: lugar.length, lon: 0 }));
+
+    const salida = await flow({ perfil: unDia, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(3);
+    expect(salida.dias[0]?.noche.map((a) => a.lugar)).toEqual(['Bares de Nervión']);
+  });
+
+  it('RF-14: en C0 no descarta nada (no usa la guía ni sus lugares)', async () => {
+    const unDia = PerfilSchema.parse({ ...perfil, dias: 1 });
+    const { flow, peticiones } = crearEntorno([dia('Lugar inventado', [])], undefined, undefined, () => null);
+
+    await flow({ perfil: unDia, modo: 'C0' });
+
+    expect(peticiones).toHaveLength(1);
+  });
+
+  it('RF-14: no repite el mismo sitio con otro nombre (la Catedral de Sevilla y la de Santa María de la Sede)', async () => {
+    const CATEDRAL = { lat: 37.3858, lon: -5.9931 };
+    const puntos: Record<string, { lat: number; lon: number }> = {
+      'Catedral de Santa María de la Sede': CATEDRAL,
+      'Catedral de Sevilla': { lat: 37.38591, lon: -5.99314 },
+      'Torre del Oro': { lat: 37.3824, lon: -5.9963 },
+      'Parque de María Luisa': { lat: 37.3747, lon: -5.9888 },
+      'Plaza de España': { lat: 37.3772, lon: -5.9869 },
+    };
+    const visita = (manana: string, noche: string) => ({
+      actividades: [{ franja: 'manana', lugar: manana, descripcion: 'Visita.', citas: [1] }, { franja: 'noche', lugar: noche, descripcion: 'Paseo.', citas: [2] }],
+    });
+    const { flow, peticiones } = crearEntorno(
+      [visita('Catedral de Santa María de la Sede', 'Torre del Oro'), visita('Catedral de Sevilla', 'Parque de María Luisa'), visita('Plaza de España', 'Parque de María Luisa')],
+      undefined,
+      undefined,
+      (lugar) => puntos[lugar] ?? null,
+    );
+
+    const salida = await flow({ perfil, modo: 'C1' });
+
+    expect(peticiones).toHaveLength(3); // el día 2 se pide otra vez: la «Catedral de Sevilla» ya estaba
+    const dia2 = [...salida.dias[1]!.manana, ...salida.dias[1]!.noche].map((a) => a.lugar);
+    expect(dia2).not.toContain('Catedral de Sevilla');
+    expect(dia2).toEqual(expect.arrayContaining(['Parque de María Luisa', 'Plaza de España']));
   });
 
   it('no reintenta más de dos veces', async () => {

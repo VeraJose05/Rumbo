@@ -16,6 +16,7 @@ import {
 import { PerfilSchema, type Perfil } from './perfil.js';
 import { FuenteSchema, type OpcionesRecuperacionSchema } from './pregunta.js';
 import { construirPromptDia } from './prompt-dia.js';
+import { distanciaMetros, type Punto } from '../compartido/ubicar.js';
 import { citasValidas, clasificarActividad, fuentesCitadas } from './rag.js';
 
 export const MODOS = ['C0', 'C1', 'C2'] as const;
@@ -78,6 +79,8 @@ export function definirPlanificacionFlow(
   recuperador: Recuperador,
   recuperadorAvanzado?: Recuperador,
   calcularSinCobertura: (destino: string, intereses: string[]) => string[] = sinCobertura,
+  /** RF-14: dónde está cada lugar (null si no se puede situar); los que no, se cambian por otros (C1 y C2). */
+  situar?: (lugar: string, destino: string) => Punto | null,
 ) {
   return ai.defineFlow(
     { name: 'planificacionFlow', inputSchema: PlanificacionEntradaSchema, outputSchema: ItinerarioSchema },
@@ -99,7 +102,7 @@ export function definirPlanificacionFlow(
       // 2. Generación: un día por llamada, con los lugares ya usados para no repetir.
       const dias: Dia[] = [];
       for (let numero = 1; numero <= perfil.dias; numero++) {
-        dias.push(await generarDia(ai, { perfil, numero, usados: lugaresUsados(dias), documentos }));
+        dias.push(await generarDia(ai, { perfil, numero, usados: lugaresUsados(dias), documentos, situar: soloConGuia(documentos, perfil.destino, situar) }));
       }
 
       // 3. Verificación de cada actividad contra los textos que cita.
@@ -126,18 +129,48 @@ export async function recuperar(ai: Genkit, recuperador: Recuperador, destino: s
   return fusionarResultados(listas, TOTAL_FRAGMENTOS);
 }
 
+/** El filtro de lugares situables solo se aplica con la guía (C1, C2): C0 queda como línea base. */
+export function soloConGuia(documentos: Recuperado[] | null, destino: string, situar?: (lugar: string, destino: string) => Punto | null) {
+  return documentos && situar ? (lugar: string) => situar(lugar, destino) : undefined;
+}
+
+/** A menos de esto, dos paradas son el mismo sitio con otro nombre (la Giralda está a ~50 m de la Catedral). */
+const MISMO_SITIO_M = 30;
+
 /** Genera un día con el modelo; null en documentos es C0 (sin textos ni citas). */
 export async function generarDia(
   ai: Genkit,
-  { perfil, numero, usados, documentos }: { perfil: Perfil; numero: number; usados: string[]; documentos: Recuperado[] | null },
+  {
+    perfil,
+    numero,
+    usados,
+    documentos,
+    situar,
+  }: { perfil: Perfil; numero: number; usados: string[]; documentos: Recuperado[] | null; situar?: (lugar: string) => Punto | null },
 ): Promise<Dia> {
   const fragmentos = documentos?.map((d) => ({ texto: d.text, seccion: String(d.metadata?.seccion ?? '') })) ?? null;
   const actividades = actividadesPorDia(perfil.ritmo);
   const esquema = esquemaDiaModelo({ conCitas: documentos !== null, actividades });
   const candidatas: z.infer<typeof esquema>['actividades'] = [];
   let dia = repartirEnFranjas(numero, [], usados);
-  // Los repetidos se quitan en código («no repitas» en el prompt no bastaba). Si faltan
-  // actividades, se reintenta con todo lo propuesto en la lista de lugares a evitar.
+  // Los repetidos se quitan en código («no repitas» en el prompt no bastaba), y también (RF-14) los
+  // lugares que no se pueden situar en el mapa: locales cerrados, cosas que no son un sitio
+  // («Bares de Nervión») o nombres mal escritos. Si faltan actividades, se reintenta con todo lo
+  // propuesto en la lista de lugares a evitar.
+  // Y lo que cae en el mismo sitio que algo ya incluido, aunque se llame distinto («Catedral de
+  // Sevilla» y «Catedral de Santa María de la Sede»).
+  const situable = (a: { lugar: string }) => !situar || situar(a.lugar) !== null;
+  const ocupados = situar ? usados.map(situar).filter((p): p is Punto => p !== null) : [];
+  const sinMismoSitio = <T extends { lugar: string }>(lista: T[]): T[] => {
+    const vistos = [...ocupados];
+    return lista.filter((a) => {
+      const punto = situar?.(a.lugar);
+      if (!punto) return true;
+      if (vistos.some((v) => distanciaMetros(v, punto) < MISMO_SITIO_M)) return false;
+      vistos.push(punto);
+      return true;
+    });
+  };
   for (let intento = 0; intento <= REINTENTOS && totalActividades(dia) < actividades; intento++) {
     const evitar = [...new Set([...usados, ...candidatas.map((a) => a.lugar)])];
     const { system, prompt } = construirPromptDia({ perfil, dia: numero, usados: evitar, fragmentos });
@@ -151,7 +184,11 @@ export async function generarDia(
     });
     if (!output) throw new Error(`El modelo no devolvió el día ${numero} con el esquema esperado`);
     candidatas.push(...output.actividades);
-    dia = repartirEnFranjas(numero, candidatas, usados, actividades);
+    dia = repartirEnFranjas(numero, sinMismoSitio(candidatas.filter(situable)), usados, actividades);
+  }
+  // Sin sustituto tras los reintentos, mejor un lugar sin chincheta (tiene «Cómo llegar») que un día corto.
+  if (totalActividades(dia) < actividades) {
+    dia = repartirEnFranjas(numero, [...sinMismoSitio(candidatas.filter(situable)), ...candidatas.filter((a) => !situable(a))], usados, actividades);
   }
   return dia;
 }

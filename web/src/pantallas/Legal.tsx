@@ -71,7 +71,30 @@ export function Legal() {
           <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">
             CC BY-SA 4.0
           </a>
-          ). Cada postal enlaza a su artículo. Rumbo puede equivocarse: comprueba horarios y precios antes de ir.
+          ), los monumentos, museos y barrios de los artículos de{' '}
+          <a href="https://es.wikipedia.org" target="_blank" rel="noopener">
+            Wikipedia
+          </a>{' '}
+          (CC BY-SA 4.0) y los restaurantes, bares y locales de noche de{' '}
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
+            OpenStreetMap
+          </a>{' '}
+          (ODbL). Cada postal enlaza a su fuente. Rumbo puede equivocarse: comprueba horarios y precios antes de ir.
+        </p>
+        <p>
+          El mapa usa datos de{' '}
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
+            © colaboradores de OpenStreetMap
+          </a>{' '}
+          (ODbL): las ubicaciones se buscaron una vez con Nominatim (y, si no estaban, en los artículos de{' '}
+          <a href="https://es.wikipedia.org" target="_blank" rel="noopener">
+            Wikipedia
+          </a>
+          ) y el fondo es de{' '}
+          <a href="https://openfreemap.org" target="_blank" rel="noopener">
+            OpenFreeMap
+          </a>{' '}
+          (OpenMapTiles). Los lugares que no se encontraron no salen en el mapa, en vez de ponerlos donde no son.
         </p>
       </section>
 
@@ -101,7 +124,7 @@ export function Legal() {
           <a href="https://github.com/VeraJose05/Rumbo" target="_blank" rel="noopener">
             github.com/VeraJose05/Rumbo
           </a>
-          . Tipografías Fraunces, Inter y Caveat (SIL Open Font License) e iconos Lucide (ISC).
+          . Tipografías Fraunces, Inter y Caveat (SIL Open Font License), iconos Lucide (ISC) y mapas con MapLibre (BSD-3).
         </p>
       </section>
     </div>

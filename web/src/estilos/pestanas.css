@@ -129,15 +129,12 @@
   padding-bottom: calc(var(--pestanas) + 40px);
 }
 .con-pestanas .barra-ajuste {
-  /* Por encima del botón central, que sobresale 30 px de la barra. */
-  bottom: calc(var(--pestanas) + 36px);
-  left: 8px;
-  right: 8px;
-  max-width: calc(var(--ancho-movil) - 16px);
-  padding-bottom: 12px;
-  border-radius: 18px;
-  border-bottom: 2px dashed var(--borde);
+  /* Pegada a la barra de pestañas, sin hueco: el botón «+» encaja en su franja de abajo. */
+  bottom: var(--pestanas);
+  padding-bottom: 38px;
+  border-radius: 18px 18px 0 0;
+  box-shadow: none;
 }
 .con-pestanas .itinerario-cuerpo {
-  padding-bottom: calc(var(--pestanas) + 180px);
+  padding-bottom: calc(var(--pestanas) + 170px);
 }

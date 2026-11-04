@@ -1,6 +1,7 @@
 // RF-11: ajuste del itinerario por chat («más tranquilo», «quita la Catedral», «añade museos»,
 // «un día más»). La petición la interpreta el código (ajuste-logica) y solo se rehacen los días
 // afectados, con los mismos fragmentos: así las citas de los días que no cambian siguen valiendo.
+import type { Punto } from '../compartido/ubicar.js';
 import { z, type Genkit } from 'genkit';
 import { sinCobertura } from '../config/cobertura.js';
 import { diasAfectados, interpretarAjuste, type Cambio } from './ajuste-logica.js';
@@ -10,6 +11,7 @@ import { lugaresUsados, type Dia } from './itinerario.js';
 import { PerfilSchema, type INTERESES, type Perfil } from './perfil.js';
 import {
   generarDia,
+  soloConGuia,
   ItinerarioSchema,
   montarItinerario,
   recuperar,
@@ -44,6 +46,8 @@ export function definirAjusteFlow(
   recuperador: Recuperador,
   recuperadorAvanzado?: Recuperador,
   calcularSinCobertura: (destino: string, intereses: string[]) => string[] = sinCobertura,
+  /** RF-14: los días rehechos tampoco llevan lugares que no se puedan situar ni repiten sitio. */
+  situar?: (lugar: string, destino: string) => Punto | null,
 ) {
   return ai.defineFlow(
     { name: 'ajusteFlow', inputSchema: AjusteEntradaSchema, outputSchema: AjusteSalidaSchema },
@@ -101,11 +105,13 @@ export function definirAjusteFlow(
       for (const numero of rehechos) {
         const i = dias.findIndex((d) => d.dia === numero);
         const usados = [...lugaresUsados(dias.filter((d) => d.dia !== numero)), ...quitados];
-        dias[i] = await generarDia(ai, { perfil: paraModelo, numero, usados, documentos });
+        dias[i] = await generarDia(ai, { perfil: paraModelo, numero, usados, documentos, situar: soloConGuia(documentos, nuevo.destino, situar) });
       }
       const anteriores = dias.length;
       for (let numero = anteriores + 1; numero <= nuevo.dias; numero++) {
-        dias.push(await generarDia(ai, { perfil: paraModelo, numero, usados: [...lugaresUsados(dias), ...quitados], documentos }));
+        dias.push(
+          await generarDia(ai, { perfil: paraModelo, numero, usados: [...lugaresUsados(dias), ...quitados], documentos, situar: soloConGuia(documentos, nuevo.destino, situar) }),
+        );
       }
       const nuevosDias = dias.slice(anteriores).map((d) => d.dia);
 

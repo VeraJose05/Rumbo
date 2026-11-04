@@ -3,7 +3,7 @@
 **Planifica conversando. Viaja con fundamento.**
 
 Rumbo es un planificador de viajes por España que arma itinerarios día a día **solo con lugares que
-aparecen en la guía** (Wikivoyage). Cada parada lleva la cita literal de la guía de la que sale, y si
+aparecen en sus fuentes** (Wikivoyage, Wikipedia y OpenStreetMap), y cada uno con su sitio en el mapa. Cada parada lleva la cita literal de la guía de la que sale, y si
 la guía no cubre lo que pides, Rumbo lo dice en vez de inventárselo. Funciona como una web móvil
 instalable (PWA) con estética de cuaderno de viaje: billete, postales, pasaporte con sellos e
 insignias.
@@ -34,6 +34,9 @@ Wikivoyage para que cada actividad salga de una fuente que se puede comprobar.
   días afectados.
 - **Honestidad ante la falta de datos:** destinos fuera de la guía o intereses que la guía no cubre
   (p. ej. playa en Madrid) se avisan, no se rellenan.
+- **Mapa del día** a pantalla completa: paradas numeradas en orden y un carrusel enlazado con
+  ellas; «Cómo llegar» y «Ruta del día» abren Google Maps a pie. El planificador cambia los lugares
+  que no se pueden situar (locales cerrados, zonas genéricas) y no repite el mismo sitio con otro nombre.
 - **Mis viajes:** guarda itinerarios en el móvil y vuelve a ellos (los ajustes actualizan la copia).
 - **Pasaporte:** «¡Estuve aquí!» en cada lugar; sellos por ciudad e insignias (Tapeador, Noctámbulo,
   Explorador, Trotamundos…) según la sección de la guía del lugar. Exportar/importar en un archivo.
@@ -43,19 +46,30 @@ Wikivoyage para que cada actividad salga de una fuente que se puede comprobar.
 
 Destinos con guía: **Sevilla, Madrid, Barcelona, Granada y Valencia**.
 
+### Fuentes
+
+| Fuente | Qué aporta | Lugares |
+| --- | --- | --- |
+| [Wikivoyage](https://es.wikivoyage.org) | La guía: qué ver, comer, salir, cómo moverse | 337 fragmentos |
+| [Wikipedia](https://es.wikipedia.org) (vía Wikidata) | Monumentos, museos, parques y barrios, con coordenadas | 1002 |
+| [OpenStreetMap](https://www.openstreetmap.org) (vía Overpass) | Restaurantes, bares, cafeterías y ocio nocturno actuales | 822 |
+
+Las coordenadas de los lugares de Wikivoyage se buscaron una vez con Nominatim (OSM) y Wikipedia.
+
 ## Cómo funciona
 
 ```
 Perfil (entrevista o recorrido)
    │
    ▼
-Recuperación ── bge-m3 (embeddings) ─▶ índice vectorial de Wikivoyage (337 fragmentos)
+Recuperación ── bge-m3 (embeddings) ─▶ índice vectorial (2161 fragmentos de 3 fuentes)
    │                                    C2: + búsqueda por palabras + reranker
    ▼
 Planificación día a día (LLM, salida JSON validada con Zod)
    │
    ▼
 Verificación: cada lugar se busca en los fragmentos ─▶ ✓ guía / ~ parecido / sin fuente
+   │                y en el mapa: si no se puede situar, se pide otro
 ```
 
 Tres modos de ejecución, para medir qué aporta la recuperación con el mismo modelo y los mismos
@@ -81,10 +95,11 @@ entre una regla estricta y una laxa). Detalle en `docs/requisitos.md` y `src/eva
 | Reranker (C2) | `BAAI/bge-reranker-v2-m3` con Text Embeddings Inference (Docker) |
 | Servidor | Express 4 (sirve la API de los flows y la web) |
 | Web | React 19, TypeScript, Vite, iconos Lucide; PWA con service worker propio |
+| Mapa | MapLibre GL con mapas vectoriales de OpenFreeMap (gratis, sin clave); navegación con Google Maps (enlaces) |
 | Tests | Vitest, Testing Library (jsdom) |
 | Despliegue | Render (plan gratuito, `render.yaml`) |
 
-Todo el software y los modelos son abiertos. Textos de Wikivoyage y fotos de Wikimedia Commons bajo
+Todo el software y los modelos son abiertos. Datos de OpenStreetMap bajo ODbL; textos de Wikivoyage y Wikipedia y fotos de Wikimedia Commons bajo
 CC BY-SA, con atribución visible en la web.
 
 ## Instalación
@@ -122,6 +137,9 @@ Con [Ollama](https://ollama.com) y Docker:
 ollama pull qwen2.5:3b && ollama pull bge-m3
 docker compose up -d chroma        # y «reranker» para el modo C2
 npm run ingesta                    # descarga Wikivoyage, trocea e indexa en Chroma
+npm run ingesta:wikipedia          # lugares de Wikipedia (Wikidata) con su resumen
+npm run ingesta:osm                # restaurantes, bares y noche de OpenStreetMap
+npm run coordenadas                # sitúa en el mapa los lugares de Wikivoyage
 ```
 
 ### Arrancar

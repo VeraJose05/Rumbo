@@ -12,6 +12,10 @@ describe('listaPrecache', () => {
     expect(listaPrecache(['sw.js', 'assets/x.js.map', 'fotos\\sevilla.webp'])).toEqual(['/fotos/sevilla.webp']);
   });
 
+  it('deja fuera el mapa: pesa mucho y sin red no sirve (sus teselas vienen de fuera)', () => {
+    expect(listaPrecache(['assets/MapaDia-abc.js', 'assets/MapaDia-abc.css', 'assets/maplibre-gl-worker-abc.js', 'assets/index-x.js'])).toEqual(['/assets/index-x.js']);
+  });
+
   it('ordena la lista para que la versión no dependa del orden del disco', () => {
     expect(listaPrecache(['b.css', 'a.css'])).toEqual(['/a.css', '/b.css']);
   });

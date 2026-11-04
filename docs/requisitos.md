@@ -57,6 +57,7 @@ El alcance se limita a un prototipo con pocos destinos y una evaluación riguros
 | RF-11 | Ajuste del itinerario por chat («más tranquilo», «quita museos»). | Should | Una petición de cambio modifica solo las partes afectadas. | Borrador |
 | RF-12 | Interfaz web de demo. | Should | Se puede completar entrevista y ver el itinerario sin usar la consola. | Borrador |
 | RF-13 | Exportar el itinerario a Markdown o PDF. | Could | El archivo exportado contiene el itinerario completo y sus fuentes. | Borrador |
+| RF-14 | Mapa del itinerario: las paradas de cada día en un mapa, en orden. | Should | Los lugares de la guía se ubican con OpenStreetMap; los que no se encuentran se indican aparte en vez de situarlos mal. | Borrador |
 
 ## Requisitos no funcionales
 

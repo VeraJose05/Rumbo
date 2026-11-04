@@ -19,6 +19,9 @@
     "experimento:similitud": "npm run build && node --env-file-if-exists=.env dist/experimentos/similitud.js",
     "experimento:cobertura": "npm run build && node --env-file-if-exists=.env dist/experimentos/cobertura.js",
     "ingesta": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar.js",
+    "ingesta:wikipedia": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar-wikipedia.js",
+    "ingesta:osm": "npm run build && node --env-file-if-exists=.env dist/ingest/indexar-osm.js",
+    "coordenadas": "npm run build && node dist/ingest/geocodificar.js",
     "exportar-indice": "npm run build && node --env-file-if-exists=.env dist/ingest/exportar-indice.js",
     "consulta": "npm run build && node --env-file-if-exists=.env dist/experimentos/consulta.js",
     "comparar": "npm run build && node --env-file-if-exists=.env dist/experimentos/comparar.js",
@@ -50,6 +53,7 @@
     "genkit": "1.42.0",
     "genkitx-ollama": "1.42.0",
     "lucide-react": "1.67.0",
+    "maplibre-gl": "6.13.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   }

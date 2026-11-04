@@ -17,6 +17,7 @@ const REGLAS_COMUNES = [
 const REGLAS_CON_TEXTOS = [
   'Usa SOLO lugares que aparezcan en los textos que te da el usuario; no añadas lugares, precios ni horarios que no estén en ellos.',
   'En "citas" pon los números de los textos de los que sale cada actividad.',
+  'En "lugar" escribe el nombre de UN sitio concreto tal como aparece en los textos, sin cambiarlo ni abreviarlo; nada de zonas o grupos como «bares de la zona».',
 ];
 
 export function construirPromptDia({

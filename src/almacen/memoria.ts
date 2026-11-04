@@ -1,4 +1,4 @@
-// RNF-10: índice vectorial en memoria. Con unos cientos de fragmentos, comparar la consulta con
+// RNF-10: índice vectorial en memoria. Con un millar de fragmentos, comparar la consulta con
 // todos (búsqueda exacta) tarda menos de un milisegundo: no hace falta el índice aproximado de Chroma.
 import { readFile } from 'node:fs/promises';
 import { z } from 'genkit';
@@ -8,7 +8,9 @@ const RegistroIndiceSchema = z.object({
   id: z.string(),
   texto: z.string(),
   metadata: z.record(z.unknown()),
-  embedding: z.array(z.number()).min(1),
+  // Se comprueba la forma sin recorrer ni copiar el vector: con 1339 fragmentos de 1024
+  // dimensiones, z.array(z.number()) duplicaba ~1,4 millones de números al arrancar.
+  embedding: z.custom<number[]>((v) => Array.isArray(v) && v.length > 0 && typeof v[0] === 'number', 'Vector vacío o no numérico'),
 });
 
 // El modelo de embeddings se guarda con el índice: la consulta debe vectorizarse con el mismo,
@@ -28,7 +30,7 @@ export function leerIndice(texto: string): Indice {
 }
 
 /** 1 − coseno, la misma distancia que usa la colección de Chroma: 0 = mismo sentido, 2 = opuestos. */
-export function distanciaCoseno(a: number[], b: number[]): number {
+export function distanciaCoseno(a: ArrayLike<number>, b: ArrayLike<number>): number {
   let producto = 0;
   let normaA = 0;
   let normaB = 0;
@@ -40,8 +42,11 @@ export function distanciaCoseno(a: number[], b: number[]): number {
   return 1 - producto / (Math.sqrt(normaA) * Math.sqrt(normaB));
 }
 
-export function crearAlmacenMemoria(registros: RegistroIndice[]): Almacen {
-  const sinVector = ({ id, texto, metadata }: RegistroIndice): FragmentoAlmacen => ({ id, texto, metadata });
+/** Registro con el vector en Float32Array: la mitad de memoria que un array de números. */
+type RegistroEnMemoria = Omit<RegistroIndice, 'embedding'> & { embedding: ArrayLike<number> };
+
+export function crearAlmacenMemoria(registros: RegistroEnMemoria[]): Almacen {
+  const sinVector = ({ id, texto, metadata }: RegistroEnMemoria): FragmentoAlmacen => ({ id, texto, metadata });
   const delDestino = (destino: string) => registros.filter((r) => r.metadata.destino === destino);
   return {
     async buscar(vector, n, destino) {
@@ -62,5 +67,6 @@ export async function abrirIndice(ruta: string, embedder: string): Promise<Almac
   if (indice.modeloEmbeddings !== embedder) {
     throw new Error(`El índice ${ruta} se hizo con ${indice.modeloEmbeddings}, pero el embedder configurado es ${embedder}`);
   }
-  return crearAlmacenMemoria(indice.registros);
+  // En Render (512 MB) la memoria cuenta: los vectores pasan a Float32Array y el JSON se libera.
+  return crearAlmacenMemoria(indice.registros.map((r) => ({ ...r, embedding: Float32Array.from(r.embedding) })));
 }
