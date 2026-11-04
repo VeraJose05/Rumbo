@@ -9,7 +9,7 @@ afterEach(cleanup);
 describe('Pestanas', () => {
   it('tiene tres destinos y marca el actual', () => {
     render(<Pestanas activa="pasaporte" guardados={0} />);
-    expect(screen.getAllByRole('link').map((a) => a.textContent)).toEqual(['Viajes', 'Nuevo viaje', 'Pasaporte']);
+    expect(screen.getAllByRole('link').map((a) => a.getAttribute('aria-label') ?? a.textContent)).toEqual(['Viajes', 'Nuevo viaje', 'Pasaporte']);
     expect(screen.getByRole('link', { name: 'Pasaporte' }).getAttribute('aria-current')).toBe('page');
   });
 

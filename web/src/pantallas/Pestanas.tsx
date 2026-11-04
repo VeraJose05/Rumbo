@@ -1,7 +1,7 @@
 // RF-12: barra de navegación flotante con tres destinos: Viajes, Nuevo viaje (botón central
 // elevado) y Pasaporte. Sale en las pantallas principales; no en el recorrido, «preparando» ni el
 // chat, que tienen su propio botón de volver.
-import { BookMarked, Stamp, type LucideIcon } from 'lucide-react';
+import { BookMarked, Plus, Stamp, type LucideIcon } from 'lucide-react';
 import type { Ruta } from '../ruta';
 import '../estilos/pestanas.css';
 
@@ -30,11 +30,8 @@ export function Pestanas({ activa, guardados }: Props) {
   return (
     <nav className="pestanas" aria-label="Secciones">
       <Lateral href="#/viajes" nombre="Viajes" Icono={BookMarked} activa={activa === 'viajes' || activa === 'itinerario'} cuenta={guardados} />
-      <a href="#/" className="pestana pestana-nuevo" aria-current={nuevo ? 'page' : undefined}>
-        <span className="pestana-boton" aria-hidden="true">
-          <img src="/marca/simbolo.svg" alt="" width={64} height={64} />
-        </span>
-        Nuevo viaje
+      <a href="#/" className="pestana-nuevo" aria-label="Nuevo viaje" aria-current={nuevo ? 'page' : undefined}>
+        <Plus className="icono" aria-hidden="true" strokeWidth={2.6} />
       </a>
       <Lateral href="#/pasaporte" nombre="Pasaporte" Icono={Stamp} activa={activa === 'pasaporte'} />
     </nav>

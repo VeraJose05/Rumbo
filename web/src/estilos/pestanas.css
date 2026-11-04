@@ -1,43 +1,54 @@
-/* RF-12: barra de navegación flotante (pantallas/Pestanas.tsx). Cápsula oscura con el botón de
-   «Nuevo viaje» elevado en el centro. --pestanas es el hueco que dejan las pantallas debajo. */
+/* RF-12: barra de navegación (pantallas/Pestanas.tsx). Pegada abajo, con un hueco recortado en el
+   centro donde encaja el botón redondo de «Nuevo viaje». --pestanas es el hueco que dejan las
+   pantallas debajo. */
 :root {
-  --pestanas: calc(78px + env(safe-area-inset-bottom));
+  --pestanas: calc(64px + env(safe-area-inset-bottom));
+  --barra-fondo: #2b2622;
+  --hueco: 38px; /* radio del recorte: botón de 60 px + 8 px de aire */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --barra-fondo: #0f0d0c;
+  }
 }
 
 .pestanas {
   position: fixed;
-  left: 12px;
-  right: 12px;
-  bottom: calc(env(safe-area-inset-bottom) + 10px);
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 20;
-  max-width: calc(var(--ancho-movil) - 24px);
+  max-width: var(--ancho-movil);
   margin: 0 auto;
-  height: 62px;
+  height: var(--pestanas);
+  padding-bottom: env(safe-area-inset-bottom);
   display: grid;
   grid-template-columns: 1fr 96px 1fr;
-  align-items: center;
-  border-radius: 24px;
-  background: #2b2622;
-  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) .pestanas {
-    background: #0f0d0c;
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(255 255 255 / 0.08);
-  }
+/* El fondo va en una capa aparte para poder recortarle el hueco sin recortar el botón. */
+.pestanas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 22px 22px 0 0;
+  background: var(--barra-fondo);
+  -webkit-mask: radial-gradient(circle var(--hueco) at 50% 0, transparent calc(var(--hueco) - 0.5px), #000 var(--hueco));
+  mask: radial-gradient(circle var(--hueco) at 50% 0, transparent calc(var(--hueco) - 0.5px), #000 var(--hueco));
+  /* Filo claro arriba: en modo oscuro separa la barra del fondo. */
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.09);
 }
 
 .pestana {
-  position: relative;
   display: grid;
   justify-items: center;
   align-content: center;
-  gap: 3px;
-  height: 100%;
-  color: rgb(255 246 236 / 0.62);
-  font: 600 11px/1.1 var(--texto);
+  gap: 4px;
+  color: rgb(255 246 236 / 0.6);
+  font: 600 11px/1 var(--texto);
   letter-spacing: 0.02em;
   text-decoration: none;
+  transition: color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
 .pestana-icono {
@@ -49,83 +60,59 @@
 .pestana:active .pestana-icono {
   transform: scale(0.88);
 }
-/* Activa: azafrán y un punto de tinta debajo, como una marca en el mapa. */
 .pestana[aria-current='page'] {
   color: var(--azafran);
 }
-.pestana[aria-current='page']::after {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: currentColor;
-}
-.pestana:focus-visible {
+.pestana:focus-visible,
+.pestana-nuevo:focus-visible {
   outline: 2px solid var(--azafran);
-  outline-offset: -4px;
-  border-radius: 18px;
+  outline-offset: 2px;
+  border-radius: 14px;
 }
 .pestana-cuenta {
   position: absolute;
   top: -6px;
-  right: -12px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
+  right: -11px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
   border-radius: 999px;
-  border: 2px solid #2b2622;
+  border: 2px solid var(--barra-fondo);
   background: var(--terracota);
   color: #fff;
   font-size: 10px;
-  line-height: 14px;
+  line-height: 13px;
   text-align: center;
 }
 
-/* Botón central elevado: la brújula de Rumbo saliendo de la barra. */
+/* Botón central: círculo terracota encajado en el hueco, medio fuera de la barra. */
 .pestana-nuevo {
-  align-content: end;
-  padding-bottom: 9px;
-}
-.pestana-nuevo[aria-current='page']::after {
-  display: none;
-}
-.pestana-boton {
-  position: absolute;
+  position: relative;
+  justify-self: center;
   top: -30px;
-  left: 50%;
-  translate: -50% 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 22px;
-  border: 4px solid #2b2622;
-  background: var(--terracota);
-  box-shadow: 0 8px 20px rgb(196 85 58 / 0.45);
-  overflow: hidden;
-  transform: rotate(-8deg);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d8664a, var(--terracota-profunda, #a8432b));
+  color: #fff;
+  box-shadow: 0 8px 18px rgb(168 67 43 / 0.45);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema='claro']) .pestana-boton,
-  :root:not([data-tema='claro']) .pestana-cuenta {
-    border-color: #0f0d0c;
-  }
+.pestana-nuevo .icono {
+  width: 28px;
+  height: 28px;
 }
-.pestana-boton img {
-  display: block;
-  width: 100%;
-  height: 100%;
+.pestana-nuevo:hover {
+  transform: rotate(90deg);
 }
-.pestana-nuevo:hover .pestana-boton,
-.pestana-nuevo[aria-current='page'] .pestana-boton {
-  transform: rotate(0deg) scale(1.05);
-}
-.pestana-nuevo:active .pestana-boton {
-  transform: rotate(0deg) scale(0.92);
+.pestana-nuevo:active {
+  transform: scale(0.9);
 }
 @media (prefers-reduced-motion: reduce) {
-  .pestana-boton,
+  .pestana-nuevo,
   .pestana-icono {
     transition: none;
   }
@@ -133,24 +120,24 @@
 
 /* Hueco para la barra en cada pantalla con pestañas. */
 .con-pestanas .inicio {
-  padding-bottom: calc(var(--pestanas) + 28px);
+  padding-bottom: calc(var(--pestanas) + 40px);
 }
 .con-pestanas .historia-credito {
-  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 38px);
+  bottom: calc(var(--alto-billete, 330px) + var(--pestanas) + 50px);
 }
 .con-pestanas .pantalla {
-  padding-bottom: calc(var(--pestanas) + 32px);
+  padding-bottom: calc(var(--pestanas) + 40px);
 }
 .con-pestanas .barra-ajuste {
   /* Por encima del botón central, que sobresale 30 px de la barra. */
-  bottom: calc(var(--pestanas) + 30px);
-  padding-bottom: 12px;
-  border-bottom: 2px dashed var(--borde);
-  border-radius: 18px;
+  bottom: calc(var(--pestanas) + 36px);
   left: 8px;
   right: 8px;
   max-width: calc(var(--ancho-movil) - 16px);
+  padding-bottom: 12px;
+  border-radius: 18px;
+  border-bottom: 2px dashed var(--borde);
 }
 .con-pestanas .itinerario-cuerpo {
-  padding-bottom: calc(var(--pestanas) + 170px);
+  padding-bottom: calc(var(--pestanas) + 180px);
 }
