@@ -39,7 +39,11 @@ export function errorDeRespuesta(estado: number, detalle: string): Error {
 const MAX_REINTENTOS = 3;
 const MAX_ESPERA_MS = 60_000;
 
-/** Milisegundos que esperar antes de reintentar, o null si no hay que reintentar. */
+/**
+ * Milisegundos que esperar antes de reintentar, o null si no hay que reintentar. Se reintenta un
+ * 429 de límite por minuto y un 400 json_validate_failed (el modelo generó un JSON que no cumple
+ * el esquema; es aleatorio y a la segunda suele salir bien).
+ */
 export function esperaAntesDeReintentar({
   estado,
   retryAfter,
@@ -51,7 +55,9 @@ export function esperaAntesDeReintentar({
   cuerpo: string;
   intento: number;
 }): number | null {
-  if (estado !== 429 || intento >= MAX_REINTENTOS) return null;
+  if (intento >= MAX_REINTENTOS) return null;
+  if (estado === 400 && cuerpo.includes('json_validate_failed')) return 0;
+  if (estado !== 429) return null;
   const segundos = retryAfter ? Number(retryAfter) : Number(/try again in ([\d.]+)s/.exec(cuerpo)?.[1]);
   if (!Number.isFinite(segundos)) return null;
   const ms = Math.ceil(segundos * 1000);

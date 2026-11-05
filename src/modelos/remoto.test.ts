@@ -131,4 +131,27 @@ describe('esperaAntesDeReintentar', () => {
   it('no reintenta otros errores', () => {
     expect(esperaAntesDeReintentar({ ...cuota, estado: 500 })).toBeNull();
   });
+
+  // Groq a veces genera un JSON que no cumple el esquema estricto (visto 2 veces en 50 planes):
+  // es aleatorio, así que basta con volver a pedirlo.
+  describe('JSON que no valida', () => {
+    const jsonInvalido = {
+      estado: 400,
+      retryAfter: null,
+      cuerpo: '{"error":{"message":"Failed to validate JSON.","type":"invalid_request_error","code":"json_validate_failed"}}',
+      intento: 0,
+    };
+
+    it('reintenta enseguida', () => {
+      expect(esperaAntesDeReintentar(jsonInvalido)).toBe(0);
+    });
+
+    it('no reintenta indefinidamente', () => {
+      expect(esperaAntesDeReintentar({ ...jsonInvalido, intento: 3 })).toBeNull();
+    });
+
+    it('no reintenta otros 400', () => {
+      expect(esperaAntesDeReintentar({ ...jsonInvalido, cuerpo: '{"error":{"code":"model_not_found"}}' })).toBeNull();
+    });
+  });
 });
