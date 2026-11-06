@@ -75,14 +75,20 @@ Verificación: cada lugar se busca en los fragmentos ─▶ ✓ guía / ~ pareci
 Tres modos de ejecución, para medir qué aporta la recuperación con el mismo modelo y los mismos
 perfiles (`src/config`):
 
-| Modo | Recuperación | Fidelidad¹ | Notas |
-| --- | --- | --- | --- |
-| C0 · LLM solo | ninguna | 0,36–0,44 | planifica incluso destinos fuera del corpus |
-| C1 · RAG básico | vectorial, top-k | 0,93–0,96 | **el que usa la web** |
-| C2 · RAG avanzado | híbrida + reranker | ≈ C1 | 2,5× más lento; comparte el 68 % de los fragmentos con C1 |
+| Modo | Recuperación | Fidelidad¹ con qwen2.5:3b | Fidelidad¹ con gpt-oss-120b | Notas |
+| --- | --- | --- | --- | --- |
+| C0 · LLM solo | ninguna | 0,51–0,60 | 0,58–0,70 | planifica incluso destinos fuera del corpus |
+| C1 · RAG básico | vectorial, top-k | 0,99 | 1,00 | **el que usa la web**; se niega fuera del corpus |
+| C2 · RAG avanzado | híbrida + reranker | ≈ C1² | — | 2,5× más lento; comparte el 68 % de los fragmentos con C1 |
 
-¹ Lugares del itinerario que existen en la guía del destino, sobre 25 perfiles de prueba (intervalo
-entre una regla estricta y una laxa). Detalle en `docs/requisitos.md` y `src/eval`.
+¹ Proporción de lugares del itinerario que aparecen en alguna fuente del destino (Wikivoyage,
+Wikipedia u OpenStreetMap, 2161 fragmentos), sobre 25 perfiles de prueba (intervalo entre una regla
+estricta y una laxa; incluye 3 destinos fuera del corpus, donde C0 lo inventa todo y C1 se niega).
+Un modelo grande conoce más sitios reales, pero incluso en los destinos del corpus, sin fuentes, entre
+un 21 % y un 34 % de sus lugares no aparecen en ninguna (32–41 % con qwen2.5:3b). Con RAG existen el 99–100 %
+y cada uno lleva su cita. Detalle en `docs/requisitos.md` y `src/eval`.
+
+² Medido con el corpus inicial (solo Wikivoyage); con ese corpus, C0 daba 0,36–0,44 y C1 0,93–0,96.
 
 ## Stack
 
